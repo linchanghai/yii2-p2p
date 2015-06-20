@@ -42,9 +42,13 @@ class Bootstrap implements BootstrapInterface
         Yii::$app->attachBehavior('accessControl', $accessControl);
     }
 
+    /**
+     * @param \yii\web\User $user
+     * @return bool
+     */
     public function checkAdmin($user)
     {
-        if ($user->identity->username == 'admin') {
+        if (!$user->isGuest && $user->identity->username == 'admin') {
             return true;
         }
         return false;
@@ -52,10 +56,6 @@ class Bootstrap implements BootstrapInterface
 
     protected function filterMenu()
     {
-        if (Yii::$app->user->isGuest) {
-            return;
-        }
-
         $filterMenu = function($menu) {
             if ($this->checkAdmin(Yii::$app->user)) {
                 return true;
@@ -79,7 +79,7 @@ class Bootstrap implements BootstrapInterface
                 }, explode('-', $permissionKey))));
                 return Yii::$app->user->can($formatKey);
             }
-            return false;
+            return true;
         };
 
         $menus = Kiwi::getConfiguration()->menus;

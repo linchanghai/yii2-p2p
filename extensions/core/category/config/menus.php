@@ -12,11 +12,17 @@ return [
         'url' => ['core_category'],
         'items' => [
             'category' => [
-                'label' => Yii::t('core_category', 'Category'),
+                'label' => Yii::t('app', 'Category'),
                 'sort' => 100,
-                'url' => ['/core_category/category/index'],
-                'linkOptions' => ['data-pjax' => '0']
-            ],
+                'items' => [
+                    'category' => [
+                        'label' => Yii::t('core_category', 'Category'),
+                        'sort' => 100,
+                        'url' => ['/core_category/category/index'],
+                        'linkOptions' => ['data-pjax' => '0']
+                    ],
+                ]
+            ]
         ]
     ]
 ];
