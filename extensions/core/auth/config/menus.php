@@ -9,18 +9,26 @@ return [
     'auth' => [
         'label' => Yii::t('app', 'Auth'),
         'sort' => 1500,
-        'url' => ['core_auth'],
+        'url' => ['/core_auth/user/index'],
         'items' => [
-            'user' => [
-                'label' => Yii::t('core_auth', 'User'),
+            'auth' => [
+                'label' => Yii::t('app', 'Auth'),
                 'sort' => 100,
-                'url' => ['/core_auth/user/index'],
-            ],
-            'role' => [
-                'label' => Yii::t('core_auth', 'Role'),
-                'sort' => 200,
-                'url' => ['/core_auth/role/index'],
-            ],
+                'items' => [
+                    'user' => [
+                        'label' => Yii::t('core_auth', 'User'),
+                        'sort' => 100,
+                        'url' => ['/core_auth/user/index'],
+                        'activeUrls' => [['/core_auth/user/create'], ['/core_auth/user/update']],
+                    ],
+                    'role' => [
+                        'label' => Yii::t('core_auth', 'Role'),
+                        'sort' => 200,
+                        'url' => ['/core_auth/role/index'],
+                        'activeUrls' => [['/core_auth/role/create', '/core_auth/role/update']],
+                    ],
+                ]
+            ]
         ]
     ],
 ];

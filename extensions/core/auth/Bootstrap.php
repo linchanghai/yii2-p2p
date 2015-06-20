@@ -79,7 +79,7 @@ class Bootstrap implements BootstrapInterface
                 }, explode('-', $permissionKey))));
                 return Yii::$app->user->can($formatKey);
             }
-            return false;
+            return true;
         };
 
         $menus = Kiwi::getConfiguration()->menus;

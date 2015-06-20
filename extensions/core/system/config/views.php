@@ -6,11 +6,11 @@
  */
 
 return [
-    'backend' => [
-        'default' => [
-            'pathMap' => [
-                '@app/views' => ['@core/system/views']
-            ]
-        ]
-    ]
+//    'backend' => [
+//        'default' => [
+//            'pathMap' => [
+//                '@app/views' => ['@core/system/views']
+//            ]
+//        ]
+//    ]
 ];
