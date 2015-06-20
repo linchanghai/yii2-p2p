@@ -29,7 +29,7 @@ class Bootstrap implements BootstrapInterface
         $accessControl = [
             'class' => AccessControl::className(),
             'regex' => true,
-            'except' => ['/site\/.*/'],
+            'except' => ['/site\/.*/', '/gii\/.*/'],
             'rules' => [
                 // deny all POST requests
                 [
