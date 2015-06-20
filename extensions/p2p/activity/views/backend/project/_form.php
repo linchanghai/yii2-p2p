@@ -29,11 +29,12 @@ use yii\bootstrap\Tabs;
     $fieldGroups[] = ['label' => Yii::t('p2p_activity','Project Base Info'), 'content' => implode('', $fields)];
 
     $fields = [];
-    $fields[] = $form->field($model, 'projectDetails.project_introduce')->textInput(['maxlength' => 255]);
-    $fields[] = $form->field($model, 'projectDetails.loan_person_info')->textInput(['maxlength' => 255]);
-    $fields[] = $form->field($model, 'projectDetails.repayment_source')->textInput(['maxlength' => 255]);
-    $fields[] = $form->field($model, 'projectDetails.collateral_info')->textInput(['maxlength' => 255]);
-    $fields[] = $form->field($model, 'projectDetails.risk_control_info')->textInput(['maxlength' => 255]);
+    $projectDetails = $model->projectDetails ?:\kiwi\Kiwi::getProjectDetails();
+    $fields[] = $form->field($projectDetails, 'project_introduce')->textInput(['maxlength' => 255]);
+    $fields[] = $form->field($projectDetails, 'loan_person_info')->textInput(['maxlength' => 255]);
+    $fields[] = $form->field($projectDetails, 'repayment_source')->textInput(['maxlength' => 255]);
+    $fields[] = $form->field($projectDetails, 'collateral_info')->textInput(['maxlength' => 255]);
+    $fields[] = $form->field($projectDetails, 'risk_control_info')->textInput(['maxlength' => 255]);
     $fieldGroups[] = ['label' => Yii::t('p2p_activity','Project Details'), 'content' => implode('', $fields)];
 
     echo Tabs::widget(['items' => $fieldGroups]);
