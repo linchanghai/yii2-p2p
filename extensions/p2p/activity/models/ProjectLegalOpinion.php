@@ -3,6 +3,7 @@
 namespace p2p\activity\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "project_legal_opinion".
@@ -30,8 +31,8 @@ class ProjectLegalOpinion extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['project_id', 'legal_info', 'create_time'], 'required'],
-            [['project_id', 'create_time', 'update_time', 'is_delete'], 'integer'],
+            [['project_id', 'legal_info'], 'required'],
+            [['project_id'], 'integer'],
             [['legal_info'], 'string']
         ];
     }
@@ -48,6 +49,17 @@ class ProjectLegalOpinion extends \kiwi\db\ActiveRecord
             'create_time' => Yii::t('p2p_activity', 'Create Time'),
             'update_time' => Yii::t('p2p_activity', 'Update Time'),
             'is_delete' => Yii::t('p2p_activity', 'Is Delete'),
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => 'update_time',
+            ],
         ];
     }
 }

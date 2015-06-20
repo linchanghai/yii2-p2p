@@ -2,6 +2,7 @@
 
 namespace p2p\activity\controllers\backend;
 
+use kiwi\Kiwi;
 use Yii;
 use p2p\activity\models\Project;
 use p2p\activity\searches\ProjectSearch;
@@ -60,7 +61,7 @@ class ProjectController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Project();
+        $model = Kiwi::getProject();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->project_id]);

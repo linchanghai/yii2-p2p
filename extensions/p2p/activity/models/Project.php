@@ -2,7 +2,10 @@
 
 namespace p2p\activity\models;
 
+use kiwi\Kiwi;
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "project".
@@ -26,6 +29,10 @@ use Yii;
  * @property integer $create_time
  * @property integer $update_time
  * @property integer $is_delete
+ *
+ * @property \p2p\activity\models\ProjectDetails $projectDetails
+ * @property \p2p\activity\models\ProjectLegalOpinion $projectLegalOpinion
+ * @property \p2p\activity\models\ProjectMaterial $projectMaterial
  */
 class Project extends \kiwi\db\ActiveRecord
 {
@@ -43,13 +50,12 @@ class Project extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'create_user', 'min_money', 'create_time'], 'required'],
-            [['invest_total_money', 'repayment_date', 'repayment_type', 'release_date', 'invested_money', 'total_invest_money', 'verify_date', 'min_money', 'status', 'create_time', 'update_time', 'is_delete'], 'integer'],
+            [['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'min_money'], 'required'],
+            [['invest_total_money', 'repayment_date', 'repayment_type', 'release_date', 'invested_money', 'total_invest_money', 'min_money', 'status'], 'integer'],
             [['interest_rate'], 'number'],
             [['project_name'], 'string', 'max' => 100],
             [['project_no'], 'string', 'max' => 30],
             [['project_type'], 'string', 'max' => 20],
-            [['create_user', 'verify_user'], 'string', 'max' => 45]
         ];
     }
 
@@ -78,5 +84,36 @@ class Project extends \kiwi\db\ActiveRecord
             'update_time' => Yii::t('p2p_activity', 'Update Time'),
             'is_delete' => Yii::t('p2p_activity', 'Is Delete'),
         ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => 'update_time',
+            ],
+            'user' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'create_user',
+                'updatedByAttribute' => false,
+            ]
+        ];
+    }
+
+    public function getProjectDetails()
+    {
+        return $this->hasOne(Kiwi::getProjectDetailsClass(), ['project_id' => 'project_id']);
+    }
+
+    public function getProjectLegalOpinion()
+    {
+        return $this->hasOne(Kiwi::getProjectLegalOpinionClass(), ['project_id' => 'project_id']);
+    }
+
+    public function getProjectMaterial()
+    {
+        return $this->hasOne(Kiwi::getProjectMaterialClass(), ['project_id' => 'project_id']);
     }
 }
