@@ -70,7 +70,6 @@ class Project extends \kiwi\db\ActiveRecord
             'project_type' => Yii::t('p2p_activity', 'Project Type'),
             'create_user' => Yii::t('p2p_activity', 'Create User'),
             'invested_money' => Yii::t('p2p_activity', 'Invested Money'),
-            'total_invest_money' => Yii::t('p2p_activity', 'Total Invest Money'),
             'verify_user' => Yii::t('p2p_activity', 'Verify User'),
             'verify_date' => Yii::t('p2p_activity', 'Verify Date'),
             'min_money' => Yii::t('p2p_activity', 'Min Money'),
