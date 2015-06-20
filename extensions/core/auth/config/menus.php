@@ -7,12 +7,12 @@
 
 return [
     'auth' => [
-        'label' => Yii::t('app', 'Auth'),
+        'label' => Yii::t('core_auth', 'Auth'),
         'sort' => 1500,
         'url' => ['/core_auth/user/index'],
         'items' => [
             'auth' => [
-                'label' => Yii::t('app', 'Auth'),
+                'label' => Yii::t('core_auth', 'Auth'),
                 'sort' => 100,
                 'items' => [
                     'user' => [

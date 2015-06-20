@@ -11,7 +11,7 @@ use yii\helpers\Html;
 /* @var $this \yii\web\View */
 /* @var $setting \core\system\models\SettingModel */
 
-$this->title = Yii::t('app', '网站配置');
+$this->title = Yii::t('core_system', '网站配置');
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['topMenuKey'] = 'setting';
 $this->params['leftMenuKey'] = 'setting';

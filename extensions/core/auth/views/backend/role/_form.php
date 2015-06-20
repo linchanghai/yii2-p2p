@@ -42,14 +42,14 @@ $this->registerJs($js);
     $groups = $model->renderForm($form, $options);
     ?>
     <div class="form-group">
-        <label class="col-sm-1 control-label"><?= Yii::t('app', 'Permission List') ?></label>
+        <label class="col-sm-1 control-label"><?= Yii::t('core_auth', 'Permission List') ?></label>
 
         <div class="col-sm-11">
             <?php
             foreach ($groups as $key => $labelContent) {
                 ?>
                 <div class="panel panel-default">
-                    <div class="panel-heading" style="cursor: pointer;"><?= $labelContent['label'] ?>[<?= Yii::t('app', 'Select All') ?>]</div>
+                    <div class="panel-heading" style="cursor: pointer;"><?= $labelContent['label'] ?>[<?= Yii::t('core_auth', 'Select All') ?>]</div>
                     <div class="panel-body">
                         <?= $labelContent['content'] ?>
                     </div>
@@ -59,7 +59,7 @@ $this->registerJs($js);
     </div>
     <div class="form-group">
         <div class="col-sm-offset-1 col-sm-11">
-            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('core_auth', 'Create') : Yii::t('core_auth', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         </div>
     </div>
     <?php $form->end(); ?>

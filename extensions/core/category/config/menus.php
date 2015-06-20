@@ -7,12 +7,12 @@
 
 return [
     'category' => [
-        'label' => Yii::t('app', 'Category'),
+        'label' => Yii::t('core_category', 'Category'),
         'sort' => 3000,
         'url' => ['core_category'],
         'items' => [
             'category' => [
-                'label' => Yii::t('app', 'Category'),
+                'label' => Yii::t('core_category', 'Category'),
                 'sort' => 100,
                 'items' => [
                     'category' => [

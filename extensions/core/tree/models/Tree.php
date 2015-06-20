@@ -56,13 +56,13 @@ class Tree extends TreeModel
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'root' => Yii::t('app', 'Root'),
-            'lft' => Yii::t('app', 'Lft'),
-            'rgt' => Yii::t('app', 'Rgt'),
-            'level' => Yii::t('app', 'Level'),
-            'type' => Yii::t('app', 'Type'),
+            'id' => Yii::t('core_tree', 'ID'),
+            'name' => Yii::t('core_tree', 'Name'),
+            'root' => Yii::t('core_tree', 'Root'),
+            'lft' => Yii::t('core_tree', 'Lft'),
+            'rgt' => Yii::t('core_tree', 'Rgt'),
+            'level' => Yii::t('core_tree', 'Level'),
+            'type' => Yii::t('core_tree', 'Type'),
         ];
     }
 

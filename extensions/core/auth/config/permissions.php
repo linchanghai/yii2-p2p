@@ -7,43 +7,43 @@
 
 return [
     'core_auth' => [     //module name, if module is app, set the app id
-        'label' => Yii::t('app', 'Auth'),
+        'label' => Yii::t('core_auth', 'Auth'),
         'sort' => 100,
         'groups' => [
             'user' => [     //controller name
-                'label' => Yii::t('app', 'Administrator'),
+                'label' => Yii::t('core_auth', 'Administrator'),
                 'sort' => 100,
                 'permissions' => [
                     'index' => [    //action name
-                        'label' => Yii::t('app', 'List'),
+                        'label' => Yii::t('core_auth', 'List'),
                         'sort' => 10,
                     ],
                     'edit' => [
-                        'label' => Yii::t('app', 'Edit'),
+                        'label' => Yii::t('core_auth', 'Edit'),
                         'sort' => 20,
                         'permissionKeys' => ['core_auth_user_create', 'core_auth_user_update']
                     ],
                     'delete' => [
-                        'label' => Yii::t('app', 'Delete'),
+                        'label' => Yii::t('core_auth', 'Delete'),
                         'sort' => 30,
                     ],
                 ]
             ],
             'role' => [
-                'label' => Yii::t('app', 'Role'),
+                'label' => Yii::t('core_auth', 'Role'),
                 'sort' => 200,
                 'permissions' => [
                     'index' => [
-                        'label' => Yii::t('app', 'List'),
+                        'label' => Yii::t('core_auth', 'List'),
                         'sort' => 10,
                     ],
                     'edit' => [
-                        'label' => Yii::t('app', 'Edit'),
+                        'label' => Yii::t('core_auth', 'Edit'),
                         'sort' => 20,
                         'permissionKeys' => ['core_auth_role_create', 'core_auth_role_update']
                     ],
                     'delete' => [
-                        'label' => Yii::t('app', 'Delete'),
+                        'label' => Yii::t('core_auth', 'Delete'),
                         'sort' => 30,
                     ],
                 ]
