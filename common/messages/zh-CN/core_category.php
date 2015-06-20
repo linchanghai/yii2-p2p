@@ -17,6 +17,9 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Incorrect username or password.' => '',
-    'Save Config' => '',
+    'Categories' => '',
+    'Category' => '',
+    'Create' => '',
+    'Update' => '',
+    'Update Category' => '',
 ];

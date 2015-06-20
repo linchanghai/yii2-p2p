@@ -11,4 +11,6 @@ namespace core\admin;
 class Module extends \kiwi\base\Module
 {
     public static $active = true;
+
+    public static $only = ['backend'];
 } 

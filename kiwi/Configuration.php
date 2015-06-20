@@ -38,6 +38,8 @@ class Configuration extends Object
 
     public $defaultConfigFiles = ['classes', 'controllers', 'views', 'config', 'aop'];
 
+    public $messagePath = '@common/messages';
+
     /**
      * @inheritdoc
      */
@@ -101,8 +103,12 @@ class Configuration extends Object
                 $moduleClass = $namespace . '\\' . $module . '\\Module';
 
                 if (class_exists($moduleClass) && $moduleClass::$active) {
-                    $moduleName = $namespace . '_' . $module;
-                    $modules[$moduleName] = $moduleClass;
+                    if ((empty($moduleClass::$only) || in_array(Yii::$app->id, $moduleClass::$only))
+                        && (empty($moduleClass::$except) || !in_array(Yii::$app->id, $moduleClass::$except))
+                    ) {
+                        $moduleName = $namespace . '_' . $module;
+                        $modules[$moduleName] = $moduleClass;
+                    }
                 }
             }
         }
@@ -152,17 +158,17 @@ class Configuration extends Object
     protected function getDefaultConfig()
     {
         $translations = [];
+        $fileMap = [];
         $urlRules = [];
         foreach ($this->modules as $moduleName => $moduleClass) {
             $moduleClassParts = explode('\\', $moduleClass);
             array_pop($moduleClassParts);
             $translations[$moduleName] = [
                 'class' => 'yii\i18n\PhpMessageSource',
-                'basePath' => '@' . implode('/', $moduleClassParts) . '/messages',
+                'basePath' => $this->messagePath ?: '@' . implode('/', $moduleClassParts) . '/messages',
                 'sourceLanguage' => 'en-US',
                 'fileMap' => [
-                    'app' => 'app.php',
-                    'app/error' => 'error.php',
+                    $moduleName => $moduleName . '.php',
                 ],
             ];
 

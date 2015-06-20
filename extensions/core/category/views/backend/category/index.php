@@ -7,7 +7,7 @@ use yii\web\JsExpression;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Categories');
+$this->title = Yii::t('core_category', 'Categories');
 
 $options = [
     'draggable' => true,
@@ -26,7 +26,7 @@ $options = [
 echo $this->render('@core/tree/views/tree/index', ['options' => $options]);
 
 Modal::begin([
-    'header' => Yii::t('app', 'Update Category'),
+    'header' => Yii::t('core_category', 'Update Category'),
     'options' => ['id' => 'category-form-modal']
 ]);
 Modal::end();

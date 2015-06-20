@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Role List');
+$this->title = Yii::t('core_auth', 'Role List');
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['topMenuKey'] = 'system';
 $this->params['leftMenuKey'] = 'role';
@@ -16,8 +16,8 @@ $this->params['leftMenuKey'] = 'role';
     <h2><?= Html::encode($this->title) ?></h2>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create {modelClass}', [
-    'modelClass' => Yii::t('app', 'Role'),
+        <?= Html::a(Yii::t('core_auth', 'Create {modelClass}', [
+    'modelClass' => Yii::t('core_auth', 'Role'),
 ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
@@ -26,7 +26,7 @@ $this->params['leftMenuKey'] = 'role';
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            ['label' => Yii::t('app', 'Role Name'), 'attribute' => 'description'],
+            ['label' => Yii::t('core_auth', 'Role Name'), 'attribute' => 'description'],
 
             ['class' => 'yii\grid\ActionColumn', 'template' => '{update} {delete}'],
         ],

@@ -7,7 +7,7 @@
 
 return [
     'cms' => [
-        'label' => Yii::t('app', 'Cms'),
+        'label' => Yii::t('core_cms', 'Cms'),
         'sort' => 2000,
         'url' => ['core_cms'],
         'items' => [

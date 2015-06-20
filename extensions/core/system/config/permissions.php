@@ -7,53 +7,53 @@
 
 return [
     'core_system' => [     //module name, if module is app, set default
-        'label' => Yii::t('app', 'System'),
+        'label' => Yii::t('core_system', 'System'),
         'sort' => 200,
         'groups' => [
             'setting' => [     //controller name
-                'label' => Yii::t('app', 'Setting'),
+                'label' => Yii::t('core_system', 'Setting'),
                 'sort' => 100,
                 'permissions' => [
                     'index' => [
-                        'label' => Yii::t('app', 'Edit'),
+                        'label' => Yii::t('core_system', 'Edit'),
                         'sort' => 10,
                     ],
                 ]
             ],
             'dataList' => [
-                'label' => Yii::t('app', 'DataList'),
+                'label' => Yii::t('core_system', 'DataList'),
                 'sort' => 200,
                 'permissions' => [
                     'index' => [
-                        'label' => Yii::t('app', 'List'),
+                        'label' => Yii::t('core_system', 'List'),
                         'sort' => 10,
                     ],
                     'edit' => [
-                        'label' => Yii::t('app', 'Edit'),
+                        'label' => Yii::t('core_system', 'Edit'),
                         'sort' => 20,
                         'permissionKeys' => ['core_system_dataList_create', 'core_system_dataList_update']
                     ],
                     'delete' => [
-                        'label' => Yii::t('app', 'Delete'),
+                        'label' => Yii::t('core_system', 'Delete'),
                         'sort' => 30,
                     ],
                 ]
             ],
             'urlRewrite' => [
-                'label' => Yii::t('app', 'Url Rewrite'),
+                'label' => Yii::t('core_system', 'Url Rewrite'),
                 'sort' => 200,
                 'permissions' => [
                     'index' => [
-                        'label' => Yii::t('app', 'List'),
+                        'label' => Yii::t('core_system', 'List'),
                         'sort' => 10,
                     ],
                     'edit' => [
-                        'label' => Yii::t('app', 'Edit'),
+                        'label' => Yii::t('core_system', 'Edit'),
                         'sort' => 20,
                         'permissionKeys' => ['core_system_urlRewrite_create', 'core_system_urlRewrite_update']
                     ],
                     'delete' => [
-                        'label' => Yii::t('app', 'Delete'),
+                        'label' => Yii::t('core_system', 'Delete'),
                         'sort' => 30,
                     ],
                 ]
