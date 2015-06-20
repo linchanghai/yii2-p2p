@@ -8,34 +8,34 @@
 return [
     'config' => [
         'onlinePayment' => [
-            'label' => Yii::t('app', '线上支付接口管理'),
+            'label' => Yii::t('core_payment', '线上支付接口管理'),
             'sort' => 200,
             'groups' => [
                 'ecpss' => [
-                    'label' => Yii::t('app', '汇潮支付'),
+                    'label' => Yii::t('core_payment', '汇潮支付'),
                     'sort' => 10,
                     'fields' => [
                         'isEnable' => [  //field
-                            'label' => Yii::t('app', '是否启用'),      //the label for input
+                            'label' => Yii::t('core_payment', '是否启用'),      //the label for input
                             'sort' => 10,
                             'type' => 'radio',               //the input type: text, select, checkbox, radio
-                            'data' => ['1' => Yii::t('app', '是'), '0' => Yii::t('app', '否')],
+                            'data' => ['1' => Yii::t('core_payment', '是'), '0' => Yii::t('core_payment', '否')],
                             'value' => '1',               //the default value
                         ],
                         'feeRate' => [
-                            'label' => Yii::t('app', '充值手续费'),
+                            'label' => Yii::t('core_payment', '充值手续费'),
                             'sort' => 20,
                             'type' => 'text',
                             'value' => '0.2',
                         ],
                         'MerNo' => [
-                            'label' => Yii::t('app', '商户号'),
+                            'label' => Yii::t('core_payment', '商户号'),
                             'sort' => 30,
                             'type' => 'text',
                             'value' => '19769',
                         ],
                         'MD5key' => [
-                            'label' => Yii::t('app', '支付密钥'),
+                            'label' => Yii::t('core_payment', '支付密钥'),
                             'sort' => 30,
                             'type' => 'password',
                             'value' => 'objmKc[b',
@@ -43,30 +43,30 @@ return [
                     ]
                 ],
 //                'ips' => [
-//                    'label' => Yii::t('app', '环迅支付'),
+//                    'label' => Yii::t('core_payment', '环迅支付'),
 //                    'sort' => 20,
 //                    'fields' => [
 //                        'isEnable' => [  //field
-//                            'label' => Yii::t('app', '是否启用'),      //the label for input
+//                            'label' => Yii::t('core_payment', '是否启用'),      //the label for input
 //                            'sort' => 10,
 //                            'type' => 'radio',               //the input type: text, select, checkbox, radio
-//                            'data' => ['1' => Yii::t('app', '是'), '0' => Yii::t('app', '否')],
+//                            'data' => ['1' => Yii::t('core_payment', '是'), '0' => Yii::t('core_payment', '否')],
 //                            'value' => '0',               //the default value
 //                        ],
 //                        'feeRate' => [
-//                            'label' => Yii::t('app', '充值手续费'),
+//                            'label' => Yii::t('core_payment', '充值手续费'),
 //                            'sort' => 20,
 //                            'type' => 'text',
 //                            'value' => '',
 //                        ],
 //                        'MerNo' => [
-//                            'label' => Yii::t('app', '商户号'),
+//                            'label' => Yii::t('core_payment', '商户号'),
 //                            'sort' => 30,
 //                            'type' => 'text',
 //                            'value' => '',
 //                        ],
 //                        'MerKey' => [
-//                            'label' => Yii::t('app', '商户证书'),
+//                            'label' => Yii::t('core_payment', '商户证书'),
 //                            'sort' => 30,
 //                            'type' => 'text',
 //                            'value' => '',
@@ -74,30 +74,30 @@ return [
 //                    ]
 //                ],
                 'chinaBank' => [
-                    'label' => Yii::t('app', '网银在线'),
+                    'label' => Yii::t('core_payment', '网银在线'),
                     'sort' => 30,
                     'fields' => [
                         'isEnable' => [  //field
-                            'label' => Yii::t('app', '是否启用'),      //the label for input
+                            'label' => Yii::t('core_payment', '是否启用'),      //the label for input
                             'sort' => 10,
                             'type' => 'radio',               //the input type: text, select, checkbox, radio
-                            'data' => ['1' => Yii::t('app', '是'), '0' => Yii::t('app', '否')],
+                            'data' => ['1' => Yii::t('core_payment', '是'), '0' => Yii::t('core_payment', '否')],
                             'value' => '1',               //the default value
                         ],
                         'feeRate' => [
-                            'label' => Yii::t('app', '充值手续费'),
+                            'label' => Yii::t('core_payment', '充值手续费'),
                             'sort' => 20,
                             'type' => 'text',
                             'value' => '0.2',
                         ],
                         'mid' => [
-                            'label' => Yii::t('app', '商户号'),
+                            'label' => Yii::t('core_payment', '商户号'),
                             'sort' => 30,
                             'type' => 'text',
                             'value' => '23091132',
                         ],
                         'mKey' => [
-                            'label' => Yii::t('app', 'MD5密钥'),
+                            'label' => Yii::t('core_payment', 'MD5密钥'),
                             'sort' => 30,
                             'type' => 'password',
                             'value' => '285279781@qq.comronxindai2014',
@@ -105,36 +105,36 @@ return [
                     ]
                 ],
                 'baoFoo' => [
-                    'label' => Yii::t('app', '宝付'),
+                    'label' => Yii::t('core_payment', '宝付'),
                     'sort' => 40,
                     'fields' => [
                         'isEnable' => [  //field
-                            'label' => Yii::t('app', '是否启用'),      //the label for input
+                            'label' => Yii::t('core_payment', '是否启用'),      //the label for input
                             'sort' => 10,
                             'type' => 'radio',               //the input type: text, select, checkbox, radio
-                            'data' => ['1' => Yii::t('app', '是'), '0' => Yii::t('app', '否')],
+                            'data' => ['1' => Yii::t('core_payment', '是'), '0' => Yii::t('core_payment', '否')],
                             'value' => '1',               //the default value
                         ],
                         'feeRate' => [
-                            'label' => Yii::t('app', '充值手续费'),
+                            'label' => Yii::t('core_payment', '充值手续费'),
                             'sort' => 20,
                             'type' => 'text',
                             'value' => '0.2',
                         ],
                         'MemberID' => [
-                            'label' => Yii::t('app', '商户号'),
+                            'label' => Yii::t('core_payment', '商户号'),
                             'sort' => 30,
                             'type' => 'text',
                             'value' => '404203',
                         ],
                         'TerminalID' => [
-                            'label' => Yii::t('app', '终端号'),
+                            'label' => Yii::t('core_payment', '终端号'),
                             'sort' => 30,
                             'type' => 'password',
                             'value' => '21128',
                         ],
                         'pKey' => [
-                            'label' => Yii::t('app', '商户证书'),
+                            'label' => Yii::t('core_payment', '商户证书'),
                             'sort' => 30,
                             'type' => 'password',
                             'value' => 'uqflvf323wjs3j6t',
@@ -142,30 +142,30 @@ return [
                     ]
                 ],
                 'sumaPay' => [
-                    'label' => Yii::t('app', '丰付'),
+                    'label' => Yii::t('core_payment', '丰付'),
                     'sort' => 40,
                     'fields' => [
                         'isEnable' => [  //field
-                            'label' => Yii::t('app', '是否启用'),      //the label for input
+                            'label' => Yii::t('core_payment', '是否启用'),      //the label for input
                             'sort' => 10,
                             'type' => 'radio',               //the input type: text, select, checkbox, radio
-                            'data' => ['1' => Yii::t('app', '是'), '0' => Yii::t('app', '否')],
+                            'data' => ['1' => Yii::t('core_payment', '是'), '0' => Yii::t('core_payment', '否')],
                             'value' => '1',               //the default value
                         ],
                         'feeRate' => [
-                            'label' => Yii::t('app', '充值手续费'),
+                            'label' => Yii::t('core_payment', '充值手续费'),
                             'sort' => 20,
                             'type' => 'text',
                             'value' => '0.2',
                         ],
                         'partner' => [
-                            'label' => Yii::t('app', '商户号'),
+                            'label' => Yii::t('core_payment', '商户号'),
                             'sort' => 30,
                             'type' => 'text',
                             'value' => '3310000040',
                         ],
                         'key' => [
-                            'label' => Yii::t('app', '商户证书'),
+                            'label' => Yii::t('core_payment', '商户证书'),
                             'sort' => 30,
                             'type' => 'password',
                             'value' => 'yRhMmS5tUXJLjUfDES9ki6USKm8TWBIe',
@@ -173,30 +173,30 @@ return [
                     ]
                 ],
 //                'tenPay' => [
-//                    'label' => Yii::t('app', '财付通'),
+//                    'label' => Yii::t('core_payment', '财付通'),
 //                    'sort' => 50,
 //                    'fields' => [
 //                        'isEnable' => [  //field
-//                            'label' => Yii::t('app', '是否启用'),      //the label for input
+//                            'label' => Yii::t('core_payment', '是否启用'),      //the label for input
 //                            'sort' => 10,
 //                            'type' => 'radio',               //the input type: text, select, checkbox, radio
-//                            'data' => ['1' => Yii::t('app', '是'), '0' => Yii::t('app', '否')],
+//                            'data' => ['1' => Yii::t('core_payment', '是'), '0' => Yii::t('core_payment', '否')],
 //                            'value' => '0',               //the default value
 //                        ],
 //                        'feeRate' => [
-//                            'label' => Yii::t('app', '充值手续费'),
+//                            'label' => Yii::t('core_payment', '充值手续费'),
 //                            'sort' => 20,
 //                            'type' => 'text',
 //                            'value' => '',
 //                        ],
 //                        'MerNo' => [
-//                            'label' => Yii::t('app', '商户号'),
+//                            'label' => Yii::t('core_payment', '商户号'),
 //                            'sort' => 30,
 //                            'type' => 'text',
 //                            'value' => '',
 //                        ],
 //                        'MerKey' => [
-//                            'label' => Yii::t('app', '支付密钥'),
+//                            'label' => Yii::t('core_payment', '支付密钥'),
 //                            'sort' => 30,
 //                            'type' => 'password',
 //                            'value' => '',
@@ -204,36 +204,36 @@ return [
 //                    ]
 //                ],
 //                'guofubao' => [
-//                    'label' => Yii::t('app', '国付宝'),
+//                    'label' => Yii::t('core_payment', '国付宝'),
 //                    'sort' => 60,
 //                    'fields' => [
 //                        'isEnable' => [  //field
-//                            'label' => Yii::t('app', '是否启用'),      //the label for input
+//                            'label' => Yii::t('core_payment', '是否启用'),      //the label for input
 //                            'sort' => 10,
 //                            'type' => 'radio',               //the input type: text, select, checkbox, radio
-//                            'data' => ['1' => Yii::t('app', '是'), '0' => Yii::t('app', '否')],
+//                            'data' => ['1' => Yii::t('core_payment', '是'), '0' => Yii::t('core_payment', '否')],
 //                            'value' => '0',               //the default value
 //                        ],
 //                        'feeRate' => [
-//                            'label' => Yii::t('app', '充值手续费'),
+//                            'label' => Yii::t('core_payment', '充值手续费'),
 //                            'sort' => 20,
 //                            'type' => 'text',
 //                            'value' => '',
 //                        ],
 //                        'merchantID' => [
-//                            'label' => Yii::t('app', '商户代码'),
+//                            'label' => Yii::t('core_payment', '商户代码'),
 //                            'sort' => 30,
 //                            'type' => 'text',
 //                            'value' => '',
 //                        ],
 //                        'VerficationCode' => [
-//                            'label' => Yii::t('app', '商户识别码'),
+//                            'label' => Yii::t('core_payment', '商户识别码'),
 //                            'sort' => 30,
 //                            'type' => 'password',
 //                            'value' => '',
 //                        ],
 //                        'virCardNoIn' => [
-//                            'label' => Yii::t('app', '国付宝帐号'),
+//                            'label' => Yii::t('core_payment', '国付宝帐号'),
 //                            'sort' => 30,
 //                            'type' => 'text',
 //                            'value' => '',
@@ -241,30 +241,30 @@ return [
 //                    ]
 //                ],
 //                'easyPay' => [
-//                    'label' => Yii::t('app', '易生支付'),
+//                    'label' => Yii::t('core_payment', '易生支付'),
 //                    'sort' => 70,
 //                    'fields' => [
 //                        'isEnable' => [  //field
-//                            'label' => Yii::t('app', '是否启用'),      //the label for input
+//                            'label' => Yii::t('core_payment', '是否启用'),      //the label for input
 //                            'sort' => 10,
 //                            'type' => 'radio',               //the input type: text, select, checkbox, radio
-//                            'data' => ['1' => Yii::t('app', '是'), '0' => Yii::t('app', '否')],
+//                            'data' => ['1' => Yii::t('core_payment', '是'), '0' => Yii::t('core_payment', '否')],
 //                            'value' => '1',               //the default value
 //                        ],
 //                        'feeRate' => [
-//                            'label' => Yii::t('app', '充值手续费'),
+//                            'label' => Yii::t('core_payment', '充值手续费'),
 //                            'sort' => 20,
 //                            'type' => 'text',
 //                            'value' => '0.2',
 //                        ],
 //                        'partner' => [
-//                            'label' => Yii::t('app', '商户号'),
+//                            'label' => Yii::t('core_payment', '商户号'),
 //                            'sort' => 30,
 //                            'type' => 'text',
 //                            'value' => '100000000001264',
 //                        ],
 //                        'key' => [
-//                            'label' => Yii::t('app', '支付密钥'),
+//                            'label' => Yii::t('core_payment', '支付密钥'),
 //                            'sort' => 30,
 //                            'type' => 'password',
 //                            'value' => 'ada466g1d5907cg51aedb2011412f4fd50a73d4ge561d8ga5549ec0107d83457',
@@ -272,30 +272,30 @@ return [
 //                    ]
 //                ],
 //                'cmPay' => [
-//                    'label' => Yii::t('app', '中国移动支付'),
+//                    'label' => Yii::t('core_payment', '中国移动支付'),
 //                    'sort' => 80,
 //                    'fields' => [
 //                        'isEnable' => [  //field
-//                            'label' => Yii::t('app', '是否启用'),      //the label for input
+//                            'label' => Yii::t('core_payment', '是否启用'),      //the label for input
 //                            'sort' => 10,
 //                            'type' => 'radio',               //the input type: text, select, checkbox, radio
-//                            'data' => ['1' => Yii::t('app', '是'), '0' => Yii::t('app', '否')],
+//                            'data' => ['1' => Yii::t('core_payment', '是'), '0' => Yii::t('core_payment', '否')],
 //                            'value' => '0',               //the default value
 //                        ],
 //                        'feeRate' => [
-//                            'label' => Yii::t('app', '充值手续费'),
+//                            'label' => Yii::t('core_payment', '充值手续费'),
 //                            'sort' => 20,
 //                            'type' => 'text',
 //                            'value' => '0.2',
 //                        ],
 //                        'merchantId' => [
-//                            'label' => Yii::t('app', '商户号'),
+//                            'label' => Yii::t('core_payment', '商户号'),
 //                            'sort' => 30,
 //                            'type' => 'text',
 //                            'value' => '888009972990047',
 //                        ],
 //                        'serverCert' => [
-//                            'label' => Yii::t('app', '支付密钥'),
+//                            'label' => Yii::t('core_payment', '支付密钥'),
 //                            'sort' => 30,
 //                            'type' => 'password',
 //                            'value' => '0IzjBZHGPg2kIrLZGrD2BkCSwrAw2djUgCcajSr2fW2pFdCEu6EoMEYYBXly34au',
@@ -303,30 +303,30 @@ return [
 //                    ]
 //                ],
 //                'chinaBankNo' => [
-//                    'label' => Yii::t('app', '网银积分'),
+//                    'label' => Yii::t('core_payment', '网银积分'),
 //                    'sort' => 90,
 //                    'fields' => [
 //                        'isEnable' => [  //field
-//                            'label' => Yii::t('app', '是否启用'),      //the label for input
+//                            'label' => Yii::t('core_payment', '是否启用'),      //the label for input
 //                            'sort' => 10,
 //                            'type' => 'radio',               //the input type: text, select, checkbox, radio
-//                            'data' => ['1' => Yii::t('app', '是'), '0' => Yii::t('app', '否')],
+//                            'data' => ['1' => Yii::t('core_payment', '是'), '0' => Yii::t('core_payment', '否')],
 //                            'value' => '0',               //the default value
 //                        ],
 //                        'feeRate' => [
-//                            'label' => Yii::t('app', '充值手续费'),
+//                            'label' => Yii::t('core_payment', '充值手续费'),
 //                            'sort' => 20,
 //                            'type' => 'text',
 //                            'value' => '0.2',
 //                        ],
 //                        'merchantId' => [
-//                            'label' => Yii::t('app', '商户号'),
+//                            'label' => Yii::t('core_payment', '商户号'),
 //                            'sort' => 30,
 //                            'type' => 'text',
 //                            'value' => '22946993',
 //                        ],
 //                        'mkey' => [
-//                            'label' => Yii::t('app', '支付密钥'),
+//                            'label' => Yii::t('core_payment', '支付密钥'),
 //                            'sort' => 30,
 //                            'type' => 'password',
 //                            'value' => '285279781@qq.comronxindai2014',
@@ -334,30 +334,30 @@ return [
 //                    ]
 //                ],
 //                'ecpssNo' => [
-//                    'label' => Yii::t('app', '汇潮积分'),
+//                    'label' => Yii::t('core_payment', '汇潮积分'),
 //                    'sort' => 100,
 //                    'fields' => [
 //                        'isEnable' => [  //field
-//                            'label' => Yii::t('app', '是否启用'),      //the label for input
+//                            'label' => Yii::t('core_payment', '是否启用'),      //the label for input
 //                            'sort' => 10,
 //                            'type' => 'radio',               //the input type: text, select, checkbox, radio
-//                            'data' => ['1' => Yii::t('app', '是'), '0' => Yii::t('app', '否')],
+//                            'data' => ['1' => Yii::t('core_payment', '是'), '0' => Yii::t('core_payment', '否')],
 //                            'value' => '0',               //the default value
 //                        ],
 //                        'feeRate' => [
-//                            'label' => Yii::t('app', '充值手续费'),
+//                            'label' => Yii::t('core_payment', '充值手续费'),
 //                            'sort' => 20,
 //                            'type' => 'text',
 //                            'value' => '0.2',
 //                        ],
 //                        'merchantId' => [
-//                            'label' => Yii::t('app', '商户号'),
+//                            'label' => Yii::t('core_payment', '商户号'),
 //                            'sort' => 30,
 //                            'type' => 'text',
 //                            'value' => '19772',
 //                        ],
 //                        'mkey' => [
-//                            'label' => Yii::t('app', '支付密钥'),
+//                            'label' => Yii::t('core_payment', '支付密钥'),
 //                            'sort' => 30,
 //                            'type' => 'password',
 //                            'value' => 'NvW}wt[k',

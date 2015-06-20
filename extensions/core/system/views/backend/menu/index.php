@@ -7,7 +7,7 @@ use yii\web\JsExpression;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Menus');
+$this->title = Yii::t('core_system', 'Menus');
 
 $options = [
     'draggable' => true,
@@ -26,7 +26,7 @@ $options = [
 echo $this->render('@core/tree/views/tree/index', ['options' => $options]);
 
 Modal::begin([
-    'header' => Yii::t('app', 'Update Menu'),
+    'header' => Yii::t('core_system', 'Update Menu'),
     'options' => ['id' => 'menu-form-modal']
 ]);
 Modal::end();

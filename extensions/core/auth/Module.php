@@ -15,4 +15,6 @@ class Module extends \kiwi\base\Module
     public static $config = ['permissions'];
 
     public static $bootstrap = ['core\auth\Bootstrap'];
+
+    public static $only = ['backend'];
 } 

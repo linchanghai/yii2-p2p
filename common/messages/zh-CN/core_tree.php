@@ -17,5 +17,11 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    '该商品没有上传图片' => '',
+    'ID' => '',
+    'Level' => '',
+    'Lft' => '',
+    'Name' => '',
+    'Rgt' => '',
+    'Root' => '',
+    'Type' => '',
 ];

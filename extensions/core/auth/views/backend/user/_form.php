@@ -15,7 +15,7 @@ use yii\bootstrap\ActiveForm;
 
     <div class="form-group">
         <div class="col-sm-offset-1 col-sm-11">
-            <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('core_auth', 'Create') : Yii::t('core_auth', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         </div>
     </div>
 

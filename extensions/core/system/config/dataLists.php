@@ -7,26 +7,26 @@
 
 return [
     'boolean' => [
-        'label' => Yii::t('app', 'Boolean'),
+        'label' => Yii::t('core_system', 'Boolean'),
         'values' => [
-            1 => Yii::t('app', 'Yes'),
-            0 => Yii::t('app', 'No'),
+            1 => Yii::t('core_system', 'Yes'),
+            0 => Yii::t('core_system', 'No'),
         ],
         'isDB' => true
     ],
     'enable' => [
-        'label' => Yii::t('app', 'Boolean'),
+        'label' => Yii::t('core_system', 'Boolean'),
         'values' => [
-            1 => Yii::t('app', 'Enable'),
-            0 => Yii::t('app', 'Disable'),
+            1 => Yii::t('core_system', 'Enable'),
+            0 => Yii::t('core_system', 'Disable'),
         ],
         'isDB' => true
     ],
     'active' => [
-        'label' => Yii::t('app', 'Active'),
+        'label' => Yii::t('core_system', 'Active'),
         'values' => [
-            1 => Yii::t('app', 'On'),
-            0 => Yii::t('app', 'Off'),
+            1 => Yii::t('core_system', 'On'),
+            0 => Yii::t('core_system', 'Off'),
         ],
         'isDB' => true
     ]

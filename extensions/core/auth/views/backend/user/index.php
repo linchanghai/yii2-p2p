@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Administrator List');
+$this->title = Yii::t('core_auth', 'Administrator List');
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['topMenuKey'] = 'system';
 $this->params['leftMenuKey'] = 'user';
@@ -18,8 +18,8 @@ $this->params['leftMenuKey'] = 'user';
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create {modelClass}', [
-            'modelClass' => Yii::t('app', 'Administrator')
+        <?= Html::a(Yii::t('core_auth', 'Create {modelClass}', [
+            'modelClass' => Yii::t('core_auth', 'Administrator')
         ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
@@ -27,13 +27,12 @@ $this->params['leftMenuKey'] = 'user';
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            ['label' =>  Yii::t('app', '管理员名称'), 'attribute' => 'username'],
-            ['label' =>  Yii::t('app', '邮箱'), 'attribute' => 'email'],
-            ['label' =>  Yii::t('app', '状态'), 'attribute' => 'status', 'value' => function($model) {
+            'username',
+            'email:email',
+            ['attribute' => 'status', 'value' => function($model) {
                 $activeList = Kiwi::getDataListModel()->isUserActive;
                 return $activeList[$model->status];
             }],
-//            'email:email',
             ['class' => 'yii\grid\ActionColumn', 'template' => '{update} {delete}'],
         ],
     ]); ?>
