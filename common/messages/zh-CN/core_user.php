@@ -17,6 +17,18 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Access Token' => '',
+    'Auth Key' => '',
+    'Created At' => '',
+    'Email' => '',
+    'Email Verify Token' => '',
+    'ID' => '',
     'Incorrect username or password.' => '',
-    'Save Config' => '',
+    'Password Hash' => '',
+    'Password Reset Token' => '',
+    'Phone' => '',
+    'Role' => '',
+    'Status' => '',
+    'Updated At' => '',
+    'Username' => '',
 ];

@@ -27,13 +27,12 @@ $this->params['leftMenuKey'] = 'user';
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            ['label' =>  Yii::t('core_auth', '管理员名称'), 'attribute' => 'username'],
-            ['label' =>  Yii::t('core_auth', '邮箱'), 'attribute' => 'email'],
-            ['label' =>  Yii::t('core_auth', '状态'), 'attribute' => 'status', 'value' => function($model) {
+            'username',
+            'email:email',
+            ['attribute' => 'status', 'value' => function($model) {
                 $activeList = Kiwi::getDataListModel()->isUserActive;
                 return $activeList[$model->status];
             }],
-//            'email:email',
             ['class' => 'yii\grid\ActionColumn', 'template' => '{update} {delete}'],
         ],
     ]); ?>

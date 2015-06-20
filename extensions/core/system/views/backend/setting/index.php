@@ -11,7 +11,7 @@ use yii\helpers\Html;
 /* @var $this \yii\web\View */
 /* @var $setting \core\system\models\SettingModel */
 
-$this->title = Yii::t('core_system', '网站配置');
+$this->title = Yii::t('core_system', 'Setting');
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['topMenuKey'] = 'setting';
 $this->params['leftMenuKey'] = 'setting';
@@ -21,7 +21,7 @@ $this->params['leftMenuKey'] = 'setting';
     <?php
     $form = ActiveForm::begin(['options' => ['class' => 'form-horizontal']]);
     echo $setting->renderForm($form);
-    echo Html::submitButton(Yii::t('core_system', '保存配置'), ['class' => 'btn btn-primary']);
+    echo Html::submitButton(Yii::t('core_system', 'Save'), ['class' => 'btn btn-primary']);
     $form->end();
     ?>
 </div>
