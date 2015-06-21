@@ -18,8 +18,8 @@ class MemberSearch extends Member
     public function rules()
     {
         return [
-            [['member_id', 'status', 'create_time', 'update_time', 'is_deleted'], 'integer'],
-            [['username', 'password_hash', 'mobile', 'email', 'email_vaild_code', 'real_name', 'id_card', 'recomend_user', 'recomend_type'], 'safe'],
+            [['member_id', 'status'], 'integer'],
+            [['username', 'mobile', 'email', 'real_name', 'id_card', 'recommend_user'], 'safe'],
         ];
     }
 
@@ -65,13 +65,16 @@ class MemberSearch extends Member
 
         $query->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'password_hash', $this->password_hash])
+            ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
             ->andFilterWhere(['like', 'mobile', $this->mobile])
             ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'email_vaild_code', $this->email_vaild_code])
+            ->andFilterWhere(['like', 'email_verify_token', $this->email_verify_token])
             ->andFilterWhere(['like', 'real_name', $this->real_name])
             ->andFilterWhere(['like', 'id_card', $this->id_card])
-            ->andFilterWhere(['like', 'recomend_user', $this->recomend_user])
-            ->andFilterWhere(['like', 'recomend_type', $this->recomend_type]);
+            ->andFilterWhere(['like', 'recommend_user', $this->recommend_user])
+            ->andFilterWhere(['like', 'recommend_type', $this->recommend_type])
+            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
+            ->andFilterWhere(['like', 'access_token', $this->access_token]);
 
         return $dataProvider;
     }

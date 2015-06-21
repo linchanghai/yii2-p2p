@@ -12,19 +12,23 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'password_reset_token')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'mobile')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'email_vaild_code')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'email_verify_token')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'real_name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'id_card')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'recomend_user')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'recomend_type')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'access_token')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'status')->textInput() ?>
 

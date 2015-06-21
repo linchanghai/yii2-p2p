@@ -6,9 +6,11 @@
  */
 
 return [
-    'components' => [
-        'user' => [
-            'identityClass' => 'core\member\models\Member',
+    'frontend' => [
+        'components' => [
+            'user' => [
+                'identityClass' => 'core\member\models\Member',
+            ],
         ],
-    ]
+    ],
 ];

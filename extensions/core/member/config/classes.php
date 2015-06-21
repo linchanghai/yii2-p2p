@@ -11,5 +11,6 @@ return [
         'memberBank' => 'core\member\models\MemberBank',
         'memberStatus' => 'core\member\models\MemberStatus',
         'memberStatistic' => 'core\member\models\MemberStatistic',
+        'memberCoupon' => 'core\member\models\MemberCoupon'
     ]
 ];

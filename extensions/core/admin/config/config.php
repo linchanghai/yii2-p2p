@@ -6,10 +6,12 @@
  */
 
 return [
-    'components' => [
-        'user' => [
-            'identityClass' => 'core\admin\models\Admin',
-            'enableAutoLogin' => true,
+    'backend' => [
+        'components' => [
+            'user' => [
+                'identityClass' => 'core\admin\models\Admin',
+                'enableAutoLogin' => true,
+            ],
         ],
     ],
 ];
