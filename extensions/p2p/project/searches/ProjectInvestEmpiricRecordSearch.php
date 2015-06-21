@@ -18,7 +18,7 @@ class ProjectInvestEmpiricRecordSearch extends ProjectInvestEmpiricRecord
     public function rules()
     {
         return [
-            [['project_invest_point_id', 'project_invest_id', 'project_id', 'member_id', 'point', 'create_time', 'is_delete'], 'integer'],
+            [['project_invest_empiric_id', 'project_invest_id', 'project_id', 'member_id', 'empiric_value', 'create_time', 'is_delete'], 'integer'],
         ];
     }
 
@@ -55,11 +55,11 @@ class ProjectInvestEmpiricRecordSearch extends ProjectInvestEmpiricRecord
         }
 
         $query->andFilterWhere([
-            'project_invest_point_id' => $this->project_invest_point_id,
+            'project_invest_empiric_id' => $this->project_invest_empiric_id,
             'project_invest_id' => $this->project_invest_id,
             'project_id' => $this->project_id,
             'member_id' => $this->member_id,
-            'point' => $this->point,
+            'empiric_value' => $this->empiric_value,
             'create_time' => $this->create_time,
             'is_delete' => $this->is_delete,
         ]);

@@ -2,9 +2,8 @@
 
 namespace p2p\project\controllers\backend;
 
+use kiwi\Kiwi;
 use Yii;
-use p2p\project\models\ProjectRepayment;
-use p2p\project\searches\ProjectRepaymentSearch;
 use kiwi\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -32,7 +31,7 @@ class ProjectRepaymentController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ProjectRepaymentSearch();
+        $searchModel = Kiwi::getProjectRepaymentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -75,7 +74,8 @@ class ProjectRepaymentController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = ProjectRepayment::findOne($id)) !== null) {
+        $projectRepaymentClass = Kiwi::getProjectRepaymentClass();
+        if (($model = $projectRepaymentClass::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

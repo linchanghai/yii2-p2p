@@ -2,9 +2,8 @@
 
 namespace p2p\project\controllers\backend;
 
+use kiwi\Kiwi;
 use Yii;
-use p2p\project\models\ProjectInvestEmpiricRecord;
-use p2p\project\searches\ProjectInvestEmpiricRecordSearch;
 use kiwi\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -32,7 +31,7 @@ class ProjectInvestEmpiricRecordController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ProjectInvestEmpiricRecordSearch();
+        $searchModel = Kiwi::getProjectInvestEmpiricRecordSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -75,7 +74,8 @@ class ProjectInvestEmpiricRecordController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = ProjectInvestEmpiricRecord::findOne($id)) !== null) {
+        $projectInvestEmpiricRecordClass = Kiwi::getProjectInvestEmpiricRecordClass();
+        if (($model = $projectInvestEmpiricRecordClass::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
