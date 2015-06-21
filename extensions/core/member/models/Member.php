@@ -45,9 +45,9 @@ class Member extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_name', 'password_hash'], 'required'],
+            [['username', 'password_hash'], 'required'],
             [['status', 'create_time', 'update_time', 'is_deleted'], 'integer'],
-            [['user_name', 'recommend_user', 'recommend_type'], 'string', 'max' => 45],
+            [['username', 'recommend_user', 'recommend_type'], 'string', 'max' => 45],
             [['password_hash', 'email'], 'string', 'max' => 60],
             [['password_reset_token', 'access_token'], 'string', 'max' => 100],
             [['mobile'], 'string', 'max' => 11],
@@ -55,7 +55,7 @@ class Member extends \kiwi\db\ActiveRecord
             [['real_name'], 'string', 'max' => 50],
             [['id_card'], 'string', 'max' => 18],
             [['auth_key'], 'string', 'max' => 32],
-            [['user_name'], 'unique']
+            [['username'], 'unique']
         ];
     }
 
@@ -66,7 +66,7 @@ class Member extends \kiwi\db\ActiveRecord
     {
         return [
             'member_id' => Yii::t('core_member', 'Member ID'),
-            'user_name' => Yii::t('core_member', 'User Name'),
+            'username' => Yii::t('core_member', 'User Name'),
             'password_hash' => Yii::t('core_member', 'Password Hash'),
             'password_reset_token' => Yii::t('core_member', 'Password Reset Token'),
             'mobile' => Yii::t('core_member', 'Mobile'),

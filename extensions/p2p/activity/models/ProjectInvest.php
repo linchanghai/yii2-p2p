@@ -2,6 +2,7 @@
 
 namespace p2p\activity\models;
 
+use core\member\models\Member;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -110,7 +111,7 @@ class ProjectInvest extends \kiwi\db\ActiveRecord
      */
     public function getMember()
     {
-        return $this->hasOne(Project::className(), ['project_id' => 'member_id']);
+        return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
     }
 
     /**

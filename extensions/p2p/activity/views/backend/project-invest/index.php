@@ -23,7 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 //            'project_invest_id',
 //            'project_id',
+            'project.project_name',
 //            'member_id',
+            'member.username',
             'rate',
             'invest_money',
              'interest_money',
