@@ -30,5 +30,21 @@ return [
             'enablePrettyUrl' => true,
         ],
     ],
+    'controllerMap' => [
+        'elfinder' => [
+            'class' => 'mihaildev\elfinder\Controller',
+            'access' => ['@'], //глобальный доступ к фаил менеджеру @ - для авторизорованных , ? - для гостей , чтоб открыть всем ['@', '?']
+            'disabledCommands' => ['netmount'], //отключение ненужных команд https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#commands
+            'roots' => [
+                [
+                    'baseUrl' => 'http://localhost/p2p/upload',
+                    'basePath' => '@upload',
+                    'path' =>  '/',
+                    'name' => 'Images',
+                    'access' => ['read' => '*', 'write' => false]
+                ],
+            ]
+        ],
+    ],
     'params' => $params,
 ];

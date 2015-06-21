@@ -62,6 +62,7 @@ class ProjectController extends Controller
     public function actionCreate()
     {
         $model = Kiwi::getProject();
+        $model->scenario = 'insert';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->project_id]);
@@ -81,6 +82,7 @@ class ProjectController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = 'insert';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->project_id]);

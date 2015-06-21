@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'project_id',
+//            'project_id',
             'project_name',
             'project_no',
             'invest_total_money',
@@ -43,9 +43,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'verify_date',
             'min_money',
             'status',
-            'create_time:datetime',
-            'update_time:datetime',
-            'is_delete',
+//            'create_time:datetime',
+//            'update_time:datetime',
+//            'is_delete',
         ],
     ]) ?>
 

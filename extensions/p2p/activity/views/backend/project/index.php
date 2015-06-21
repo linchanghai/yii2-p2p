@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'project_id',
+//            'project_id',
             'project_name',
             'project_no',
             'invest_total_money',
@@ -44,7 +44,15 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'update_time:datetime',
             // 'is_delete',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'buttons' =>
+                    [
+                        'view' => function ($url, $model) {
+                            return ;
+                        },
+                    ]
+            ],
         ],
     ]); ?>
 

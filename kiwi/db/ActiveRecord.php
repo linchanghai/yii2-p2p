@@ -80,6 +80,9 @@ class ActiveRecord extends \yii\db\ActiveRecord
      */
     public function setRelation($name, $values, $indexKey = null)
     {
+        if ($name == end(explode('\\', $this->className()))) {
+            return false;
+        }
         $name = lcfirst($name);
         if ((is_array($values) || $values instanceof ActiveRecord) && $relation = $this->getRelation($name, false)) {
             if ($relation->multiple) {

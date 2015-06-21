@@ -36,7 +36,7 @@ class BaseKiwi
                 $type = ArrayHelper::merge($type, $arguments[0]);
             }
             $params = isset($arguments[1]) && is_array($arguments[1]) ? $arguments[1] : [];
-            return Kiwi::createObject($type, $params);
+            return Yii::createObject($type, $params);
         }
         throw new UnknownMethodException('Calling unknown method: ' . get_called_class() . "::$name()");
     }
