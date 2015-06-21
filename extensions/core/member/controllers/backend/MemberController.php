@@ -2,6 +2,7 @@
 
 namespace core\member\controllers\backend;
 
+use kiwi\Kiwi;
 use Yii;
 use core\member\models\Member;
 use core\member\searches\MemberSearch;
@@ -32,7 +33,7 @@ class MemberController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new MemberSearch();
+        $searchModel = Kiwi::getMemberSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -60,7 +61,7 @@ class MemberController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Member();
+        $model = Kiwi::getMember();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->member_id]);
