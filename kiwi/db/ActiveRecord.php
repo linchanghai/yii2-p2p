@@ -509,8 +509,9 @@ class ActiveRecord extends \yii\db\ActiveRecord
     {
         $model = new static;
         foreach (static::$cascadeDeleteRelations as $name) {
+            $name = lcfirst($name);
             /** @var \yii\db\ActiveQuery $relation */
-            if ($relation = $model->getRelation($name, false)) {
+            if ($relation = $model->getRelation($name, true)) {
                 /** @var \yii\db\ActiveRecord $modelClass */
                 $modelClass = $relation->modelClass;
                 $condition = [];

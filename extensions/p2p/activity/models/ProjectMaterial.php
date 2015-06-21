@@ -17,6 +17,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class ProjectMaterial extends \kiwi\db\ActiveRecord
 {
+    public static $enableLogicDelete = true;
+
     /**
      * @inheritdoc
      */
