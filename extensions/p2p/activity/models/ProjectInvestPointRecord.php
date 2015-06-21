@@ -6,9 +6,9 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "project_invest_point_record".
+ * This is the model class for table "project_invest_point_id".
  *
- * @property integer $project_invest_point_record
+ * @property integer $project_invest_point_id
  * @property integer $project_invest_id
  * @property integer $project_id
  * @property integer $member_id
@@ -47,7 +47,7 @@ class ProjectInvestPointRecord extends \kiwi\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'project_invest_point_record' => Yii::t('p2p_activity', 'Project Invest Point Record'),
+            'project_invest_point_id' => Yii::t('p2p_activity', 'Project Invest Point ID'),
             'project_invest_id' => Yii::t('p2p_activity', 'Project Invest ID'),
             'project_id' => Yii::t('p2p_activity', 'Project ID'),
             'member_id' => Yii::t('p2p_activity', 'Member ID'),
@@ -63,7 +63,7 @@ class ProjectInvestPointRecord extends \kiwi\db\ActiveRecord
             'time' => [
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'create_time',
-                'updatedAtAttribute' => 'update_time',
+                'updatedAtAttribute' => false,
             ]
         ];
     }

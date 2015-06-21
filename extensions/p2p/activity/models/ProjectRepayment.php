@@ -8,7 +8,7 @@ use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "project_repayment".
  *
- * @property integer $project_repayment_record
+ * @property integer $project_repayment_id
  * @property integer $project_invest_id
  * @property integer $project_id
  * @property integer $member_id
@@ -53,7 +53,7 @@ class ProjectRepayment extends \kiwi\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'project_repayment_record' => Yii::t('p2p_activity', 'Project Repayment Record'),
+            'project_repayment_id' => Yii::t('p2p_activity', 'Project Repayment ID'),
             'project_invest_id' => Yii::t('p2p_activity', 'Project Invest ID'),
             'project_id' => Yii::t('p2p_activity', 'Project ID'),
             'member_id' => Yii::t('p2p_activity', 'Member ID'),

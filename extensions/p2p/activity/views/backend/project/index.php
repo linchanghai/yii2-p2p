@@ -46,12 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'buttons' =>
-                    [
-                        'view' => function ($url, $model) {
-                            return ;
-                        },
-                    ]
+                'template' => '<div style="width: 30px">{update} {delete}</div>'
             ],
         ],
     ]); ?>

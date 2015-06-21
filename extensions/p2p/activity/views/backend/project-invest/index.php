@@ -25,19 +25,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'project_invest_id',
+//            'project_invest_id',
             'project_id',
             'member_id',
             'rate',
             'invest_money',
-            // 'interest_money',
+             'interest_money',
             // 'create_time:datetime',
             // 'update_time:datetime',
-            // 'status',
+             'status',
             // 'is_delete',
-            // 'actual_invest_money',
+             'actual_invest_money',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '<div style="width: 30px">{view} {delete}</div>'
+            ],
         ],
     ]); ?>
 
