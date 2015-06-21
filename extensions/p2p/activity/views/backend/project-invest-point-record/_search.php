@@ -17,15 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'project_invest_point_record') ?>
 
-    <?= $form->field($model, 'project_invest_record_id') ?>
+    <?= $form->field($model, 'project_invest_id') ?>
 
     <?= $form->field($model, 'project_id') ?>
 
     <?= $form->field($model, 'member_id') ?>
 
     <?= $form->field($model, 'point') ?>
-
-    <?php // echo $form->field($model, 'project_type') ?>
 
     <?php // echo $form->field($model, 'create_time') ?>
 

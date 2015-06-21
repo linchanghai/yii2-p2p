@@ -12,15 +12,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'project_invest_record_id')->textInput() ?>
+    <?= $form->field($model, 'project_invest_id')->textInput() ?>
 
     <?= $form->field($model, 'project_id')->textInput() ?>
 
     <?= $form->field($model, 'member_id')->textInput() ?>
 
     <?= $form->field($model, 'point')->textInput() ?>
-
-    <?= $form->field($model, 'project_type')->textInput() ?>
 
     <?= $form->field($model, 'create_time')->textInput() ?>
 

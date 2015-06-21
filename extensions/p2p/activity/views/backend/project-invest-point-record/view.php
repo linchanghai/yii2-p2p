@@ -29,11 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'project_invest_point_record',
-            'project_invest_record_id',
+            'project_invest_id',
             'project_id',
             'member_id',
             'point',
-            'project_type',
             'create_time:datetime',
             'is_delete',
         ],

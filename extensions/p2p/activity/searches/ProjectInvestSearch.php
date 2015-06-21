@@ -5,12 +5,12 @@ namespace p2p\activity\searches;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use p2p\activity\models\ProjectRepaymentRecord;
+use p2p\activity\models\ProjectInvest;
 
 /**
- * ProjectRepaymentRecordSearch represents the model behind the search form about `p2p\activity\models\ProjectRepaymentRecord`.
+ * ProjectInvestSearch represents the model behind the search form about `p2p\activity\models\ProjectInvest`.
  */
-class ProjectRepaymentRecordSearch extends ProjectRepaymentRecord
+class ProjectInvestSearch extends ProjectInvest
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class ProjectRepaymentRecordSearch extends ProjectRepaymentRecord
     public function rules()
     {
         return [
-            [['project_repayment_record', 'project_invest_record_id', 'project_id', 'member_id', 'invest_money', 'repayment_date', 'status', 'create_time', 'update_time', 'is_delete'], 'integer'],
-            [['interest_money'], 'number'],
+            [['project_invest_id', 'project_id', 'member_id', 'invest_money', 'create_time', 'update_time', 'status', 'is_delete', 'actual_invest_money'], 'integer'],
+            [['rate', 'interest_money'], 'number'],
         ];
     }
 
@@ -41,7 +41,7 @@ class ProjectRepaymentRecordSearch extends ProjectRepaymentRecord
      */
     public function search($params)
     {
-        $query = ProjectRepaymentRecord::find();
+        $query = ProjectInvest::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -56,17 +56,17 @@ class ProjectRepaymentRecordSearch extends ProjectRepaymentRecord
         }
 
         $query->andFilterWhere([
-            'project_repayment_record' => $this->project_repayment_record,
-            'project_invest_record_id' => $this->project_invest_record_id,
+            'project_invest_id' => $this->project_invest_id,
             'project_id' => $this->project_id,
             'member_id' => $this->member_id,
-            'interest_money' => $this->interest_money,
+            'rate' => $this->rate,
             'invest_money' => $this->invest_money,
-            'repayment_date' => $this->repayment_date,
-            'status' => $this->status,
+            'interest_money' => $this->interest_money,
             'create_time' => $this->create_time,
             'update_time' => $this->update_time,
+            'status' => $this->status,
             'is_delete' => $this->is_delete,
+            'actual_invest_money' => $this->actual_invest_money,
         ]);
 
         return $dataProvider;

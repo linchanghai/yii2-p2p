@@ -5,12 +5,12 @@ namespace p2p\activity\searches;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use p2p\activity\models\ProjectInvestRecord;
+use p2p\activity\models\ProjectRepayment;
 
 /**
- * ProjectInvestRecordSearch represents the model behind the search form about `p2p\activity\models\ProjectInvestRecord`.
+ * ProjectRepaymentSearch represents the model behind the search form about `p2p\activity\models\ProjectRepayment`.
  */
-class ProjectInvestRecordSearch extends ProjectInvestRecord
+class ProjectRepaymentSearch extends ProjectRepayment
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class ProjectInvestRecordSearch extends ProjectInvestRecord
     public function rules()
     {
         return [
-            [['project_invest_record_id', 'project_id', 'member_id', 'invest_money', 'create_time', 'update_time', 'status', 'is_delete'], 'integer'],
-            [['rate', 'interest_money'], 'number'],
+            [['project_repayment_record', 'project_invest_id', 'project_id', 'member_id', 'invest_money', 'repayment_date', 'status', 'is_transfer', 'create_time', 'update_time', 'is_delete'], 'integer'],
+            [['interest_money'], 'number'],
         ];
     }
 
@@ -41,7 +41,7 @@ class ProjectInvestRecordSearch extends ProjectInvestRecord
      */
     public function search($params)
     {
-        $query = ProjectInvestRecord::find();
+        $query = ProjectRepayment::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -56,15 +56,17 @@ class ProjectInvestRecordSearch extends ProjectInvestRecord
         }
 
         $query->andFilterWhere([
-            'project_invest_record_id' => $this->project_invest_record_id,
+            'project_repayment_record' => $this->project_repayment_record,
+            'project_invest_id' => $this->project_invest_id,
             'project_id' => $this->project_id,
             'member_id' => $this->member_id,
-            'rate' => $this->rate,
-            'invest_money' => $this->invest_money,
             'interest_money' => $this->interest_money,
+            'invest_money' => $this->invest_money,
+            'repayment_date' => $this->repayment_date,
+            'status' => $this->status,
+            'is_transfer' => $this->is_transfer,
             'create_time' => $this->create_time,
             'update_time' => $this->update_time,
-            'status' => $this->status,
             'is_delete' => $this->is_delete,
         ]);
 

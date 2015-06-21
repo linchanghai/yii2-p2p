@@ -4,34 +4,38 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model p2p\activity\searches\ProjectInvestRecordSearch */
+/* @var $model p2p\activity\searches\ProjectRepaymentSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="project-invest-record-search">
+<div class="project-repayment-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'project_invest_record_id') ?>
+    <?= $form->field($model, 'project_repayment_record') ?>
+
+    <?= $form->field($model, 'project_invest_id') ?>
 
     <?= $form->field($model, 'project_id') ?>
 
     <?= $form->field($model, 'member_id') ?>
 
-    <?= $form->field($model, 'rate') ?>
+    <?= $form->field($model, 'interest_money') ?>
 
-    <?= $form->field($model, 'invest_money') ?>
+    <?php // echo $form->field($model, 'invest_money') ?>
 
-    <?php // echo $form->field($model, 'interest_money') ?>
+    <?php // echo $form->field($model, 'repayment_date') ?>
+
+    <?php // echo $form->field($model, 'status') ?>
+
+    <?php // echo $form->field($model, 'is_transfer') ?>
 
     <?php // echo $form->field($model, 'create_time') ?>
 
     <?php // echo $form->field($model, 'update_time') ?>
-
-    <?php // echo $form->field($model, 'status') ?>
 
     <?php // echo $form->field($model, 'is_delete') ?>
 

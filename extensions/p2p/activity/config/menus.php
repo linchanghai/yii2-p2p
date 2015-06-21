@@ -16,23 +16,23 @@ return [
                         'url' => ['/p2p_activity/project/index'],
                         'activeUrls' => [['/p2p_activity/project/create'], ['/p2p_activity/project/update']],
                     ],
+                    'project_invest' => [
+                        'label' => Yii::t('p2p_activity', 'Project Invest'),
+                        'sort' => 300,
+                        'url' => ['/p2p_activity/project-invest/index'],
+                        'activeUrls' => [['/p2p_activity/project-invest/create'], ['/p2p_activity/project-invest/update']],
+                    ],
                     'project_invest_point_record' => [
                         'label' => Yii::t('p2p_activity', 'Project Invest Point Record'),
-                        'sort' => 300,
+                        'sort' => 400,
                         'url' => ['/p2p_activity/project-invest-point-record/index'],
                         'activeUrls' => [['/p2p_activity/project-invest-point-record/create'], ['/p2p_activity/project-invest-point-record/update']],
                     ],
-                    'project_invest_record' => [
-                        'label' => Yii::t('p2p_activity', 'Project Invest Record'),
-                        'sort' => 400,
-                        'url' => ['/p2p_activity/project-invest-record/index'],
-                        'activeUrls' => [['/p2p_activity/project-invest-record/create'], ['/p2p_activity/project-invest-record/update']],
-                    ],
-                    'project_repayment_record' => [
-                        'label' => Yii::t('p2p_activity', 'Project Repayment Record'),
+                    'project_repayment' => [
+                        'label' => Yii::t('p2p_activity', 'Project Repayment'),
                         'sort' => 700,
-                        'url' => ['/p2p_activity/project-repayment-record/index'],
-                        'activeUrls' => [['/p2p_activity/project-repayment-record/create'], ['/p2p_activity/project-repayment-record/update']],
+                        'url' => ['/p2p_activity/project-repayment/index'],
+                        'activeUrls' => [['/p2p_activity/project-repayment/create'], ['/p2p_activity/project-repayment/update']],
                     ],
                 ]
             ]

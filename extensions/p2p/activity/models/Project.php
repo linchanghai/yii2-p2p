@@ -33,6 +33,13 @@ use yii\behaviors\TimestampBehavior;
 class Project extends \kiwi\db\ActiveRecord
 {
     use ProjectTrait;
+
+    public static $enableLogicDelete = true;
+
+    public static $enableCascadeDelete = true;
+
+    public static $cascadeDeleteRelations = ['ProjectDetails', 'ProjectLegalOpinion', 'ProjectMaterial'];
+
     /**
      * @inheritdoc
      */

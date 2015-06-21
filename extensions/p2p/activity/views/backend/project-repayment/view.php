@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model p2p\activity\models\ProjectRepaymentRecord */
+/* @var $model p2p\activity\models\ProjectRepayment */
 
 $this->title = $model->project_repayment_record;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('p2p_activity', 'Project Repayment Records'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('p2p_activity', 'Project Repayments'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="project-repayment-record-view">
+<div class="project-repayment-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,13 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'project_repayment_record',
-            'project_invest_record_id',
+            'project_invest_id',
             'project_id',
             'member_id',
             'interest_money',
             'invest_money',
             'repayment_date',
             'status',
+            'is_transfer',
             'create_time:datetime',
             'update_time:datetime',
             'is_delete',
