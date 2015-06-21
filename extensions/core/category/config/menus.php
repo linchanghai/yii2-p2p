@@ -9,7 +9,7 @@ return [
     'category' => [
         'label' => Yii::t('core_category', 'Category'),
         'sort' => 3000,
-        'url' => ['core_category'],
+        'url' => ['/core_category/category/index'],
         'items' => [
             'category' => [
                 'label' => Yii::t('core_category', 'Category'),
