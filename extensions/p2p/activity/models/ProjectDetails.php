@@ -35,8 +35,7 @@ class ProjectDetails extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['project_id', 'project_introduce', 'loan_person_info', 'repayment_source', 'collateral_info', 'risk_control_info'], 'required'],
-            [['project_id'], 'integer'],
+            [['project_introduce', 'loan_person_info', 'repayment_source', 'collateral_info', 'risk_control_info'], 'required'],
             [['repayment_source', 'collateral_info', 'risk_control_info'], 'string'],
             [['project_introduce'], 'string', 'max' => 256],
             [['loan_person_info'], 'string', 'max' => 150]

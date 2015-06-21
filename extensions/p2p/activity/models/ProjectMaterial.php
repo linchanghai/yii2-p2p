@@ -31,8 +31,7 @@ class ProjectMaterial extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['project_id', 'material'], 'required'],
-            [['project_id'], 'integer'],
+            [['material'], 'required'],
             [['material'], 'string']
         ];
     }

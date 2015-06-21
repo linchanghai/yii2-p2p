@@ -18,7 +18,7 @@ class ProjectSearch extends Project
     public function rules()
     {
         return [
-            [['project_id', 'invest_total_money', 'repayment_date', 'repayment_type', 'release_date', 'invested_money', 'total_invest_money', 'verify_date', 'min_money', 'status', 'create_time', 'update_time', 'is_delete'], 'integer'],
+            [['project_id', 'invest_total_money', 'repayment_date', 'repayment_type', 'release_date', 'invested_money', 'verify_date', 'min_money', 'status', 'create_time', 'update_time', 'is_delete'], 'integer'],
             [['project_name', 'project_no', 'project_type', 'create_user', 'verify_user'], 'safe'],
             [['interest_rate'], 'number'],
         ];
@@ -64,7 +64,6 @@ class ProjectSearch extends Project
             'repayment_type' => $this->repayment_type,
             'release_date' => $this->release_date,
             'invested_money' => $this->invested_money,
-            'total_invest_money' => $this->total_invest_money,
             'verify_date' => $this->verify_date,
             'min_money' => $this->min_money,
             'status' => $this->status,

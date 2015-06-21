@@ -39,7 +39,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'project_type',
             'create_user',
             'invested_money',
-            'total_invest_money',
             'verify_user',
             'verify_date',
             'min_money',

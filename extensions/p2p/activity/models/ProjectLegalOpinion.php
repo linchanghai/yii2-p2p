@@ -31,8 +31,7 @@ class ProjectLegalOpinion extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['project_id', 'legal_info'], 'required'],
-            [['project_id'], 'integer'],
+            [['legal_info'], 'required'],
             [['legal_info'], 'string']
         ];
     }

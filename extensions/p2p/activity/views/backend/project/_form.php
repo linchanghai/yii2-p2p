@@ -19,11 +19,21 @@ use yii\bootstrap\Tabs;
     $fields[] = $form->field($model, 'invest_total_money')->textInput(['maxlength' => 255]);
     $fields[] = $form->field($model, 'interest_rate')->textInput(['maxlength' => 255]);
     $fields[] = $form->field($model, 'repayment_date')->textInput(['maxlength' => 255]);
+    $fields[] = $form->field($model, 'repayment_type')->textInput(['maxlength' => 255]);
     $fields[] = $form->field($model, 'release_date')->textInput(['maxlength' => 255]);
     $fields[] = $form->field($model, 'project_type')->textInput(['maxlength' => 255]);
     $fields[] = $form->field($model, 'invested_money')->textInput(['maxlength' => 255]);
     $fields[] = $form->field($model, 'verify_user')->textInput(['maxlength' => 255]);
-    $fields[] = $form->field($model, 'verify_date')->textInput(['maxlength' => 255]);
+    $fields[] = $form->field($model, 'verify_date')->widget(\kartik\datetime\DateTimePicker::className(),[
+        'name' => 'verify_date',
+        'options' => ['placeholder' => 'Please select time ...'],
+        'convertFormat' => true,
+        'pluginOptions' => [
+            'format' => 'd-M-Y g:i A',
+            'todayHighlight' => true,
+            'autoclose' => true,
+        ]
+    ]);
     $fields[] = $form->field($model, 'min_money')->textInput(['maxlength' => 255]);
     $fields[] = $form->field($model, 'status')->textInput(['maxlength' => 255]);
     $fieldGroups[] = ['label' => Yii::t('p2p_activity','Project Base Info'), 'content' => implode('', $fields)];
@@ -36,6 +46,16 @@ use yii\bootstrap\Tabs;
     $fields[] = $form->field($projectDetails, 'collateral_info')->textInput(['maxlength' => 255]);
     $fields[] = $form->field($projectDetails, 'risk_control_info')->textInput(['maxlength' => 255]);
     $fieldGroups[] = ['label' => Yii::t('p2p_activity','Project Details'), 'content' => implode('', $fields)];
+
+    $fields = [];
+    $projectLegalOpinion = $model->projectLegalOpinion ?:\kiwi\Kiwi::getProjectLegalOpinion();
+    $fields[] = $form->field($projectLegalOpinion, 'legal_info')->textInput(['maxlength' => 255]);
+    $fieldGroups[] = ['label' => Yii::t('p2p_activity','Project Legal Opinion'), 'content' => implode('', $fields)];
+
+    $fields = [];
+    $projectMaterial = $model->projectMaterial ?:\kiwi\Kiwi::getProjectMaterial();
+    $fields[] = $form->field($projectMaterial, 'material')->textInput(['maxlength' => 255]);
+    $fieldGroups[] = ['label' => Yii::t('p2p_activity','Project Material'), 'content' => implode('', $fields)];
 
     echo Tabs::widget(['items' => $fieldGroups]);
     ?>

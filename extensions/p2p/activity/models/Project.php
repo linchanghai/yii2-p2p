@@ -21,7 +21,6 @@ use yii\behaviors\TimestampBehavior;
  * @property string $project_type
  * @property string $create_user
  * @property integer $invested_money
- * @property integer $total_invest_money
  * @property string $verify_user
  * @property integer $verify_date
  * @property integer $min_money
@@ -30,12 +29,10 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $update_time
  * @property integer $is_delete
  *
- * @property \p2p\activity\models\ProjectDetails $projectDetails
- * @property \p2p\activity\models\ProjectLegalOpinion $projectLegalOpinion
- * @property \p2p\activity\models\ProjectMaterial $projectMaterial
  */
 class Project extends \kiwi\db\ActiveRecord
 {
+    use ProjectTrait;
     /**
      * @inheritdoc
      */
@@ -51,8 +48,9 @@ class Project extends \kiwi\db\ActiveRecord
     {
         return [
             [['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'min_money'], 'required'],
-            [['invest_total_money', 'repayment_date', 'repayment_type', 'release_date', 'invested_money', 'total_invest_money', 'min_money', 'status'], 'integer'],
+            [['verify_date', 'invest_total_money', 'repayment_date', 'repayment_type', 'release_date', 'invested_money', 'min_money', 'status'], 'integer'],
             [['interest_rate'], 'number'],
+            [['verify_user'], 'string'],
             [['project_name'], 'string', 'max' => 100],
             [['project_no'], 'string', 'max' => 30],
             [['project_type'], 'string', 'max' => 20],
@@ -102,18 +100,5 @@ class Project extends \kiwi\db\ActiveRecord
         ];
     }
 
-    public function getProjectDetails()
-    {
-        return $this->hasOne(Kiwi::getProjectDetailsClass(), ['project_id' => 'project_id']);
-    }
 
-    public function getProjectLegalOpinion()
-    {
-        return $this->hasOne(Kiwi::getProjectLegalOpinionClass(), ['project_id' => 'project_id']);
-    }
-
-    public function getProjectMaterial()
-    {
-        return $this->hasOne(Kiwi::getProjectMaterialClass(), ['project_id' => 'project_id']);
-    }
 }

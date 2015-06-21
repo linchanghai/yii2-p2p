@@ -37,8 +37,6 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'invested_money') ?>
 
-    <?php // echo $form->field($model, 'total_invest_money') ?>
-
     <?php // echo $form->field($model, 'verify_user') ?>
 
     <?php // echo $form->field($model, 'verify_date') ?>
