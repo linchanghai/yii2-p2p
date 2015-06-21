@@ -20,6 +20,7 @@ return [
                         'label' => Yii::t('core_member', 'Member'),
                         'sort' => 100,
                         'url' => ['/core_member/member/index'],
+                        'activeUrls' => [['/core_member/member/create'], ['/core_member/member/update']],
                     ],
                 ]
             ],
