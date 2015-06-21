@@ -7,20 +7,19 @@ use Yii;
 /**
  * This is the model class for table "{{%member_status}}".
  *
- * @property integer $memeber_status_id
+ * @property integer $member_status_id
  * @property integer $member_id
  * @property integer $email_status
  * @property integer $mobile_status
- * @property integer $real_name_status
- * @property integer $id_cars_status
+ * @property integer $id_card_status
  * @property integer $create_time
  * @property integer $update_time
  * @property integer $is_delete
+ *
+ * @property Member $member
  */
 class MemberStatus extends \kiwi\db\ActiveRecord
 {
-    use MemberTrait;
-
     /**
      * @inheritdoc
      */
@@ -35,7 +34,8 @@ class MemberStatus extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['email_status', 'mobile_status', 'id_cars_status'], 'integer']
+            [['member_id', 'create_time'], 'required'],
+            [['member_id', 'email_status', 'mobile_status', 'id_card_status', 'create_time', 'update_time', 'is_delete'], 'integer']
         ];
     }
 
@@ -45,15 +45,22 @@ class MemberStatus extends \kiwi\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'memeber_status_id' => Yii::t('core_member', 'Memeber Status ID'),
+            'member_status_id' => Yii::t('core_member', 'Member Status ID'),
             'member_id' => Yii::t('core_member', 'Member ID'),
             'email_status' => Yii::t('core_member', 'Email Status'),
             'mobile_status' => Yii::t('core_member', 'Mobile Status'),
-            'real_name_status' => Yii::t('core_member', 'Real Name Status'),
-            'id_cars_status' => Yii::t('core_member', 'Id Cars Status'),
+            'id_card_status' => Yii::t('core_member', 'Id Card Status'),
             'create_time' => Yii::t('core_member', 'Create Time'),
             'update_time' => Yii::t('core_member', 'Update Time'),
             'is_delete' => Yii::t('core_member', 'Is Delete'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMember()
+    {
+        return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
     }
 }

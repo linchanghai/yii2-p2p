@@ -158,7 +158,6 @@ class Configuration extends Object
     protected function getDefaultConfig()
     {
         $translations = [];
-        $fileMap = [];
         $urlRules = [];
         foreach ($this->modules as $moduleName => $moduleClass) {
             $moduleClassParts = explode('\\', $moduleClass);
