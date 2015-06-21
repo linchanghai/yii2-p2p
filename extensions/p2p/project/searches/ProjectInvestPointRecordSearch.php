@@ -5,12 +5,12 @@ namespace p2p\project\searches;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use p2p\project\models\ProjectInvestPointRecord;
+use p2p\project\models\ProjectInvestEmpiricRecord;
 
 /**
- * ProjectInvestPointRecordSearch represents the model behind the search form about `p2p\project\models\ProjectInvestPointRecord`.
+ * ProjectInvestEmpiricRecordSearch represents the model behind the search form about `p2p\project\models\ProjectInvestEmpiricRecord`.
  */
-class ProjectInvestPointRecordSearch extends ProjectInvestPointRecord
+class ProjectInvestEmpiricRecordSearch extends ProjectInvestEmpiricRecord
 {
     /**
      * @inheritdoc
@@ -40,7 +40,7 @@ class ProjectInvestPointRecordSearch extends ProjectInvestPointRecord
      */
     public function search($params)
     {
-        $query = ProjectInvestPointRecord::find();
+        $query = ProjectInvestEmpiricRecord::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

@@ -3,16 +3,16 @@
 namespace p2p\project\controllers\backend;
 
 use Yii;
-use p2p\project\models\ProjectInvestPointRecord;
-use p2p\project\searches\ProjectInvestPointRecordSearch;
+use p2p\project\models\ProjectInvestEmpiricRecord;
+use p2p\project\searches\ProjectInvestEmpiricRecordSearch;
 use kiwi\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ProjectInvestPointRecordController implements the CRUD actions for ProjectInvestPointRecord model.
+ * ProjectInvestEmpiricRecordController implements the CRUD actions for ProjectInvestEmpiricRecord model.
  */
-class ProjectInvestPointRecordController extends Controller
+class ProjectInvestEmpiricRecordController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class ProjectInvestPointRecordController extends Controller
     }
 
     /**
-     * Lists all ProjectInvestPointRecord models.
+     * Lists all ProjectInvestEmpiricRecord models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ProjectInvestPointRecordSearch();
+        $searchModel = new ProjectInvestEmpiricRecordSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class ProjectInvestPointRecordController extends Controller
     }
 
     /**
-     * Displays a single ProjectInvestPointRecord model.
+     * Displays a single ProjectInvestEmpiricRecord model.
      * @param integer $id
      * @return mixed
      */
@@ -54,7 +54,7 @@ class ProjectInvestPointRecordController extends Controller
     }
 
     /**
-     * Deletes an existing ProjectInvestPointRecord model.
+     * Deletes an existing ProjectInvestEmpiricRecord model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -67,15 +67,15 @@ class ProjectInvestPointRecordController extends Controller
     }
 
     /**
-     * Finds the ProjectInvestPointRecord model based on its primary key value.
+     * Finds the ProjectInvestEmpiricRecord model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ProjectInvestPointRecord the loaded model
+     * @return ProjectInvestEmpiricRecord the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ProjectInvestPointRecord::findOne($id)) !== null) {
+        if (($model = ProjectInvestEmpiricRecord::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

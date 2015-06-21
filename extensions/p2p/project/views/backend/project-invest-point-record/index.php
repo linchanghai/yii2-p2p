@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel p2p\project\searches\ProjectInvestPointRecordSearch */
+/* @var $searchModel p2p\project\searches\ProjectInvestEmpiricRecordSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('p2p_project', 'Project Invest Point Records');

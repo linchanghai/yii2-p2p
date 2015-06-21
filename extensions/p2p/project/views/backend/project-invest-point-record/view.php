@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model p2p\project\models\ProjectInvestPointRecord */
+/* @var $model p2p\project\models\ProjectInvestEmpiricRecord */
 
 $this->title = $model->project_invest_point_id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('p2p_project', 'Project Invest Point Records'), 'url' => ['index']];

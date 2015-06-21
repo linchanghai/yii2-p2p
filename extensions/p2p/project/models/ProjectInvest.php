@@ -26,7 +26,7 @@ use yii\behaviors\TimestampBehavior;
  * @property ConponCashRecord[] $conponCashRecords
  * @property Project $member
  * @property Project $project
- * @property ProjectInvestPointRecord[] $projectInvestPointRecords
+ * @property ProjectInvestEmpiricRecord[] $projectInvestPointRecords
  * @property ProjectRepayment[] $projectRepayments
  */
 class ProjectInvest extends \kiwi\db\ActiveRecord
@@ -125,9 +125,9 @@ class ProjectInvest extends \kiwi\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProjectInvestPointRecords()
+    public function getProjectInvestEmpiricRecords()
     {
-        return $this->hasMany(ProjectInvestPointRecord::className(), ['project_invest_id' => 'project_invest_id']);
+        return $this->hasMany(ProjectInvestEmpiricRecord::className(), ['project_invest_id' => 'project_invest_id']);
     }
 
     /**
