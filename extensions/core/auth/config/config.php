@@ -6,9 +6,11 @@
  */
 
 return [
-    'components' => [
-        'authManager' => [
-            'class' => 'yii\rbac\DbManager',
+    'backend' => [
+        'components' => [
+            'authManager' => [
+                'class' => 'yii\rbac\DbManager',
+            ],
         ],
-    ]
+    ],
 ];

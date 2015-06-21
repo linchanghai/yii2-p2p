@@ -16,6 +16,7 @@ use kiwi\Kiwi;
  * @property MemberBank $memberBank
  * @property MemberStatus $memberStatus
  * @property MemberStatistic $memberStatistic
+ * @property MemberCoupon $memberCoupons
  *
  * @package core\member\models
  * @author jeremy.zhou(gao_lujie@live.cn)

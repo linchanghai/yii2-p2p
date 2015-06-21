@@ -21,19 +21,25 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'password_hash') ?>
 
+    <?= $form->field($model, 'password_reset_token') ?>
+
     <?= $form->field($model, 'mobile') ?>
 
-    <?= $form->field($model, 'email') ?>
+    <?php // echo $form->field($model, 'email') ?>
 
-    <?php // echo $form->field($model, 'email_vaild_code') ?>
+    <?php // echo $form->field($model, 'email_verify_token') ?>
 
     <?php // echo $form->field($model, 'real_name') ?>
 
     <?php // echo $form->field($model, 'id_card') ?>
 
-    <?php // echo $form->field($model, 'recomend_user') ?>
+    <?php // echo $form->field($model, 'recommend_user') ?>
 
-    <?php // echo $form->field($model, 'recomend_type') ?>
+    <?php // echo $form->field($model, 'recommend_type') ?>
+
+    <?php // echo $form->field($model, 'auth_key') ?>
+
+    <?php // echo $form->field($model, 'access_token') ?>
 
     <?php // echo $form->field($model, 'status') ?>
 

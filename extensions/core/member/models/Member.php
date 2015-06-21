@@ -2,31 +2,35 @@
 
 namespace core\member\models;
 
-use core\user\models\User;
 use Yii;
 
 /**
  * This is the model class for table "{{%member}}".
  *
  * @property integer $member_id
- * @property string $user_name
- * @property string $password
+ * @property string $username
+ * @property string $password_hash
+ * @property string $password_reset_token
  * @property string $mobile
  * @property string $email
- * @property string $email_vaild_code
+ * @property string $email_verify_token
  * @property string $real_name
  * @property string $id_card
- * @property string $recomend_user
- * @property string $recomend_type
+ * @property string $recommend_user
+ * @property string $recommend_type
+ * @property string $auth_key
+ * @property string $access_token
  * @property integer $status
  * @property integer $create_time
  * @property integer $update_time
  * @property integer $is_deleted
+ *
+ * @property MemberBank[] $memberBanks
+ * @property MemberStatistic[] $memberStatistics
+ * @property MemberStatus[] $memberStatuses
  */
-class Member extends User
+class Member extends \kiwi\db\ActiveRecord
 {
-    use MemberTrait;
-
     /**
      * @inheritdoc
      */
@@ -41,14 +45,16 @@ class Member extends User
     public function rules()
     {
         return [
-            [['user_name', 'password'], 'required'],
+            [['user_name', 'password_hash'], 'required'],
             [['status', 'create_time', 'update_time', 'is_deleted'], 'integer'],
             [['user_name', 'recomend_user', 'recomend_type'], 'string', 'max' => 45],
-            [['password', 'email'], 'string', 'max' => 60],
+            [['password_hash', 'email'], 'string', 'max' => 60],
+            [['password_reset_token', 'access_token'], 'string', 'max' => 100],
             [['mobile'], 'string', 'max' => 11],
-            [['email_vaild_code'], 'string', 'max' => 120],
+            [['email_verify_token'], 'string', 'max' => 120],
             [['real_name'], 'string', 'max' => 50],
             [['id_card'], 'string', 'max' => 18],
+            [['auth_key'], 'string', 'max' => 32],
             [['user_name'], 'unique']
         ];
     }
@@ -61,14 +67,17 @@ class Member extends User
         return [
             'member_id' => Yii::t('core_member', 'Member ID'),
             'user_name' => Yii::t('core_member', 'User Name'),
-            'password' => Yii::t('core_member', 'Password'),
+            'password_hash' => Yii::t('core_member', 'Password Hash'),
+            'password_reset_token' => Yii::t('core_member', 'Password Reset Token'),
             'mobile' => Yii::t('core_member', 'Mobile'),
             'email' => Yii::t('core_member', 'Email'),
-            'email_vaild_code' => Yii::t('core_member', 'Email Vaild Code'),
+            'email_verify_token' => Yii::t('core_member', 'Email Verify Token'),
             'real_name' => Yii::t('core_member', 'Real Name'),
             'id_card' => Yii::t('core_member', 'Id Card'),
             'recomend_user' => Yii::t('core_member', 'Recomend User'),
             'recomend_type' => Yii::t('core_member', 'Recomend Type'),
+            'auth_key' => Yii::t('core_member', 'Auth Key'),
+            'access_token' => Yii::t('core_member', 'Access Token'),
             'status' => Yii::t('core_member', 'Status'),
             'create_time' => Yii::t('core_member', 'Create Time'),
             'update_time' => Yii::t('core_member', 'Update Time'),
@@ -77,10 +86,114 @@ class Member extends User
     }
 
     /**
-     * @inheritdoc
+     * @return \yii\db\ActiveQuery
      */
-    public static function find()
+    public function getActivityRecords()
     {
-        return parent::find()->where([]);
+        return $this->hasMany(ActivityRecord::className(), ['member_id' => 'member_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getConponAnnualRecords()
+    {
+        return $this->hasMany(ConponAnnualRecord::className(), ['member_id' => 'member_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getConponBonusRecords()
+    {
+        return $this->hasMany(ConponBonusRecord::className(), ['member_id' => 'member_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getConponCashRecords()
+    {
+        return $this->hasMany(ConponCashRecord::className(), ['member_id' => 'member_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDepositRecords()
+    {
+        return $this->hasMany(DepositRecord::className(), ['member_id' => 'member_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getExchangeRecords()
+    {
+        return $this->hasMany(ExchangeRecord::className(), ['member_id' => 'member_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMemberBanks()
+    {
+        return $this->hasMany(MemberBank::className(), ['member_id' => 'member_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMemberConpons()
+    {
+        return $this->hasMany(MemberCoupon::className(), ['member_id' => 'member_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMemberStatistics()
+    {
+        return $this->hasMany(MemberStatistic::className(), ['member_id' => 'member_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMemberStatuses()
+    {
+        return $this->hasMany(MemberStatus::className(), ['member_id' => 'member_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPackageRecords()
+    {
+        return $this->hasMany(PackageRecord::className(), ['member_id' => 'member_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProjectInvestPointRecords()
+    {
+        return $this->hasMany(ProjectInvestPointRecord::className(), ['member_id' => 'member_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProjectRepayments()
+    {
+        return $this->hasMany(ProjectRepayment::className(), ['member_id' => 'member_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRechargeRecords()
+    {
+        return $this->hasMany(RechargeRecord::className(), ['member_id' => 'member_id']);
     }
 }

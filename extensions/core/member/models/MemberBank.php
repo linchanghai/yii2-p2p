@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "{{%member_bank}}".
  *
- * @property integer $menber_bank_id
+ * @property integer $member_bank_id
  * @property integer $member_id
  * @property string $bank_name
  * @property string $card_no
@@ -18,11 +18,11 @@ use Yii;
  * @property integer $create_time
  * @property integer $update_time
  * @property integer $is_delete
+ *
+ * @property Member $member
  */
 class MemberBank extends \kiwi\db\ActiveRecord
 {
-    use MemberTrait;
-
     /**
      * @inheritdoc
      */
@@ -37,7 +37,8 @@ class MemberBank extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['bank_name', 'card_no', 'bank_user_name', 'province', 'city', 'branch_name'], 'required'],
+            [['member_id', 'bank_name', 'card_no', 'bank_user_name', 'province', 'city', 'branch_name', 'create_time'], 'required'],
+            [['member_id', 'create_time', 'update_time', 'is_delete'], 'integer'],
             [['bank_name'], 'string', 'max' => 30],
             [['card_no'], 'string', 'max' => 25],
             [['bank_user_name'], 'string', 'max' => 10],
@@ -52,7 +53,7 @@ class MemberBank extends \kiwi\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'menber_bank_id' => Yii::t('core_member', 'Menber Bank ID'),
+            'member_bank_id' => Yii::t('core_member', 'Member Bank ID'),
             'member_id' => Yii::t('core_member', 'Member ID'),
             'bank_name' => Yii::t('core_member', 'Bank Name'),
             'card_no' => Yii::t('core_member', 'Card No'),
@@ -64,5 +65,13 @@ class MemberBank extends \kiwi\db\ActiveRecord
             'update_time' => Yii::t('core_member', 'Update Time'),
             'is_delete' => Yii::t('core_member', 'Is Delete'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMember()
+    {
+        return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
     }
 }

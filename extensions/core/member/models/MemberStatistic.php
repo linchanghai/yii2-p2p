@@ -25,11 +25,11 @@ use Yii;
  * @property integer $create_time
  * @property integer $update_time
  * @property integer $is_delete
+ *
+ * @property Member $member
  */
 class MemberStatistic extends \kiwi\db\ActiveRecord
 {
-    use MemberTrait;
-
     /**
      * @inheritdoc
      */
@@ -44,7 +44,8 @@ class MemberStatistic extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['project_total_money', 'points', 'bonus', 'used_bonus', 'empirical_value', 'is_first_invest'], 'integer'],
+            [['member_id', 'create_time'], 'required'],
+            [['member_id', 'project_total_money', 'points', 'bonus', 'used_bonus', 'empirical_value', 'is_first_invest', 'create_time', 'update_time', 'is_delete'], 'integer'],
             [['account_money', 'freezon_money', 'package_money', 'package_earning', 'project_earning', 'collect_principal', 'collect_interest'], 'number']
         ];
     }
@@ -74,5 +75,13 @@ class MemberStatistic extends \kiwi\db\ActiveRecord
             'update_time' => Yii::t('core_member', 'Update Time'),
             'is_delete' => Yii::t('core_member', 'Is Delete'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMember()
+    {
+        return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
     }
 }

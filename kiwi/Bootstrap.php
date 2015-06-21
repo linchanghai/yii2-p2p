@@ -91,21 +91,24 @@ class Bootstrap extends Object implements BootstrapInterface
         }
 
         if ($config = $this->configuration->config) {
-            if (isset($config['components'])) {
-                $components = ArrayHelper::merge(Yii::$app->getComponents(), $config['components']);
-                if (isset($components['errorHandler'])) {
-                    unset($components['errorHandler']);
+            if (isset($config[Yii::$app->id])) {
+                $config = $config[Yii::$app->id];
+                if (isset($config['components'])) {
+                    $components = ArrayHelper::merge(Yii::$app->getComponents(), $config['components']);
+                    if (isset($components['errorHandler'])) {
+                        unset($components['errorHandler']);
+                    }
+                    Yii::$app->setComponents($components);
                 }
-                Yii::$app->setComponents($components);
-            }
 
-            if (isset($config['modules'])) {
-                $modules = ArrayHelper::merge(Yii::$app->getModules(), $config['modules']);
-                Yii::$app->setModules($modules);
-            }
+                if (isset($config['modules'])) {
+                    $modules = ArrayHelper::merge(Yii::$app->getModules(), $config['modules']);
+                    Yii::$app->setModules($modules);
+                }
 
-            if (isset($config['params'])) {
-                Yii::$app->params = ArrayHelper::merge(Yii::$app->params, $config['params']);
+                if (isset($config['params'])) {
+                    Yii::$app->params = ArrayHelper::merge(Yii::$app->params, $config['params']);
+                }
             }
         }
     }
