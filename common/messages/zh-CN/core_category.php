@@ -17,9 +17,9 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Categories' => '',
-    'Category' => '',
-    'Create' => '',
-    'Update' => '',
-    'Update Category' => '',
+    'Categories' => '分类',
+    'Category' => '分类',
+    'Create' => '新建',
+    'Update' => '更新',
+    'Update Category' => '更新分类',
 ];
