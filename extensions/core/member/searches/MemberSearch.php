@@ -18,8 +18,8 @@ class MemberSearch extends Member
     public function rules()
     {
         return [
-            [['member_id', 'status', 'create_time', 'update_time', 'is_deleted'], 'integer'],
-            [['username', 'password_hash', 'password_reset_token', 'mobile', 'email', 'email_verify_token', 'real_name', 'id_card', 'recommend_user', 'recommend_type', 'auth_key', 'access_token'], 'safe'],
+            [['member_id', 'status'], 'integer'],
+            [['username', 'mobile', 'email', 'real_name', 'id_card', 'recommend_user'], 'safe'],
         ];
     }
 
