@@ -11,10 +11,10 @@ use ArrayObject;
 use kiwi\searchers\Searcher;
 use Yii;
 use yii\base\InvalidConfigException;
-use yii\base\InvalidParamException;
 use yii\base\ModelEvent;
 use yii\data\ActiveDataProvider;
 use yii\db\Exception;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class ActiveRecord
@@ -479,6 +479,10 @@ class ActiveRecord extends \yii\db\ActiveRecord
 
     public static $isDeleteAttribute = 'is_delete';
 
+    public static $enableCascadeDelete = false;
+
+    public static $cascadeDeleteRelations = [];
+
     const IS_DELETE_TRUE = 1;
     const IS_DELETE_FALSE = 0;
 
@@ -487,11 +491,35 @@ class ActiveRecord extends \yii\db\ActiveRecord
      */
     public static function deleteAll($condition = '', $params = [])
     {
+        if (static::$enableCascadeDelete) {
+            $models = static::findAll($condition);
+            static::deleteAllRelations($models);
+        }
         if (static::$enableLogicDelete) {
             $attributes = [static::$isDeleteAttribute => static::IS_DELETE_TRUE];
             return static::updateAll($attributes, $condition, $params);
         }
         return parent::deleteAll($condition, $params);
+    }
+
+    /**
+     * @param array $models
+     */
+    public static function deleteAllRelations($models)
+    {
+        $model = new static;
+        foreach (static::$cascadeDeleteRelations as $name) {
+            /** @var \yii\db\ActiveQuery $relation */
+            if ($relation = $model->getRelation($name, false)) {
+                /** @var \yii\db\ActiveRecord $modelClass */
+                $modelClass = $relation->modelClass;
+                $condition = [];
+                foreach ($relation->link as $fk => $pk) {
+                    $condition[$fk] = ArrayHelper::getColumn($models, $pk);
+                }
+                $modelClass::deleteAll($condition);
+            }
+        }
     }
 
     /**
