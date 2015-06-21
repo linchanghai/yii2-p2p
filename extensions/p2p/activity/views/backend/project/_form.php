@@ -43,7 +43,7 @@ if(isset($model->repayment_date) && isset($model->release_date) && isset($model-
             'value' => $repayment_date
         ],
         'pluginOptions' => [
-            'language' => 'zh-CN',
+            'language' => Yii::$app->language,
             'autoclose'=>true,
         ]
     ]);
@@ -53,7 +53,7 @@ if(isset($model->repayment_date) && isset($model->release_date) && isset($model-
             'value' => $release_date
         ],
         'pluginOptions' => [
-            'language' => 'zh-CN',
+            'language' => Yii::$app->language,
             'autoclose'=>true,
         ]
     ]);
@@ -65,7 +65,7 @@ if(isset($model->repayment_date) && isset($model->release_date) && isset($model-
             'value' => $verify_date
         ],
         'pluginOptions' => [
-            'language' => 'zh-CN',
+            'language' => Yii::$app->language,
             'autoclose'=>true,
         ]
     ]);
@@ -89,6 +89,7 @@ if(isset($model->repayment_date) && isset($model->release_date) && isset($model-
         'editorOptions' => [
             'filebrowserBrowseUrl' => Url::to(['/elfinder/manager']),
             'preset' => 'standard',
+            'language' => Yii::$app->language,
         ]
     ]);
     $fieldGroups[] = ['label' => Yii::t('p2p_activity','Project Legal Opinion'), 'content' => implode('', $fields)];
@@ -100,6 +101,7 @@ if(isset($model->repayment_date) && isset($model->release_date) && isset($model-
         'editorOptions' => [
             'filebrowserBrowseUrl' => Url::to(['/elfinder/manager']),
             'preset' => 'standard',
+            'language' => Yii::$app->language,
         ]
     ]);
     $fieldGroups[] = ['label' => Yii::t('p2p_activity','Project Material'), 'content' => implode('', $fields)];
