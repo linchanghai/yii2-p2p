@@ -21,10 +21,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'project_repayment_id',
-            'project_invest_id',
-            'project_id',
-            'member_id',
+//            'project_repayment_id',
+//            'project_invest_id',
+//            'project_id',
+//            'member_id',
             'interest_money',
              'invest_money',
              'repayment_date',
