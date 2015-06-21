@@ -27,7 +27,7 @@ class MemberCoupon extends \kiwi\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%member_conpon}}';
+        return '{{%member_coupon}}';
     }
 
     /**

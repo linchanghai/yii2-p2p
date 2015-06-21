@@ -12,7 +12,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $project_invest_id
  * @property integer $project_id
  * @property integer $member_id
- * @property integer $point
+ * @property integer $empiric_value
  * @property integer $create_time
  * @property integer $is_delete
  *
@@ -20,14 +20,14 @@ use yii\behaviors\TimestampBehavior;
  * @property Project $project
  * @property ProjectInvest $projectInvest
  */
-class ProjectInvestPointRecord extends \kiwi\db\ActiveRecord
+class ProjectInvestEmpiricRecord extends \kiwi\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'project_invest_point_record';
+        return 'project_invest_empiric_record';
     }
 
     /**
