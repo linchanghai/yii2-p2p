@@ -6,8 +6,10 @@
  */
 
 return [
-    'class' => [
+    'singleton' => [
         'gilek\gtreetable\assets\BrowserAsset' => 'core\tree\assets\BrowserAsset',
+    ],
+    'class' => [
         'Tree' => 'core\tree\models\Tree',
     ],
 ];

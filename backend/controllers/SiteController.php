@@ -2,6 +2,7 @@
 namespace backend\controllers;
 
 use core\user\controllers\UserController;
+use kiwi\generator\CodeGenerator;
 use kiwi\Kiwi;
 use Yii;
 
@@ -25,5 +26,11 @@ class SiteController extends UserController
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    public function actionTable()
+    {
+        $generator = new CodeGenerator();
+        $generator->generateTables();
     }
 }

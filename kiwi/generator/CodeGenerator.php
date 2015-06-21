@@ -7,7 +7,7 @@
 
 namespace kiwi\generator;
 
-
+use kiwi\Kiwi;
 use Yii;
 
 class CodeGenerator
@@ -50,5 +50,69 @@ PHP;
         }
         $codeLines[] = ']';
         return $codeLines;
+    }
+
+    /**
+     * @param $ar \yii\db\ActiveRecord
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function generateTable($ar)
+    {
+        $template = '';
+        $columnMap = [
+            'varchar' => 'TYPE_STRING . \'',
+            'char' => 'TYPE_STRING . \'',
+            'text' => 'TYPE_STRING . \'',
+            'smallint' => 'TYPE_SMALLINT . \'',
+            'mediumint' => 'TYPE_INTEGER . \'',
+            'int' => 'TYPE_INTEGER . \'',
+            'bigint' => 'TYPE_BIGINT . \'',
+            'float' => 'TYPE_FLOAT . \'',
+            'decimal' => 'TYPE_DECIMAL . \'',
+            'datetime' => 'TYPE_DATETIME . \'',
+            'timestamp' => 'TYPE_TIMESTAMP . \'',
+            'time' => 'TYPE_TIME . \'',
+            'date' => 'TYPE_DATE . \'',
+            'blob' => 'TYPE_BINARY . \'',
+            'tinyint' => 'TYPE_BOOLEAN . \'',
+        ];
+
+        /** @var $ar \yii\db\ActiveRecord */
+        $columns = $ar::getTableSchema()->columns;
+        foreach ($columns as $column) {
+            if ($column->isPrimaryKey) {
+                $dbType = strpos($column->dbType, 'bigint') === false ? 'Schema::TYPE_PK' : 'Schema::TYPE_BIGPK';
+                $template .= "'{$column->name}' => $dbType, \n";
+            } else {
+                $dbType = 'Schema::' . strtr($column->dbType, $columnMap);
+                $default = $column->defaultValue !== null ? " default \\'{$column->defaultValue}\\'" : '';
+                $allowNull = $column->allowNull ? '' : ' NOT NULL';
+                $template .= "'{$column->name}' => {$dbType}{$allowNull}{$default}', \n";
+            }
+        }
+        $createTemplate = <<<EOF
+\$this->createTable('{$ar::tableName()}', [
+    $template
+]);\n
+EOF;
+        echo $createTemplate;
+    }
+
+    public function generateTables()
+    {
+        $exclude = [];
+        $tables = [];
+        foreach (['singleton', 'class'] as $type) {
+            foreach (Kiwi::$classMap[$type] as $key => $class) {
+                if (in_array($class, $exclude)) {
+                    continue;
+                }
+                /** @var $class \yii\db\ActiveRecord */
+                if (strpos($class, 'models') !== false && strpos($class, 'Form') === false && strpos($class, 'Model') === false && !in_array($class::tableName(), $tables)) {
+                    $tables[] = $class::tableName();
+                    $this->generateTable($class);
+                }
+            }
+        }
     }
 } 
