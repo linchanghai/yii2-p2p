@@ -5,7 +5,7 @@
  * @license http://www.yincart.com/license/
  */
 
-namespace core\activity\migrations;
+namespace core\member\migrations;
 
 use kiwi\db\Migration;
 use yii\db\Schema;

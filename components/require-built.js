@@ -11666,7 +11666,7 @@ $.fn.ajaxSubmit = function(options) {
         };
 
         g = s.global;
-        // trigger ajax global events so that activity/block indicators work like normal
+        // trigger ajax global events so that project/block indicators work like normal
         if (g && 0 === $.active++) {
             $.event.trigger("ajaxStart");
         }
