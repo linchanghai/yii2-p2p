@@ -76,7 +76,7 @@ class v0_1_0 extends Migration
         $this->createTable('project_legal_opinion', [
             'project_legal_opinion_id' => Schema::TYPE_PK,
             'project_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-            'legal_info' => Schema::longTYPE_STRING . ' NOT NULL',
+            'legal_info' => Schema::TYPE_STRING . ' NOT NULL',
             'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'update_time' => Schema::TYPE_INTEGER . '(11)',
             'is_delete' => Schema::TYPE_SMALLINT . '(1) NOT NULL default \'0\'',
@@ -85,7 +85,7 @@ class v0_1_0 extends Migration
         $this->createTable('project_material', [
             'project_material' => Schema::TYPE_PK,
             'project_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-            'material' => Schema::longTYPE_STRING . ' NOT NULL',
+            'material' => Schema::TYPE_STRING . ' NOT NULL',
             'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'update_time' => Schema::TYPE_INTEGER . '(11)',
             'is_delete' => Schema::TYPE_SMALLINT . '(1) unsigned NOT NULL default \'0\'',
