@@ -18,7 +18,7 @@ class ProjectRepaymentSearch extends ProjectRepayment
     public function rules()
     {
         return [
-            [['project_repayment_record', 'project_invest_id', 'project_id', 'member_id', 'invest_money', 'repayment_date', 'status', 'is_transfer', 'create_time', 'update_time', 'is_delete'], 'integer'],
+            [['project_repayment_id', 'project_invest_id', 'project_id', 'member_id', 'invest_money', 'repayment_date', 'status', 'is_transfer', 'create_time', 'update_time', 'is_delete'], 'integer'],
             [['interest_money'], 'number'],
         ];
     }
@@ -56,7 +56,7 @@ class ProjectRepaymentSearch extends ProjectRepayment
         }
 
         $query->andFilterWhere([
-            'project_repayment_record' => $this->project_repayment_record,
+            'project_repayment_id' => $this->project_repayment_id,
             'project_invest_id' => $this->project_invest_id,
             'project_id' => $this->project_id,
             'member_id' => $this->member_id,

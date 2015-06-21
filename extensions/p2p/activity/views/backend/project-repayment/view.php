@@ -15,7 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('p2p_activity', 'Update'), ['update', 'id' => $model->project_repayment_id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('p2p_activity', 'Delete'), ['delete', 'id' => $model->project_repayment_id], [
             'class' => 'btn btn-danger',
             'data' => [

@@ -18,7 +18,7 @@ class ProjectInvestPointRecordSearch extends ProjectInvestPointRecord
     public function rules()
     {
         return [
-            [['project_invest_point_record', 'project_invest_id', 'project_id', 'member_id', 'point', 'create_time', 'is_delete'], 'integer'],
+            [['project_invest_point_id', 'project_invest_id', 'project_id', 'member_id', 'point', 'create_time', 'is_delete'], 'integer'],
         ];
     }
 
@@ -55,7 +55,7 @@ class ProjectInvestPointRecordSearch extends ProjectInvestPointRecord
         }
 
         $query->andFilterWhere([
-            'project_invest_point_record' => $this->project_invest_point_record,
+            'project_invest_point_id' => $this->project_invest_point_id,
             'project_invest_id' => $this->project_invest_id,
             'project_id' => $this->project_id,
             'member_id' => $this->member_id,
