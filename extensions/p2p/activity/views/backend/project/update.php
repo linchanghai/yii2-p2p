@@ -9,7 +9,7 @@ $this->title = Yii::t('p2p_activity', 'Update {modelClass}: ', [
     'modelClass' => 'Project',
 ]) . ' ' . $model->project_id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('p2p_activity', 'Projects'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->project_id, 'url' => ['view', 'id' => $model->project_id]];
+$this->params['breadcrumbs'][] = ['label' => $model->project_name];
 $this->params['breadcrumbs'][] = Yii::t('p2p_activity', 'Update');
 ?>
 <div class="project-update">
