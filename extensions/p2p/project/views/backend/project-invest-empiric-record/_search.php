@@ -8,14 +8,14 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="project-invest-point-record-search">
+<div class="project-invest-empiric-record-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'project_invest_point_id') ?>
+    <?= $form->field($model, 'project_invest_empiric_id') ?>
 
     <?= $form->field($model, 'project_invest_id') ?>
 
@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'member_id') ?>
 
-    <?= $form->field($model, 'point') ?>
+    <?= $form->field($model, 'empiric_value') ?>
 
     <?php // echo $form->field($model, 'create_time') ?>
 

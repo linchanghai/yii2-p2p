@@ -50,7 +50,7 @@ class v0_1_0 extends Migration
         ]);
 
         $this->createTable('project_invest_empiric_record', [
-            'project_invest_point_record' => Schema::TYPE_PK,
+            'project_invest_empiric_id' => Schema::TYPE_PK,
             'project_invest_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'project_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'member_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
@@ -83,16 +83,15 @@ class v0_1_0 extends Migration
         ]);
 
         $this->createTable('project_material', [
-            'project_material' => Schema::TYPE_PK,
+            'project_material_id' => Schema::TYPE_PK,
             'project_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'material' => Schema::TYPE_STRING . ' NOT NULL',
             'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'update_time' => Schema::TYPE_INTEGER . '(11)',
             'is_delete' => Schema::TYPE_SMALLINT . '(1) unsigned NOT NULL default \'0\'',
         ]);
-
         $this->createTable('project_repayment', [
-            'project_repayment_record' => Schema::TYPE_PK,
+            'project_repayment_id' => Schema::TYPE_PK,
             'project_invest_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'project_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'member_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',

@@ -6,9 +6,9 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "project_invest_point_id".
+ * This is the model class for table "project_invest_empiric_id".
  *
- * @property integer $project_invest_point_id
+ * @property integer $project_invest_empiric_id
  * @property integer $project_invest_id
  * @property integer $project_id
  * @property integer $member_id
@@ -36,8 +36,8 @@ class ProjectInvestEmpiricRecord extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['point'], 'required'],
-            [['point'], 'integer']
+            [['empiric'], 'required'],
+            [['empiric'], 'integer']
         ];
     }
 
@@ -47,11 +47,11 @@ class ProjectInvestEmpiricRecord extends \kiwi\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'project_invest_point_id' => Yii::t('p2p_project', 'Project Invest Point ID'),
+            'project_invest_empiric_id' => Yii::t('p2p_project', 'Project Invest Point ID'),
             'project_invest_id' => Yii::t('p2p_project', 'Project Invest ID'),
             'project_id' => Yii::t('p2p_project', 'Project ID'),
             'member_id' => Yii::t('p2p_project', 'Member ID'),
-            'point' => Yii::t('p2p_project', 'Point'),
+            'empiric' => Yii::t('p2p_project', 'Point'),
             'create_time' => Yii::t('p2p_project', 'Create Time'),
             'is_delete' => Yii::t('p2p_project', 'Is Delete'),
         ];

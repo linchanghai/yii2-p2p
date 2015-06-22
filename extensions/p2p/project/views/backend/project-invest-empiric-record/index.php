@@ -10,7 +10,7 @@ use yii\grid\GridView;
 $this->title = Yii::t('p2p_project', 'Project Invest Point Records');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="project-invest-point-record-index">
+<div class="project-invest-empiric-record-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -21,11 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-//            'project_invest_point_id',
+//            'project_invest_empiric_id',
 //            'project_invest_id',
 //            'project_id',
 //            'member_id',
-            'point',
+            'empiric_value',
              'create_time:datetime',
             // 'is_delete',
 

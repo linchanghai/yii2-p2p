@@ -22,11 +22,11 @@ return [
                         'url' => ['/p2p_project/project-invest/index'],
                         'activeUrls' => [['/p2p_project/project-invest/create'], ['/p2p_project/project-invest/update']],
                     ],
-                    'project_invest_point_record' => [
+                    'project_invest_empiric_record' => [
                         'label' => Yii::t('p2p_project', 'Project Invest Point Record'),
                         'sort' => 400,
-                        'url' => ['/p2p_project/project-invest-point-record/index'],
-                        'activeUrls' => [['/p2p_project/project-invest-point-record/create'], ['/p2p_project/project-invest-point-record/update']],
+                        'url' => ['/p2p_project/project-invest-empiric-record/index'],
+                        'activeUrls' => [['/p2p_project/project-invest-empiric-record/create'], ['/p2p_project/project-invest-empiric-record/update']],
                     ],
                     'project_repayment' => [
                         'label' => Yii::t('p2p_project', 'Project Repayment'),
