@@ -1,5 +1,6 @@
 <?php
 
+use yii\bootstrap\Tabs;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -25,27 +26,24 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
+    <?php
+    $memberContent = DetailView::widget([
         'model' => $model,
         'attributes' => [
             'member_id',
             'username',
-            'password_hash',
-            'password_reset_token',
             'mobile',
             'email:email',
-            'email_verify_token:email',
             'real_name',
             'id_card',
             'recommend_user',
             'recommend_type',
-            'auth_key',
-            'access_token',
             'status',
             'create_time:datetime',
             'update_time:datetime',
-            'is_deleted',
         ],
-    ]) ?>
+    ]);
+    Tabs::widget(['items' => [
 
+    ]]); ?>
 </div>
