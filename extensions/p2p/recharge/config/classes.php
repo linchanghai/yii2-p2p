@@ -7,6 +7,6 @@
 
 return [
     'class' => [
-        'RechargeRecord' => 'p2p\payment\models\RechargeRecord',
+        'RechargeRecord' => 'p2p\recharge\models\RechargeRecord',
     ],
 ];

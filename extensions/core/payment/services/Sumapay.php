@@ -100,6 +100,14 @@ class Sumapay extends BasePayment
         return isset($data['requestId']) && isset($data['payId']);
     }
 
+    /**
+     * @inheritdoc
+     */
+    protected function getCallbackId($data)
+    {
+        return isset($data['requestId']) ? $data['requestId'] : false;
+    }
+
     private function HmacMd5($data, $key) {
         // RFC 2104 HMAC implementation for php.
         // Creates an md5 HMAC.
