@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model core\member\models\Member */
@@ -10,7 +10,12 @@ use yii\widgets\ActiveForm;
 
 <div class="member-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'id' => 'member-form-horizontal',
+        'type' => ActiveForm::TYPE_HORIZONTAL,
+        'formConfig' => ['labelSpan' => 2],
+        'fullSpan' => 11
+    ]); ?>
 
     <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
 
@@ -39,7 +44,9 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'is_deleted')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('core_member', 'Create') : Yii::t('core_member', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <div class="col-sm-offset-2 col-sm-9">
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('core_member', 'Create') : Yii::t('core_member', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

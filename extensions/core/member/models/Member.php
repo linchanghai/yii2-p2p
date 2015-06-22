@@ -152,17 +152,17 @@ class Member extends \kiwi\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getMemberStatistics()
+    public function getMemberStatistic()
     {
-        return $this->hasMany(MemberStatistic::className(), ['member_id' => 'member_id']);
+        return $this->hasOne(MemberStatistic::className(), ['member_id' => 'member_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getMemberStatuses()
+    public function getMemberStatus()
     {
-        return $this->hasMany(MemberStatus::className(), ['member_id' => 'member_id']);
+        return $this->hasOne(MemberStatus::className(), ['member_id' => 'member_id']);
     }
 
     /**

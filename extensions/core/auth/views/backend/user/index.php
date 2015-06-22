@@ -30,15 +30,18 @@ $this->params['leftMenuKey'] = 'user';
         ],
         'export' => false,
         'responsive' => true,
+        'toolbar' => Html::a(Yii::t('core_auth', 'Create {modelClass}', [
+            'modelClass' => Yii::t('core_auth', 'Administrator')
+        ]), ['create'], ['class' => 'btn btn-info']),
         'containerOptions' => ['style' => 'overflow: auto'], // only set when $responsive = false
         'headerRowOptions' => ['class' => 'kartik-sheet-style'],
         'filterRowOptions' => ['class' => 'kartik-sheet-style'],
         'panelHeadingTemplate' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> ' . Html::encode($this->title) . '</h3>',
         'panel' => [
             'type' => GridView::TYPE_DEFAULT,
-            'before' => Html::a(Yii::t('core_auth', 'Create {modelClass}', [
-                'modelClass' => Yii::t('core_auth', 'Administrator')
-            ]), ['create'], ['class' => 'btn btn-info']),
+//            'before' => Html::a(Yii::t('core_auth', 'Create {modelClass}', [
+//                'modelClass' => Yii::t('core_auth', 'Administrator')
+//            ]), ['create'], ['class' => 'btn btn-info']),
             'after' => false,
             'footer' => false
         ],
