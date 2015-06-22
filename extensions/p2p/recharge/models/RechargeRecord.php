@@ -24,6 +24,10 @@ use Yii;
  */
 class RechargeRecord extends \kiwi\db\ActiveRecord
 {
+    const STATUS_SUCCESS = 1;
+    const STATUS_FAIL = 2;
+    const STATUS_ERROR = 3;
+
     /**
      * @inheritdoc
      */
@@ -74,7 +78,11 @@ class RechargeRecord extends \kiwi\db\ActiveRecord
         return $this->hasOne(Kiwi::getMemberClass(), ['member_id' => 'member_id']);
     }
 
-    public function findByTransactionId($transactionId)
+    /**
+     * @param $transactionId
+     * @return RechargeRecord
+     */
+    public static function findByTransactionId($transactionId)
     {
         return static::findOne(['transaction_id' => $transactionId]);
     }

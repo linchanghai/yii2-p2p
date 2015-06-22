@@ -31,5 +31,16 @@ class Bootstrap implements BootstrapInterface
     public function finishPay($event)
     {
         $rechargeRecordClass = Kiwi::getRechargeRecordClass();
+        $rechargeRecord = $rechargeRecordClass::findByTransactionId($event->transactionId);
+        if ($event->isError) {
+            $rechargeRecord->status = $rechargeRecord::STATUS_ERROR;
+        } else {
+            if ($event->isSuccessful) {
+                $rechargeRecord->status = $rechargeRecord::STATUS_SUCCESS;
+            } else {
+                $rechargeRecord->status = $rechargeRecord::STATUS_FAIL;
+            }
+        }
+        $rechargeRecord->save();
     }
 } 
