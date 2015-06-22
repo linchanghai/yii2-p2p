@@ -34,7 +34,7 @@ $menus = Kiwi::getConfiguration()->menus;
         <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/logo.png"/>
     </div>
     <div class="nav-left">
-        <span style="color:#ffffff;"><?= Yii::$app->user->identity->username; ?></span>
+        <span style="color:#ffffff;"><?= Yii::$app->user->isGuest ? Html::a('Login', ['site/login']) : Yii::$app->user->identity->username; ?></span>
         您好！&nbsp; |
         <a href="/" target="_blank">查看前台</a> |
         <a href="javascript:click(location.reload())">刷新</a> |
