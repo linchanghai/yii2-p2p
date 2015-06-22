@@ -39,7 +39,7 @@ $menus = Kiwi::getConfiguration()->menus;
         <a href="/" target="_blank">查看前台</a> |
         <a href="javascript:click(location.reload())">刷新</a> |
         <a href="javascript:void(0)">清空缓存</a> |
-        <a href="<?= Url::to(['site/logout']) ?>">退出</a><br/>
+        <a href="<?= Url::to(['site//logout']) ?>">退出</a><br/>
 
         <div id="TopTime"></div>
     </div>

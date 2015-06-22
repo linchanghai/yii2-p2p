@@ -17,7 +17,6 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Project' => '活动',
     'Actual Invest Money' => '实际投资金额',
     'Are you sure you want to delete this item?' => '您确定要删除这条记录吗？',
     'Collateral Info' => '抵押物信息',
@@ -37,7 +36,7 @@ return [
     'Loan Person Info' => '贷款人信息',
     'Material' => '资料',
     'Member ID' => '',
-    'Min Money' => '最小金额',
+    'Min Money' => '起投金额',
     'Point' => '积分',
     'Project' => '投资项目',
     'Project Base Info' => '项目基本信息',

@@ -2,6 +2,7 @@
 
 namespace p2p\project\searches;
 
+use kiwi\Kiwi;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -41,7 +42,8 @@ class ProjectRepaymentSearch extends ProjectRepayment
      */
     public function search($params)
     {
-        $query = ProjectRepayment::find();
+        $projectRepaymentClass = Kiwi::getProjectRepaymentClass();
+        $query = $projectRepaymentClass::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

@@ -2,6 +2,7 @@
 
 namespace p2p\project\searches;
 
+use kiwi\Kiwi;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -42,7 +43,8 @@ class ProjectSearch extends Project
      */
     public function search($params)
     {
-        $query = Project::find();
+        $projectClass = Kiwi::getProjectClass();
+        $query = $projectClass::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
