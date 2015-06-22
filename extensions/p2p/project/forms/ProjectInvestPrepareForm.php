@@ -9,14 +9,33 @@
 namespace p2p\project\forms;
 
 use kiwi\Kiwi;
+use p2p\project\InterestHelper;
 use Yii;
 use kiwi\base\Model;
+use yii\base\Event;
+use yii\base\InvalidValueException;
+use yii\base\ModelEvent;
 
+/**
+ * Class ProjectInvestPrepareForm
+ *
+ * @property \p2p\project\models\Project $project
+ *
+ * @package p2p\project\forms
+ * @author 1079140464@qq.com
+ */
 class ProjectInvestPrepareForm extends Model
 {
+    const EVENT_BEFORE_INVEST = 'beforeInvest';
+    const EVENT_AFTER_INVEST = 'afterInvest';
+
     public $money;
     public $annual_id;
     public $project_id;
+    public $invest;
+
+    /** @var \p2p\project\models\Project */
+    protected $_project;
 
     /**
      * @inheritdoc
@@ -24,7 +43,7 @@ class ProjectInvestPrepareForm extends Model
     public function rules()
     {
         return [
-            [['money','project_id'], 'required'],
+            [['money', 'project_id'], 'required'],
             [['annual_id'], 'number'],
         ];
     }
@@ -41,52 +60,81 @@ class ProjectInvestPrepareForm extends Model
         ];
     }
 
+    public function getInvestInfo()
+    {
+        if (!$this->validate()) {
+            return false;
+        }
+
+        if ($this->beforeInvest()) {
+            $this->invest = $this->calculateInvest();
+            $this->afterInvest();
+        }
+
+        return $this->invest;
+    }
+
+    /**
+     * @return null|\p2p\project\models\Project|static
+     */
+    protected function getProject()
+    {
+        if (!$this->_project) {
+            $this->_project = Kiwi::getProject()->findOne($this->project_id);
+            if (!$this->_project) {
+                throw new InvalidValueException();
+            }
+        }
+        return $this->_project;
+    }
+
+    /**
+     * @return \p2p\project\models\ProjectInvest
+     */
     public function calculateInvest()
     {
-        if($this->validate()) {
-            /** @var \p2p\project\models\Project $project */
-            $project = Kiwi::getProject()->findOne($this->project_id);
-            $invest = Kiwi::getProjectInvest();
-            $invest->project_id = $project->project_id;
-            $invest->member_id = Yii::$app->user->id;
-            $invest->rate = $project->interest_rate;
-            $invest->invest_money = $this->money;
+        $invest = Kiwi::getProjectInvest();
+        $invest->project_id = $this->getProject()->project_id;
+        $invest->member_id = Yii::$app->user->id;
+        $invest->rate = $this->getProject()->interest_rate;
+        $invest->invest_money = $this->money;
 
-            $backDay = 20;
-            $repayments = [];
-            $project->repayment_date;
-            $repaymentDate = strtotime(date('Y-m-' . $backDay));
-            $startDate = strtotime(date('Y-m-d'));
-            $totalInterestMoney = 0;
-            while ($repaymentDate < $project->repayment_date) {
-                $days = ($repaymentDate - $startDate) / 3600 / 24;
-                $interestMoney = $invest->invest_money * $project->interest_rate / 365 * $days;
+        list($totalInterestMoney, $repayments) = InterestHelper::calculateInterest($this->money, $invest->rate, time(), $project->repayment_date, 20);
 
-                $repayment = Kiwi::getProjectRepayment();
-                $repayment->interest_money = $interestMoney;
-                $totalInterestMoney = $totalInterestMoney + $interestMoney;
-                $repayment->invest_money = 0;
-                $repayment->repayment_date = $repaymentDate;
-                $repayments[] = $repayment;
-
-                $startDate = $repaymentDate;
-                $repaymentDate = strtotime('+1 month', $repaymentDate);
-            }
-
-            $repaymentDate = $project->repayment_date;
-            $days = ($repaymentDate - $startDate) / 3600 / 24;
-            $interestMoney = $invest->invest_money * $project->interest_rate / 365 * $days;
-            $repayment = Kiwi::getProjectRepayment();
-            $repayment->interest_money = $interestMoney;
-            $totalInterestMoney = $totalInterestMoney + $interestMoney;
-            $repayment->invest_money = $invest->invest_money;
-            $repayments[] = $repayment;
-
-
-            $invest->interest_money = $totalInterestMoney;
-
-            $invest->setRelation('projectRepayments', $repayments);
-            return $invest;
+        foreach ($repayments as $key => $repayment) {
+            $repayments[$key] = Kiwi::getProjectRepayment([
+                'interest_money' => $repayment['interestMoney'],
+                'invest_money' => $repayment['principalMoney'],
+                'repayment_date' => $repayment['repaymentDate'],
+            ]);
         }
+
+        $invest->interest_money = $totalInterestMoney;
+
+        $invest->setRelation('projectRepayments', $repayments);
+        return $invest;
+    }
+
+    public function beforeInvest()
+    {
+        $event = new ModelEvent();
+        $this->trigger(static::EVENT_BEFORE_INVEST, $event);
+        return $event->isValid;
+    }
+
+    public function afterInvest()
+    {
+        $event = new ModelEvent();
+        $this->trigger(static::EVENT_AFTER_INVEST, $event);
+    }
+
+    public function xxx()
+    {
+        $class = Kiwi::getProjectInvestPrepareFormClass();
+        Event::on($class, $class::EVENT_BEFORE_INVEST, function($event) {
+            /** @var \p2p\project\forms\ProjectInvestPrepareForm $form */
+            $form = $event->sender;
+            $form->getProject()->interest_rate + 0.1;
+        });
     }
 }
