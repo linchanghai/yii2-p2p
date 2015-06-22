@@ -80,9 +80,9 @@ class ProjectInvest extends \kiwi\db\ActiveRecord
                 'createdAtAttribute' => 'create_time',
                 'updatedAtAttribute' => 'update_time',
             ],
-            'repayment' => [
-                RepaymentBehavior::className(),
-            ]
+//            'repayment' => [
+//                RepaymentBehavior::className(),
+//            ]
         ];
     }
 

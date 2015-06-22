@@ -7,16 +7,21 @@
 
 namespace p2p\project\controllers\frontend;
 
-
+use Yii;
+use kiwi\Kiwi;
 use kiwi\web\Controller;
-use p2p\project\services\ProjectService;
 
 class ProjectInvestController extends Controller
 {
     public function actionPrepareInvest()
     {
-        $p = new ProjectService();
-        $invest = $p->getInvestInfo();
-        json_encode($invest);
+        $InvestPrepareForm = Kiwi::getProjectInvestPrepareForm();
+        if ($InvestPrepareForm->load(Yii::$app->request->post())) {
+            return json_encode($InvestPrepareForm->calculateInvest());
+        } else {
+            return $this->render('create', [
+                'InvestPrepareForm' => $InvestPrepareForm,
+            ]);
+        }
     }
 } 
