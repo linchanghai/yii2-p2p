@@ -7,10 +7,11 @@
 
 return [
     'class' => [
-        'member' => 'core\member\models\Member',
-        'memberBank' => 'core\member\models\MemberBank',
-        'memberStatus' => 'core\member\models\MemberStatus',
-        'memberStatistic' => 'core\member\models\MemberStatistic',
-        'memberCoupon' => 'core\member\models\MemberCoupon'
+        'Member' => 'core\member\models\Member',
+        'MmberBank' => 'core\member\models\MemberBank',
+        'MemberStatus' => 'core\member\models\MemberStatus',
+        'MemberStatistic' => 'core\member\models\MemberStatistic',
+        'MemberCoupon' => 'core\member\models\MemberCoupon',
+        'MemberSearch' => 'core\member\searches\MemberSearch',
     ]
 ];

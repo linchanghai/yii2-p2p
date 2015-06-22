@@ -3,6 +3,7 @@
 namespace p2p\project\models;
 
 use core\member\models\Member;
+use p2p\project\services\RepaymentBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -78,6 +79,9 @@ class ProjectInvest extends \kiwi\db\ActiveRecord
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'create_time',
                 'updatedAtAttribute' => 'update_time',
+            ],
+            'repayment' => [
+                RepaymentBehavior::className(),
             ]
         ];
     }
