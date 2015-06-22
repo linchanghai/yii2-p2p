@@ -177,3 +177,38 @@
   padding-top: 40px;
   height: 220px;
 }
+.customerService{
+  width: 180px;
+  height: 120px;
+  padding: 30px 20px;
+  color: #8f939a;
+  background: #e1e3e7;
+}
+.indexOperate{
+  width: 900px;
+  padding-top: 24px;
+  .operateItem{
+    float: left;
+    width: 16.6%;
+    text-align: center;
+  }
+  .glyphicon{
+    font-size: 40px;
+  }
+}
+.cooperate{
+  height: 75px;
+  line-height: 75px;
+  padding: 0;
+}
+.cooperateMate{
+  padding-top: 23px;
+  a{
+    float: left;
+    width: 125px;
+    padding: 0 10px;
+    &:hover{
+      opacity: .8;
+    }
+  }
+}
