@@ -46,6 +46,8 @@ class ProjectInvestForm extends Model
 
     public function invest()
     {
-        $this->validate();
+        if($this->validate()) {
+            return true;
+        }
     }
 }

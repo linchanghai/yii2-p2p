@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel core\member\searches\MemberSearch */
@@ -12,12 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="member-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a(Yii::t('core_member', 'Create Member'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -37,6 +32,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'memberStatus.id_card_status',
 
             ['class' => 'yii\grid\ActionColumn'],
+        ],
+        'export' => false,
+        'responsive' => true,
+        'containerOptions' => ['style' => 'overflow: auto'], // only set when $responsive = false
+        'headerRowOptions' => ['class' => 'kartik-sheet-style'],
+        'filterRowOptions' => ['class' => 'kartik-sheet-style'],
+        'panelHeadingTemplate' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> ' . Html::encode($this->title) . '</h3>',
+        'panel' => [
+            'type' => GridView::TYPE_DEFAULT,
+            'before' => Html::a(Yii::t('core_member', 'Create Member'), ['create'], ['class' => 'btn btn-info']),
+            'after' => false,
+            'footer' => false
         ],
     ]); ?>
 

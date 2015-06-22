@@ -139,6 +139,10 @@ class ProjectInvest extends \kiwi\db\ActiveRecord
      */
     public function getProjectRepayments()
     {
-        return $this->hasMany(ProjectRepayment::className(), ['project_invest_id' => 'project_invest_id']);
+        return $this->hasMany(ProjectRepayment::className(), [
+            'project_invest_id' => 'project_invest_id',
+            'project_id' => 'project_id',
+            'member_id' => 'member_id',
+        ]);
     }
 }
