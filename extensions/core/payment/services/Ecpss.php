@@ -97,4 +97,12 @@ class Ecpss extends BasePayment
     {
         return isset($data['Succeed']) && $data['Succeed'] == 88;
     }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getCallbackId($data)
+    {
+        return isset($data['BillNo']) ? $data['BillNo'] : false;
+    }
 } 

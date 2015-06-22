@@ -49,16 +49,6 @@ class v0_1_0 extends Migration
             'is_delete' => Schema::TYPE_SMALLINT . '(1) NOT NULL default \'0\'',
         ]);
 
-        $this->createTable('project_invest_empiric_record', [
-            'project_invest_empiric_id' => Schema::TYPE_PK,
-            'project_invest_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-            'project_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-            'member_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-            'empiric_value' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-            'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-            'is_delete' => Schema::TYPE_SMALLINT . '(1) NOT NULL default \'0\'',
-        ]);
-
         $this->createTable('project_invest', [
             'project_invest_id' => Schema::TYPE_PK,
             'project_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',

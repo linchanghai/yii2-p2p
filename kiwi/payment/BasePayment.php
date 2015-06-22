@@ -14,6 +14,9 @@ use yii\base\Component;
 
 /**
  * Class BasePayment
+ *
+ * @property int $id
+ *
  * @package core\payment\services
  * @author Lujie.Zhou(lujie.zhou@jago-ag.cn)
  */
@@ -63,7 +66,8 @@ abstract class BasePayment extends Component implements PaymentInterface
     {
         $isError = !$this->validateCallbackData($data);
         $isSuccessful = !$isError && $this->validatePaymentStatus($data);
-        $this->finishPay($data, $isSuccessful, $isError);
+        $transactionId = $this->getCallbackId($data);
+        $this->finishPay($data, $transactionId, $isSuccessful, $isError);
     }
 
     protected function sendPaymentRequest($money)
@@ -97,10 +101,17 @@ abstract class BasePayment extends Component implements PaymentInterface
      */
     abstract protected function validatePaymentStatus($data);
 
+    /**
+     * @param $data
+     * @return string the transaction id
+     */
+    abstract protected function getCallbackId($data);
+
     public function beforePay($money)
     {
         $event = new PaymentEvent();
         $event->money = $money;
+        $event->transactionId = $this->getId();
         $this->trigger(self::EVENT_BEFORE_PAY, $event);
         return $event->isValid;
     }
@@ -109,13 +120,15 @@ abstract class BasePayment extends Component implements PaymentInterface
     {
         $event = new PaymentEvent();
         $event->money = $money;
+        $event->transactionId = $this->getId();
         $this->trigger(self::EVENT_AFTER_PAY, $event);
     }
 
-    public function finishPay($data, $isSuccessful, $isError)
+    public function finishPay($data, $transactionId, $isSuccessful, $isError)
     {
         $event = new PaymentEvent();
         $event->callbackData = $data;
+        $event->transactionId = $transactionId;
         $event->isSuccessful = $isSuccessful;
         $event->isError = $isError;
         $this->trigger(self::EVENT_FINISH_PAY, $event);

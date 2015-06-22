@@ -12,11 +12,16 @@ use yii\base\Event;
 
 /**
  * Class PaymentEvent
+ *
+ * @property BasePayment $sender
+ *
  * @package kiwi\payment
  * @author Lujie.Zhou(lujie.zhou@jago-ag.cn)
  */
 class PaymentEvent extends Event
 {
+    public $transactionId;
+
     /**
      * @var float the pay money
      */

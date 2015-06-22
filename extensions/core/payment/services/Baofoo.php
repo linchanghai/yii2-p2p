@@ -94,4 +94,12 @@ class Baofoo extends BasePayment
     {
         return isset($data['Result']) && $data['status'] == 1;
     }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getCallbackId($data)
+    {
+        return isset($data['TransID']) ? $data['TransID'] : false;
+    }
 } 

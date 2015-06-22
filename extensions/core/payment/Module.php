@@ -10,5 +10,7 @@ namespace core\payment;
 
 class Module extends \kiwi\base\Module
 {
+    public static $active = true;
 
+    public static $bootstrap = [];
 } 

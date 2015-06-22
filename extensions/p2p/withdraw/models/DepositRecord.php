@@ -2,6 +2,7 @@
 
 namespace p2p\withdraw\models;
 
+use kiwi\Kiwi;
 use Yii;
 
 /**
@@ -18,7 +19,7 @@ use Yii;
  * @property integer $update_time
  * @property integer $is_delete
  *
- * @property Member $member
+ * @property \core\member\models\Member $member
  */
 class DepositRecord extends \kiwi\db\ActiveRecord
 {
@@ -68,6 +69,6 @@ class DepositRecord extends \kiwi\db\ActiveRecord
      */
     public function getMember()
     {
-        return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
+        return $this->hasOne(Kiwi::getMemberClass(), ['member_id' => 'member_id']);
     }
 }

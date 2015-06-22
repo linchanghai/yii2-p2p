@@ -89,4 +89,12 @@ class Chinabank extends BasePayment
     {
         return isset($data['v_pstatus']) && $data['v_pstatus'] == 20;
     }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getCallbackId($data)
+    {
+        return isset($data['v_oid']) ? $data['v_oid'] : false;
+    }
 } 

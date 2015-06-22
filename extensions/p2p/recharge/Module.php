@@ -5,7 +5,7 @@
  * @Time 20:11
  */
 
-namespace p2p\payment;
+namespace p2p\recharge;
 
 
 class Module extends \kiwi\base\Module
