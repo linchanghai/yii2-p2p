@@ -5,7 +5,7 @@
  * @Time 20:11
  */
 
-namespace p2p\recharge;
+namespace p2p\transfer;
 
 /**
  * Class Module
@@ -17,6 +17,4 @@ class Module extends \kiwi\base\Module
     public static $active = true;
 
     public static $version = 'v0.1.0';
-
-    public static $bootstrap = ['p2p\recharge\Bootstrap'];
 }
