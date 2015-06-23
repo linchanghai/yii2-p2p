@@ -14,7 +14,6 @@ use kiwi\base\Model;
 class ProjectInvestForm extends Model
 {
     public $money;
-    public $annual_id;
     public $project_id;
     public $bonus_id;
     public $couponCash_id;
@@ -26,7 +25,7 @@ class ProjectInvestForm extends Model
     {
         return [
             [['money','project_id'], 'required'],
-            [['annual_id', 'bonus_id', 'couponCash_id'], 'number'],
+            [['bonus_id', 'couponCash_id'], 'number'],
         ];
     }
 
@@ -38,7 +37,6 @@ class ProjectInvestForm extends Model
         return [
             'money' => Yii::t('p2p_project', 'Money'),
             'project_id' => Yii::t('p2p_project', 'Project'),
-            'annual_id' => Yii::t('p2p_project', 'Annual'),
             'bonus_id' => Yii::t('p2p_project', 'Bonus'),
             'couponCash_id' => Yii::t('p2p_project', 'CouponCash'),
         ];
