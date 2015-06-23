@@ -29,6 +29,6 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 
-
+#frontend
 gulpfile.js
 node_modules
