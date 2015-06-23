@@ -8,9 +8,9 @@
 namespace core\payment\services;
 
 
-use kiwi\payment\BasePayment;
+use kiwi\payment\BasePaymentMethod;
 
-class Ecpss extends BasePayment
+class Ecpss extends BasePaymentMethod
 {
     public $requestUrl = 'https://pay.ecpss.com/sslpayment';
 //    public $requestUrl = 'https://pay.ips.net.cn/ipayment.aspx';    //测试环境
@@ -84,7 +84,7 @@ class Ecpss extends BasePayment
     /**
      * @inheritdoc
      */
-    protected function validateCallbackData($data)
+    public function validateCallbackData($data)
     {
         $signStr = $this->getCallbackSignature($data);
         return isset($data['SignMD5info']) && strtoupper($data['SignMD5info']) == strtoupper($signStr);
@@ -93,7 +93,7 @@ class Ecpss extends BasePayment
     /**
      * @inheritdoc
      */
-    protected function validatePaymentStatus($data)
+    public function validatePaymentStatus($data)
     {
         return isset($data['Succeed']) && $data['Succeed'] == 88;
     }
@@ -101,7 +101,7 @@ class Ecpss extends BasePayment
     /**
      * @inheritdoc
      */
-    protected function getCallbackId($data)
+    public function getCallbackId($data)
     {
         return isset($data['BillNo']) ? $data['BillNo'] : false;
     }

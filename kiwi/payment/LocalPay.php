@@ -13,7 +13,7 @@ namespace kiwi\payment;
  * @package kiwi\payment
  * @author Lujie.Zhou(lujie.zhou@jago-ag.cn)
  */
-class LocalPay extends BasePayment
+class LocalPay extends BasePaymentMethod
 {
     public $merchantId = 'localUserId';
 
@@ -28,7 +28,7 @@ class LocalPay extends BasePayment
      * @param $money
      * @return array
      */
-    protected function prepareRequestData($money)
+    public function prepareRequestData($money)
     {
         $requestData = [
             'merchantId' => $this->merchantId,
@@ -41,7 +41,7 @@ class LocalPay extends BasePayment
         return $requestData;
     }
 
-    protected function getRequestSignature($data)
+    public function getRequestSignature($data)
     {
         $signKeys = ['merchantId', 'transactionId', 'money', 'callbackUrl', 'returnUrl'];
         $signData = [];
@@ -57,7 +57,7 @@ class LocalPay extends BasePayment
         return $signStr;
     }
 
-    protected function getCallbackSignature($data)
+    public function getCallbackSignature($data)
     {
         $signKeys = ['merchantId', 'transactionId', 'money', 'status', 'note', 'transactionTime'];
         $signData = [];
@@ -75,7 +75,7 @@ class LocalPay extends BasePayment
     /**
      * @inheritdoc
      */
-    protected function validateCallbackData($data)
+    public function validateCallbackData($data)
     {
         $signStr = $this->getCallbackSignature($data);
         return isset($data['Signature']) && strtoupper($data['Signature']) == strtoupper($signStr);
@@ -84,8 +84,16 @@ class LocalPay extends BasePayment
     /**
      * @inheritdoc
      */
-    protected function validatePaymentStatus($data)
+    public function validatePaymentStatus($data)
     {
         return isset($data['status']) && $data['status'] == 1;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCallbackId($data)
+    {
+        return isset($data['transactionId']) ? $data['transactionId'] : false;
     }
 }

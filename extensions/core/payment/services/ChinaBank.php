@@ -8,9 +8,9 @@
 namespace core\payment\services;
 
 
-use kiwi\payment\BasePayment;
+use kiwi\payment\BasePaymentMethod;
 
-class Chinabank extends BasePayment
+class Chinabank extends BasePaymentMethod
 {
     public $requestUrl = 'https://Pay3.chinabank.com.cn/PayGate';
 
@@ -76,7 +76,7 @@ class Chinabank extends BasePayment
     /**
      * @inheritdoc
      */
-    protected function validateCallbackData($data)
+    public function validateCallbackData($data)
     {
         $signStr = $this->getCallbackSignature($data);
         return isset($data['v_md5str']) && strtoupper($data['v_md5str']) == strtoupper($signStr);
@@ -85,7 +85,7 @@ class Chinabank extends BasePayment
     /**
      * @inheritdoc
      */
-    protected function validatePaymentStatus($data)
+    public function validatePaymentStatus($data)
     {
         return isset($data['v_pstatus']) && $data['v_pstatus'] == 20;
     }
@@ -93,7 +93,7 @@ class Chinabank extends BasePayment
     /**
      * @inheritdoc
      */
-    protected function getCallbackId($data)
+    public function getCallbackId($data)
     {
         return isset($data['v_oid']) ? $data['v_oid'] : false;
     }
