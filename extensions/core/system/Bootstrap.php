@@ -9,10 +9,10 @@ namespace core\system;
 
 use kiwi\helpers\ArrayHelper;
 use kiwi\Kiwi;
-use kiwi\web\Controller;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\Event;
+use yii\web\Controller;
 
 class Bootstrap implements BootstrapInterface
 {
@@ -20,7 +20,7 @@ class Bootstrap implements BootstrapInterface
     {
         $this->sortConfig();
         $this->addUrlRules($app);
-        $this->attachEvents();
+        $this->attachEvents($app);
     }
 
     /**
@@ -45,9 +45,12 @@ class Bootstrap implements BootstrapInterface
         Kiwi::getConfiguration()->menus = $menus;
     }
 
-    protected function attachEvents()
+    /**
+     * @param \yii\base\Application $app
+     */
+    protected function attachEvents($app)
     {
-        Event::on(Controller::className(), Controller::EVENT_BEFORE_ACTION, [$this, 'setActiveMenu']);
+        $app->on(Controller::EVENT_BEFORE_ACTION, [$this, 'setActiveMenu']);
     }
 
     public function setActiveMenu()

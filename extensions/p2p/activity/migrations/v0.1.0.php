@@ -14,6 +14,46 @@ class v0_1_0 extends Migration
 {
     public function safeUp()
     {
+        $this->createTable('activity', [
+            'activity_id' => Schema::TYPE_PK,
+            'activity_type' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'activity_send_type' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'activity_send_value' => Schema::TYPE_STRING . '(45) NOT NULL',
+            'vaild_date' => Schema::TYPE_INTEGER . '(11) NOT NULL default \'0\'',
+            'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'update_time' => Schema::TYPE_INTEGER . '(11)',
+            'is_delete' => Schema::TYPE_SMALLINT . '(1) NOT NULL default \'0\'',
+
+        ]);
+        $this->createTable('activity_record', [
+            'activity_records_id' => Schema::TYPE_PK,
+            'member_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'activity_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'note' => Schema::TYPE_STRING . '(50)',
+            'create_time' => Schema::TYPE_STRING . '(45) NOT NULL',
+            'is_delete' => Schema::TYPE_SMALLINT . '(1) NOT NULL default \'0\'',
+
+        ]);
+        $this->createTable('exchange_record', [
+            'exchange_records_id' => Schema::TYPE_PK,
+            'member_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'product_map_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'note' => Schema::TYPE_STRING . '(50)',
+            'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'is_delete' => Schema::TYPE_SMALLINT . '(1) default \'0\'',
+
+        ]);
+        $this->createTable('product_map', [
+            'product_map_id' => Schema::TYPE_PK,
+            'type' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'exchange_value' => Schema::TYPE_STRING . '(20) NOT NULL',
+            'exchange_points' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'duration' => Schema::TYPE_INTEGER . '(11) default \'0\'',
+            'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'update_time' => Schema::TYPE_INTEGER . '(11)',
+            'is_delete' => Schema::TYPE_SMALLINT . '(1) NOT NULL default \'0\'',
+
+        ]);
         $this->createTable('{{%project_invest_empiric_record}}', [
             'project_invest_empiric_record_id' => Schema::TYPE_PK,
             'project_invest_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',

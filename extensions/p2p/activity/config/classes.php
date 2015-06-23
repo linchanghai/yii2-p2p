@@ -7,6 +7,10 @@
 
 return [
     'class' => [
+        'Activity' => 'p2p\activity\models\Activity',
+        'ActivityRecord' => 'p2p\activity\models\ActivityRecord',
+        'ExchangeRecord' => 'p2p\activity\models\ExchangeRecord',
+        'ProductMap' => 'p2p\activity\models\ProductMap',
         'CouponAnnualRecord' => 'p2p\activity\models\CouponAnnualRecord',
         'CouponBonusRecord' => 'p2p\activity\models\CouponBonusRecord',
         'CouponCashRecord' => 'p2p\activity\models\CouponCashRecord',
