@@ -57,6 +57,9 @@ class Bootstrap implements BootstrapInterface
     protected function filterMenu()
     {
         $filterMenu = function($menu) {
+            if (Yii::$app->user->isGuest) {
+                return false;
+            }
             if ($this->checkAdmin(Yii::$app->user)) {
                 return true;
             }
