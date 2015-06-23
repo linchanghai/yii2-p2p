@@ -7,7 +7,11 @@
 
 namespace core\payment;
 
-
+/**
+ * Class Module
+ * @package core\payment
+ * @author jeremy.zhou(gao_lujie@live.cn)
+ */
 class Module extends \kiwi\base\Module
 {
     public static $active = true;

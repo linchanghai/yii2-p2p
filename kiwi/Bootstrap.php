@@ -180,11 +180,11 @@ class Bootstrap extends Object implements BootstrapInterface
             $migrationDir = $moduleDir . '/migrations';
 
             if (!is_dir($migrationDir))
-                return;
+                continue;
 
             $migrationFiles = FileHelper::findFiles($migrationDir);
             if (!$migrationFiles)
-                return;
+                continue;
 
             $migrationVersions = array_map(function ($fileName) {
                 $fileName = end(explode(DIRECTORY_SEPARATOR, $fileName));
