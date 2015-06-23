@@ -13,6 +13,7 @@ use p2p\project\InterestHelper;
 use Yii;
 use kiwi\base\Model;
 use yii\base\Event;
+use yii\base\Exception;
 use yii\base\InvalidValueException;
 use yii\base\ModelEvent;
 
@@ -99,7 +100,8 @@ class ProjectInvestPrepareForm extends Model
         $invest->rate = $this->getProject()->interest_rate;
         $invest->invest_money = $this->money;
 
-        list($totalInterestMoney, $repayments) = InterestHelper::calculateInterest($this->money, $invest->rate, time(), $project->repayment_date, 20);
+        $InterestHelperClass = Kiwi::getInterestHelperClass();
+        list($totalInterestMoney, $repayments) = $InterestHelperClass::calculateInterest($this->money, $invest->rate, time(), $this->getProject()->repayment_date, 20);
 
         foreach ($repayments as $key => $repayment) {
             $repayments[$key] = Kiwi::getProjectRepayment([
@@ -128,13 +130,24 @@ class ProjectInvestPrepareForm extends Model
         $this->trigger(static::EVENT_AFTER_INVEST, $event);
     }
 
-    public function xxx()
+    public function useAnnual()
     {
         $class = Kiwi::getProjectInvestPrepareFormClass();
         Event::on($class, $class::EVENT_BEFORE_INVEST, function($event) {
             /** @var \p2p\project\forms\ProjectInvestPrepareForm $form */
             $form = $event->sender;
-            $form->getProject()->interest_rate + 0.1;
+            $form->getProject()->interest_rate += 0.1;
         });
+    }
+
+    public function saveInvest()
+    {
+        /** @var \p2p\project\models\ProjectInvest $invest */
+        $invest = $this->calculateInvest();
+        if($invest->save()) {
+            return true;
+        } else {
+            throw new Exception('Save invest fail !');
+        }
     }
 }

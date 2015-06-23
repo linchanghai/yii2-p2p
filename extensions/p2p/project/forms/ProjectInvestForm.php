@@ -8,15 +8,25 @@
 
 namespace p2p\project\forms;
 
+use kiwi\Kiwi;
 use Yii;
 use kiwi\base\Model;
+use yii\base\Event;
+use yii\base\Exception;
+use yii\base\ModelEvent;
 
 class ProjectInvestForm extends Model
 {
+    const EVENT_BEFORE_PAY_INVEST = 'beforePayInvest';
+    const EVENT_AFTER_PAY_INVEST = 'afterPayInvest';
+
     public $money;
     public $project_id;
     public $bonus_id;
     public $couponCash_id;
+
+    /** @var \p2p\project\models\Project */
+    protected $_invest;
 
     /**
      * @inheritdoc
@@ -42,10 +52,60 @@ class ProjectInvestForm extends Model
         ];
     }
 
-    public function invest()
+    public function payInvest()
     {
-        if($this->validate()) {
-            return true;
+        if(!$this->validate()) {
+            return false;
         }
+
+        if ($this->beforePayInvest()) {
+            $memberStatisticClass  = Kiwi::getMemberStatisticClass();
+            /** @var \core\member\models\MemberStatistic $memberStatistic */
+            $memberStatistic = $memberStatisticClass::findOne(['member_id' => Yii::$app->user->id]);
+            if($memberStatistic->account_money >= $this->money) {
+                $memberStatistic->account_money -= $this->money;
+                if(!$memberStatistic->save()) {
+                    throw new Exception('Save member statistic fail !');
+                }
+            } else {
+                throw new Exception('Account balance is insufficient !');
+            }
+            $this->afterPayInvest();
+        }
+
+        return true;
+    }
+
+    public function beforePayInvest()
+    {
+        $event = new ModelEvent();
+        $this->trigger(static::EVENT_BEFORE_PAY_INVEST, $event);
+        return $event->isValid;
+    }
+
+    public function afterPayInvest()
+    {
+        $event = new ModelEvent();
+        $this->trigger(static::EVENT_AFTER_PAY_INVEST, $event);
+    }
+
+    public function useBonus()
+    {
+        $class = Kiwi::getProjectInvestFormClass();
+        Event::on($class, $class::EVENT_BEFORE_PAY_INVEST, function($event) {
+            /** @var \p2p\project\forms\ProjectInvestForm $form */
+            $form = $event->sender;
+            $form->money -= 10;
+        });
+    }
+
+    public function useCash()
+    {
+        $class = Kiwi::getProjectInvestFormClass();
+        Event::on($class, $class::EVENT_BEFORE_PAY_INVEST, function($event) {
+            /** @var \p2p\project\forms\ProjectInvestForm $form */
+            $form = $event->sender;
+            $form->money -= 10;
+        });
     }
 }

@@ -6,7 +6,7 @@
  * Time: 20:35
  */
 
-namespace p2p\project;
+namespace p2p\project\helpers;
 
 
 use kiwi\helpers\ArrayHelper;

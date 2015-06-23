@@ -14,7 +14,7 @@ class ProjectInvestController extends Controller
         $InvestPrepareForm = Kiwi::getProjectInvestPrepareForm();
         if ($InvestPrepareForm->load(Yii::$app->request->post())) {
             $this->render('prepare', [
-                'InvestPrepareForm' => $InvestPrepareForm->calculateInvest(),
+                'InvestPrepareForm' => $InvestPrepareForm->getInvestInfo(),
             ]);
         } else {
             return $this->render('create', [
@@ -28,7 +28,21 @@ class ProjectInvestController extends Controller
         $InvestPrepareForm = Kiwi::getProjectInvestPrepareForm();
         if ($InvestPrepareForm->load(Yii::$app->request->post())) {
             $this->render('confirm', [
-                'InvestPrepareForm' => $InvestPrepareForm->calculateInvest(),
+                'InvestPrepareForm' => $InvestPrepareForm->getInvestInfo(),
+            ]);
+        } else {
+            return $this->render('create', [
+                'InvestPrepareForm' => $InvestPrepareForm,
+            ]);
+        }
+    }
+
+    public function actionSaveInvest()
+    {
+        $InvestPrepareForm = Kiwi::getProjectInvestPrepareForm();
+        if ($InvestPrepareForm->load(Yii::$app->request->post())) {
+            $this->render('confirm', [
+                'InvestPrepareForm' => $InvestPrepareForm->saveInvest(),
             ]);
         } else {
             return $this->render('create', [
@@ -41,7 +55,7 @@ class ProjectInvestController extends Controller
     {
         $InvestForm = Kiwi::getProjectInvestForm();
         if ($InvestForm->load(Yii::$app->request->post())) {
-            $InvestForm->invest();
+            $InvestForm->payInvest();
         }
     }
 } 
