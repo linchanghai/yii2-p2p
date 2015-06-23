@@ -12,6 +12,7 @@ use kiwi\Kiwi;
 use Yii;
 use yii\base\Component;
 use yii\base\InvalidValueException;
+use yii\helpers\Url;
 
 /**
  * Class BasePayment

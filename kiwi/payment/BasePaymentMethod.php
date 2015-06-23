@@ -9,7 +9,6 @@
 namespace kiwi\payment;
 
 use Yii;
-use yii\base\Component;
 
 /**
  * Class BasePaymentMethod
