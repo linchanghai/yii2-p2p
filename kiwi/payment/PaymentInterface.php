@@ -11,18 +11,15 @@ namespace kiwi\payment;
 interface PaymentInterface
 {
     /**
-     * @return string
-     */
-    public function generateId();
-
-    /**
+     * @param string $method
      * @param float $money
      */
-    public function pay($money);
+    public function pay($method, $money);
 
     /**
-     * @param $data
+     * @param string $method
+     * @param array $data
      * @return boolean true if the payment is success
      */
-    public function callback($data);
+    public function callback($method, $data);
 }

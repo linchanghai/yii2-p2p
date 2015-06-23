@@ -11,46 +11,45 @@ namespace kiwi\payment;
 use kiwi\Kiwi;
 use Yii;
 use yii\base\Component;
+use yii\base\InvalidValueException;
 
 /**
  * Class BasePayment
- *
- * @property int $id
- *
  * @package core\payment\services
  * @author Lujie.Zhou(lujie.zhou@jago-ag.cn)
  */
-abstract class BasePayment extends Component implements PaymentInterface
+class Payment extends Component implements PaymentInterface
 {
     const EVENT_BEFORE_PAY = 'beforePay';
     const EVENT_AFTER_PAY = 'afterPay';
     const EVENT_FINISH_PAY = 'finishPay';
 
-    public $useLocalPay;
+    public $useLocalPay = false;
 
-    public $requestUrl;
+    /** @var BasePaymentMethod */
+    protected $paymentMethod;
 
-    public $callbackUrl;
+    public $methods = [];
 
-    public $returnUrl;
+    public $callbackUrl = '';
 
-    private $_id;
-
-    public function getId()
+    public function setPaymentMethod($method)
     {
-        if (!$this->_id) {
-            $this->_id = $this->generateId();
+        if ($this->useLocalPay) {
+            $this->paymentMethod = Yii::createObject('kiwi\payment\LocalPay');
+            $this->paymentMethod->callbackUrl = Url::to([$this->callbackUrl, 'method' => $method]);
+        } else if (isset($this->methods[$method])) {
+            $this->paymentMethod = Yii::createObject($this->methods[$method]);
+            $this->paymentMethod->callbackUrl = Url::to([$this->callbackUrl, 'method' => $method]);
+        } else {
+            throw new InvalidValueException();
         }
-        return $this->_id;
     }
 
-    /**
-     * @return string generate the transaction no
-     */
-    abstract public function generateId();
-
-    public function pay($money)
+    public function pay($method, $money)
     {
+        $this->setPaymentMethod($method);
+
         if (!$this->beforePay($money)) {
             return false;
         }
@@ -62,17 +61,19 @@ abstract class BasePayment extends Component implements PaymentInterface
         $this->afterPay($money);
     }
 
-    public function callback($data)
+    public function callback($method, $data)
     {
-        $isError = !$this->validateCallbackData($data);
-        $isSuccessful = !$isError && $this->validatePaymentStatus($data);
-        $transactionId = $this->getCallbackId($data);
+        $this->setPaymentMethod($method);
+
+        $isError = !$this->paymentMethod->validateCallbackData($data);
+        $isSuccessful = !$isError && $this->paymentMethod->validatePaymentStatus($data);
+        $transactionId = $this->paymentMethod->getCallbackId($data);
         $this->finishPay($data, $transactionId, $isSuccessful, $isError);
     }
 
     protected function sendPaymentRequest($money)
     {
-        $this->renderRequestForm($this->prepareRequestData($money));
+        $this->renderRequestForm($this->paymentMethod->prepareRequestData($money));
         return true;
     }
 
@@ -83,35 +84,11 @@ abstract class BasePayment extends Component implements PaymentInterface
         Yii::$app->response->send();
     }
 
-    /**
-     * @param $money
-     * @return array
-     */
-    abstract protected function prepareRequestData($money);
-
-    /**
-     * @param $data
-     * @return bool check if the signature data is correct
-     */
-    abstract protected function validateCallbackData($data);
-
-    /**
-     * @param $data
-     * @return bool check if the payment is successful
-     */
-    abstract protected function validatePaymentStatus($data);
-
-    /**
-     * @param $data
-     * @return string the transaction id
-     */
-    abstract protected function getCallbackId($data);
-
     public function beforePay($money)
     {
         $event = new PaymentEvent();
         $event->money = $money;
-        $event->transactionId = $this->getId();
+        $event->transactionId = $this->paymentMethod->getId();
         $this->trigger(self::EVENT_BEFORE_PAY, $event);
         return $event->isValid;
     }
@@ -120,7 +97,7 @@ abstract class BasePayment extends Component implements PaymentInterface
     {
         $event = new PaymentEvent();
         $event->money = $money;
-        $event->transactionId = $this->getId();
+        $event->transactionId = $this->paymentMethod->getId();
         $this->trigger(self::EVENT_AFTER_PAY, $event);
     }
 

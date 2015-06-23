@@ -8,9 +8,9 @@
 namespace core\payment\services;
 
 
-use kiwi\payment\BasePayment;
+use kiwi\payment\BasePaymentMethod;
 
-class Sumapay extends BasePayment
+class Sumapay extends BasePaymentMethod
 {
     public $requestUrl = 'https://www.sumapay.com/sumapay/unitivepay_bankPayForNoLoginUser';
 
@@ -86,7 +86,7 @@ class Sumapay extends BasePayment
     /**
      * @inheritdoc
      */
-    protected function validateCallbackData($data)
+    public function validateCallbackData($data)
     {
         $signStr = $this->getCallbackSignature($data);
         return isset($data['resultSignature']) && strtoupper($data['resultSignature']) == strtoupper($signStr);
@@ -95,7 +95,7 @@ class Sumapay extends BasePayment
     /**
      * @inheritdoc
      */
-    protected function validatePaymentStatus($data)
+    public function validatePaymentStatus($data)
     {
         return isset($data['requestId']) && isset($data['payId']);
     }
@@ -103,7 +103,7 @@ class Sumapay extends BasePayment
     /**
      * @inheritdoc
      */
-    protected function getCallbackId($data)
+    public function getCallbackId($data)
     {
         return isset($data['requestId']) ? $data['requestId'] : false;
     }

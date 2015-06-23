@@ -8,9 +8,9 @@
 namespace core\payment\services;
 
 
-use kiwi\payment\BasePayment;
+use kiwi\payment\BasePaymentMethod;
 
-class Baofoo extends BasePayment
+class Baofoo extends BasePaymentMethod
 {
     public $requestUrl = 'http://gw.baofoo.com/payindex';
 
@@ -50,7 +50,7 @@ class Baofoo extends BasePayment
         return $requestData;
     }
 
-    protected function getRequestSignature($data)
+    public function getRequestSignature($data)
     {
         $md5 = '';
         $signKeys = ["MemberID", "PayID", "TradeDate", "TransID", "OrderMoney", "PageUrl", "ReturnUrl", "NoticeType"];
@@ -64,7 +64,7 @@ class Baofoo extends BasePayment
         return $md5;
     }
 
-    protected function getCallbackSignature($data)
+    public function getCallbackSignature($data)
     {
         $md5 = '';
         $signKeys = ["MemberID", "TerminalID", "TransID", "Result", "ResultDesc", "FactMoney", "AdditionalInfo", 'SuccTime'];
@@ -81,7 +81,7 @@ class Baofoo extends BasePayment
     /**
      * @inheritdoc
      */
-    protected function validateCallbackData($data)
+    public function validateCallbackData($data)
     {
         $signStr = $this->getCallbackSignature($data);
         return isset($data['Md5Sign']) && strtoupper($data['Md5Sign']) == strtoupper($signStr);
@@ -90,7 +90,7 @@ class Baofoo extends BasePayment
     /**
      * @inheritdoc
      */
-    protected function validatePaymentStatus($data)
+    public function validatePaymentStatus($data)
     {
         return isset($data['Result']) && $data['status'] == 1;
     }
@@ -98,7 +98,7 @@ class Baofoo extends BasePayment
     /**
      * @inheritdoc
      */
-    protected function getCallbackId($data)
+    public function getCallbackId($data)
     {
         return isset($data['TransID']) ? $data['TransID'] : false;
     }
