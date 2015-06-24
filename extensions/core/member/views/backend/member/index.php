@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'export' => false,
         'responsive' => true,
-        'toolbar' => Html::a(Yii::t('core_member', 'Create Member'), ['create'], ['class' => 'btn btn-info']),
+        'toolbar' => false, //Html::a(Yii::t('core_member', 'Create Member'), ['create'], ['class' => 'btn btn-info']),
         'containerOptions' => ['style' => 'overflow: auto'], // only set when $responsive = false
         'headerRowOptions' => ['class' => 'kartik-sheet-style'],
         'filterRowOptions' => ['class' => 'kartik-sheet-style'],
