@@ -24,31 +24,21 @@ class RechargeForm extends Model
 
     public function pay()
     {
-        $this->setPaymentMethod();
-        /** @var \kiwi\payment\BasePayment $recharge */
-        $recharge = Yii::$app->payment;
-        $recharge->on($recharge::EVENT_BEFORE_PAY, [$this, 'beforePay']);
-        $recharge->pay($this->money);
-    }
-
-    public function setPaymentMethod()
-    {
-        if (empty($this->rechargeConfig[$this->method])) {
-            throw new InvalidValueException(Yii::t('p2p_recharge', 'Error recharge method'));
-        }
-        $rechargeConfig = $this->rechargeConfig[$this->method];
-        Yii::$app->setComponents(['recharge' => $rechargeConfig]);
+        /** @var \kiwi\payment\Payment $payment */
+        $payment = Yii::$app->payment;
+        $payment->on($payment::EVENT_BEFORE_PAY, [$this, 'createRechargeRecord']);
+        $payment->pay($this->method, $this->money);
     }
 
     /**
      * @param \kiwi\payment\PaymentEvent $event
      */
-    public function beforePay($event)
+    public function createRechargeRecord($event)
     {
         $recharge = Kiwi::getRechargeRecord([
             'transaction_id' => $event->transactionId,
             'recharge_type' => $this->method,
-            'money' => $this->money,
+            'money' => $event->money,
             'member_id' => Yii::$app->user->id,
         ]);
         if (!$recharge->save()) {
