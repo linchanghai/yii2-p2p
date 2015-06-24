@@ -9,7 +9,6 @@
 namespace p2p\project\forms;
 
 use kiwi\Kiwi;
-use p2p\project\InterestHelper;
 use Yii;
 use kiwi\base\Model;
 use yii\base\Event;
