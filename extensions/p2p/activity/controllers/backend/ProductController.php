@@ -4,8 +4,8 @@ namespace p2p\activity\controllers\backend;
 
 use Yii;
 use p2p\activity\models\ProductMap;
-use yii\data\ActiveDataProvider;
-use kiwi\web\Controller;
+use p2p\activity\searches\ProductMapSearch;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -32,11 +32,11 @@ class ProductController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => ProductMap::find(),
-        ]);
+        $searchModel = new ProductMapSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
