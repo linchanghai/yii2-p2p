@@ -2,6 +2,7 @@
 
 namespace p2p\activity\controllers\backend;
 
+use kiwi\Kiwi;
 use Yii;
 use p2p\activity\models\ProductMap;
 use p2p\activity\searches\ProductMapSearch;
@@ -32,7 +33,7 @@ class ProductController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ProductMapSearch();
+        $searchModel = Kiwi::getProductMapSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -60,7 +61,7 @@ class ProductController extends Controller
      */
     public function actionCreate()
     {
-        $model = new ProductMap();
+        $model = Kiwi::getProductMap();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->product_map_id]);
@@ -112,7 +113,8 @@ class ProductController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = ProductMap::findOne($id)) !== null) {
+        $ProductMapClass = Kiwi::getProductMapClass();
+        if (($model = $ProductMapClass::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

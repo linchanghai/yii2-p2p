@@ -2,7 +2,10 @@
 
 namespace core\member\models;
 
+use kiwi\Kiwi;
+use p2p\activity\models\ProductMap;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%member_coupon}}".
@@ -22,6 +25,9 @@ use Yii;
  */
 class MemberCoupon extends \kiwi\db\ActiveRecord
 {
+
+    const STATUS_USED = 1;
+
     /**
      * @inheritdoc
      */
@@ -68,5 +74,32 @@ class MemberCoupon extends \kiwi\db\ActiveRecord
     public function getMember()
     {
         return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
+    }
+
+    public function exchangeCoupon(ProductMap $productMap){
+        /**@var $memberStatisticModel MemberStatistic **/
+        $memberStatisticModel = Kiwi::getMemberCoupon()->findOne(Yii::$app->user->id);
+        if($productMap->exchange_points <= $memberStatisticModel->points){
+            $this->member_id = Yii::$app->user->id;
+            $this->type = $productMap->type;
+            $this->value = $productMap->exchange_value;
+            $this->expire_date = $productMap->duration;
+            $this->value = $productMap->exchange_value;
+            if($this->save()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function behaviors()
+    {
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => 'update_time',
+            ],
+        ];
     }
 }

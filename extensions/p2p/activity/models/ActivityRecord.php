@@ -70,4 +70,5 @@ class ActivityRecord extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
     }
+
 }
