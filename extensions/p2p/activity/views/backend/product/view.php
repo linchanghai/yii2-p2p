@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'type',
             'exchange_value',
             'exchange_points',
-            'vaild_date',
+            'duration',
             'create_time:datetime',
             'update_time:datetime',
             'is_delete',

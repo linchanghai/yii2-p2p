@@ -2,8 +2,9 @@
 
 namespace p2p\activity\models;
 
+use kiwi\Kiwi;
 use Yii;
-
+use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "product_map".
  *
@@ -18,8 +19,20 @@ use Yii;
  *
  * @property ExchangeRecord[] $exchangeRecords
  */
-class ProductMap extends \yii\db\ActiveRecord
+class ProductMap extends \kiwi\db\ActiveRecord
 {
+    const CouponBonus = 1;
+    const CouponCash = 2;
+    const CouponAnnual = 3;
+
+    public function getTypeArray(){
+        return [
+            self::CouponBonus => Yii::t('p2p_activity', 'Coupon Bonus'),
+            self::CouponCash => Yii::t('p2p_activity', 'Coupon Cash'),
+            self::CouponAnnual => Yii::t('p2p_activity', 'Coupon Annual'),
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -34,8 +47,8 @@ class ProductMap extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_map_id', 'type', 'exchange_value', 'exchange_points', 'create_time'], 'required'],
-            [['product_map_id', 'type', 'exchange_points', 'duration', 'create_time', 'update_time', 'is_delete'], 'integer'],
+            [[ 'type', 'exchange_value', 'exchange_points'], 'required'],
+            [[ 'type', 'exchange_points', 'duration', 'create_time', 'update_time', 'is_delete'], 'integer'],
             [['exchange_value'], 'string', 'max' => 20]
         ];
     }
@@ -63,5 +76,16 @@ class ProductMap extends \yii\db\ActiveRecord
     public function getExchangeRecords()
     {
         return $this->hasMany(ExchangeRecord::className(), ['product_map_id' => 'product_map_id']);
+    }
+
+    public function behaviors()
+    {
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => 'update_time',
+            ],
+        ];
     }
 }

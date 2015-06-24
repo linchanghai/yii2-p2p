@@ -17,19 +17,13 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    '请不要关闭页面，支付跳转中.....' => '',
-    'MD5密钥' => '@@@@',
-    '丰付' => '@@@@',
-    '充值手续费' => '@@@@',
-    '否' => '@@@@',
-    '商户号' => '@@@@',
-    '商户证书' => '@@@@',
-    '宝付' => '@@@@',
-    '支付密钥' => '@@@@',
-    '是' => '@@@@',
-    '是否启用' => '@@@@',
-    '汇潮支付' => '@@@@',
-    '线上支付接口管理' => '@@@@',
-    '终端号' => '@@@@',
-    '网银在线' => '@@@@',
+    'Create Time' => '',
+    'Daily Interest' => '',
+    'Exchange Cash' => '',
+    'Is Delete' => '',
+    'Member ID' => '',
+    'Package Interest Record ID' => '',
+    'Package Record ID' => '',
+    'Target Date' => '',
+    'Type' => '',
 ];
