@@ -2,6 +2,7 @@
 
 namespace p2p\activity\models;
 
+use p2p\activity\behaviors\RecordBehavior;
 use Yii;
 
 /**
@@ -68,5 +69,12 @@ class ExchangeRecord extends \yii\db\ActiveRecord
     public function getProductMap()
     {
         return $this->hasOne(ProductMap::className(), ['product_map_id' => 'product_map_id']);
+    }
+
+    public function behaviors()
+    {
+        return [
+            'coupon' => RecordBehavior::className(),
+        ];
     }
 }
