@@ -1,22 +1,31 @@
-<?php
-/* @var $this yii\web\View */
-$this->title = 'My Yii Application';
-?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Examples</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link href="css/style.min.css" rel="stylesheet" />
+    <link href="css/index.min.css" rel="stylesheet" />
+</head>
+<body>
+<?php include "header.php" ;?>
 <div class="banner">
     <ul id="banner">
         <li>
-            <a href="#"><img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/banner1.jpg" alt=""/></a>
+            <a href="#"><img src="images/static/banner1.jpg" alt=""/></a>
         </li>
         <li>
-            <a href="#"><img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/banner2.jpg" alt=""/></a>
+            <a href="#"><img src="images/static/banner2.jpg" alt=""/></a>
         </li>
         <li>
-            <a href="#"><img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/banner3.jpg" alt=""/></a>
+            <a href="#"><img src="images/static/banner3.jpg" alt=""/></a>
         </li>
     </ul>
     <div class="bannerLayer">
         <p class="fs20">
-            钻点预期年化收益率
+             钻点预期年化收益率
         </p>
         <p class="mt10">
             最高可达 <span class="themeColor fs30">16%</span>
@@ -45,7 +54,7 @@ $this->title = 'My Yii Application';
         </div>
     </div>
     <div class="fl halfArea backGrey textCenter indexIconArea walletArea">
-        <img class="disib verB" width="45" height="66" src="<?= Yii::$app->urlManager->baseUrl ?>/images/wallet.png" alt=""/>
+        <img class="disib verB" width="45" height="66" src="images/wallet.png" alt=""/>
         <div class="disib ml20 textLeft fs18">
             <a class="themeColor disb" href="#">钻点钱包</a>
             <a class="themeColor disb mt10" href="#">查看详情 > </a>
@@ -56,7 +65,7 @@ $this->title = 'My Yii Application';
     <div class="fl indexPro">
         <div class="clearFix mt20 indexProduct">
             <div class="fl textCenter secondBack colorWhite indexProductBrief">
-                <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/indexPro1.png" width="42" height="73" alt="" />
+                <img src="images/indexPro1.png" width="42" height="73" alt="" />
                 <p class="mt20">长期项目</p>
             </div>
             <div class="fl backGrey pt20 indexProWrap">
@@ -94,7 +103,7 @@ $this->title = 'My Yii Application';
         </div>
         <div class="clearFix mt20 indexProduct">
             <div class="fl textCenter secondBack colorWhite indexProductBrief">
-                <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/indexPro2.png" width="97" height="73" alt="" />
+                <img src="images/indexPro2.png" width="97" height="73" alt="" />
                 <p class="mt20">长期项目</p>
             </div>
             <div class="fl backGrey pt20 indexProWrap">
@@ -132,7 +141,7 @@ $this->title = 'My Yii Application';
         </div>
         <div class="clearFix mt20 indexProduct">
             <div class="fl textCenter secondBack colorWhite indexProductBrief">
-                <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/indexPro3.png" width="64" height="72" alt="" />
+                <img src="images/indexPro3.png" width="64" height="72" alt="" />
                 <p class="mt20">转让项目</p>
             </div>
             <div class="fl backGrey pt20 indexProWrap">
@@ -207,7 +216,7 @@ $this->title = 'My Yii Application';
             </div>
         </div>
         <div class="mt20 siteItem textCenter siteItemLast">
-            <a href="#"><img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/200_100.png" alt=""/></a>
+            <a href="#"><img src="images/static/200_100.png" alt=""/></a>
             <a class="mt20 fs16 disb themeColor" href="#">活动专场</a>
         </div>
     </div>
@@ -250,22 +259,26 @@ $this->title = 'My Yii Application';
     </div>
     <div class="cooperateMate">
         <a href="#" class="cooperateMateItem">
-            <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/c1.png" alt=""/>
+            <img src="images/static/c1.png" alt=""/>
         </a>
         <a href="#" class="cooperateMateItem">
-            <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/c2.png" alt=""/>
+            <img src="images/static/c2.png" alt=""/>
         </a>
         <a href="#" class="cooperateMateItem">
-            <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/c3.png" alt=""/>
+            <img src="images/static/c3.png" alt=""/>
         </a>
         <a href="#" class="cooperateMateItem">
-            <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/c1.png" alt=""/>
+            <img src="images/static/c1.png" alt=""/>
         </a>
         <a href="#" class="cooperateMateItem">
-            <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/c2.png" alt=""/>
+            <img src="images/static/c2.png" alt=""/>
         </a>
         <a href="#" class="cooperateMateItem">
-            <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/c3.png" alt=""/>
+            <img src="images/static/c3.png" alt=""/>
         </a>
     </div>
 </div>
+<?php include "footer.php" ;?>
+<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>
