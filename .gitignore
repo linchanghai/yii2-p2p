@@ -32,3 +32,5 @@ phpunit.phar
 #frontend
 gulpfile.js
 node_modules
+
+.sass-cache
