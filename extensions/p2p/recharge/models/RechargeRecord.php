@@ -4,6 +4,7 @@ namespace p2p\recharge\models;
 
 use kiwi\Kiwi;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%recharge_record}}".
@@ -24,6 +25,7 @@ use Yii;
  */
 class RechargeRecord extends \kiwi\db\ActiveRecord
 {
+    const STATUS_PAYING = 0;
     const STATUS_SUCCESS = 1;
     const STATUS_FAIL = 2;
     const STATUS_ERROR = 3;
@@ -42,8 +44,8 @@ class RechargeRecord extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['member_id', 'transaction_id', 'money', 'recharge_type', 'create_time'], 'required'],
-            [['member_id', 'project_invest_id', 'recharge_type', 'status', 'create_time', 'update_time', 'is_delete'], 'integer'],
+            [['transaction_id', 'money', 'recharge_type'], 'required'],
+            [['project_invest_id', 'recharge_type', 'status'], 'integer'],
             [['money'], 'number'],
             [['transaction_id'], 'string', 'max' => 100],
             [['use_for'], 'string', 'max' => 100]
@@ -85,5 +87,16 @@ class RechargeRecord extends \kiwi\db\ActiveRecord
     public static function findByTransactionId($transactionId)
     {
         return static::findOne(['transaction_id' => $transactionId]);
+    }
+
+    public function behaviors()
+    {
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => 'update_time',
+            ],
+        ];
     }
 }

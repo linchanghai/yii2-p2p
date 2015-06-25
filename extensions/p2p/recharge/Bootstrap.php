@@ -12,6 +12,8 @@ use kiwi\Kiwi;
 use kiwi\payment\BasePayment;
 use kiwi\payment\PaymentEvent;
 use yii\base\BootstrapInterface;
+use yii\base\Exception;
+use yii\helpers\Json;
 
 class Bootstrap implements BootstrapInterface
 {
@@ -27,6 +29,7 @@ class Bootstrap implements BootstrapInterface
 
     /**
      * @param \kiwi\payment\PaymentEvent $event
+     * @throws Exception
      */
     public function finishPay($event)
     {
@@ -41,6 +44,8 @@ class Bootstrap implements BootstrapInterface
                 $rechargeRecord->status = $rechargeRecord::STATUS_FAIL;
             }
         }
-        $rechargeRecord->save();
+        if (!$rechargeRecord->save()) {
+            throw new Exception('Update recharge record error: ' . Json::encode($rechargeRecord->getErrors()));
+        }
     }
 } 
