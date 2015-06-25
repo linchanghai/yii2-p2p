@@ -14,7 +14,7 @@ class ActivityController extends Controller
     public function actionCouponExchange($id){
         $ProductMapClass = Kiwi::getProductMapClass();
         if (($model = $ProductMapClass::findOne($id)) !== null) {
-            if(Kiwi::getMemberCoupon()->exchangeCoupon($model)) {
+            if(Kiwi::getExchangeRecord(['product_map_id'=>$id,'member_id'=>Yii::$app->user->id])->save()) {
                 return json_encode('success');
             }
         }
