@@ -25,6 +25,8 @@ class Bootstrap implements BootstrapInterface
     public function attachEvents($app)
     {
         PaymentEvent::on(Payment::className(), Payment::EVENT_FINISH_PAY, [$this, 'updateRechargeRecord']);
+        PaymentEvent::on(Payment::className(), Payment::EVENT_FINISH_PAY, [$this, 'updateAccountMoney']);
+        PaymentEvent::on(Payment::className(), Payment::EVENT_FINISH_PAY, [$this, 'continuePay']);
     }
 
     /**
@@ -55,6 +57,10 @@ class Bootstrap implements BootstrapInterface
      */
     public function updateAccountMoney($event)
     {
+        if (!$event->isSuccessful) {
+            return;
+        }
+
         $rechargeRecordClass = Kiwi::getRechargeRecordClass();
         $rechargeRecord = $rechargeRecordClass::findByTransactionId($event->transactionId);
 
@@ -65,6 +71,26 @@ class Bootstrap implements BootstrapInterface
         $changeRecord->link_id = $rechargeRecord->recharge_record_id;
         if (!$rechargeRecord->save()) {
             throw new Exception('Update account money error: ' . Json::encode($rechargeRecord->getErrors()));
+        }
+    }
+
+    /**
+     * @param \kiwi\payment\PaymentEvent $event
+     */
+    public function continuePay($event)
+    {
+        if (!$event->isSuccessful) {
+            return;
+        }
+
+        $rechargeRecordClass = Kiwi::getRechargeRecordClass();
+        $rechargeRecord = $rechargeRecordClass::findByTransactionId($event->transactionId);
+
+        switch($rechargeRecord->use_for_type) {
+            case $rechargeRecord::USE_FOR_TYPE_INVEST:
+                break;
+            case $rechargeRecord::USE_FOR_TYPE_TO_PACKAGE:
+                break;
         }
     }
 } 

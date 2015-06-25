@@ -21,6 +21,16 @@ use Yii;
 class StatisticChangeRecord extends \kiwi\db\ActiveRecord
 {
     const TYPE_RECHARGE = 1;
+    const TYPE_INVEST = 2;
+    const TYPE_ACCOUNT_TO_PACKAGE = 3;
+    const TYPE_PACKAGE_FROM_ACCOUNT = 4;
+    const TYPE_PACKAGE_TO_ACCOUNT = 5;
+    const TYPE_ACCOUNT_FROM_PACKAGE = 6;
+    const TYPE_WITHDRAW_ACCOUNT_TO_FREEZON = 7;
+    const TYPE_WITHDRAW_FREEZON_FROM_ACCOUNT = 8;
+    const TYPE_WITHDRAW_FORBIDDEN_FREEZON_TO_ACCOUNT = 9;
+    const TYPE_WITHDRAW_FORBIDDEN_ACCOUNT_FROM_FREEZON = 10;
+    const TYPE_WITHDRAW_SUCCESS = 11;
 
     /**
      * @inheritdoc
