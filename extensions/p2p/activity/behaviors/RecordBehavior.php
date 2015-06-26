@@ -23,9 +23,7 @@ class RecordBehavior extends Behavior
     public $attributes = [
         'type' => 'ProductMap.type',
         'value' => 'ProductMap.exchange_value',
-//        'expire_date' => function() {
-//            return time() + 'ProductMap.duration'
-//        },
+        'expire_date' => 'ProductMap.duration + time()',
     ];
 
     public function events()
@@ -35,14 +33,23 @@ class RecordBehavior extends Behavior
         ];
     }
 
-    public function createRecord()
+    public function createRecord($event)
     {
+        $eventModel = $event->sender;
+        $model = '';
         $this->target = Yii::createObject($this->targetClass);
-
-
+        foreach ($this->attributes as $key => $value) {
+            $tmp = explode('.', $value);
+            if (count($tmp) > 1) {
+                if(!$model){
+                    $model = $eventModel->$tmp[0];
+                }
+                $this->target->key = $model->$tmp[1];
+            }
+        }
 
         if (!$this->target->save()) {
             throw new Exception('Save target error: ' . Json::encode($this->target));
         }
     }
-} 
+}

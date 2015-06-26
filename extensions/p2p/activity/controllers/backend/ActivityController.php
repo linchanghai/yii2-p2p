@@ -2,18 +2,17 @@
 
 namespace p2p\activity\controllers\backend;
 
-use kiwi\Kiwi;
 use Yii;
-use p2p\activity\models\ProductMap;
-use p2p\activity\searches\ProductMapSearch;
-use yii\web\Controller;
+use p2p\activity\models\Activity;
+use p2p\activity\searches\ActivitySearch;
+use kiwi\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ProductController implements the CRUD actions for ProductMap model.
+ * ActivityController implements the CRUD actions for Activity model.
  */
-class ProductController extends Controller
+class ActivityController extends Controller
 {
     public function behaviors()
     {
@@ -28,12 +27,12 @@ class ProductController extends Controller
     }
 
     /**
-     * Lists all ProductMap models.
+     * Lists all Activity models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = Kiwi::getProductMapSearch();
+        $searchModel = new ActivitySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -43,7 +42,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Displays a single ProductMap model.
+     * Displays a single Activity model.
      * @param integer $id
      * @return mixed
      */
@@ -55,16 +54,16 @@ class ProductController extends Controller
     }
 
     /**
-     * Creates a new ProductMap model.
+     * Creates a new Activity model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = Kiwi::getProductMap();
+        $model = new Activity();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->product_map_id]);
+            return $this->redirect(['view', 'id' => $model->activity_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -73,7 +72,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Updates an existing ProductMap model.
+     * Updates an existing Activity model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -83,7 +82,7 @@ class ProductController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->product_map_id]);
+            return $this->redirect(['view', 'id' => $model->activity_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -92,7 +91,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Deletes an existing ProductMap model.
+     * Deletes an existing Activity model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -105,16 +104,15 @@ class ProductController extends Controller
     }
 
     /**
-     * Finds the ProductMap model based on its primary key value.
+     * Finds the Activity model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ProductMap the loaded model
+     * @return Activity the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        $ProductMapClass = Kiwi::getProductMapClass();
-        if (($model = $ProductMapClass::findOne($id)) !== null) {
+        if (($model = Activity::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
