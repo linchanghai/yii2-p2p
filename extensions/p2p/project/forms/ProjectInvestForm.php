@@ -104,6 +104,20 @@ class ProjectInvestForm extends Model
         });
     }
 
+    public function updateProject()
+    {
+        $class = Kiwi::getProjectInvestFormClass();
+        Event::on($class, $class::EVENT_AFTER_PAY_INVEST, function ($event) {
+            /** @var \p2p\project\forms\ProjectInvestForm $form */
+            $form = $event->sender;
+            /** @var \p2p\project\models\ProjectInvest $invest */
+            $invest = Kiwi::getProjectInvest()->findOne($form->invest_id);
+            $project = $invest->project;
+            $project->invested_money += $form->money;
+            $project->save();
+        });
+    }
+
     public function useBonus()
     {
         $class = Kiwi::getProjectInvestFormClass();

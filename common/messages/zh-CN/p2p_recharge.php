@@ -18,7 +18,6 @@
  */
 return [
     'Create Time' => '',
-    'Error recharge method' => '',
     'Is Delete' => '',
     'Member ID' => '',
     'Money' => '',
@@ -29,4 +28,5 @@ return [
     'Transaction ID' => '',
     'Update Time' => '',
     'Use For' => '',
+    'Error recharge method' => '@@@@',
 ];
