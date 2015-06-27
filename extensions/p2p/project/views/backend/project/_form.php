@@ -1,5 +1,6 @@
 <?php
 
+use kiwi\Kiwi;
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use yii\bootstrap\Tabs;
@@ -19,6 +20,10 @@ if(isset($model->repayment_date) && isset($model->release_date)) {
 } else {
     $repayment_date = date('Y-m-d H:i', time());
     $release_date = date('Y-m-d H:i', time());
+}
+$projectClass = Kiwi::getProjectClass();
+if(!isset($model->status)) {
+    $model->status = $projectClass::PROJECT_STATUS_PENDING;
 }
 ?>
 <div class="project-form">
@@ -54,7 +59,7 @@ if(isset($model->repayment_date) && isset($model->release_date)) {
             'autoclose'=>true,
         ]
     ]);
-    $fields[] = $form->field($model, 'project_type')->textInput(['maxlength' => 255]);
+    $fields[] = $form->field($model, 'project_type')->dropDownList(Kiwi::getDataListModel()->projectType);
     $fields[] = $form->field($model, 'invested_money')->textInput([
         'value' => $model->invested_money ? $model->invested_money : 0,
         'disabled' => 'disabled'
@@ -70,7 +75,10 @@ if(isset($model->repayment_date) && isset($model->release_date)) {
 //        ]
 //    ]);
     $fields[] = $form->field($model, 'min_money')->textInput(['maxlength' => 255]);
-    $fields[] = $form->field($model, 'status')->dropDownList([0 => '待审核'],  ['disabled' => 'disabled']);
+    $fields[] = $form->field($model, 'status')->textInput([
+        'value' => Kiwi::getDataListModel()->projectStatus[$model->status],
+        'disabled' => 'disabled'
+    ]);
     $fieldGroups[] = ['label' => Yii::t('p2p_project','Project Base Info'), 'content' => implode('', $fields)];
 
     $fields = ['<br />'];

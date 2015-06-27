@@ -32,6 +32,13 @@ use yii\behaviors\TimestampBehavior;
  */
 class Project extends \kiwi\db\ActiveRecord
 {
+    const PROJECT_TYPE_NORMAL = 0;
+    const PROJECT_TYPE_TRANSFER = 1;
+
+    const PROJECT_STATUS_PENDING = 0;
+    const PROJECT_STATUS_PASSED = 1;
+    const PROJECT_STATUS_FAIlED = 2;
+
     use ProjectTrait;
 
     public static $enableLogicDelete = true;
