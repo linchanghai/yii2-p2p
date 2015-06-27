@@ -21,7 +21,8 @@ class BindMEForm extends Model
     public function rules()
     {
         return [
-
+            ['email', 'email'],
+            ['mobile', 'integer']
         ];
     }
 
@@ -35,9 +36,9 @@ class BindMEForm extends Model
         if ($memberModel) {
             $memberModel->email_verify_token = Yii::$app->security->generateRandomString() . '_' . time();
             $memberStatusModel = $memberModel->memberStatus;
-            if($memberStatusModel->email_status){
+            if ($memberStatusModel->email_status) {
                 $email = $memberModel->email;
-            }else{
+            } else {
                 $email = $this->email;
             }
             if ($memberModel->save()) {
@@ -61,7 +62,7 @@ class BindMEForm extends Model
                 if ($memberStatusModel->save()) {
                     return true;
                 }
-            }else{
+            } else {
                 $memberStatusModel->email_status = 0;
                 if ($memberStatusModel->save()) {
                     return true;
