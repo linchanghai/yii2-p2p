@@ -3,6 +3,7 @@
 namespace core\member\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%member_bank}}".
@@ -37,13 +38,14 @@ class MemberBank extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['member_id', 'bank_name', 'card_no', 'bank_user_name', 'province', 'city', 'branch_name', 'create_time'], 'required'],
+            [['member_id', 'bank_name', 'card_no', 'bank_user_name', 'province', 'city', 'branch_name'], 'required'],
             [['member_id', 'create_time', 'update_time', 'is_delete'], 'integer'],
             [['bank_name'], 'string', 'max' => 30],
             [['card_no'], 'string', 'max' => 25],
             [['bank_user_name'], 'string', 'max' => 10],
             [['province', 'city'], 'string', 'max' => 20],
-            [['branch_name'], 'string', 'max' => 60]
+            [['branch_name'], 'string', 'max' => 60],
+            ['member_id','unique ']
         ];
     }
 
@@ -73,5 +75,16 @@ class MemberBank extends \kiwi\db\ActiveRecord
     public function getMember()
     {
         return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
+    }
+
+    public function behaviors()
+    {
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => 'update_time',
+            ],
+        ];
     }
 }
