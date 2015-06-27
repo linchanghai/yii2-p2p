@@ -3,7 +3,9 @@
 namespace core\member\models;
 
 use kiwi\behaviors\ChangeLogBehavior;
+use kiwi\Kiwi;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%statistic_change_record}}".
@@ -24,12 +26,17 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
     const TYPE_RECHARGE = 1;
     const TYPE_INVEST = 2;
     const TYPE_ACCOUNT_TO_PACKAGE = 3;
-    const TYPE_PACKAGE_TO_ACCOUNT = 5;
-    const TYPE_WITHDRAW_APPLY = 7;
+    const TYPE_PACKAGE_TO_ACCOUNT = 4;
+    const TYPE_PACKAGE_INTEREST = 5;
+    const TYPE_WITHDRAW_APPLY = 6;
+    const TYPE_WITHDRAW_FORBIDDEN = 7;
     const TYPE_WITHDRAW_SUCCESS = 8;
     const TYPE_WITHDRAW_FAIL = 9;
-    const TYPE_WITHDRAW_FORBIDDEN = 10;
+
     const TYPE_INVEST_EMPIRICAL = 11;
+    const TYPE_USER_POINT_REGISTER = 12;
+
+    public $types = [];
 
     /**
      * @inheritdoc
@@ -45,9 +52,11 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['member_id', 'type', 'value', 'result', 'link_id', 'note', 'create_time'], 'required'],
-            [['member_id', 'type', 'link_id', 'create_time', 'is_delete'], 'integer'],
+            ['note', 'default', 'value' => ''],
+            [['member_id', 'type', 'attribute', 'value', 'result', 'link_id'], 'required'],
+            [['member_id', 'type', 'link_id'], 'integer'],
             [['value', 'result'], 'number'],
+            [['attribute'], 'string', 'max' => 40],
             [['note'], 'string', 'max' => 255]
         ];
     }
@@ -60,6 +69,7 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
         return [
             'statistic_change_record_id' => Yii::t('core_member', 'Statistic Change Record ID'),
             'member_id' => Yii::t('core_member', 'Member ID'),
+            'attribute' => Yii::t('core_member', 'Attribute'),
             'type' => Yii::t('core_member', 'Type'),
             'value' => Yii::t('core_member', 'Value'),
             'result' => Yii::t('core_member', 'Result'),
@@ -73,21 +83,35 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
     public function behaviors()
     {
         return [
-            'changeLog' => [
-                'class' => ChangeLogBehavior::className(),
-                'types' => [
-                    static::TYPE_RECHARGE => [
-                        'class' => 'core\member\models\MemberStatistic',
-                        'attribute' => 'account_money',
-                        'condition' => ['member_id' => $this->member_id],
-                    ],
-                    static::TYPE_INVEST_EMPIRICAL => [
-                        'class' => 'core\member\models\MemberStatistic',
-                        'attribute' => 'empirical_value',
-                        'condition' => ['member_id' => $this->member_id],
-                    ]
-                ],
-            ],
+            'changeLog' => $this->getChangeLogBehaviorConfig($this->type),
         ];
+    }
+
+    public function getChangeLogBehaviorConfig($type)
+    {
+        $types = [
+            static::TYPE_ACCOUNT_TO_PACKAGE => [
+                'class' => Kiwi::getMemberStatisticClass(),
+                'attribute' => $this->attribute,
+                'condition' => ['member_id' => $this->member_id],
+            ],
+            static::TYPE_PACKAGE_TO_ACCOUNT => [
+                'class' => Kiwi::getMemberStatisticClass(),
+                'attribute' => $this->attribute,
+                'condition' => ['member_id' => $this->member_id],
+            ],
+            static::TYPE_RECHARGE => [
+                'class' => Kiwi::getMemberStatisticClass(),
+                'attribute' => 'account_money',
+                'condition' => ['member_id' => $this->member_id],
+            ],
+            static::TYPE_INVEST_EMPIRICAL => [
+                'class' => Kiwi::getMemberStatisticClass(),
+                'attribute' => 'empirical_value',
+                'condition' => ['member_id' => $this->member_id],
+            ]
+        ];
+
+        return isset($types[$type]) ? $types[$type] : [];
     }
 }

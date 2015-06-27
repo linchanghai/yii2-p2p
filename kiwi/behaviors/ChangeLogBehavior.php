@@ -8,6 +8,7 @@
 namespace kiwi\behaviors;
 
 
+use kiwi\helpers\CheckHelper;
 use yii\base\Behavior;
 use yii\base\Exception;
 use yii\db\ActiveRecord;
@@ -16,33 +17,30 @@ use yii\helpers\Json;
 /**
  * Class ChangeLogBehavior
  *
- * [
- *      'types' => [
- *          'typeXXX' => [
- *              'class' => 'xxx\models\xxx'
- *              'attribute' => 'xxx'
- *          ]
- *      ]
- * ]
+ * this class is helper to update a value by created record
  *
- * @property \yii\db\ActiveRecord $owner
+ * [
+ *      'class' => ChangeLogBehavior::className(),
+ *      'targetClass' => 'xxx\models\xxx',
+ *      'attribute' => 'xxx',
+ *      'condition' => ['member_id' => 'xxx']
+ * ]
  *
  * @package kiwi\behaviors
  * @author jeremy.zhou(gao_lujie@live.cn)
  */
 class ChangeLogBehavior extends Behavior
 {
-    public $types;
+    /** @var ActiveRecord */
+    public $targetClass;
 
-    public $typeAttribute = 'type';
+    public $attribute;
 
-    public $attrAttribute = 'attribute';
+    public $condition;
 
     public $valueAttribute = 'value';
 
     public $resultAttribute = 'result';
-
-    public $linkAttribute = 'link_id';
 
     /** @var \yii\db\ActiveRecord */
     protected $target;
@@ -55,30 +53,35 @@ class ChangeLogBehavior extends Behavior
         ];
     }
 
-    public function initChange()
+    /**
+     * @param \yii\base\ModelEvent $event
+     * @throws Exception
+     */
+    public function initChange($event)
     {
-        if (empty($this->types[$this->{$this->typeAttribute}])) {
-            throw new Exception('Error type');
+        if (CheckHelper::isCallable($this->condition)) {
+            $this->condition = call_user_func($this->condition, $event->sender);
         }
-
-        $type = $this->types[$this->owner->{$this->typeAttribute}];
-        /** @var ActiveRecord $class */
-        $class = $type['class'];
-        $attribute = $type['attribute'];
-        $condition = $type['condition'];
-        $this->target = $class::findOne($condition);
+        $targetClass = $this->targetClass;
+        $this->target = $targetClass::findOne($this->condition);
         if (!$this->target) {
             throw new Exception('Can not find target record');
         }
-        $this->target->$attribute += $this->owner->{$this->valueAttribute};
 
-        $this->owner->{$this->attrAttribute} = $this->target->className() . '::' . $attribute;
-        $this->owner->{$this->resultAttribute} = $this->target->$attribute;
+        $record = $event->sender;
+        $this->target->{$this->attribute} += $record->{$this->valueAttribute};
+        if ($this->resultAttribute) {
+            $record->{$this->resultAttribute} = $this->target->{$this->attribute};
+        }
     }
 
-    public function saveChange()
+    /**
+     * @param \yii\base\ModelEvent $event
+     * @throws Exception
+     */
+    public function saveChange($event)
     {
-        if ($this->target->save()) {
+        if (!$this->target->save()) {
             throw new Exception('Save target value error: ' . Json::encode($this->target->getErrors()));
         }
     }

@@ -2,7 +2,7 @@
 
 namespace p2p\activity\models;
 
-use p2p\activity\behaviors\RecordBehavior;
+use kiwi\behaviors\RecordBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 

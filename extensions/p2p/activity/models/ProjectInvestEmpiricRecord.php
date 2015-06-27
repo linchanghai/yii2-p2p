@@ -3,8 +3,7 @@
 namespace p2p\activity\models;
 
 use core\member\models\StatisticChangeRecord;
-use kiwi\behaviors\ChangeLogBehavior;
-use p2p\activity\behaviors\RecordBehavior;
+use kiwi\behaviors\RecordBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
