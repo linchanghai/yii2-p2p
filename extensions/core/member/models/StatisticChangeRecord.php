@@ -29,6 +29,7 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
     const TYPE_WITHDRAW_SUCCESS = 8;
     const TYPE_WITHDRAW_FAIL = 9;
     const TYPE_WITHDRAW_FORBIDDEN = 10;
+    const TYPE_INVEST_EMPIRICAL = 11;
 
     /**
      * @inheritdoc
@@ -78,6 +79,11 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
                     static::TYPE_RECHARGE => [
                         'class' => 'core\member\models\MemberStatistic',
                         'attribute' => 'account_money',
+                        'condition' => ['member_id' => $this->member_id],
+                    ],
+                    static::TYPE_INVEST_EMPIRICAL => [
+                        'class' => 'core\member\models\MemberStatistic',
+                        'attribute' => 'empirical_value',
                         'condition' => ['member_id' => $this->member_id],
                     ]
                 ],
