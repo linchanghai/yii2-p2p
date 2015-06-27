@@ -107,4 +107,32 @@ class PackageRecord extends \kiwi\db\ActiveRecord
     {
         return $this->hasOne(Kiwi::getMemberClass(), ['member_id' => 'member_id']);
     }
+
+    /**
+     * @param int $from
+     * @param int $to
+     * @param int $memberId
+     * @return int get the total into package money in this time range
+     */
+    public static function getIntoPackageMoney($from, $to, $memberId)
+    {
+        return static::find()
+            ->andWhere(['type' =>static::TYPE_INTO, 'member_id' => $memberId])
+            ->andWhere(['between', 'create_time', $from, $to])
+            ->sum('exchange_cash');
+    }
+
+    /**
+     * @param int $from
+     * @param int $to
+     * @param int $memberId
+     * @return int get the total into package money in this time range
+     */
+    public static function getOutPackageMoney($from, $to, $memberId)
+    {
+        return static::find()
+            ->andWhere(['type' =>static::TYPE_OUT, 'member_id' => $memberId])
+            ->andWhere(['between', 'create_time', $from, $to])
+            ->sum('exchange_cash');
+    }
 }
