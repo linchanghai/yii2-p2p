@@ -55,6 +55,14 @@ class Project extends \kiwi\db\ActiveRecord
         return 'project';
     }
 
+    public function scenarios()
+    {
+        return [
+            static::SCENARIO_DEFAULT => ['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'min_money'],
+            'insert' => ['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'min_money'],
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -62,6 +70,7 @@ class Project extends \kiwi\db\ActiveRecord
     {
         return [
             [['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'min_money'], 'required'],
+            [['project_name', 'project_no'], 'unique'],
             [['invest_total_money', 'repayment_type', 'invested_money', 'min_money', 'status'], 'integer'],
             [['interest_rate'], 'number'],
 //            [['verify_user'], 'string'],
@@ -119,10 +128,10 @@ class Project extends \kiwi\db\ActiveRecord
 
     public function validateDate()
     {
-        if($this->repayment_date < time()) {
+        if ($this->repayment_date < time()) {
             $this->addError('repayment_date', 'repayment_date不能早于当前时间！');
         }
-        if($this->release_date < time()) {
+        if ($this->release_date < time()) {
             $this->addError('release_date', 'release_date不能早于当前时间！');
         }
     }
