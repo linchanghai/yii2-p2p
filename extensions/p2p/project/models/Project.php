@@ -54,17 +54,16 @@ class Project extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'verify_date', 'min_money'], 'required'],
+            [['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'min_money'], 'required'],
             [['invest_total_money', 'repayment_type', 'invested_money', 'min_money', 'status'], 'integer'],
             [['interest_rate'], 'number'],
-            [['verify_user'], 'string'],
+//            [['verify_user'], 'string'],
             [['project_name'], 'string', 'max' => 100],
             [['project_no'], 'string', 'max' => 30],
             [['project_type'], 'string', 'max' => 20],
             ['repayment_date', 'date', 'format' => 'yyyy-MM-dd HH:mm', 'timestampAttribute' => 'repayment_date', 'on' => ['insert']],
             ['release_date', 'date', 'format' => 'yyyy-MM-dd HH:mm', 'timestampAttribute' => 'release_date', 'on' => ['insert']],
-            ['verify_date', 'date', 'format' => 'yyyy-MM-dd HH:mm', 'timestampAttribute' => 'verify_date', 'on' => ['insert']],
-            [['repayment_date', 'release_date', 'verify_date'], 'validateDate', 'on' => ['insert']],
+            [['repayment_date', 'release_date'], 'validateDate', 'on' => ['insert']],
         ];
     }
 
@@ -118,9 +117,6 @@ class Project extends \kiwi\db\ActiveRecord
         }
         if($this->release_date < time()) {
             $this->addError('release_date', 'release_date不能早于当前时间！');
-        }
-        if($this->verify_date < time()) {
-            $this->addError('verify_date', 'verify_date不能早于当前时间！');
         }
     }
 }

@@ -14,19 +14,25 @@ return [
                         'label' => Yii::t('p2p_project', 'Project'),
                         'sort' => 100,
                         'url' => ['/p2p_project/project/index'],
-                        'activeUrls' => [['/p2p_project/project/create'], ['/p2p_project/project/update']],
+                        'activeUrls' => [['/p2p_project/project/create'], ['/p2p_project/project/update'], ['/p2p_project/project/view']],
+                    ],
+                    'project_check' => [
+                        'label' => Yii::t('p2p_project', 'Project Check'),
+                        'sort' => 200,
+                        'url' => ['/p2p_project/project-check/index'],
+                        'activeUrls' => [['/p2p_project/project-check/update'], ['/p2p_project/project-check/view']],
                     ],
                     'project_invest' => [
                         'label' => Yii::t('p2p_project', 'Project Invest'),
-                        'sort' => 200,
+                        'sort' => 300,
                         'url' => ['/p2p_project/project-invest/index'],
-                        'activeUrls' => [['/p2p_project/project-invest/create'], ['/p2p_project/project-invest/update']],
+                        'activeUrls' => [['/p2p_project/project-invest/create'], ['/p2p_project/project-invest/update'], ['/p2p_project/project-invest/view']],
                     ],
                     'project_repayment' => [
                         'label' => Yii::t('p2p_project', 'Project Repayment'),
-                        'sort' => 300,
+                        'sort' => 400,
                         'url' => ['/p2p_project/project-repayment/index'],
-                        'activeUrls' => [['/p2p_project/project-repayment/create'], ['/p2p_project/project-repayment/update']],
+                        'activeUrls' => [['/p2p_project/project-repayment/create'], ['/p2p_project/project-repayment/update'], ['/p2p_project/project-repayment/view']],
                     ],
                 ]
             ]

@@ -21,11 +21,13 @@ class ProjectInvestForm extends Model
     const EVENT_AFTER_PAY_INVEST = 'afterPayInvest';
 
     public $money;
-    public $project_id;
+    public $account_money;
+    public $bank_money;
+    public $invest_id;
     public $bonus_id;
     public $couponCash_id;
 
-    /** @var \p2p\project\models\Project */
+    /** @var \p2p\project\models\ProjectInvest */
     protected $_invest;
 
     /**
@@ -34,8 +36,8 @@ class ProjectInvestForm extends Model
     public function rules()
     {
         return [
-            [['money','project_id'], 'required'],
-            [['bonus_id', 'couponCash_id'], 'number'],
+            [['money', 'invest_id'], 'required'],
+            [['bonus_id', 'couponCash_id', 'account_money', 'bank_money'], 'number'],
         ];
     }
 
@@ -46,7 +48,7 @@ class ProjectInvestForm extends Model
     {
         return [
             'money' => Yii::t('p2p_project', 'Money'),
-            'project_id' => Yii::t('p2p_project', 'Project'),
+            'invest_id' => Yii::t('p2p_project', 'Project Invest'),
             'bonus_id' => Yii::t('p2p_project', 'Bonus'),
             'couponCash_id' => Yii::t('p2p_project', 'CouponCash'),
         ];
@@ -54,17 +56,17 @@ class ProjectInvestForm extends Model
 
     public function payInvest()
     {
-        if(!$this->validate()) {
+        if (!$this->validate()) {
             return false;
         }
 
         if ($this->beforePayInvest()) {
-            $memberStatisticClass  = Kiwi::getMemberStatisticClass();
+            $memberStatisticClass = Kiwi::getMemberStatisticClass();
             /** @var \core\member\models\MemberStatistic $memberStatistic */
             $memberStatistic = $memberStatisticClass::findOne(['member_id' => Yii::$app->user->id]);
-            if($memberStatistic->account_money >= $this->money) {
+            if ($memberStatistic->account_money >= $this->money) {
                 $memberStatistic->account_money -= $this->money;
-                if(!$memberStatistic->save()) {
+                if (!$memberStatistic->save()) {
                     throw new Exception('Save member statistic fail !');
                 }
             } else {
@@ -89,10 +91,37 @@ class ProjectInvestForm extends Model
         $this->trigger(static::EVENT_AFTER_PAY_INVEST, $event);
     }
 
+    public function updateInvest()
+    {
+        $class = Kiwi::getProjectInvestFormClass();
+        Event::on($class, $class::EVENT_AFTER_PAY_INVEST, function ($event) {
+            /** @var \p2p\project\forms\ProjectInvestForm $form */
+            $form = $event->sender;
+            /** @var \p2p\project\models\ProjectInvest $invest */
+            $invest = Kiwi::getProjectInvest()->findOne($form->invest_id);
+            $invest->actual_invest_money = $form->account_money + $form->bank_money;
+            $invest->save();
+        });
+    }
+
+    public function updateProject()
+    {
+        $class = Kiwi::getProjectInvestFormClass();
+        Event::on($class, $class::EVENT_AFTER_PAY_INVEST, function ($event) {
+            /** @var \p2p\project\forms\ProjectInvestForm $form */
+            $form = $event->sender;
+            /** @var \p2p\project\models\ProjectInvest $invest */
+            $invest = Kiwi::getProjectInvest()->findOne($form->invest_id);
+            $project = $invest->project;
+            $project->invested_money += $form->money;
+            $project->save();
+        });
+    }
+
     public function useBonus()
     {
         $class = Kiwi::getProjectInvestFormClass();
-        Event::on($class, $class::EVENT_BEFORE_PAY_INVEST, function($event) {
+        Event::on($class, $class::EVENT_BEFORE_PAY_INVEST, function ($event) {
             /** @var \p2p\project\forms\ProjectInvestForm $form */
             $form = $event->sender;
             $form->money -= 10;
@@ -102,7 +131,7 @@ class ProjectInvestForm extends Model
     public function useCash()
     {
         $class = Kiwi::getProjectInvestFormClass();
-        Event::on($class, $class::EVENT_BEFORE_PAY_INVEST, function($event) {
+        Event::on($class, $class::EVENT_BEFORE_PAY_INVEST, function ($event) {
             /** @var \p2p\project\forms\ProjectInvestForm $form */
             $form = $event->sender;
             $form->money -= 10;

@@ -55,10 +55,7 @@ if(isset($model->repayment_date) && isset($model->release_date)) {
         ]
     ]);
     $fields[] = $form->field($model, 'project_type')->textInput(['maxlength' => 255]);
-    $fields[] = $form->field($model, 'invested_money')->textInput([
-        'value' => $model->invested_money ? $model->invested_money : 0,
-        'disabled' => 'disabled'
-    ]);
+//    $fields[] = $form->field($model, 'invested_money')->textInput(['maxlength' => 255]);
 //    $fields[] = $form->field($model, 'verify_user')->textInput(['maxlength' => 255]);
 //    $fields[] = $form->field($model, 'verify_date')->widget(DateTimePicker::className(),[
 //        'options' => [
@@ -70,7 +67,7 @@ if(isset($model->repayment_date) && isset($model->release_date)) {
 //        ]
 //    ]);
     $fields[] = $form->field($model, 'min_money')->textInput(['maxlength' => 255]);
-    $fields[] = $form->field($model, 'status')->dropDownList([0 => '待审核'],  ['disabled' => 'disabled']);
+    $fields[] = $form->field($model, 'status')->dropDownList([0 => '待审核', 1 => '审核通过', 2 => '审核未通过']);
     $fieldGroups[] = ['label' => Yii::t('p2p_project','Project Base Info'), 'content' => implode('', $fields)];
 
     $fields = ['<br />'];
