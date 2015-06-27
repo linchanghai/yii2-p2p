@@ -60,7 +60,7 @@ class ProjectInvestEmpiricRecord extends \kiwi\db\ActiveRecord
         return [
             'coupon' => [
                 'class' => RecordBehavior::className(),
-                'targetClass' => 'core\member\models\ChangeLog',
+                'targetClass' => 'core\member\models\StatisticChangeRecord',
                 'attributes' => [
                     'member_id'=> 'member_id',
                     'type' => 'productMap.type',
