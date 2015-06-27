@@ -36,6 +36,8 @@ class ChangeLogBehavior extends Behavior
 
     public $typeAttribute = 'type';
 
+    public $attrAttribute = 'attribute';
+
     public $valueAttribute = 'value';
 
     public $resultAttribute = 'result';
@@ -70,6 +72,7 @@ class ChangeLogBehavior extends Behavior
         }
         $this->target->$attribute += $this->owner->{$this->valueAttribute};
 
+        $this->owner->{$this->attrAttribute} = $this->target->className() . '::' . $attribute;
         $this->owner->{$this->resultAttribute} = $this->target->$attribute;
     }
 
