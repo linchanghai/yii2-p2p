@@ -56,6 +56,7 @@ class Member extends \kiwi\db\ActiveRecord
             [['id_card'], 'string', 'max' => 18],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique']
+            //TODO: when mobileStatus or emailStatus = 0,you can change the value
         ];
     }
 
