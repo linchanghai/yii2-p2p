@@ -18,6 +18,7 @@ class v0_1_0_v0_2_0 extends Migration
             'statistic_change_record_id' => Schema::TYPE_PK,
             'member_id' => Schema::TYPE_INTEGER . ' NOT NULL',
             'type' => Schema::TYPE_SMALLINT . ' NOT NULL',
+            'attribute' => Schema::TYPE_STRING . ' NOT NULL',
             'value' => Schema::TYPE_DECIMAL . '(10, 2) NOT NULL',
             'result' => Schema::TYPE_DECIMAL . '(10, 2) NOT NULL',
             'link_id' => Schema::TYPE_INTEGER . ' NOT NULL',
