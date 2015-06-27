@@ -7,24 +7,25 @@
 
 namespace p2p\activity\behaviors;
 
+use kiwi\helpers\CheckHelper;
 use Yii;
 use yii\base\Behavior;
 use yii\base\Exception;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
 class RecordBehavior extends Behavior
 {
-    public $targetClass = 'core\member\models\MemberCoupon';
+    public $targetClass = '';
+
+    public $condition ='';
 
     /** @var \yii\db\ActiveRecord */
     protected $target;
 
-    public $attributes = [
-        'type' => 'ProductMap.type',
-        'value' => 'ProductMap.exchange_value',
-        'expire_date' => 'ProductMap.duration + time()',
-    ];
+    public $attributes = [];
+
 
     public function events()
     {
@@ -33,18 +34,27 @@ class RecordBehavior extends Behavior
         ];
     }
 
+    public function init(){
+        parent::init();
+        $this->target = Yii::createObject($this->targetClass);
+        if(!$this->condition){
+            $this->target = $this->target->findOne($this->condition);
+        }
+    }
+
+    /**
+     * @param \yii\base\ModelEvent $event
+     * @throws Exception
+     */
     public function createRecord($event)
     {
-        $eventModel = $event->sender;
-        $model = '';
-        $this->target = Yii::createObject($this->targetClass);
         foreach ($this->attributes as $key => $value) {
-            $tmp = explode('.', $value);
-            if (count($tmp) > 1) {
-                if(!$model){
-                    $model = $eventModel->$tmp[0];
-                }
-                $this->target->key = $model->$tmp[1];
+            if (is_string($value)) {
+                $this->target->$key = ArrayHelper::getValue($event->sender, $value);
+            } else if (CheckHelper::isCallable($value)) {
+                $this->target->$key = call_user_func($value, $event->sender);
+            } else {
+                throw new Exception();
             }
         }
 
