@@ -99,6 +99,22 @@ class ProjectInvestForm extends Model
             $form = $event->sender;
             /** @var \p2p\project\models\ProjectInvest $invest */
             $invest = Kiwi::getProjectInvest()->findOne($form->invest_id);
+
+            $InterestHelperClass = Kiwi::getInterestHelperClass();
+            list($totalInterestMoney, $repayments) = $InterestHelperClass::calculateInterest($this->money, $invest->rate, time(), $invest->project->repayment_date, 20);
+
+            foreach ($repayments as $key => $repayment) {
+                $repayments[$key] = Kiwi::getProjectRepayment([
+                    'interest_money' => $repayment['interestMoney'],
+                    'invest_money' => $repayment['principalMoney'],
+                    'repayment_date' => $repayment['repaymentDate'],
+                ]);
+            }
+
+            $invest->interest_money = $totalInterestMoney;
+
+            $invest->setRelation('projectRepayments', $repayments);
+
             $invest->actual_invest_money = $form->account_money + $form->bank_money;
             $invest->save();
         });
@@ -124,7 +140,11 @@ class ProjectInvestForm extends Model
         Event::on($class, $class::EVENT_BEFORE_PAY_INVEST, function ($event) {
             /** @var \p2p\project\forms\ProjectInvestForm $form */
             $form = $event->sender;
-            $form->money -= 10;
+
+            /** @var \p2p\activity\models\Activity $bonus */
+            $bonus = Kiwi::getActivity()->findOne($form->bonus_id);
+
+            $form->money -= $bonus->activity_send_value;
         });
     }
 
@@ -134,7 +154,11 @@ class ProjectInvestForm extends Model
         Event::on($class, $class::EVENT_BEFORE_PAY_INVEST, function ($event) {
             /** @var \p2p\project\forms\ProjectInvestForm $form */
             $form = $event->sender;
-            $form->money -= 10;
+
+            /** @var \p2p\activity\models\Activity $couponCash */
+            $couponCash = Kiwi::getActivity()->findOne($form->couponCash_id);
+
+            $form->money -= $couponCash->activity_send_value;
         });
     }
 }

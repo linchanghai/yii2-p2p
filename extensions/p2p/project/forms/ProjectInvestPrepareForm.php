@@ -135,7 +135,11 @@ class ProjectInvestPrepareForm extends Model
         Event::on($class, $class::EVENT_BEFORE_INVEST, function ($event) {
             /** @var \p2p\project\forms\ProjectInvestPrepareForm $form */
             $form = $event->sender;
-            $form->getProject()->interest_rate += 0.1;
+
+            /** @var \p2p\activity\models\Activity $annual */
+            $annual = Kiwi::getActivity()->findOne($form->annual_id);
+
+            $form->getProject()->interest_rate += $annual->activity_send_value;
         });
     }
 
