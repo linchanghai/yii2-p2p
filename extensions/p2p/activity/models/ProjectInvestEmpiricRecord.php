@@ -2,7 +2,10 @@
 
 namespace p2p\activity\models;
 
+use kiwi\behaviors\ChangeLogBehavior;
+use p2p\activity\behaviors\RecordBehavior;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%project_invest_empiric_record}}".
@@ -49,6 +52,22 @@ class ProjectInvestEmpiricRecord extends \kiwi\db\ActiveRecord
             'empiric_value' => Yii::t('p2p_activity', 'Empiric Value'),
             'create_time' => Yii::t('p2p_activity', 'Create Time'),
             'is_delete' => Yii::t('p2p_activity', 'Is Delete'),
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'coupon' => [
+                'class' => RecordBehavior::className(),
+                'targetClass' => 'core\member\models\MemberStatistic',
+                'condition' => ['member_id'=>Yii::$app->user->id],
+                'attribute' => 'empirical_value',
+            ],
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time'
+            ],
         ];
     }
 }

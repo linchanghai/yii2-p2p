@@ -21,6 +21,7 @@ use yii\behaviors\TimestampBehavior;
  */
 class Activity extends \yii\db\ActiveRecord
 {
+    //TODO:add event name
     const TYPE_BIND_EMAIL = 1;
     const TYPE_BIND_PHONE = 2;
     const TYPE_INVEST = 3;

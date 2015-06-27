@@ -4,6 +4,7 @@ namespace p2p\activity\models;
 
 use p2p\activity\behaviors\RecordBehavior;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "exchange_record".
@@ -34,6 +35,7 @@ class ExchangeRecord extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            ['note', 'default', 'value' => 'xxx'],
             [['member_id', 'product_map_id', 'create_time'], 'required'],
             [['member_id', 'product_map_id', 'create_time', 'is_delete'], 'integer'],
             [['note'], 'string', 'max' => 50]
@@ -74,7 +76,24 @@ class ExchangeRecord extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            'coupon' => RecordBehavior::className(),
+            'coupon' => [
+                'class' => RecordBehavior::className(),
+                'targetClass' => 'core\member\models\MemberCoupon',
+                'attributes' => [
+                    'member_id'=> 'member_id',
+                    'type' => 'productMap.type',
+                    'value' => 'productMap.exchange_value',
+                    'expire_date' => 'expireDate',
+                ],
+            ],
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time'
+            ],
         ];
+    }
+
+    public function getExpireDate(){
+        return $this->productMap->duration + time();
     }
 }
