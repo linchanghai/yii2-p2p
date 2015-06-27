@@ -60,9 +60,13 @@ class ProjectInvestEmpiricRecord extends \kiwi\db\ActiveRecord
         return [
             'coupon' => [
                 'class' => RecordBehavior::className(),
-                'targetClass' => 'core\member\models\MemberStatistic',
-                'condition' => ['member_id'=>Yii::$app->user->id],
-                'attribute' => 'empirical_value',
+                'targetClass' => 'core\member\models\ChangeLog',
+                'attributes' => [
+                    'member_id'=> 'member_id',
+                    'type' => 'productMap.type',
+                    'value' => 'productMap.exchange_value',
+                    'expire_date' => 'expireDate',
+                ],
             ],
             'time' => [
                 'class' => TimestampBehavior::className(),
