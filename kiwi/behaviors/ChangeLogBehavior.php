@@ -34,15 +34,13 @@ class ChangeLogBehavior extends Behavior
 {
     public $types;
 
-    public $typeAttribute;
+    public $typeAttribute = 'type';
 
-    public $valueAttribute;
+    public $valueAttribute = 'value';
 
-    public $resultAttribute;
+    public $resultAttribute = 'result';
 
-    public $linkAttribute;
-
-    public $targetConditions;
+    public $linkAttribute = 'link_id';
 
     /** @var \yii\db\ActiveRecord */
     protected $target;
@@ -61,10 +59,12 @@ class ChangeLogBehavior extends Behavior
             throw new Exception('Error type');
         }
 
+        $type = $this->types[$this->owner->{$this->typeAttribute}];
         /** @var ActiveRecord $class */
-        $class = $this->types[$this->owner->{$this->typeAttribute}]['class'];
-        $attribute = $this->types[$this->owner->{$this->typeAttribute}]['attribute'];
-        $this->target = $class::findOne($this->targetConditions);
+        $class = $type['class'];
+        $attribute = $type['attribute'];
+        $condition = $type['condition'];
+        $this->target = $class::findOne($condition);
         if (!$this->target) {
             throw new Exception('Can not find target record');
         }

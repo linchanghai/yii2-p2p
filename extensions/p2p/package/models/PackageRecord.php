@@ -14,10 +14,13 @@ use Yii;
  * @property integer $create_time
  * @property integer $is_delete
  *
- * @property Member $member
+ * @property \core\member\models\Member $member
  */
 class PackageRecord extends \kiwi\db\ActiveRecord
 {
+    const TYPE_INCOME = 1;
+    const TYPE_OUTGO = 2;
+
     /**
      * @inheritdoc
      */

@@ -12,10 +12,10 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $recharge_record_id
  * @property string $transaction_id
  * @property integer $member_id
- * @property string $use_for
- * @property integer $project_invest_id
  * @property string $money
  * @property integer $recharge_type
+ * @property string $use_for_type
+ * @property integer $use_for_id
  * @property integer $status
  * @property integer $create_time
  * @property integer $update_time
@@ -29,6 +29,10 @@ class RechargeRecord extends \kiwi\db\ActiveRecord
     const STATUS_SUCCESS = 1;
     const STATUS_FAIL = 2;
     const STATUS_ERROR = 3;
+
+    const USE_FOR_TYPE_NULL = 0;
+    const USE_FOR_TYPE_INVEST = 1;
+    const USE_FOR_TYPE_TO_PACKAGE = 2;
 
     /**
      * @inheritdoc
@@ -45,10 +49,9 @@ class RechargeRecord extends \kiwi\db\ActiveRecord
     {
         return [
             [['transaction_id', 'money', 'recharge_type'], 'required'],
-            [['project_invest_id', 'recharge_type', 'status'], 'integer'],
+            [['use_for_type', 'use_for_id', 'recharge_type', 'status'], 'integer'],
             [['money'], 'number'],
             [['transaction_id'], 'string', 'max' => 100],
-            [['use_for'], 'string', 'max' => 100]
         ];
     }
 
@@ -61,8 +64,8 @@ class RechargeRecord extends \kiwi\db\ActiveRecord
             'recharge_record_id' => Yii::t('p2p_recharge', 'Recharge Record ID'),
             'transaction_id' => Yii::t('p2p_recharge', 'Transaction ID'),
             'member_id' => Yii::t('p2p_recharge', 'Member ID'),
-            'use_for' => Yii::t('p2p_recharge', 'Use For'),
-            'project_invest_id' => Yii::t('p2p_recharge', 'Project Invest ID'),
+            'use_for_type' => Yii::t('p2p_recharge', 'Use For Type'),
+            'use_for_id' => Yii::t('p2p_recharge', 'Use For ID'),
             'money' => Yii::t('p2p_recharge', 'Money'),
             'recharge_type' => Yii::t('p2p_recharge', 'Recharge Type'),
             'status' => Yii::t('p2p_recharge', 'Status'),
