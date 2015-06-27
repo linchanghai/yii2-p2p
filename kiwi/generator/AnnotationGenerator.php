@@ -32,11 +32,42 @@ class AnnotationGenerator extends Object
 
     public function generate()
     {
-        $classes = ['Kiwi', 'Configuration', 'DataListModel', 'SettingModel'];
+        $classes = ['Application', 'Kiwi', 'Configuration', 'DataListModel', 'SettingModel'];
         foreach ($classes as $class) {
             $generateFunc = 'generate' . ucfirst($class);
             $this->$generateFunc();
         }
+    }
+
+    public function generateApplication()
+    {
+        $annotations = [];
+        $components = Yii::$app->getComponents();
+        foreach ($components as $name => $definition) {
+            $class = is_array($definition) ? $definition['class'] : $definition;
+            $class = '\\' . trim($class, '\\');
+            $annotations[] = " * @property {$class} {$name}";
+        }
+
+
+        $annotations = implode("\n", $annotations);
+
+        $content = <<<EOF
+<?php
+
+namespace yii\web;
+
+exit("This file should not be included, only analyzed by your IDE");
+
+/**
+{$annotations}
+ */
+class Application extends \yii\base\Application
+{
+}
+EOF;
+        $classFile = $this->annotationDir . '/_Application.php';
+        file_put_contents($classFile, $content);
     }
 
     public function generateKiwi()

@@ -13,5 +13,6 @@ return [
         'MemberStatistic' => 'core\member\models\MemberStatistic',
         'MemberCoupon' => 'core\member\models\MemberCoupon',
         'MemberSearch' => 'core\member\searches\MemberSearch',
+        'StatisticChangeRecord' => 'core\member\models\StatisticChangeRecord',
     ]
 ];
