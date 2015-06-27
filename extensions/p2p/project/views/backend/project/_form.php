@@ -49,7 +49,7 @@ if (!isset($model->status)) {
             'autoclose' => true,
         ]
     ]);
-    $fields[] = $form->field($model, 'repayment_type')->textInput(['maxlength' => 255]);
+    $fields[] = $form->field($model, 'repayment_type')->dropDownList(Kiwi::getDataListModel()->projectRepaymentType);
     $fields[] = $form->field($model, 'release_date')->widget(DateTimePicker::className(), [
         'options' => [
             'value' => $release_date

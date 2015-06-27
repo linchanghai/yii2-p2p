@@ -46,7 +46,7 @@ if(isset($model->repayment_date) && isset($model->release_date)) {
             'autoclose'=>true,
         ]
     ]);
-    $fields[] = $form->field($model, 'repayment_type')->textInput(['maxlength' => 255, 'disabled' => 'disabled']);
+    $fields[] = $form->field($model, 'repayment_type')->dropDownList(Kiwi::getDataListModel()->projectRepaymentType, ['disabled' => 'disabled']);
     $fields[] = $form->field($model, 'release_date')->widget(DateTimePicker::className(),[
         'options' => [
             'value' => $release_date,
