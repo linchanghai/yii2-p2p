@@ -164,7 +164,7 @@ html input[disabled] {
   color: $secondColor;
 }
 .backGrey{
-  background: #f3f5fb;
+  background: $backColor;
 }
 .colorWhite{
   color: #fff;
@@ -184,6 +184,12 @@ html input[disabled] {
 }
 .col333{
   color: #333;
+}
+.col666{
+  color: #666;
+}
+.col999{
+  color: #999;
 }
 .backTheme{
   background: $themeColor;
@@ -316,7 +322,7 @@ html input[disabled] {
   color: #ECECEC;
   .glyphicon{
     color: #ececec;
-    font-size: 100px;
+    font-size: 80px;
   }
 }
 .footerMenuWrap{

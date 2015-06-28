@@ -1,0 +1,69 @@
+@import "settings";
+.investTitle{
+  border-width: 1px 0;
+  border-color: $borderColor;
+  border-style: solid;
+  li{
+    float: left;
+    padding: 10px 20px;
+  }
+  .active a{
+    color: $themeColor;
+  }
+}
+.filterLine{
+  label,a{
+    float: left;
+    padding: 5px 15px;
+  }
+  label{
+    margin-right: 30px;
+  }
+  a{
+    border-radius: 3px;
+  }
+  a.active{
+    background: $themeColor;
+    color: #fff;
+  }
+}
+.investList{
+  li{
+    float: left;
+    width: 240px;
+    padding: 15px;
+    margin: 0 30px 20px 0;
+    border: 1px $borderColor solid;
+    background: $backColor;
+    border-radius: 3px;
+  }
+}
+.investListBrief{
+  height: 72px;
+  overflow: hidden;
+  text-indent: 2em;
+}
+.investListDetail{
+  float: left;
+  width: 50%;
+  border-right: 1px $borderColor solid;
+}
+.investListDetail.fr{
+  border-right: none;
+}
+.checkItem{
+  display: block;
+  width: 80%;
+  height: 45px;
+  line-height: 45px;
+  margin: 20px auto 0 auto;
+  background: $themeColor;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 16px;
+  &:hover{
+    opacity: .8;
+    color: #fff;
+  }
+}
