@@ -359,3 +359,14 @@ html input[disabled] {
   background: #404549;
   color: #707e8c;
 }
+//ss
+.indexNotice{
+  position: relative;
+  height: 48px;
+  line-height: 48px;
+  overflow: hidden;
+  .glyphicon{
+    margin-right: 0;
+    top: 4px;
+  }
+}

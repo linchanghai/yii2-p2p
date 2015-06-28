@@ -704,3 +704,14 @@ html input[disabled] {
   background: #404549;
   color: #707e8c;
 }
+
+.indexNotice {
+  position: relative;
+  height: 48px;
+  line-height: 48px;
+  overflow: hidden;
+}
+.indexNotice .glyphicon {
+  margin-right: 0;
+  top: 4px;
+}

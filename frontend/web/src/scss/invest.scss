@@ -67,3 +67,71 @@
     color: #fff;
   }
 }
+.indexNotice{
+  li{
+    height: 48px;
+    line-height: 48px;
+  }
+}
+.integralLine{
+  overflow: hidden;
+  dt,dd{
+    float: left;
+  }
+  dt{
+    width: 260px;
+    padding: 30px;
+    text-align: center;
+    background: #fff;
+    font-size: 16px;
+  }
+  dd{
+    width: 820px;
+    background: $backColor;
+  }
+  .integralItem{
+    float: left;
+    padding: 30px 15px;
+    text-align: center;
+  }
+}
+.integralToday{
+  height: 160px;
+  .integralItem{
+    width: 33.3%;
+  }
+}
+.integralNormal{
+  height: 200px;
+  dd{
+    height: 200px;
+  }
+  .integralItem{
+    width: 25%;
+  }
+}
+.integralItemDetail{
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+  background: $themeColor;
+  font-size: 36px;
+  color: #fff;
+  border-radius: 3px;
+}
+.integralItemBottom{
+  .left{
+    margin-top: 5px;
+  }
+  .btn{
+    padding: 5px 10px;
+  }
+}
+.integralYear{
+  .integralItem{
+    width: 50%;
+  }
+  .integralItemDetail,.btn{
+    background: $secondColor;
+  }
+}
