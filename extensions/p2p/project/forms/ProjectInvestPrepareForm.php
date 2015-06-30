@@ -132,10 +132,14 @@ class ProjectInvestPrepareForm extends Model
     public function useAnnual()
     {
         $class = Kiwi::getProjectInvestPrepareFormClass();
-        Event::on($class, $class::EVENT_BEFORE_INVEST, function($event) {
+        Event::on($class, $class::EVENT_BEFORE_INVEST, function ($event) {
             /** @var \p2p\project\forms\ProjectInvestPrepareForm $form */
             $form = $event->sender;
-            $form->getProject()->interest_rate += 0.1;
+
+            /** @var \p2p\activity\models\Activity $annual */
+            $annual = Kiwi::getActivity()->findOne($form->annual_id);
+
+            $form->getProject()->interest_rate += $annual->activity_send_value;
         });
     }
 
@@ -143,7 +147,7 @@ class ProjectInvestPrepareForm extends Model
     {
         /** @var \p2p\project\models\ProjectInvest $invest */
         $invest = $this->calculateInvest();
-        if($invest->save()) {
+        if ($invest->save()) {
             return true;
         } else {
             throw new Exception('Save invest fail !');

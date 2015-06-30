@@ -517,6 +517,14 @@ html input[disabled] {
   color: #333;
 }
 
+.col666 {
+  color: #666;
+}
+
+.col999 {
+  color: #999;
+}
+
 .backTheme {
   background: #ed7c5e;
 }
@@ -660,7 +668,7 @@ html input[disabled] {
 }
 .footerHot .glyphicon {
   color: #ececec;
-  font-size: 100px;
+  font-size: 80px;
 }
 
 .footerMenuWrap {
