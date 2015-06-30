@@ -9,11 +9,24 @@
 namespace p2p\project\controllers\frontend;
 
 
+use kiwi\Kiwi;
 use kiwi\web\Controller;
+use yii\data\ActiveDataProvider;
 
-class ProjectController extends Controller {
+class ProjectController extends Controller
+{
     public function actionList()
     {
-        return $this->render('list');
+        $projectClass = Kiwi::getProjectClass();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $projectClass::find(),
+        ]);
+
+        $dataProvider->prepare(true);
+
+        return $this->render('list', [
+            'projects' => $dataProvider->models,
+        ]);
     }
 }
