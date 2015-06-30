@@ -135,3 +135,42 @@
     background: $secondColor;
   }
 }
+.investTitleTop{
+  height: 60px;
+  line-height: 60px;
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+}
+.investTitleLeft{
+  width: 200px;
+  background: #363b3f;
+}
+.investTitleRight{
+  width: 880px;
+  height: 60px;
+  background: $secondColor;
+  a{
+    margin-right: 20px;
+    color: #fff;
+    font-size: 14px;
+    &:hover{
+      opacity: .8;
+    }
+  }
+}
+.investWrap{
+  padding: 20px;
+  background: $backColor;
+}
+.progressWrap{
+  width: 200px;
+  margin-top: 50px;
+}
+.progressWrapDetail{
+  margin-top: 20px;
+  padding: 0 20px 0 60px;
+}
+.progressWrapDetail2{
+  border-left: 1px #ddd solid;
+}

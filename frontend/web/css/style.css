@@ -457,6 +457,10 @@ html input[disabled] {
   margin-top: 20px;
 }
 
+.mb20 {
+  margin-bottom: 20px;
+}
+
 .pt20 {
   padding-top: 20px;
 }
