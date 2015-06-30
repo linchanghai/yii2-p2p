@@ -137,3 +137,49 @@
 .integralYear .integralItemDetail, .integralYear .btn {
   background: #5e9eed;
 }
+
+.investTitleTop {
+  height: 60px;
+  line-height: 60px;
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+}
+
+.investTitleLeft {
+  width: 200px;
+  background: #363b3f;
+}
+
+.investTitleRight {
+  width: 880px;
+  height: 60px;
+  background: #5e9eed;
+}
+.investTitleRight a {
+  margin-right: 20px;
+  color: #fff;
+  font-size: 14px;
+}
+.investTitleRight a:hover {
+  opacity: .8;
+}
+
+.investWrap {
+  padding: 20px;
+  background: #f3f5fb;
+}
+
+.progressWrap {
+  width: 200px;
+  margin-top: 50px;
+}
+
+.progressWrapDetail {
+  margin-top: 20px;
+  padding: 0 20px 0 60px;
+}
+
+.progressWrapDetail2 {
+  border-left: 1px #ddd solid;
+}
