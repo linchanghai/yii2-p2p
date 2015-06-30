@@ -26,6 +26,7 @@ use yii\helpers\ArrayHelper;
  * @property array $views
  * @property array $config
  * @property array $defaultConfig
+ * @property array $aop
  *
  * @package kiwi
  * @author Lujie.Zhou(lujie.zhou@jago-ag.cn)
