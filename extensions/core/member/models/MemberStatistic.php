@@ -9,12 +9,12 @@ use Yii;
  *
  * @property integer $member_statistic_id
  * @property integer $member_id
- * @property string $account_money
- * @property string $freezon_money
- * @property string $package_money
- * @property string $package_earning
+ * @property float $account_money
+ * @property float $freezon_money
+ * @property float $package_money
+ * @property float $package_earning
  * @property integer $project_total_money
- * @property string $project_earning
+ * @property float $project_earning
  * @property string $collect_principal
  * @property string $collect_interest
  * @property integer $points

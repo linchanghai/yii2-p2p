@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Lujie.Zhou(lujie.zhou@jago-ag.cn) 
+ * @author Lujie.Zhou(lujie.zhou@jago-ag.cn)
  * @Date 6/2/2015
  * @Time 9:00 PM
  */
@@ -44,6 +44,7 @@ class BaseKiwi
     public static function createObject($type, array $params = [])
     {
         $object = Yii::createObject($type, $params);
+        return $object;
         /** @var \kiwi\base\AopInfo $aopInfo */
         $aopInfo = Yii::createObject(['class' => 'kiwi\base\AopInfo', 'instance' => $object]);
         /** @var \kiwi\base\Aop $aop */

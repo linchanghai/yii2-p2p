@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use frontend\assets\AppAsset;
+use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -8,27 +9,27 @@ use frontend\assets\AppAsset;
 //AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
-<!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
-<head>
-    <meta charset="<?= Yii::$app->charset ?>"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <title><?= Html::encode($this->title) ?></title>
-    <?= Html::csrfMetaTags() ?>
-    <?php $this->head() ?>
-    <?php
-    $this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/style.min.css');
-    $this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/index.min.css');
+    <!DOCTYPE html>
+    <html lang="<?= Yii::$app->language ?>">
+    <head>
+        <meta charset="<?= Yii::$app->charset ?>"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="description" content=""/>
+        <meta name="keywords" content=""/>
+        <title><?= Html::encode($this->title) ?></title>
+        <?= Html::csrfMetaTags() ?>
+        <?php $this->head() ?>
+        <?php
+        $this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/style.min.css');
+        $this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/index.min.css');
 
-    $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/index.js');
-    $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/require.js');
-    $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/requireApp.js');
-    ?>
-</head>
-<body>
+        $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/require.js');
+        $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/requireApp.js');
+        $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/index.js');
+        ?>
+    </head>
+    <body>
     <?php $this->beginBody() ?>
     <header>
         <div class="topNotice">
@@ -42,6 +43,7 @@ use frontend\assets\AppAsset;
                     <a class="fl" href="#">
                         <i class="glyphicon glyphicon-phone"></i>手机钻点
                     </a>
+
                     <div class="fr headerRight">
                         <a class="hotLine" href="javascript:void(0);">
                             <i class="glyphicon glyphicon-earphone"></i>400-0574-0574 (9:00-21:00)
@@ -67,11 +69,15 @@ use frontend\assets\AppAsset;
             </div>
             <div class="container headerNav">
                 <a class="fl logo" href="#">
-                    <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/logo.png" width="270" height="40" alt=""/>
+                    <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/logo.png" width="270" height="40"
+                         alt=""/>
                 </a>
+
                 <div class="fr ulNav">
-                    <a class="active" href="#">首页</a>
-                    <a href="#">投资项目</a>
+                    <a class="<?= isset($this->params['home']) && $this->params['home'] ? 'active' : '' ?>"
+                       href="<?= Url::to(['/']) ?>">首页</a>
+                    <a class="<?= isset($this->params['project-list']) && $this->params['project-list'] ? 'active' : '' ?>"
+                       href="<?= Url::to(['/project/project/list']) ?>">投资项目</a>
                     <a href="#">安全保障</a>
                     <a href="#">新手指南</a>
                     <a href="#">关于我们</a>
@@ -87,6 +93,7 @@ use frontend\assets\AppAsset;
             <div class="container">
                 <div class="fl footerHot">
                     <i class="glyphicon glyphicon-phone-alt"></i>
+
                     <p class="mt10 fs20">
                         400-0574-0574
                     </p>
@@ -113,13 +120,17 @@ use frontend\assets\AppAsset;
                 </ul>
                 <ul class="fr mobileFooter">
                     <li>
-                        <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/qr85.png" width="85" height="85" alt=""/>
+                        <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/qr85.png" width="85" height="85"
+                             alt=""/>
+
                         <p class="mt10">
                             关注爱钱进微信
                         </p>
                     </li>
                     <li>
-                        <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/qr85.png" width="85" height="85" alt=""/>
+                        <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/qr85.png" width="85" height="85"
+                             alt=""/>
+
                         <p class="mt10">
                             手机点钻
                         </p>
@@ -140,6 +151,6 @@ use frontend\assets\AppAsset;
     </footer>
 
     <?php $this->endBody() ?>
-</body>
-</html>
+    </body>
+    </html>
 <?php $this->endPage() ?>

@@ -1,12 +1,9 @@
 <?php
 namespace frontend\controllers;
 
+use kiwi\Kiwi;
 use Yii;
 use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
-use frontend\models\ContactForm;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -76,7 +73,7 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $model = new LoginForm();
+        $model =Kiwi::getLoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
@@ -95,7 +92,7 @@ class SiteController extends Controller
 
     public function actionContact()
     {
-        $model = new ContactForm();
+        $model = Kiwi::getContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
@@ -118,7 +115,7 @@ class SiteController extends Controller
 
     public function actionSignup()
     {
-        $model = new SignupForm();
+        $model = Kiwi::getSignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
@@ -134,7 +131,7 @@ class SiteController extends Controller
 
     public function actionRequestPasswordReset()
     {
-        $model = new PasswordResetRequestForm();
+        $model = Kiwi::getPasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
                 Yii::$app->getSession()->setFlash('success', 'Check your email for further instructions.');
@@ -153,7 +150,7 @@ class SiteController extends Controller
     public function actionResetPassword($token)
     {
         try {
-            $model = new ResetPasswordForm($token);
+            $model = Kiwi::getResetPasswordForm($token) ;
         } catch (InvalidParamException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }

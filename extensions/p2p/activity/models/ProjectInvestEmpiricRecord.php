@@ -2,8 +2,8 @@
 
 namespace p2p\activity\models;
 
-use kiwi\behaviors\ChangeLogBehavior;
-use p2p\activity\behaviors\RecordBehavior;
+use core\member\models\StatisticChangeRecord;
+use kiwi\behaviors\RecordBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -60,12 +60,11 @@ class ProjectInvestEmpiricRecord extends \kiwi\db\ActiveRecord
         return [
             'coupon' => [
                 'class' => RecordBehavior::className(),
-                'targetClass' => 'core\member\models\StatisticChangeRecord',
+                'targetClass' => StatisticChangeRecord::className(),
                 'attributes' => [
                     'member_id'=> 'member_id',
-                    'type' => 'productMap.type',
-                    'value' => 'productMap.exchange_value',
-                    'expire_date' => 'expireDate',
+                    'type' => StatisticChangeRecord::TYPE_INVEST_EMPIRICAL,
+                    'value' => 'empiric_value',
                 ],
             ],
             'time' => [

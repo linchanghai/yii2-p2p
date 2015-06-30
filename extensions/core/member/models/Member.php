@@ -2,7 +2,9 @@
 
 namespace core\member\models;
 
+use core\user\models\User;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%member}}".
@@ -26,10 +28,10 @@ use Yii;
  * @property integer $is_deleted
  *
  * @property MemberBank[] $memberBanks
- * @property MemberStatistic[] $memberStatistics
- * @property MemberStatus[] $memberStatuses
+ * @property MemberStatistic $memberStatistic
+ * @property MemberStatus $memberStatus
  */
-class Member extends \kiwi\db\ActiveRecord
+class Member extends User
 {
     /**
      * @inheritdoc
@@ -196,5 +198,32 @@ class Member extends \kiwi\db\ActiveRecord
     public function getRechargeRecords()
     {
         return $this->hasMany(RechargeRecord::className(), ['member_id' => 'member_id']);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function find()
+    {
+        return parent::find()->where([]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne(['member_id' => $id, 'status' => static::STATUS_ACTIVE]);
+    }
+
+    public function behaviors()
+    {
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => 'update_time',
+            ],
+        ];
     }
 }

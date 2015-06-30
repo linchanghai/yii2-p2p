@@ -2,7 +2,10 @@
 
 namespace p2p\package\models;
 
+use kiwi\Kiwi;
+use kiwi\behaviors\RecordBehavior;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%package_record}}".
@@ -18,8 +21,8 @@ use Yii;
  */
 class PackageRecord extends \kiwi\db\ActiveRecord
 {
-    const TYPE_INCOME = 1;
-    const TYPE_OUTGO = 2;
+    const TYPE_INTO = 1;
+    const TYPE_OUT = 2;
 
     /**
      * @inheritdoc
@@ -35,8 +38,8 @@ class PackageRecord extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['member_id', 'exchange_cash', 'create_time'], 'required'],
-            [['member_id', 'exchange_cash', 'type', 'create_time', 'is_delete'], 'integer']
+            [['member_id', 'exchange_cash'], 'required'],
+            [['member_id', 'exchange_cash', 'type'], 'integer']
         ];
     }
 
@@ -55,11 +58,81 @@ class PackageRecord extends \kiwi\db\ActiveRecord
         ];
     }
 
+    public function behaviors()
+    {
+        $recordClass = Kiwi::getStatisticChangeRecordClass();
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => false
+            ],
+            'changeAccount' => [
+                'class' => RecordBehavior::className(),
+                'targetClass' => $recordClass,
+                'attributes' => [
+                    'type' => $this->type == $this::TYPE_INTO
+                        ? $recordClass::TYPE_ACCOUNT_TO_PACKAGE
+                        : $recordClass::TYPE_PACKAGE_TO_ACCOUNT,
+                    'attribute' => $recordClass::tableName() . '.' . 'account_money',
+                    'value' => function() {
+                        return $this->type == $this::TYPE_INTO ? -$this->exchange_cash : $this->exchange_cash;
+                    },
+                    'member_id' => 'member_id',
+                    'link_id' => 'primaryKey',
+                ]
+            ],
+            'changePackage' => [
+                'class' => RecordBehavior::className(),
+                'targetClass' => $recordClass,
+                'attributes' => [
+                    'type' => $this->type == $this::TYPE_INTO
+                        ? $recordClass::TYPE_ACCOUNT_TO_PACKAGE
+                        : $recordClass::TYPE_PACKAGE_TO_ACCOUNT,
+                    'attribute' => $recordClass::tableName() . '.' . 'package_money',
+                    'value' => function() {
+                        return $this->type == $this::TYPE_INTO ? $this->exchange_cash : -$this->exchange_cash;
+                    },
+                    'member_id' => 'member_id',
+                    'link_id' => 'primaryKey',
+                ]
+            ],
+        ];
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getMember()
     {
-        return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
+        return $this->hasOne(Kiwi::getMemberClass(), ['member_id' => 'member_id']);
+    }
+
+    /**
+     * @param int $from
+     * @param int $to
+     * @param int $memberId
+     * @return int get the total into package money in this time range
+     */
+    public static function getIntoPackageMoney($from, $to, $memberId)
+    {
+        return static::find()
+            ->andWhere(['type' =>static::TYPE_INTO, 'member_id' => $memberId])
+            ->andWhere(['between', 'create_time', $from, $to])
+            ->sum('exchange_cash');
+    }
+
+    /**
+     * @param int $from
+     * @param int $to
+     * @param int $memberId
+     * @return int get the total into package money in this time range
+     */
+    public static function getOutPackageMoney($from, $to, $memberId)
+    {
+        return static::find()
+            ->andWhere(['type' =>static::TYPE_OUT, 'member_id' => $memberId])
+            ->andWhere(['between', 'create_time', $from, $to])
+            ->sum('exchange_cash');
     }
 }
