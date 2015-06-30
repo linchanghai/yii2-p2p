@@ -10,36 +10,65 @@ namespace p2p\package;
 
 use kiwi\base\Service;
 use kiwi\Kiwi;
+use Yii;
 
+/**
+ * Class PackageService
+ *
+ * 今天拿到利息的本金
+ * = 昨天余额 - 昨天转入金额
+ * = 前天余额 - 昨天转出金额
+ *
+ * @package p2p\package
+ * @author jeremy.zhou(gao_lujie@live.cn)
+ */
 class PackageService extends Service
 {
-    public function income($money)
+    public function getTodayInterest()
     {
-        $packageRecord = Kiwi::getPackageRecord();
-        $packageRecord->exchange_cash = $money;
-        $packageRecord->type = $packageRecord::TYPE_INCOME;
-        $packageRecord->save();
-
-        $accountMoneyRecord = Kiwi::getStatisticChangeRecord();
-        $accountMoneyRecord->value = -$money;
-        $accountMoneyRecord->type = $accountMoneyRecord::TYPE_ACCOUNT_TO_PACKAGE;
-        $accountMoneyRecord->link_id = $packageRecord->package_record_id;
-        $accountMoneyRecord->save();
-
-        $packageMoneyRecord = Kiwi::getStatisticChangeRecord();
-        $packageMoneyRecord->value = $money;
-        $packageMoneyRecord->type = $accountMoneyRecord::TYPE_PACKAGE_FROM_ACCOUNT;
-        $packageMoneyRecord->link_id = $packageRecord->package_record_id;
-        $packageMoneyRecord->save();
+        $rate = 7;
+        $principal = $this->getTodayInterestPrincipal();
+        $interest = $principal * $rate / 100 / 365;
+        return $interest;
     }
 
-    public function outgo($money)
+    /**
+     *
+     */
+    public function getTodayInterestPrincipal()
     {
+        $yesterday = strtotime('-1 day');
+        $from = strtotime(date('Y-m-d 00:00:00', $yesterday));
+        $to = strtotime(date('Y-m-d 23:59:59', $yesterday));
 
+        $packageRecordClass = Kiwi::getPackageRecordClass();
+        $intoPackageMoney = $packageRecordClass::getIntoPackageMoney($from, $to, Yii::$app->user->id);
+
+        $yesterdayPackageMoney = $this->getYesterdayPackageMoney();
+        $principal = $yesterdayPackageMoney - $intoPackageMoney;
+        return $principal;
     }
 
-    public function getInterest($money)
+    /**
+     *
+     * @return float get last day package money
+     */
+    public function getYesterdayPackageMoney()
     {
+        $now = time();
+        $from = strtotime(date('Y-m-d 00:00:00', $now));
+        $to = strtotime(date('Y-m-d 23:59:59', $now));
 
+        $packageRecordClass = Kiwi::getPackageRecordClass();
+        $intoPackageMoney = $packageRecordClass::getIntoPackageMoney($from, $to, Yii::$app->user->id);
+        $outPackageMoney = $packageRecordClass::getOutPackageMoney($from, $to, Yii::$app->user->id);
+
+        /** @var \core\member\models\Member $member */
+        $member = Yii::$app->user->identity;
+        $nowPackageMoney = $member->memberStatistic->package_money;
+
+        // because $lastDayPackageMoney + $intoPackageMoney - $outPackageMoney = $nowPackageMoney
+        $lastDayPackageMoney = $nowPackageMoney + $outPackageMoney - $intoPackageMoney;
+        return $lastDayPackageMoney;
     }
 } 

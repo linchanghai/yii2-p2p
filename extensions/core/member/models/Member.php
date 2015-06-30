@@ -26,8 +26,8 @@ use Yii;
  * @property integer $is_deleted
  *
  * @property MemberBank[] $memberBanks
- * @property MemberStatistic[] $memberStatistics
- * @property MemberStatus[] $memberStatuses
+ * @property MemberStatistic $memberStatistic
+ * @property MemberStatus $memberStatus
  */
 class Member extends \kiwi\db\ActiveRecord
 {

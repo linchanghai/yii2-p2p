@@ -489,6 +489,17 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function beforeSave($insert)
+    {
+        if (static::$enableLogicDelete) {
+            $this->{static::$isDeleteAttribute} = static::IS_DELETE_FALSE;
+        }
+        return parent::beforeSave($insert);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public static function deleteAll($condition = '', $params = [])
     {
         if (static::$enableCascadeDelete) {
