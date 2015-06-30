@@ -19,7 +19,7 @@ class BindMobileForm extends Model
     public function rules()
     {
         return [
-            ['mobile', 'integer']
+            ['mobile', 'number', 'min' => 11, 'max' => 11, 'integerOnly' => true]
         ];
     }
 

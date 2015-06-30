@@ -18,7 +18,7 @@ class UserVerifyForm extends Model
     public function rules()
     {
         return [
-            ['id_card', 'integer'],
+            [['id_card', 'real_name'], 'required'],
             ['real_name', 'string'],
             ['id_card', 'verifyIdCard'],
         ];
