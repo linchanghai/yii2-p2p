@@ -31,124 +31,12 @@ use yii\helpers\Url;
     </head>
     <body>
     <?php $this->beginBody() ?>
-    <header>
-        <div class="topNotice">
-            <div class="container">
-                <span>系统维护</span>
-            </div>
-        </div>
-        <div class="header">
-            <div class="headerTools">
-                <div class="container">
-                    <a class="fl" href="#">
-                        <i class="glyphicon glyphicon-phone"></i>手机钻点
-                    </a>
 
-                    <div class="fr headerRight">
-                        <a class="hotLine" href="javascript:void(0);">
-                            <i class="glyphicon glyphicon-earphone"></i>400-0574-0574 (9:00-21:00)
-                        </a>
-                        <a class="customer" href="#">
-                            <i class="glyphicon glyphicon-envelope"></i>在线客服
-                        </a>
-                <span class="loginArea">
-                    <a class="registerItem" href="#">注册</a>
-                    <label class="split">|</label>
-                    <a class="loginItem" href="#">登录</a>
-                </span>
-                        <!--                logined begin-->
-                        <!--                <a class="myMessages" href="#">-->
-                        <!--                    <i class="glyphicon glyphicon-bell"></i>消息-->
-                        <!--                </a>-->
-                        <!--                <a class="userAccount" href="#">-->
-                        <!--                    <i class="glyphicon glyphicon-user"></i>用户-->
-                        <!--                </a>-->
-                        <!--                logined end-->
-                    </div>
-                </div>
-            </div>
-            <div class="container headerNav">
-                <a class="fl logo" href="#">
-                    <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/logo.png" width="270" height="40"
-                         alt=""/>
-                </a>
-
-                <div class="fr ulNav">
-                    <a class="<?= isset($this->params['home']) && $this->params['home'] ? 'active' : '' ?>"
-                       href="<?= Url::to(['/']) ?>">首页</a>
-                    <a class="<?= isset($this->params['project-list']) && $this->params['project-list'] ? 'active' : '' ?>"
-                       href="<?= Url::to(['/project/project/list']) ?>">投资项目</a>
-                    <a href="#">安全保障</a>
-                    <a href="#">新手指南</a>
-                    <a href="#">关于我们</a>
-                </div>
-            </div>
-        </div>
-    </header>
+    <?= $this->render('header') ?>
 
     <?= $content ?>
 
-    <footer>
-        <div class="mt10 footer">
-            <div class="container">
-                <div class="fl footerHot">
-                    <i class="glyphicon glyphicon-phone-alt"></i>
-
-                    <p class="mt10 fs20">
-                        400-0574-0574
-                    </p>
-                </div>
-                <ul class="fl footerMenuWrap">
-                    <li class="fl footerMenu">
-                        <a href="#">关于我们</a>
-                        <a href="#">平台介绍</a>
-                        <a href="#">法律法规</a>
-                        <a href="#">安全保障</a>
-                    </li>
-                    <li class="fl footerMenu">
-                        <a href="#">新手指南</a>
-                        <a href="#">官方论坛</a>
-                        <a href="#">名词解释</a>
-                        <a href="#">理财知识</a>
-                    </li>
-                    <li class="fl footerMenu">
-                        <a href="#">联系我们</a>
-                        <a href="#">诚聘英才</a>
-                        <a href="#">友情链接</a>
-                        <a href="#">网站地图</a>
-                    </li>
-                </ul>
-                <ul class="fr mobileFooter">
-                    <li>
-                        <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/qr85.png" width="85" height="85"
-                             alt=""/>
-
-                        <p class="mt10">
-                            关注爱钱进微信
-                        </p>
-                    </li>
-                    <li>
-                        <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/static/qr85.png" width="85" height="85"
-                             alt=""/>
-
-                        <p class="mt10">
-                            手机点钻
-                        </p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="copyrightFooter">
-            <div class="container">
-                <div class="fl">
-                    ©Copyright(c)2014 dianzuan.com.All Rights Reserved
-                </div>
-                <div class="fr">
-                    浙ICP备14099887
-                </div>
-            </div>
-        </div>
-    </footer>
+    <?= $this->render('footer') ?>
 
     <?php $this->endBody() ?>
     </body>

@@ -5,7 +5,7 @@
  * @Time 14:25
  */
 
-namespace core\member\models;
+namespace core\member\forms;
 
 
 use kiwi\base\Model;
