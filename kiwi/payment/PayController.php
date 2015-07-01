@@ -14,6 +14,8 @@ use yii\helpers\ArrayHelper;
 
 class PayController extends Controller
 {
+    public $enableCsrfValidation = false;
+
     public function actionCallback($method)
     {
         $request = Yii::$app->request;

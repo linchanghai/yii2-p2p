@@ -1,38 +1,62 @@
 <?php
 /**
- * @author Lujie.Zhou(lujie.zhou@jago-ag.cn)
- * @Date 6/19/2015
- * @Time 5:17 PM
+ * @link http://www.yincart.com/
+ * @copyright Copyright (c) 2014 Yincart
+ * @license http://www.yincart.com/license/
  */
 
 namespace kiwi\payment;
 
+use kiwi\web\Controller;
 use Yii;
-use yii\base\Action;
 
-class LocalPayServerAction extends Action
+class LocalPayServerController extends Controller
 {
+    public $enableCsrfValidation = false;
+
     protected $merchantTokens = ['localUserId' => 'localToken'];
 
-    public $requestLogPath = '@runtime/localPay';
+    public $requestLogPath = '@runtime/localPay/';
 
-    public function run()
+    public function actionPay()
     {
         $data = Yii::$app->request->post();
         if ($this->validateRequestData($data)) {
             $callbackUrl = isset($data['callbackUrl']) ? $data['callbackUrl'] : false;
             unset($data['callbackUrl']);
             $returnUrl = isset($data['returnUrl']) ? $data['returnUrl'] : false;
-            unset($data['callbackUrl']);
+            unset($data['returnUrl']);
             if ($callbackUrl) {
                 $callbackData = $this->prepareCallbackData($data);
-                $result = $this->sendCallbackRequest($callbackUrl, $callbackData);
-                $this->saveCallbackRequest($callbackUrl, $callbackData, $result);
+                $callbackResult = $this->sendCallbackRequest($callbackUrl, $callbackData);
             }
             if ($returnUrl) {
-                $this->controller->redirect($returnUrl);
+                $this->redirect($returnUrl);
             }
         }
+
+        $payData = [
+            'requestData' => $data,
+            'callbackUrl' => isset($callbackUrl) ? $callbackUrl : 'false',
+            'returnUrl' => isset($returnUrl) ? $returnUrl : 'false',
+            'callbackData' => isset($callbackData) ? $callbackData : 'false',
+            'callbackResult' => isset($callbackResult) ? $callbackResult : 'false',
+        ];
+        $this->savePay($payData);
+    }
+
+    public function savePay($data)
+    {
+        $time = microtime(true);
+        $file = $this->requestLogPath . date('Ymd-His-', $time) . sprintf('%04d', (int) (($time - (int) $time) * 10000)) . '-' . sprintf('%04d', mt_rand(0, 10000)) . '.txt';
+        $file = Yii::getAlias($file);
+
+        foreach ($data as $key => $value) {
+            $data[$key] = $key . ': ' . is_array($value) ? json_encode($value) : $value;
+        }
+        $dataStr = implode("\n", $data);
+
+        file_put_contents($file, $dataStr);
     }
 
     protected function sendCallbackRequest($callbackUrl, $data)
@@ -46,14 +70,6 @@ class LocalPayServerAction extends Action
         $result = curl_exec($curl);
         curl_close($curl);
         return $result;
-    }
-
-    protected function saveCallbackRequest($callbackUrl, $callbackData, $result)
-    {
-        $time = microtime(true);
-        $file = date('Ymd-His-', $time) . sprintf('%04d', (int) (($time - (int) $time) * 10000)) . '-' . sprintf('%04d', mt_rand(0, 10000)) . '.txt';
-
-        file_put_contents($file, $callbackUrl . "\n" . json_encode($callbackData) . "\n" . $result);
     }
 
     protected function validateRequestData($data)
@@ -110,4 +126,5 @@ class LocalPayServerAction extends Action
         $signStr = md5($signStr);
         return $signStr;
     }
-}
+
+} 

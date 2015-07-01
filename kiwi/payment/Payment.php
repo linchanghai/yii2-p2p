@@ -16,6 +16,9 @@ use yii\helpers\Url;
 
 /**
  * Class BasePayment
+ *
+ * @property BasePaymentMethod paymentMethod
+ *
  * @package core\payment\services
  * @author Lujie.Zhou(lujie.zhou@jago-ag.cn)
  */
@@ -34,17 +37,25 @@ class Payment extends Component implements PaymentInterface
 
     public $callbackUrl = '';
 
+    public $returnUrl = '';
+
+    public function getPaymentMethod()
+    {
+        return $this->paymentMethod;
+    }
+
     public function setPaymentMethod($method)
     {
         if ($this->useLocalPay) {
             $this->paymentMethod = Yii::createObject('kiwi\payment\LocalPay');
-            $this->paymentMethod->callbackUrl = Url::to([$this->callbackUrl, 'method' => $method]);
         } else if (isset($this->methods[$method])) {
             $this->paymentMethod = Yii::createObject($this->methods[$method]);
-            $this->paymentMethod->callbackUrl = Url::to([$this->callbackUrl, 'method' => $method]);
         } else {
             throw new InvalidValueException();
         }
+
+        $this->paymentMethod->callbackUrl = Url::to([$this->callbackUrl, 'method' => $method]);
+        $this->paymentMethod->returnUrl = Url::to([$this->returnUrl, 'method' => $method]);
     }
 
     public function pay($method, $money)

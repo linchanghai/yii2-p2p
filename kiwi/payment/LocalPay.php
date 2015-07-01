@@ -1,11 +1,13 @@
 <?php
 /**
- * @author Lujie.Zhou(lujie.zhou@jago-ag.cn) 
+ * @author Lujie.Zhou(lujie.zhou@jago-ag.cn)
  * @Date 6/19/2015
  * @Time 4:15 PM
  */
 
 namespace kiwi\payment;
+
+use yii\helpers\Url;
 
 
 /**
@@ -18,6 +20,11 @@ class LocalPay extends BasePaymentMethod
     public $merchantId = 'localUserId';
 
     public $merchantToken = 'localToken';
+
+    public function init()
+    {
+        $this->requestUrl = $this->requestUrl ?: Url::to(['/local-pay/pay'], true);
+    }
 
     public function generateId()
     {

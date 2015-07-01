@@ -40,6 +40,7 @@ return [
         ],
         'controllerMap' => [
             'pay' => 'kiwi\payment\PayController',
+            'local-pay' => 'kiwi\payment\LocalPayServerController'
         ]
     ],
 ];
