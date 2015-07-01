@@ -8,11 +8,14 @@
 return [
     'class' => [
         'Member' => 'core\member\models\Member',
-        'MmberBank' => 'core\member\models\MemberBank',
+        'MemberBank' => 'core\member\models\MemberBank',
         'MemberStatus' => 'core\member\models\MemberStatus',
         'MemberStatistic' => 'core\member\models\MemberStatistic',
         'MemberCoupon' => 'core\member\models\MemberCoupon',
         'MemberSearch' => 'core\member\searches\MemberSearch',
         'StatisticChangeRecord' => 'core\member\models\StatisticChangeRecord',
+        'UserVerifyForm' =>  'core\member\models\UserVerifyForm',
+        'BindEmailForm' =>  'core\member\models\BindEmailForm',
+        'BindMobileForm' =>  'core\member\models\BindMobileForm',
     ]
 ];
