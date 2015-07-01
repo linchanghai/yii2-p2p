@@ -35,6 +35,8 @@ use yii\helpers\Url;
                         <a class="myMessages" href="#">
                             <i class="glyphicon glyphicon-bell"></i>消息
                         </a>
+                        <label class="split">|</label>
+                        <?= Html::a('登出', ['/site/logout'], ['class' => 'loginItem', 'data-method' => 'post']) ?>
                     <?php } ?>
                 </span>
                 </div>

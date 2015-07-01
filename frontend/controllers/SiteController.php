@@ -73,7 +73,7 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $model =Kiwi::getLoginForm();
+        $model = Kiwi::getLoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
@@ -150,7 +150,7 @@ class SiteController extends Controller
     public function actionResetPassword($token)
     {
         try {
-            $model = Kiwi::getResetPasswordForm($token) ;
+            $model = Kiwi::getResetPasswordForm($token);
         } catch (InvalidParamException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
