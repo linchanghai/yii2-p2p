@@ -84,7 +84,7 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depend
                    href="<?= Url::to(['/project/project/details', 'project_id' => $project->project_id]) ?>">
                     查看详情
                 </a>
-                <a class="checkItem" href="<?= Url::to(['/']) ?>">
+                <a class="checkItem" href="<?= Url::to(['/project/project-invest/prepare-invest', 'id' => $project->project_id]) ?>">
                     立即投资
                 </a>
             </li>
