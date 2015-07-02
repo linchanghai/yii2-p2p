@@ -491,7 +491,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
      */
     public function beforeSave($insert)
     {
-        if (static::$enableLogicDelete) {
+        if (static::$enableLogicDelete && $insert) {
             $this->{static::$isDeleteAttribute} = static::IS_DELETE_FALSE;
         }
         return parent::beforeSave($insert);

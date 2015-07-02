@@ -5,7 +5,7 @@
  * @license http://www.yincart.com/license/
  */
 
-namespace core\payment\actions;
+namespace kiwi\payment;
 
 
 use kiwi\web\Controller;
@@ -21,5 +21,6 @@ class PayController extends Controller
         $request = Yii::$app->request;
         $data = ArrayHelper::merge($request->post(), $request->get());
         Yii::$app->payment->callback($method, $data);
+        echo 'ok';
     }
 } 

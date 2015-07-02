@@ -54,8 +54,8 @@ class Payment extends Component implements PaymentInterface
             throw new InvalidValueException();
         }
 
-        $this->paymentMethod->callbackUrl = Url::to([$this->callbackUrl, 'method' => $method]);
-        $this->paymentMethod->returnUrl = Url::to([$this->returnUrl, 'method' => $method]);
+        $this->paymentMethod->callbackUrl = Url::to([$this->callbackUrl, 'method' => $method], true);
+        $this->paymentMethod->returnUrl = Url::to([$this->returnUrl, 'method' => $method], true);
     }
 
     public function pay($method, $money)

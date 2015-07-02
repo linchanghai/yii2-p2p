@@ -5,6 +5,8 @@ namespace core\member\models;
 use kiwi\behaviors\ChangeLogBehavior;
 use kiwi\Kiwi;
 use Yii;
+use yii\base\Exception;
+use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -53,8 +55,8 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
     {
         return [
             ['note', 'default', 'value' => ''],
-            [['member_id', 'type', 'attribute', 'value', 'result', 'link_id'], 'required'],
-            [['member_id', 'type', 'link_id'], 'integer'],
+            [['type', 'value', 'link_id'], 'required'],
+            [['type', 'link_id'], 'integer'],
             [['value', 'result'], 'number'],
             [['attribute'], 'string', 'max' => 40],
             [['note'], 'string', 'max' => 255]
@@ -84,6 +86,11 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
     {
         return [
             'changeLog' => $this->getChangeLogBehaviorConfig($this->type),
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => 'false',
+            ],
         ];
     }
 
@@ -91,27 +98,38 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
     {
         $types = [
             static::TYPE_ACCOUNT_TO_PACKAGE => [
-                'class' => Kiwi::getMemberStatisticClass(),
+                'targetClass' => Kiwi::getMemberStatisticClass(),
                 'attribute' => $this->attribute,
                 'condition' => ['member_id' => $this->member_id],
             ],
             static::TYPE_PACKAGE_TO_ACCOUNT => [
-                'class' => Kiwi::getMemberStatisticClass(),
+                'targetClass' => Kiwi::getMemberStatisticClass(),
                 'attribute' => $this->attribute,
                 'condition' => ['member_id' => $this->member_id],
             ],
             static::TYPE_RECHARGE => [
-                'class' => Kiwi::getMemberStatisticClass(),
+                'targetClass' => Kiwi::getMemberStatisticClass(),
                 'attribute' => 'account_money',
                 'condition' => ['member_id' => $this->member_id],
             ],
             static::TYPE_INVEST_EMPIRICAL => [
-                'class' => Kiwi::getMemberStatisticClass(),
+                'targetClass' => Kiwi::getMemberStatisticClass(),
                 'attribute' => 'empirical_value',
                 'condition' => ['member_id' => $this->member_id],
             ]
         ];
 
-        return isset($types[$type]) ? $types[$type] : [];
+        $types = ArrayHelper::merge($types, $this->types);
+
+        if (empty($types[$type])) {
+            throw new Exception('Invalid Type: ' . $type);
+        }
+
+        $config = $types[$type];
+        $config['class'] = ChangeLogBehavior::className();
+
+        $this->attribute = $config['attribute'];
+
+        return $config;
     }
 }

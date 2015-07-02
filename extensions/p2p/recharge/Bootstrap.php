@@ -64,13 +64,15 @@ class Bootstrap implements BootstrapInterface
         $rechargeRecordClass = Kiwi::getRechargeRecordClass();
         $rechargeRecord = $rechargeRecordClass::findByTransactionId($event->transactionId);
 
-        $changeRecord = Kiwi::getStatisticChangeRecord();
-        $changeRecord->type = $changeRecord::TYPE_RECHARGE;
-        $changeRecord->value = $rechargeRecord->money;
-        $changeRecord->member_id = $rechargeRecord->member_id;
-        $changeRecord->link_id = $rechargeRecord->recharge_record_id;
-        if (!$rechargeRecord->save()) {
-            throw new Exception('Update account money error: ' . Json::encode($rechargeRecord->getErrors()));
+        $changeRecordClass = Kiwi::getStatisticChangeRecordClass();
+        $changeRecord = Kiwi::getStatisticChangeRecord([
+            'type' => $changeRecordClass::TYPE_RECHARGE,
+            'value' => $rechargeRecord->money,
+            'member_id' => $rechargeRecord->member_id,
+            'link_id' => $rechargeRecord->recharge_record_id,
+        ]);
+        if (!$changeRecord->save()) {
+            throw new Exception('Update account money error: ' . Json::encode($changeRecord->getErrors()));
         }
     }
 
@@ -86,7 +88,7 @@ class Bootstrap implements BootstrapInterface
         $rechargeRecordClass = Kiwi::getRechargeRecordClass();
         $rechargeRecord = $rechargeRecordClass::findByTransactionId($event->transactionId);
 
-        switch($rechargeRecord->use_for_type) {
+        switch ($rechargeRecord->use_for_type) {
             case $rechargeRecord::USE_FOR_TYPE_INVEST:
                 break;
             case $rechargeRecord::USE_FOR_TYPE_TO_PACKAGE:
