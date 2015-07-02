@@ -66,7 +66,7 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depend
     <div class="fl progressWrapDetail progressWrapDetail2">
         <p class="mb20">
             <label>理财期限: </label>
-            <span class="col333">30天</span>
+            <span class="col333"><?= ceil(($project->repayment_date - time()) / (3600 * 24)) ?>天</span>
         </p>
 
         <p class="mb20">

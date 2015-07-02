@@ -73,7 +73,9 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depend
                         <p class="textCenter mt10">年利率</p>
                     </div>
                     <div class="fr investListDetail">
-                        <p class="textCenter">100天</p>
+                        <p class="textCenter">
+                            <?= ceil(($project->repayment_date - time()) / (3600 * 24)) ?>天
+                        </p>
 
                         <p class="textCenter mt10">期限</p>
                     </div>
