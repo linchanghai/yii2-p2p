@@ -72,6 +72,21 @@ class MemberController extends Controller
         echo Json::encode(['output'=>'', 'selected'=>'']);
     }
 
+    public function actionSendEmail(){
+        $model = Kiwi::getBindEmailForm();
+        return $model->sendEmail();
+    }
 
+    public function actionBindEmail($token){
+        $model = Kiwi::getBindEmailForm();
+        if($model->setEmailStatus($token)){
+            $this->redirect(['/member/member/success']);
+        }else{
+            $this->redirect(['/member/member/fail']);
+        }
+    }
 
+    public function actionSendMobileCode(){
+
+    }
 } 
