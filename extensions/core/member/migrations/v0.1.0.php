@@ -86,7 +86,7 @@ class v0_1_0 extends Migration
             'type' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'value' => Schema::TYPE_STRING . '(45) NOT NULL',
             'used_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-            'expire_date' => Schema::TYPE_DATETIME . ' NOT NULL',
+            'expire_date' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'status' => Schema::TYPE_SMALLINT . '(1) NOT NULL default \'0\'',
             'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'update_time' => Schema::TYPE_INTEGER . '(11)',

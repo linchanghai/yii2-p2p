@@ -15,7 +15,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $type
  * @property string $value
  * @property integer $used_time
- * @property string $expire_date
+ * @property integer $expire_date
  * @property integer $status
  * @property integer $create_time
  * @property integer $update_time
@@ -42,8 +42,8 @@ class MemberCoupon extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['member_id', 'type', 'value', 'used_time', 'expire_date', 'create_time'], 'required'],
-            [['member_id', 'type', 'used_time', 'status', 'create_time', 'update_time', 'is_delete'], 'integer'],
+            [['member_id', 'type', 'value','expire_date'], 'required'],
+            [['member_id', 'type', 'used_time', 'status', 'create_time', 'update_time', 'is_delete','expire_date'], 'integer'],
             [['expire_date'], 'safe'],
             [['value'], 'string', 'max' => 45]
         ];
