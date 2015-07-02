@@ -9,6 +9,7 @@ namespace kiwi\payment;
 
 use kiwi\web\Controller;
 use Yii;
+use yii\helpers\FileHelper;
 
 class LocalPayServerController extends Controller
 {
@@ -17,6 +18,12 @@ class LocalPayServerController extends Controller
     protected $merchantTokens = ['localUserId' => 'localToken'];
 
     public $requestLogPath = '@runtime/localPay/';
+
+    public function init()
+    {
+        $this->requestLogPath = Yii::getAlias($this->requestLogPath);
+        FileHelper::createDirectory(Yii::getAlias($this->requestLogPath));
+    }
 
     public function actionPay()
     {
@@ -42,6 +49,7 @@ class LocalPayServerController extends Controller
             'callbackData' => isset($callbackData) ? $callbackData : 'false',
             'callbackResult' => isset($callbackResult) ? $callbackResult : 'false',
         ];
+
         $this->savePay($payData);
     }
 
@@ -52,7 +60,7 @@ class LocalPayServerController extends Controller
         $file = Yii::getAlias($file);
 
         foreach ($data as $key => $value) {
-            $data[$key] = $key . ': ' . is_array($value) ? json_encode($value) : $value;
+            $data[$key] = $key . ': ' . (is_array($value) ? json_encode($value) : $value);
         }
         $dataStr = implode("\n", $data);
 
