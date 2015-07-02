@@ -4,6 +4,7 @@ namespace core\user\forms;
 use kiwi\base\Model;
 use kiwi\Kiwi;
 use Yii;
+use yii\base\ModelEvent;
 
 /**
  * Class SignupForm
@@ -45,17 +46,39 @@ class SignupForm extends Model
      */
     public function signup()
     {
-        if ($this->validate()) {
+        if (!$this->validate()) {
+            return false;
+        }
+
+        if ($this->beforeSignup()) {
             /** @var \core\user\models\User $user */
             $user = Kiwi::createObject(Yii::$app->user->identityClass);
             $user->username = $this->username;
             $user->email = $this->email;
             $user->setPassword($this->password);
             $user->generateAuthKey();
+            $user->status = 1;
             $user->save();
+
+            $this->afterSignup();
             return $user;
         }
 
         return null;
+    }
+
+    const BEFORE_SIGNUP = 'beforeSignup';
+    const AFTER_SIGNUP = 'afterSignup';
+
+    public function beforeSignup()
+    {
+        $event = new ModelEvent();
+        $this->trigger(static::BEFORE_SIGNUP, $event);
+        return $event->isValid;
+    }
+
+    public function afterSignup()
+    {
+        $this->trigger(static::AFTER_SIGNUP);
     }
 }

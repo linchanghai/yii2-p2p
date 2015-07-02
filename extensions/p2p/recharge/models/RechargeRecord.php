@@ -49,8 +49,9 @@ class RechargeRecord extends \kiwi\db\ActiveRecord
     {
         return [
             [['transaction_id', 'money', 'recharge_type'], 'required'],
-            [['use_for_type', 'use_for_id', 'recharge_type', 'status'], 'integer'],
+            [['use_for_type', 'use_for_id', 'status'], 'integer'],
             [['money'], 'number'],
+            [['recharge_type'], 'string', 'max' => 20],
             [['transaction_id'], 'string', 'max' => 100],
         ];
     }

@@ -80,13 +80,11 @@ class Bootstrap extends Object implements BootstrapInterface
                 Yii::$app->setComponents($components);
             }
 
-            if (isset($config['modules'])) {
-                $modules = ArrayHelper::merge(Yii::$app->getModules(), $config['modules']);
-                Yii::$app->setModules($modules);
-            }
-
-            if (isset($config['params'])) {
-                Yii::$app->params = ArrayHelper::merge(Yii::$app->params, $config['params']);
+            $keys = ['modules', 'controllerMap', 'params'];
+            foreach ($keys as $key) {
+                if (isset($config[$key])) {
+                    Yii::$app->$key = ArrayHelper::merge(Yii::$app->$key, $config[$key]);
+                }
             }
         }
 
@@ -101,13 +99,11 @@ class Bootstrap extends Object implements BootstrapInterface
                     Yii::$app->setComponents($components);
                 }
 
-                if (isset($config['modules'])) {
-                    $modules = ArrayHelper::merge(Yii::$app->getModules(), $config['modules']);
-                    Yii::$app->setModules($modules);
-                }
-
-                if (isset($config['params'])) {
-                    Yii::$app->params = ArrayHelper::merge(Yii::$app->params, $config['params']);
+                $keys = ['modules', 'controllerMap', 'params'];
+                foreach ($keys as $key) {
+                    if (isset($config[$key])) {
+                        Yii::$app->$key = ArrayHelper::merge(Yii::$app->$key, $config[$key]);
+                    }
                 }
             }
         }

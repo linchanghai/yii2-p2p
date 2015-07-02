@@ -3,6 +3,7 @@
 namespace core\member\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%member_statistic}}".
@@ -44,8 +45,7 @@ class MemberStatistic extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['member_id', 'create_time'], 'required'],
-            [['member_id', 'project_total_money', 'points', 'bonus', 'used_bonus', 'empirical_value', 'is_first_invest', 'create_time', 'update_time', 'is_delete'], 'integer'],
+            [['project_total_money', 'points', 'bonus', 'used_bonus', 'empirical_value', 'is_first_invest'], 'integer'],
             [['account_money', 'freezon_money', 'package_money', 'package_earning', 'project_earning', 'collect_principal', 'collect_interest'], 'number']
         ];
     }
@@ -83,5 +83,16 @@ class MemberStatistic extends \kiwi\db\ActiveRecord
     public function getMember()
     {
         return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
+    }
+
+    public function behaviors()
+    {
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => 'update_time',
+            ],
+        ];
     }
 }

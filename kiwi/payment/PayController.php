@@ -5,7 +5,7 @@
  * @license http://www.yincart.com/license/
  */
 
-namespace core\payment\actions;
+namespace kiwi\payment;
 
 
 use kiwi\web\Controller;
@@ -14,10 +14,13 @@ use yii\helpers\ArrayHelper;
 
 class PayController extends Controller
 {
+    public $enableCsrfValidation = false;
+
     public function actionCallback($method)
     {
         $request = Yii::$app->request;
         $data = ArrayHelper::merge($request->post(), $request->get());
         Yii::$app->payment->callback($method, $data);
+        echo 'ok';
     }
 } 
