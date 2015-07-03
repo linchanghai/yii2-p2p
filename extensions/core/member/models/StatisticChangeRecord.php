@@ -36,7 +36,7 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
     const TYPE_INVEST_EMPIRICAL = 11;
     const TYPE_USER_POINT_REGISTER = 12;
 
-    public $types = [];
+    const TYPE_EXCHANGE_POINT = 13;
 
     /**
      * @inheritdoc
@@ -109,7 +109,12 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
                 'class' => Kiwi::getMemberStatisticClass(),
                 'attribute' => 'empirical_value',
                 'condition' => ['member_id' => $this->member_id],
-            ]
+            ],
+            static::TYPE_EXCHANGE_POINT => [
+                'class' => Kiwi::getMemberStatisticClass(),
+                'attribute' => 'points',
+                'condition' => ['member_id' => $this->member_id],
+            ],
         ];
 
         return isset($types[$type]) ? $types[$type] : [];
