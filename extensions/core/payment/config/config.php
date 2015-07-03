@@ -35,11 +35,12 @@ return [
                         'key' => '',
                     ],
                 ],
-                'callbackUrl' => 'pay/callback'
+                'callbackUrl' => '/pay/callback'
             ]
         ],
         'controllerMap' => [
             'pay' => 'kiwi\payment\PayController',
+            'local-pay' => 'kiwi\payment\LocalPayServerController'
         ]
     ],
 ];

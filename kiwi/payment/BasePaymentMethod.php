@@ -9,6 +9,7 @@
 namespace kiwi\payment;
 
 use Yii;
+use yii\base\Object;
 
 /**
  * Class BasePaymentMethod
@@ -17,9 +18,8 @@ use Yii;
  *
  * @package kiwi\payment
  */
-abstract class BasePaymentMethod
+abstract class BasePaymentMethod extends Object
 {
-
     public $requestUrl;
 
     public $callbackUrl;

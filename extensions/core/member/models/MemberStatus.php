@@ -3,6 +3,7 @@
 namespace core\member\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%member_status}}".
@@ -34,8 +35,7 @@ class MemberStatus extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['member_id', 'create_time'], 'required'],
-            [['member_id', 'email_status', 'mobile_status', 'id_card_status', 'create_time', 'update_time', 'is_delete'], 'integer']
+            [['member_id', 'email_status', 'mobile_status', 'id_card_status'], 'integer']
         ];
     }
 
@@ -62,5 +62,16 @@ class MemberStatus extends \kiwi\db\ActiveRecord
     public function getMember()
     {
         return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
+    }
+
+    public function behaviors()
+    {
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => 'update_time',
+            ],
+        ];
     }
 }
