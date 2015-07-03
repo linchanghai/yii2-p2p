@@ -15,7 +15,7 @@ use Yii;
 class BindEmailForm extends Model
 {
     public $email;
-
+    public $status;
 
     public function rules()
     {
@@ -24,35 +24,46 @@ class BindEmailForm extends Model
         ];
     }
 
+    public function __construct()
+    {
+        $memberModel = Yii::$app->user->identity;
+        $this->email = $memberModel->email;
+        $memberStatusModel = $memberModel->memberStatus;
+        if ($memberStatusModel) {
+            $this->status = $memberStatusModel->email_status;
+        } else {
+            $this->status = 0;
+        }
+    }
+
     /**
      * Sends an email with a link, for binding the email.
      * @return boolean whether the email was send
      */
     public function sendEmail()
     {
-        $memberModel = Kiwi::getMember()->find()->where(['member_id' => Yii::$app->user->id])->one();
-        if ($memberModel) {
-            $memberModel->email_verify_token = Yii::$app->security->generateRandomString() . '_' . time();
-            $memberStatusModel = $memberModel->memberStatus;
-            if ($memberStatusModel->email_status) {
-                $email = $memberModel->email;
-            } else {
-                $email = $this->email;
-            }
-            if ($memberModel->save()) {
-                return Yii::$app->mailer->compose('emailResetToken', ['email' => $memberModel, 'user' => Yii::$app->user->identity])
-                    ->setFrom(Yii::$app->params['supportEmail'])
-                    ->setTo($email)
-                    ->setSubject('email reset for ' . Yii::$app->name)
-                    ->send();
-            }
+        $memberModel = Yii::$app->user->identity;
+        $memberModel->email_verify_token = Yii::$app->security->generateRandomString() . '_' . time();
+        if ($this->status) {
+            $email = $memberModel->email;
+        } else {
+            $email = $this->email;
         }
-        return false;
+        if ($memberModel->save()) {
+            return Yii::$app->mailer->compose('emailResetToken', ['email' => $memberModel, 'user' => Yii::$app->user->identity])
+                ->setFrom(Yii::$app->params['supportEmail'])
+                ->setTo($email)
+                ->setSubject('email reset for ' . Yii::$app->name)
+                ->send();
+        } else {
+            return false;
+        }
+
     }
 
     public function setEmailStatus($token)
     {
-        $memberModel = Kiwi::getMember()->find()->where(array('email_verify_token' => $token))->one();
+        $memberModel = Kiwi::getMember()->find()->where(array('email_verify_token' => $token,'member_id'=>Yii::$app->user->id))->one();
         if ($memberModel) {
             $memberStatusModel = $memberModel->memberStatus;
             if ($memberStatusModel->email_status == 0) {

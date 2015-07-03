@@ -36,7 +36,7 @@ class ExchangeRecord extends \yii\db\ActiveRecord
     {
         return [
             ['note', 'default', 'value' => 'xxx'],
-            [['member_id', 'product_map_id', 'create_time'], 'required'],
+            [['member_id', 'product_map_id'], 'required'],
             [['member_id', 'product_map_id', 'create_time', 'is_delete'], 'integer'],
             [['note'], 'string', 'max' => 50]
         ];
@@ -88,12 +88,19 @@ class ExchangeRecord extends \yii\db\ActiveRecord
             ],
             'time' => [
                 'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'create_time'
+                'createdAtAttribute' => 'create_time',
+                 'updatedAtAttribute' => false,
             ],
         ];
     }
 
     public function getExpireDate(){
         return $this->productMap->duration + time();
+    }
+
+    public function transactions(){
+        return [
+            static::SCENARIO_DEFAULT => static::OP_ALL
+        ];
     }
 }
