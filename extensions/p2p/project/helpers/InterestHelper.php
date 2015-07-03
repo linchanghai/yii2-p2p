@@ -27,9 +27,11 @@ class InterestHelper
         $invest = [];
         $repayments = [];
 
+        $rate = $rate / 100;
+
         $repaymentDate = strtotime(date('Y-m-' . $repaymentDay));
         while ($repaymentDate < $endDate) {
-            $days = ($repaymentDate - $startDate) / 3600 / 24;
+            $days = ceil(($repaymentDate - $startDate) / 3600 / 24);
             $interestMoney = $money * $rate / 365 * $days;
             $principalMoney = 0;
             $repayments[] = [
@@ -43,7 +45,7 @@ class InterestHelper
         }
 
         $repaymentDate = $endDate;
-        $days = ($repaymentDate - $startDate) / 3600 / 24;
+        $days = ceil(($repaymentDate - $startDate) / 3600 / 24);
         $interestMoney =$money* $rate / 365 * $days;
         $principalMoney = $money;
         $repayments[] = [

@@ -12,6 +12,7 @@ namespace p2p\project\controllers\frontend;
 use kiwi\Kiwi;
 use kiwi\web\Controller;
 use yii\data\ActiveDataProvider;
+use yii\web\NotFoundHttpException;
 
 class ProjectController extends Controller
 {
@@ -28,5 +29,31 @@ class ProjectController extends Controller
         return $this->render('list', [
             'projects' => $dataProvider->models,
         ]);
+    }
+
+    public function actionDetails()
+    {
+        $project_id = \Yii::$app->request->get('project_id');
+
+        return $this->render('details', [
+            'project' => $this->findModel($project_id)
+        ]);
+    }
+
+    /**
+     * Finds the Project model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Project the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        $projectClass = Kiwi::getProjectClass();
+        if (($model = $projectClass::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

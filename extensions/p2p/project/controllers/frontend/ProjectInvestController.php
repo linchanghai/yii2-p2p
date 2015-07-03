@@ -9,16 +9,16 @@ use kiwi\web\Controller;
 
 class ProjectInvestController extends Controller
 {
-    public function actionPrepareInvest()
+    public function actionPrepareInvest($id)
     {
-        $InvestPrepareForm = Kiwi::getProjectInvestPrepareForm();
+        $InvestPrepareForm = Kiwi::getProjectInvestPrepareForm(['project_id' => $id]);
         if ($InvestPrepareForm->load(Yii::$app->request->post())) {
             $this->render('prepare', [
                 'InvestPrepareForm' => $InvestPrepareForm->getInvestInfo(),
             ]);
         } else {
-            return $this->render('create', [
-                'InvestPrepareForm' => $InvestPrepareForm,
+            return $this->render('prepare', [
+                'InvestPrepareForm' => $InvestPrepareForm->getInvestInfo(),
             ]);
         }
     }

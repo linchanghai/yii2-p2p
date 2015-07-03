@@ -2,6 +2,7 @@
 
 namespace core\member\models;
 
+use core\area\models\Area;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -45,7 +46,7 @@ class MemberBank extends \kiwi\db\ActiveRecord
             [['bank_user_name'], 'string', 'max' => 10],
             [['province', 'city'], 'string', 'max' => 20],
             [['branch_name'], 'string', 'max' => 60],
-            ['member_id','unique ']
+            ['member_id','unique']
         ];
     }
 
@@ -75,6 +76,10 @@ class MemberBank extends \kiwi\db\ActiveRecord
     public function getMember()
     {
         return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
+    }
+
+    public function getCityArea(){
+        return $this->hasOne(Area::className(),['area_id'=>'city']);
     }
 
     public function behaviors()

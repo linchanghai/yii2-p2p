@@ -139,9 +139,9 @@ class Member extends User
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getMemberBanks()
+    public function getMemberBank()
     {
-        return $this->hasMany(MemberBank::className(), ['member_id' => 'member_id']);
+        return $this->hasOne(MemberBank::className(), ['member_id' => 'member_id']);
     }
 
     /**

@@ -13,7 +13,7 @@ return [
         'values' => [
             Project::PROJECT_TYPE_NORMAL => Yii::t('p2p_project', 'Normal Project'),
             Project::PROJECT_TYPE_TRANSFER => Yii::t('p2p_project', 'Transfer Project'),
-            Project::PROJECT_TYPE_NOVICE=> Yii::t('p2p_project', 'Novice Project'),
+            Project::PROJECT_TYPE_NOVICE => Yii::t('p2p_project', 'Novice Project'),
         ]
     ],
 

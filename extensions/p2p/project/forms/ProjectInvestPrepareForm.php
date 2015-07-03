@@ -43,7 +43,7 @@ class ProjectInvestPrepareForm extends Model
     public function rules()
     {
         return [
-            [['money', 'project_id'], 'required'],
+            [['project_id'], 'required'],
             [['annual_id'], 'number'],
         ];
     }
@@ -93,6 +93,7 @@ class ProjectInvestPrepareForm extends Model
      */
     public function calculateInvest()
     {
+        $this->money = $this->money ?: $this->getProject()->min_money;
         $invest = Kiwi::getProjectInvest();
         $invest->project_id = $this->getProject()->project_id;
         $invest->member_id = Yii::$app->user->id;
