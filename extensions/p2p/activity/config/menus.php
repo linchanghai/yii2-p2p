@@ -14,13 +14,13 @@ return [
                         'label' => Yii::t('p2p_activity', 'Activity'),
                         'sort' => 100,
                         'url' => ['/p2p_activity/activity/index'],
-                        'activeUrls' => [['/p2p_activity/activity/create'], ['/p2p_project/activity/update']],
+                        'activeUrls' => [['/p2p_activity/activity/create'], ['/p2p_activity/activity/update']],
                     ],
                     'product' => [
                         'label' => Yii::t('p2p_activity', 'Product'),
                         'sort' => 200,
                         'url' => ['/p2p_activity/product/index'],
-                        'activeUrls' => [['/p2p_activity/product/create'], ['/p2p_project/project/update']],
+                        'activeUrls' => [['/p2p_activity/product/create'], ['/p2p_activity/product/update']],
                     ],
                 ]
             ]
