@@ -16,6 +16,6 @@ $projectRepayments = $InvestPrepareForm->projectRepayments;
 /** @var \p2p\project\models\ProjectRepayment $projectRepayment */
 foreach($projectRepayments as $projectRepayment) {
     ?>
-    <p>付息时间：<?= date('Y-h-d', $projectRepayment->repayment_date); ?></p>
+    <p>付息时间：<?= date('Y-m-d', $projectRepayment->repayment_date); ?></p>
     <p>支付利息：<?= $projectRepayment->interest_money; ?></p>
 <?php } ?>
