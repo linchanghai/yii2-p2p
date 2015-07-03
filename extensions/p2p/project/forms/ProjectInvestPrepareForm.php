@@ -147,7 +147,7 @@ class ProjectInvestPrepareForm extends Model
     public function saveInvest()
     {
         /** @var \p2p\project\models\ProjectInvest $invest */
-        $invest = $this->calculateInvest();
+        $invest = $this->getInvestInfo();
         if ($invest->save()) {
             return true;
         } else {
