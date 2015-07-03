@@ -19,6 +19,7 @@
 return [
     'Access Token' => '',
     'Are you sure you want to delete this item?' => '',
+    'Attribute' => '',
     'Auth Key' => '',
     'Email Verify Token' => '',
     'Is Delete' => '',

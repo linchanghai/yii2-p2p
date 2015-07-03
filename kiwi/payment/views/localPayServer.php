@@ -11,17 +11,17 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /** @var array $data */
 
-/** @var \kiwi\payment\Payment $payment */
-$payment = $this->context;
+/** @var \kiwi\payment\Payment $onlinePay */
+$onlinePay = $this->context;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>请不要关闭页面,支付跳转中.....</title>
+    <title>LocalPay</title>
 </head>
 <body>
-<form action="<?= $payment->paymentMethod->requestUrl ?>" name="pay" id="pay" method="POST">
+<form action="<?= Url::to($onlinePay->paymentMethod->requestUrl, true) ?>" name="pay" id="pay" method="POST">
 <?php foreach ($data as $key => $value) {
     echo Html::hiddenInput($key, $value);
 }

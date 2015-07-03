@@ -13,4 +13,6 @@ class Module extends \kiwi\base\Module
     public static $active = true;
 
     public static $version = 'v0.2.0';
+
+    public static $bootstrap = ['core\member\Bootstrap'];
 } 
