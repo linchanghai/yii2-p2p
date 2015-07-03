@@ -40,6 +40,7 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
 
     const TYPE_EXCHANGE_POINT = 13;
 
+    public $types = [];
     /**
      * @inheritdoc
      */
@@ -89,7 +90,7 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
             'time' => [
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'create_time',
-                'updatedAtAttribute' => 'false',
+                'updatedAtAttribute' => false,
             ],
         ];
     }
@@ -118,7 +119,7 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
                 'condition' => ['member_id' => $this->member_id],
             ],
             static::TYPE_EXCHANGE_POINT => [
-                'class' => Kiwi::getMemberStatisticClass(),
+                'targetClass' => Kiwi::getMemberStatisticClass(),
                 'attribute' => 'points',
                 'condition' => ['member_id' => $this->member_id],
             ],
