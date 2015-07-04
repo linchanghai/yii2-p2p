@@ -38,7 +38,7 @@ return [
     'Package Into Records' => '钱包转出记录',
     'Package Out Records' => '钱包转入记录',
     'Package Record ID' => '',
-    'Package out' => '钱包转入',
+    'Package Out' => '钱包转入',
     'Reset' => '',
     'Search' => '',
     'Target Date' => '收益日期',

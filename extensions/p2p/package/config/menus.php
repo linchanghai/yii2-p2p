@@ -22,12 +22,12 @@ return [
                         'url' => ['/p2p_package/package-interest-record/index'],
                     ],
                     'package_into' => [
-                        'label' => Yii::t('p2p_package', 'Package Into'),
+                        'label' => Yii::t('p2p_package', 'Package Into Records'),
                         'sort' => 200,
                         'url' => ['/p2p_package/package-record/into-index'],
                     ],
                     'package_out' => [
-                        'label' => Yii::t('p2p_package', 'Package out'),
+                        'label' => Yii::t('p2p_package', 'Package Out Records'),
                         'sort' => 300,
                         'url' => ['/p2p_package/package-record/out-index'],
                     ],
