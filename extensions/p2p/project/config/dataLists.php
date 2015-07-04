@@ -22,6 +22,8 @@ return [
             Project::PROJECT_STATUS_PENDING => Yii::t('p2p_project', 'Pending Check'),
             Project::PROJECT_STATUS_PASSED => Yii::t('p2p_project', 'Passed Check'),
             Project::PROJECT_STATUS_FAIlED => Yii::t('p2p_project', 'Failed Check'),
+            Project::PROJECT_STATUS_Repaying => Yii::t('p2p_project', 'Repaying Project'),
+            Project::PROJECT_STATUS_End => Yii::t('p2p_project', 'Project End'),
         ]
     ],
 

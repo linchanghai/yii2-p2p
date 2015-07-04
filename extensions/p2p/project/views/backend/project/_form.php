@@ -25,6 +25,9 @@ $projectClass = Kiwi::getProjectClass();
 if (!isset($model->status)) {
     $model->status = $projectClass::PROJECT_STATUS_PENDING;
 }
+
+$disabled = $model->status == $projectClass::PROJECT_STATUS_PENDING ? '' : 'disabled';
+
 ?>
 <div class="project-form">
 
@@ -32,7 +35,8 @@ if (!isset($model->status)) {
         'id' => 'project-form-horizontal',
         'type' => ActiveForm::TYPE_HORIZONTAL,
         'formConfig' => ['labelSpan' => 2],
-        'fullSpan' => 11
+        'fullSpan' => 11,
+        'disabled' => $disabled
     ]);
     $fieldGroups = [];
     $fields = ['<br />'];
@@ -116,11 +120,13 @@ if (!isset($model->status)) {
     echo Tabs::widget(['items' => $fieldGroups]);
     ?>
 
+    <?php if($disabled != 'disabled') { ?>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-9">
             <?= Html::submitButton($model->isNewRecord ? Yii::t('p2p_project', 'Create') : Yii::t('p2p_project', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         </div>
     </div>
+    <?php } ?>
 
     <?php ActiveForm::end(); ?>
 

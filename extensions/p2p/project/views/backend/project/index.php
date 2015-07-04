@@ -2,13 +2,27 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
+use kiwi\Kiwi;
 
 /* @var $this yii\web\View */
 /* @var $searchModel p2p\project\searches\ProjectSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+$projectClass = Kiwi::getProjectClass();
+if ($status == $projectClass::PROJECT_STATUS_PASSED) {
+    $this->title = Yii::t('p2p_project', 'Project Passed');
+} else if ($status == $projectClass::PROJECT_STATUS_FAIlED) {
+    $this->title = Yii::t('p2p_project', 'Project Failed');
+} else if ($status == $projectClass::PROJECT_STATUS_Repaying) {
+    $this->title = Yii::t('p2p_project', 'Project Repaying');
+} else if ($status == $projectClass::PROJECT_STATUS_End) {
+    $this->title = Yii::t('p2p_project', 'Project End');
+}
 $this->title = Yii::t('p2p_project', 'Projects');
 $this->params['breadcrumbs'][] = $this->title;
+
+$projectClass = Kiwi::getProjectClass();
+$createButton = $status == $projectClass::PROJECT_STATUS_PENDING ? true : false;
 ?>
 <div class="project-index">
 
@@ -46,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'export' => false,
         'responsive' => true,
-        'toolbar' => Html::a(Yii::t('p2p_project', 'Create Project'), ['create'], ['class' => 'btn btn-info']),
+        'toolbar' => $createButton ? Html::a(Yii::t('p2p_project', 'Create Project'), ['create'], ['class' => 'btn btn-info']) : $createButton,
         'containerOptions' => ['style' => 'overflow: auto'], // only set when $responsive = false
         'headerRowOptions' => ['class' => 'kartik-sheet-style'],
         'filterRowOptions' => ['class' => 'kartik-sheet-style'],
@@ -54,6 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'type' => GridView::TYPE_DEFAULT,
 //            'before' => Html::a(Yii::t('p2p_project', 'Create Project'), ['create'], ['class' => 'btn btn-info']),
+            'before' => $createButton ? '' : false,
             'after' => false,
             'footer' => false
         ],
