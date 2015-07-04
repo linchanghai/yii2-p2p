@@ -2,6 +2,7 @@
 
 namespace p2p\package\models;
 
+use kiwi\Kiwi;
 use Yii;
 
 /**
@@ -60,14 +61,6 @@ class PackageInterestRecord extends \kiwi\db\ActiveRecord
      */
     public function getMember()
     {
-        return $this->hasOne(PackageInterestRecord::className(), ['package_interest_record_id' => 'member_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPackageInterestRecords()
-    {
-        return $this->hasMany(PackageInterestRecord::className(), ['member_id' => 'package_interest_record_id']);
+        return $this->hasOne(Kiwi::getMemberClass(), ['member_id' => 'member_id']);
     }
 }

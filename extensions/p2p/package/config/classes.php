@@ -9,5 +9,8 @@ return [
     'class' => [
         'PackageInterestRecord' => 'p2p\package\models\PackageInterestRecord',
         'PackageRecord' => 'p2p\package\models\PackageRecord',
+
+        'PackageInterestRecordSearch' => 'p2p\package\searches\PackageInterestRecordSearch',
+        'PackageRecordSearch' => 'p2p\package\searches\PackageRecordSearch',
     ],
 ];

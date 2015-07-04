@@ -38,7 +38,7 @@ class OutPackageForm extends Model
     public function attributeLabels()
     {
         return [
-            'money' => Yii::t('p2p_package', 'Out money'),
+            'money' => Yii::t('p2p_package', 'Out Money'),
         ];
     }
 
