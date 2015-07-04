@@ -87,6 +87,10 @@ class NotificationServices extends Service
      */
     public function sendMessage($to, $content, $title)
     {
-        return true;
+        return Yii::$app->message->compose()
+            ->setContent($content)
+            ->setTitle($title)
+            ->setTo($to)
+            ->send();
     }
 } 

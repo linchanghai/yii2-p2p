@@ -3,6 +3,7 @@
 namespace core\message\models;
 
 use Yii;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "{{%message}}".
@@ -52,5 +53,56 @@ class Message extends \kiwi\db\ActiveRecord
             'status' => Yii::t('core_message', 'Status'),
             'created_at' => Yii::t('core_message', 'Created At'),
         ];
+    }
+
+    /**
+     * @param \core\message\services\Messager $messager
+     * @return bool
+     */
+    public function send($messager = null)
+    {
+        $messager = $messager ?: Yii::$app->message;
+        return $messager->send($this);
+    }
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    public function setContent($content)
+    {
+        $this->content = $content;
+        return $this;
+    }
+
+    /**
+     * @param IdentityInterface|array|string|int $to
+     * @return $this
+     */
+    public function setTo($to)
+    {
+        $this->to = $this->handleFromTo($to);
+        return $this;
+    }
+
+    public function setFrom($from)
+    {
+        $this->from = $this->handleFromTo($from);
+        return $this;
+    }
+
+    protected function handleFromTo($fromTo)
+    {
+        if ($fromTo instanceof IdentityInterface) {
+            $fromTo = $fromTo->getId();
+        } else if (is_array($fromTo)) {
+            /** @var IdentityInterface $identityClass */
+            $identityClass = Yii::$app->user->identityClass;
+            $fromTo = $identityClass::findOne($fromTo);
+            $fromTo = $fromTo->getId();
+        }
+        return $fromTo;
     }
 }
