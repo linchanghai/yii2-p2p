@@ -19,20 +19,30 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'activity_records_id',
-            'member_id',
+            [
+                'attribute'=>'member_id',
+                'vAlign'=>'middle',
+                'width'=>'180px',
+                'value'=>function ($model, $key, $index, $widget) {
+                    $member = \kiwi\Kiwi::getMember()->findOne($model->member_id);
+                    return $member->username;
+                },
+                'filterType'=>GridView::FILTER_SELECT2,
+                'filter'=>\kiwi\helpers\ArrayHelper::map(\kiwi\Kiwi::getMember()->find()->orderBy('username')->asArray()->all(), 'member_id', 'username'),
+                'filterWidgetOptions'=>[
+                    'pluginOptions'=>['allowClear'=>true],
+                ],
+                'filterInputOptions'=>['placeholder'=>'Any author'],
+                'format'=>'raw'
+            ],
             'activity_id',
             'note',
             'create_time',
             // 'is_delete',
 
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '<div style="width: 30px">{update} {delete}</div>'
-            ],
         ],
         'export' => false,
         'responsive' => true,
-        'toolbar' => Html::a(Yii::t('p2p_activity', 'Create Activity Records'), ['create'], ['class' => 'btn btn-info']),
         'containerOptions' => ['style' => 'overflow: auto'], // only set when $responsive = false
         'headerRowOptions' => ['class' => 'kartik-sheet-style'],
         'filterRowOptions' => ['class' => 'kartik-sheet-style'],

@@ -16,7 +16,6 @@ use kartik\widgets\ActiveForm;
         'fullSpan' => 11
     ]); ?>
 
-    <?= $form->field($model, 'coupon_annual_record_id')->textInput() ?>
 
     <?= $form->field($model, 'project_invest_id')->textInput() ?>
 
@@ -31,8 +30,6 @@ use kartik\widgets\ActiveForm;
     <?= $form->field($model, 'interst_money')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'create_time')->textInput() ?>
-
-    <?= $form->field($model, 'is_delete')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('p2p_activity', 'Create') : Yii::t('p2p_activity', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
