@@ -23,6 +23,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $projectClass = Kiwi::getProjectClass();
 $createButton = $status == $projectClass::PROJECT_STATUS_PENDING ? true : false;
+if($createButton) {
+    $buttonTemplate = '<div style="width: 30px">{update} {delete}</div>';
+} else {
+    $buttonTemplate = '<div style="width: 30px">{update}</div>';
+}
 ?>
 <div class="project-index">
 
@@ -38,11 +43,25 @@ $createButton = $status == $projectClass::PROJECT_STATUS_PENDING ? true : false;
             'project_name',
             'project_no',
             'invest_total_money',
-            'interest_rate',
+            [
+                'label' => Yii::t('p2p_project', 'Interest Rate') . '(%)',
+                'attribute'=>'interest_rate',
+            ],
             // 'repayment_date',
-            'repayment_type',
+            [
+                'attribute'=>'repayment_type',
+                'value'=>function ($model) {
+                    return Kiwi::getDataListModel()->projectRepaymentType[$model->repayment_type] ;
+                },
+                'width' => '175px'
+            ],
             // 'release_date',
-            'project_type',
+            [
+                'attribute'=>'project_type',
+                'value'=>function ($model) {
+                    return Kiwi::getDataListModel()->projectType[$model->project_type] ;
+                },
+            ],
             // 'create_user',
             'invested_money',
             // 'verify_user',
@@ -55,7 +74,7 @@ $createButton = $status == $projectClass::PROJECT_STATUS_PENDING ? true : false;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '<div style="width: 30px">{update} {delete}</div>'
+                'template' => $buttonTemplate
             ],
         ],
         'export' => false,
@@ -70,7 +89,7 @@ $createButton = $status == $projectClass::PROJECT_STATUS_PENDING ? true : false;
 //            'before' => Html::a(Yii::t('p2p_project', 'Create Project'), ['create'], ['class' => 'btn btn-info']),
             'before' => $createButton ? '' : false,
             'after' => false,
-            'footer' => false
+            'footer' => false,
         ],
     ]); ?>
 

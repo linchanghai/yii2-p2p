@@ -4,7 +4,6 @@ namespace p2p\project\controllers\backend;
 
 use kiwi\helpers\ArrayHelper;
 use kiwi\Kiwi;
-use p2p\project\models\Project;
 use Yii;
 use kiwi\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -38,13 +37,18 @@ class ProjectController extends Controller
      */
     public function actionIndex()
     {
+        $projectClass = Kiwi::getProjectClass();
         $searchModel = Kiwi::getProjectSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider =  $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
+            'ProjectSearch' => [
+                'status' => [$projectClass::PROJECT_STATUS_PENDING, $projectClass::PROJECT_STATUS_PASSED],
+                'id_delete' => 0,
+            ]]));
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'status' => Project::PROJECT_STATUS_PENDING,
+            'status' => $projectClass::PROJECT_STATUS_PENDING,
         ]);
     }
 
