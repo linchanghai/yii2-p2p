@@ -2,7 +2,9 @@
 
 namespace p2p\project\controllers\backend;
 
+use kiwi\helpers\ArrayHelper;
 use kiwi\Kiwi;
+use p2p\project\models\Project;
 use Yii;
 use kiwi\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -13,6 +15,11 @@ use yii\filters\VerbFilter;
  */
 class ProjectController extends Controller
 {
+    public function getViewPath()
+    {
+        return $this->module->getViewPath() . DIRECTORY_SEPARATOR . 'project';
+    }
+
     public function behaviors()
     {
         return [
@@ -37,6 +44,7 @@ class ProjectController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'status' => Project::PROJECT_STATUS_PENDING,
         ]);
     }
 

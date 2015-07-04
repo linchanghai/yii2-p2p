@@ -17,20 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Create Time' => '',
-    'Is Delete' => '',
-    'Member ID' => '',
-    'Recharge Record ID' => '',
-    'Status' => '',
-    'Transaction ID' => '',
-    'Update Time' => '',
-    'Use For ID' => '',
-    'Use For Type' => '',
-    'Error recharge method' => '@@@@',
-    'Project Invest ID' => '@@@@',
-    'Use For' => '@@@@',
-    'Money' => '金额',
-    'Recharge Type' => '充值方式',
-    'Recharge method' => '充值方式',
-    'Recharge money' => '充值金额',
+    'Area ID' => '',
+    'Grade' => '',
+    'Language' => '',
+    'Name' => '',
+    'Parent ID' => '',
+    'Path' => '',
 ];

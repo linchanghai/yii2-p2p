@@ -4,6 +4,7 @@ namespace p2p\project\controllers\backend;
 
 use kiwi\helpers\ArrayHelper;
 use kiwi\Kiwi;
+use p2p\project\models\Project;
 use p2p\withdraw\migrations\v0_1_0;
 use Yii;
 use kiwi\web\Controller;
@@ -34,7 +35,11 @@ class ProjectCheckController extends Controller
     public function actionIndex()
     {
         $searchModel = Kiwi::getProjectSearch();
-        $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, ['ProjectSearch' => ['status' => 0, 'id_delete' => 0,]]));
+        $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
+            'ProjectSearch' => [
+                'status' => Project::PROJECT_STATUS_PENDING,
+                'id_delete' => 0,
+            ]]));
 
         return $this->render('index', [
             'searchModel' => $searchModel,
