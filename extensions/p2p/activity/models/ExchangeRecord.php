@@ -2,7 +2,9 @@
 
 namespace p2p\activity\models;
 
+use kiwi\behaviors\ChangeLogBehavior;
 use kiwi\behaviors\RecordBehavior;
+use kiwi\Kiwi;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -75,6 +77,7 @@ class ExchangeRecord extends \yii\db\ActiveRecord
 
     public function behaviors()
     {
+        $changeRecordClass = Kiwi::getStatisticChangeRecordClass();
         return [
             'coupon' => [
                 'class' => RecordBehavior::className(),
@@ -84,6 +87,16 @@ class ExchangeRecord extends \yii\db\ActiveRecord
                     'type' => 'productMap.type',
                     'value' => 'productMap.exchange_value',
                     'expire_date' => 'expireDate',
+                ],
+            ],
+            'updatePoint' => [
+                'class' => RecordBehavior::className(),
+                'targetClass' => 'core\member\models\StatisticChangeRecord',
+                'attributes' => [
+                    'member_id'=> 'member_id',
+                    'type' => $changeRecordClass::TYPE_EXCHANGE_POINT,
+                    'value' => function($record) { return -$record->productMap->exchange_value; },
+                    'link_id' => 'exchange_records_id'
                 ],
             ],
             'time' => [

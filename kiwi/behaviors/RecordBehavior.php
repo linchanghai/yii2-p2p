@@ -55,16 +55,18 @@ class RecordBehavior extends Behavior
      */
     public function createRecord($event)
     {
-        $target = Yii::createObject($this->targetClass);
+        $targetConfig = [];
         foreach ($this->attributes as $key => $value) {
-            if (CheckHelper::isCallable($value)) {
-                $target->$key = call_user_func($value, $event->sender);
-            } else if (is_string($value)) {
-                $target->$key = ArrayHelper::getValue($event->sender, $value);
+            if (is_int($value)) {
+                $targetConfig[$key] = $value;
+            } else if (CheckHelper::isCallable($value)) {
+                $targetConfig[$key] = call_user_func($value, $event->sender);
             } else {
-                throw new Exception('Error attribute');
+                $targetConfig[$key] = ArrayHelper::getValue($event->sender, $value);
             }
         }
+        $targetConfig['class'] = $this->targetClass;
+        $target = Yii::createObject($targetConfig);
 
         if (!$target->save()) {
             throw new Exception('Save target error: ' . Json::encode($target));

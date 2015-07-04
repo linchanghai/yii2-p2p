@@ -45,8 +45,8 @@ class MemberStatistic extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['project_total_money', 'points', 'bonus', 'used_bonus', 'empirical_value', 'is_first_invest'], 'integer'],
-            [['account_money', 'freezon_money', 'package_money', 'package_earning', 'project_earning', 'collect_principal', 'collect_interest'], 'number']
+            [['project_total_money', 'points', 'bonus', 'used_bonus', 'empirical_value', 'is_first_invest'], 'integer', 'min' => 0],
+            [['account_money', 'freezon_money', 'package_money', 'package_earning', 'project_earning', 'collect_principal', 'collect_interest'], 'number', 'min' => 0]
         ];
     }
 

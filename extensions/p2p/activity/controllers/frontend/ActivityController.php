@@ -27,9 +27,24 @@ class ActivityController extends Controller
     }
 
     public function actionListCoupon(){
-        $ProductMap = Kiwi::getProductMap()->find()->all();
+        $productMapModel =  Kiwi::getProductMap();
+
+        if(Yii::$app->request->isPost){
+            $id = Yii::$app->request->post('id') ;
+            if (($model = $productMapModel->findOne($id)) !== null) {
+                if(Kiwi::getExchangeRecord(['product_map_id'=>$id,'member_id'=>Yii::$app->user->id])->save()) {
+                    Yii::$app->session->setFlash('success',Yii::t('p2p_activity','exchange success'));
+                }
+            }
+        }
+
+        $CouponBonus =$productMapModel->find()->where(['type'=>$productMapModel::CouponBonus])->limit(4)->all();
+        $CouponCash = $productMapModel->find()->where(['type'=>$productMapModel::CouponCash])->limit(4)->all();
+        $CouponAnnual= $productMapModel->find()->where(['type'=>$productMapModel::CouponAnnual])->limit(2)->all();
         return $this->render('listCoupon',[
-            'ProductMap'=>$ProductMap
+            'CouponBonus'=>$CouponBonus,
+            'CouponCash'=>$CouponCash,
+            'CouponAnnual'=>$CouponAnnual,
         ]);
     }
 } 
