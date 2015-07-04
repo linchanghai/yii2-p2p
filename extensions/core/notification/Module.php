@@ -10,5 +10,7 @@ namespace core\notification;
 
 class Module extends \kiwi\base\Module
 {
+    public static $active = true;
 
+    public static $bootstrap = ['core\notification\Bootstrap'];
 } 
