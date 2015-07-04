@@ -4,13 +4,14 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel p2p\activity\searches\ActivityRecordSearch */
+/* @var $searchModel p2p\withdraw\searches\WithdrawRecordSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('p2p_activity', 'Activity Records');
+$this->title = Yii::t('p2p_withdraw', 'Withdraw Records');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="activity-record-index">
+<div class="withdraw-record-index">
+
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -18,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'activity_records_id',
+            'deposit_record_id',
             [
                 'attribute'=>'member_id',
                 'vAlign'=>'middle',
@@ -35,10 +36,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterInputOptions'=>['placeholder'=>'Any author'],
                 'format'=>'raw'
             ],
-            'activity_id',
-            'note',
-            'create_time',
+            'money',
+            'counter_fee',
+            'deposit_type',
+             'first_verify_user',
+             'first_verify_date',
+             'second_verify_user',
+             'second_verify_date',
+             'status',
+             'create_time:datetime',
+             'update_time:datetime',
             // 'is_delete',
+
 
         ],
         'export' => false,

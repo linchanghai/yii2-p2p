@@ -18,10 +18,35 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
 //            'product_map_id',
-            'type',
+            [
+                'attribute'=>'type',
+                'vAlign'=>'middle',
+                'width'=>'180px',
+                'value'=>function ($model, $key, $index, $widget) {
+                    $productModel = \kiwi\Kiwi::getProductMap()->findOne($model->product_map_id);
+                    $status = $productModel->getTypeArray();
+                    return $status[$productModel->type];
+                },
+                'filterType'=>GridView::FILTER_SELECT2,
+                'filter'=>[ 1 => Yii::t('p2p_activity', 'Coupon Bonus'),
+                    2 => Yii::t('p2p_activity', 'Coupon Cash'),
+                    3 => Yii::t('p2p_activity', 'Coupon Annual'),],
+                'filterWidgetOptions'=>[
+                    'pluginOptions'=>['allowClear'=>true],
+                ],
+                'filterInputOptions'=>['placeholder'=>'Any Type'],
+                'format'=>'raw'
+            ],
             'exchange_value',
             'exchange_points',
-            'duration',
+            [
+                'attribute'=>'duration',
+                'vAlign'=>'middle',
+                'width'=>'180px',
+                'value'=>function ($model, $key, $index, $widget) {
+                    return $model->duration.'天';
+                }
+            ],
              'create_time:datetime',
              'update_time:datetime',
             // 'is_delete',

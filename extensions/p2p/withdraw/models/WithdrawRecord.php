@@ -2,33 +2,41 @@
 
 namespace p2p\withdraw\models;
 
-use kiwi\Kiwi;
 use Yii;
 
 /**
- * This is the model class for table "{{%deposit_record}}".
+ * This is the model class for table "deposit_record".
  *
  * @property integer $deposit_record_id
  * @property integer $member_id
  * @property string $money
  * @property string $counter_fee
  * @property string $deposit_type
- * @property string $verify_user
- * @property integer $verify_date
+ * @property string $first_verify_user
+ * @property integer $first_verify_date
+ * @property string $second_verify_user
+ * @property integer $second_verify_date
+ * @property integer $status
  * @property integer $create_time
  * @property integer $update_time
  * @property integer $is_delete
- *
- * @property \core\member\models\Member $member
  */
-class DepositRecord extends \kiwi\db\ActiveRecord
+class WithdrawRecord extends \kiwi\db\ActiveRecord
 {
+    const TYPE_AUTO = 1;
+    const TYPE_MANUAL = 2;
+
+    const STATUS_PENDING = 0;
+    const STATUS_SUCCESS = 1;
+    const STATUS_FAIL = 2;
+    const STATUS_FIRST_VERIFY_SUCCESS = 3;
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%deposit_record}}';
+        return 'deposit_record';
     }
 
     /**
@@ -38,10 +46,10 @@ class DepositRecord extends \kiwi\db\ActiveRecord
     {
         return [
             [['member_id', 'money', 'counter_fee', 'create_time'], 'required'],
-            [['member_id', 'verify_date', 'create_time', 'update_time', 'is_delete'], 'integer'],
+            [['member_id', 'first_verify_date', 'second_verify_date', 'status', 'create_time', 'update_time', 'is_delete'], 'integer'],
             [['money', 'counter_fee'], 'number'],
             [['deposit_type'], 'string', 'max' => 45],
-            [['verify_user'], 'string', 'max' => 80]
+            [['first_verify_user', 'second_verify_user'], 'string', 'max' => 80]
         ];
     }
 
@@ -56,19 +64,14 @@ class DepositRecord extends \kiwi\db\ActiveRecord
             'money' => Yii::t('p2p_withdraw', 'Money'),
             'counter_fee' => Yii::t('p2p_withdraw', 'Counter Fee'),
             'deposit_type' => Yii::t('p2p_withdraw', 'Deposit Type'),
-            'verify_user' => Yii::t('p2p_withdraw', 'Verify User'),
-            'verify_date' => Yii::t('p2p_withdraw', 'Verify Date'),
+            'first_verify_user' => Yii::t('p2p_withdraw', 'First Verify User'),
+            'first_verify_date' => Yii::t('p2p_withdraw', 'First Verify Date'),
+            'second_verify_user' => Yii::t('p2p_withdraw', 'Second Verify User'),
+            'second_verify_date' => Yii::t('p2p_withdraw', 'Second Verify Date'),
+            'status' => Yii::t('p2p_withdraw', 'Status'),
             'create_time' => Yii::t('p2p_withdraw', 'Create Time'),
             'update_time' => Yii::t('p2p_withdraw', 'Update Time'),
             'is_delete' => Yii::t('p2p_withdraw', 'Is Delete'),
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMember()
-    {
-        return $this->hasOne(Kiwi::getMemberClass(), ['member_id' => 'member_id']);
     }
 }

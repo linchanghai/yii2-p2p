@@ -2,6 +2,9 @@
 
 namespace p2p\activity\models;
 
+use core\member\models\Member;
+use p2p\project\models\Project;
+use p2p\project\models\ProjectInvest;
 use Yii;
 
 /**

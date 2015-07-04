@@ -22,7 +22,7 @@ use kartik\widgets\ActiveForm;
 
     <?= $form->field($model, 'exchange_points')->textInput() ?>
 
-    <?= $form->field($model, 'duration')->textInput() ?>
+    <?= $form->field($model, 'duration')->textInput(['placeholder'=>'有效期天数，即几天之后过期']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('p2p_activity', 'Create') : Yii::t('p2p_activity', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

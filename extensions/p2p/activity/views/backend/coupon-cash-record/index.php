@@ -18,23 +18,41 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'coupon_cash_record_id',
-            'project_invest_id',
-            'project_id',
-            'member_id',
-            'member_coupon_id',
-            // 'discount_money',
-            // 'create_time:datetime',
-            // 'is_delete',
 
             [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '<div style="width: 30px">{update} {delete}</div>'
+                'label'=>Yii::t('p2p_activity', 'Type'),
+                'attribute'=>'coupon_cash_record_id',
+                'vAlign'=>'middle',
+                'width'=>'180px',
+                'value'=>function ($model, $key, $index, $widget) {
+                    return '现金券';
+                },
             ],
+            'project.project_name',
+            [
+                'attribute'=>'member_id',
+                'vAlign'=>'middle',
+                'width'=>'180px',
+                'value'=>function ($model, $key, $index, $widget) {
+                    $member = \kiwi\Kiwi::getMember()->findOne($model->member_id);
+                    return $member->username;
+                },
+                'filterType'=>GridView::FILTER_SELECT2,
+                'filter'=>\kiwi\helpers\ArrayHelper::map(\kiwi\Kiwi::getMember()->find()->orderBy('username')->asArray()->all(), 'member_id', 'username'),
+                'filterWidgetOptions'=>[
+                    'pluginOptions'=>['allowClear'=>true],
+                ],
+                'filterInputOptions'=>['placeholder'=>'Any author'],
+                'format'=>'raw'
+            ],
+             'discount_money',
+             'create_time:datetime',
+            // 'is_delete',
+
+
         ],
         'export' => false,
         'responsive' => true,
-        'toolbar' => Html::a(Yii::t('p2p_activity', 'Create Coupon Cash Records'), ['create'], ['class' => 'btn btn-info']),
         'containerOptions' => ['style' => 'overflow: auto'], // only set when $responsive = false
         'headerRowOptions' => ['class' => 'kartik-sheet-style'],
         'filterRowOptions' => ['class' => 'kartik-sheet-style'],

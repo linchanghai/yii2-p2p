@@ -2,16 +2,16 @@
 
 return [
     'activity' => [
-        'label' => Yii::t('p2p_activity', 'Activity'),
+        'label' => Yii::t('p2p_activity', 'ActivityManagement'),
         'sort' => 2000,
         'url' => ['/p2p_activity/product/index'],
         'items' => [
             'activity' => [
-                'label' => Yii::t('p2p_activity', 'Activity'),
-                'sort' => 300,
+                'label' => Yii::t('p2p_activity', 'ActivityManagement'),
+                'sort' => 100,
                 'items' => [
                     'activity' => [
-                        'label' => Yii::t('p2p_activity', 'Activity'),
+                        'label' => Yii::t('p2p_activity', 'ActivityManagement'),
                         'sort' => 100,
                         'url' => ['/p2p_activity/activity/index'],
                         'activeUrls' => [['/p2p_activity/activity/create'], ['/p2p_activity/activity/update']],
@@ -22,12 +22,18 @@ return [
                         'url' => ['/p2p_activity/product/index'],
                         'activeUrls' => [['/p2p_activity/product/create'], ['/p2p_activity/product/update']],
                     ],
-                    'exchangeRecord' => [
-                        'label' => Yii::t('p2p_activity', 'ExchangeRecord'),
-                        'sort' => 300,
-                        'url' => ['/p2p_activity/exchange-record/index'],
-                        'activeUrls' => [['/p2p_activity/exchange-record/create'], ['/p2p_activity/exchange-record/update']],
-                    ],
+
+                ]
+            ],
+            'record' => [
+                'label' => Yii::t('p2p_activity', 'RecordManagement'),
+                'sort' => 200,
+                'items' => [ 'exchangeRecord' => [
+                    'label' => Yii::t('p2p_activity', 'ExchangeRecord'),
+                    'sort' => 300,
+                    'url' => ['/p2p_activity/exchange-record/index'],
+                    'activeUrls' => [['/p2p_activity/exchange-record/create'], ['/p2p_activity/exchange-record/update']],
+                ],
                     'annualRecord' => [
                         'label' => Yii::t('p2p_activity', 'AnnualRecord'),
                         'sort' => 400,

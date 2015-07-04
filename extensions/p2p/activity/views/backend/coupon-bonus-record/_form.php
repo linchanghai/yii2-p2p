@@ -28,8 +28,6 @@ use kartik\widgets\ActiveForm;
 
     <?= $form->field($model, 'create_time')->textInput() ?>
 
-    <?= $form->field($model, 'is_delete')->textInput() ?>
-
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('p2p_activity', 'Create') : Yii::t('p2p_activity', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

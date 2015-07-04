@@ -7,6 +7,6 @@
 
 return [
     'class' => [
-        'DepositRecord' => 'p2p\withdraw\models\DepositRecord',
+        'WithdrawRecord' => 'p2p\withdraw\models\WithdrawRecord',
     ],
 ];

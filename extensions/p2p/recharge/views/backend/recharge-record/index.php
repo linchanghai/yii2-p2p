@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel p2p\activity\searches\ActivityRecordSearch */
+/* @var $searchModel p2p\recharge\models\RechargeRecordSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('p2p_activity', 'Activity Records');
+$this->title = Yii::t('p2p_recharge', 'Recharge Records');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="activity-record-index">
+<div class="recharge-record-index">
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -18,7 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'activity_records_id',
+//            'recharge_record_id',
+            'transaction_id',
             [
                 'attribute'=>'member_id',
                 'vAlign'=>'middle',
@@ -35,9 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterInputOptions'=>['placeholder'=>'Any author'],
                 'format'=>'raw'
             ],
-            'activity_id',
-            'note',
-            'create_time',
+            'money',
+            'recharge_type',
+             'status',
+             'create_time:datetime',
+             'update_time:datetime',
             // 'is_delete',
 
         ],
@@ -53,6 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'after' => false,
             'footer' => false
         ],
+
 
     ]); ?>
 

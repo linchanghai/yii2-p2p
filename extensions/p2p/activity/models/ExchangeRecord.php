@@ -95,7 +95,7 @@ class ExchangeRecord extends \yii\db\ActiveRecord
                 'attributes' => [
                     'member_id'=> 'member_id',
                     'type' => $changeRecordClass::TYPE_EXCHANGE_POINT,
-                    'value' => function($record) { return -$record->productMap->exchange_value; },
+                    'value' => function($record) { return -$record->productMap->exchange_points; },
                     'link_id' => 'exchange_records_id'
                 ],
             ],
