@@ -68,7 +68,7 @@ $createButton = $status == $projectClass::PROJECT_STATUS_PENDING ? true : false;
         'panel' => [
             'type' => GridView::TYPE_DEFAULT,
 //            'before' => Html::a(Yii::t('p2p_project', 'Create Project'), ['create'], ['class' => 'btn btn-info']),
-            'before' => $createButton,
+            'before' => $createButton ? '' : false,
             'after' => false,
             'footer' => false
         ],
