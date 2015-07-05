@@ -40,7 +40,6 @@ require(["jquery","common","textslider"],function($,c){
                 leastLine.html(Number($(this).val())*leastIntegral);
             }
 
-
         });
 
     });
