@@ -114,9 +114,9 @@
                         <div class="clearFix">
                             <label class="fl">投资金额:</label>
                             <div class="fl ml10 moneyArea">
-                                <span class="operate minus">-</span>
-                                <input type="text" name="" value="1000" class="investMoney" />
-                                <span class="operate plus">+</span>
+                                <span class="fl operate minus">-</span>
+                                <input type="text" name="" value="1000" class="fl investMoney" />
+                                <span class="fl operate plus">+</span>
                             </div>
                         </div>
                         <p class="mt20">账户余额: <span id="myMoney">1000</span>元 </p>
