@@ -174,3 +174,89 @@
 .progressWrapDetail2{
   border-left: 1px #ddd solid;
 }
+.investArea{
+  width: 250px;
+  height: 230px;
+  padding: 10px 15px;
+  margin-left: 30px;
+  background: #fff;
+}
+.toInvestArea{
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px #ECECEC solid;
+}
+.toInvest{
+  width: 70%;
+  height: 36px;
+  line-height: 36px;
+  cursor: pointer;
+}
+.toCalc{
+  width: 26%;
+  margin-left: 4%;
+  background-color: $secondColor;
+}
+.investRuleTap{
+  padding: 0 20px;
+  border-bottom: $borderColor;
+  li{
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 30px;
+    border-bottom: 3px transparent solid;
+    margin-bottom: -3px;
+    cursor: pointer;
+  }
+  .active{
+    color: $secondColor;
+    border-color: $secondColor;
+  }
+}
+.investRuleDetail{
+  padding: 0 20px;
+  .table .textRight{
+    color: #666;
+  }
+}
+.investSingleRule{
+  padding-top: 20px;
+}
+.investSingleRule1{
+  width: 52%;
+}
+.investModalArea{
+  width: 320px;
+}
+.prepInvest{
+  padding: 20px 40px;
+}
+.minus,.plus{
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  line-height: 23px;
+  background: $secondColor;
+  cursor: pointer;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+}
+.investMoney{
+  width: 180px;
+  padding-left: 10px;
+  height: 25px;
+  line-height: 24px;
+  border: none;
+  background: $backColor;
+  color: $secondColor;
+  text-align: center;
+}
+.investNow{
+  width: 100px;
+}
+.investSingleMoney{
+  padding-top: 20px;
+  border-top: 1px #e5e5e5 solid;
+}

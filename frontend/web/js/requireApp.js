@@ -3,11 +3,13 @@ requirejs.config({
     paths: {
         "jquery" : "jquery.min",
         "bxslider": "jquery.bxslider.min",
-        "textslider": "jquery.textslider"
+        "textslider": "jquery.textslider",
+        "modal": "modal"
     },
     shim:{
         "bxslider": ["jquery"],
-        "textslider":["jquery"]
+        "textslider":["jquery"],
+        "modal": ["jquery"]
     //    "cartFly":["jquery"],
     //    "modal": ["jquery"],
     //    "placeholder":["jquery"],
