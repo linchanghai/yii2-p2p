@@ -1,5 +1,5 @@
 <?php
-
+use yii\helpers\Url;
 $this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/invest.min.css', ['depends' => [\frontend\assets\RequireAsset::className()]]);
 
 $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/integral.js', ['depends' => [\frontend\assets\RequireAsset::className()]]);
@@ -8,11 +8,6 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/integral.js', ['depe
 <div class="indexNotice backGrey" id="textSlider">
 
     <ul class="container">
-        <?php
-        if(Yii::$app->session->hasFlash('success')){
-            echo Yii::$app->session->getFlash('success');
-        }
-        ?>
         <li>用户: 188 **** 8888 成功领取红包 <label class="themeColor">50</label> 元</li>
         <li>用户: 187 **** 8888 成功领取红包 <label class="themeColor">60</label> 元</li>
         <li>用户: 186 **** 8888 成功领取红包 <label class="themeColor">70</label> 元</li>
@@ -51,10 +46,6 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/integral.js', ['depe
         foreach($CouponBonus as $coupon){
             ?>
             <div class="integralItem">
-                <?php $form = \yii\widgets\ActiveForm::begin([
-                    'method' => 'post'
-                ]) ?>
-                <?= \yii\helpers\Html::hiddenInput('id', $coupon->product_map_id); ?>
                 <div class="integralItemTitle">钻点红包</div>
                 <div class="mt10 integralItemDetail">
                     <?= $coupon->exchange_value?>元
@@ -62,9 +53,8 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/integral.js', ['depe
                 <p class="textLeft mt10"><?= $coupon->exchange_value?>元红包</p>
                 <div class="clearFix integralItemBottom">
                     <div class="fl left"><?= $coupon->exchange_points?>分</div>
-                        <?= \yii\helpers\Html::submitButton('换购',['class'=>'fr btn'])?>
+                        <?= \yii\helpers\Html::a('换购',Url::to(['/activity/activity/view','id'=>$coupon->product_map_id]),['class'=>'fr btn'])?>
                 </div>
-                <?php $form::end() ?>
             </div>
         <?php }
 
@@ -82,10 +72,7 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/integral.js', ['depe
             foreach($CouponCash as $coupon){
                 ?>
                 <div class="integralItem">
-                    <?php $form = \yii\widgets\ActiveForm::begin([
-                        'method' => 'post'
-                    ]) ?>
-                    <?= \yii\helpers\Html::hiddenInput('id', $coupon->product_map_id); ?>
+
                     <div class="integralItemTitle">钻点现金券</div>
                     <div class="mt10 integralItemDetail">
                         <?= $coupon->exchange_value?>元
@@ -93,9 +80,8 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/integral.js', ['depe
                     <p class="textLeft mt10"><?= $coupon->exchange_value?>元现金券</p>
                     <div class="clearFix integralItemBottom">
                         <div class="fl left"><?= $coupon->exchange_points?>分</div>
-                        <?= \yii\helpers\Html::submitButton('换购',['class'=>'fr btn'])?>
+                        <?= \yii\helpers\Html::a('换购',Url::to(['/activity/activity/view','id'=>$coupon->product_map_id]),['class'=>'fr btn'])?>
                     </div>
-                    <?php $form::end() ?>
                 </div>
             <?php }
 
@@ -112,10 +98,7 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/integral.js', ['depe
             foreach($CouponAnnual as $coupon){
                 ?>
                 <div class="integralItem">
-                    <?php $form = \yii\widgets\ActiveForm::begin([
-                        'method' => 'post'
-                    ]) ?>
-                    <?= \yii\helpers\Html::hiddenInput('id', $coupon->product_map_id); ?>
+
                     <div class="integralItemTitle">钻点年化券</div>
                     <div class="mt10 integralItemDetail">
                         <?= $coupon->exchange_value?>%年化券
@@ -123,9 +106,8 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/integral.js', ['depe
                     <p class="textLeft mt10"><?= $coupon->exchange_value?>%年化券</p>
                     <div class="clearFix integralItemBottom">
                         <div class="fl left"><?= $coupon->exchange_points?>分</div>
-                        <?= \yii\helpers\Html::submitButton('换购',['class'=>'fr btn'])?>
+                        <?= \yii\helpers\Html::a('换购',Url::to(['/activity/activity/view','id'=>$coupon->product_map_id]),['class'=>'fr btn'])?>
                     </div>
-                    <?php $form::end() ?>
                 </div>
             <?php }
             ?>

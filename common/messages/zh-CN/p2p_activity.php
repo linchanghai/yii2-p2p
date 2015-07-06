@@ -98,4 +98,5 @@ return [
     'Update {modelClass}: ' => '更新',
     'Vaild Date' => '有效期',
     'exchange success' => '兑换成功！',
+    'Quantity'=>'数量',
 ];
