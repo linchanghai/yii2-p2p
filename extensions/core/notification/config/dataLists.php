@@ -6,7 +6,7 @@
  */
 
 return [
-    'notificationTemplateType' => [
+    'notificationType' => [
         'label' => Yii::t('core_notification', 'Notification type'),
         'values' => [
             'mail' => Yii::t('core_notification', 'Email'),
@@ -14,7 +14,7 @@ return [
             'message' => Yii::t('core_notification', 'Message'),
         ]
     ],
-    'events' => [
+    'notificationEvents' => [
         'label' => Yii::t('core_notification', 'Events'),
         'values' => [
         ]
