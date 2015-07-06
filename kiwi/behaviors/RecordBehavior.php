@@ -42,11 +42,44 @@ class RecordBehavior extends Behavior
     /** @var array the attributes map that can instance of target class */
     public $attributes = [];
 
+    /** @var string the attribute show the errors of record */
+    public $errorAttribute;
+
+    /** @var \yii\db\ActiveRecord */
+    protected $target;
+
     public function events()
     {
         return [
+            ActiveRecord::EVENT_AFTER_VALIDATE => 'validateRecord',
             ActiveRecord::EVENT_AFTER_INSERT => 'createRecord',
         ];
+    }
+
+    /**
+     * @param \yii\base\ModelEvent $event
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function validateRecord($event)
+    {
+        /** @var ActiveRecord $sender */
+        $sender = $event->sender;
+        $targetConfig = [];
+        foreach ($this->attributes as $key => $value) {
+            if (is_int($value)) {
+                $targetConfig[$key] = $value;
+            } else if (CheckHelper::isCallable($value)) {
+                $targetConfig[$key] = call_user_func($value, $sender);
+            } else {
+                $targetConfig[$key] = ArrayHelper::getValue($sender, $value);
+            }
+        }
+        $targetConfig['class'] = $this->targetClass;
+        $this->target = Yii::createObject($targetConfig);
+
+        if (!$this->target->validate()) {
+            $sender->addErrors($this->errorAttribute, Json::encode($this->target->getErrors()));
+        }
     }
 
     /**
@@ -55,21 +88,8 @@ class RecordBehavior extends Behavior
      */
     public function createRecord($event)
     {
-        $targetConfig = [];
-        foreach ($this->attributes as $key => $value) {
-            if (is_int($value)) {
-                $targetConfig[$key] = $value;
-            } else if (CheckHelper::isCallable($value)) {
-                $targetConfig[$key] = call_user_func($value, $event->sender);
-            } else {
-                $targetConfig[$key] = ArrayHelper::getValue($event->sender, $value);
-            }
-        }
-        $targetConfig['class'] = $this->targetClass;
-        $target = Yii::createObject($targetConfig);
-
-        if (!$target->save()) {
-            throw new Exception('Save target error: ' . Json::encode($target));
+        if (!$this->target->save(false)) {
+            throw new Exception('Save target error: ' . Json::encode($this->target));
         }
     }
 }

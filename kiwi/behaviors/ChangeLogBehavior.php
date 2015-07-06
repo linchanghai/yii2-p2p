@@ -48,16 +48,12 @@ class ChangeLogBehavior extends Behavior
     public function events()
     {
         return [
-            ActiveRecord::EVENT_BEFORE_INSERT => 'initChange',
+            ActiveRecord::EVENT_AFTER_VALIDATE => 'validateChange',
             ActiveRecord::EVENT_AFTER_INSERT => 'saveChange',
         ];
     }
 
-    /**
-     * @param \yii\base\ModelEvent $event
-     * @throws Exception
-     */
-    public function initChange($event)
+    public function validateChange($event)
     {
         if (CheckHelper::isCallable($this->condition)) {
             $this->condition = call_user_func($this->condition, $event->sender);
@@ -68,10 +64,15 @@ class ChangeLogBehavior extends Behavior
             throw new Exception('Can not find target record');
         }
 
+        /** @var ActiveRecord $record */
         $record = $event->sender;
         $this->target->{$this->attribute} += $record->{$this->valueAttribute};
         if ($this->resultAttribute) {
             $record->{$this->resultAttribute} = $this->target->{$this->attribute};
+        }
+
+        if (!$this->target->validate()) {
+            $record->addError($this->valueAttribute, Json::encode($this->target->getErrors()));
         }
     }
 
@@ -81,8 +82,8 @@ class ChangeLogBehavior extends Behavior
      */
     public function saveChange($event)
     {
-        if (!$this->target->save()) {
-            throw new Exception('Save target value error: ' . Json::encode($this->target->getErrors()));
+        if (!$this->target->save(false)) {
+            throw new Exception('Save target value error: ' . Json::encode($this->target));
         }
     }
 } 
