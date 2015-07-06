@@ -13,6 +13,7 @@ use yii\behaviors\TimestampBehavior;
  * @property float $account_money
  * @property float $freezon_money
  * @property float $package_money
+ * @property float $is_auto_into
  * @property float $package_earning
  * @property integer $project_total_money
  * @property float $project_earning
@@ -61,6 +62,7 @@ class MemberStatistic extends \kiwi\db\ActiveRecord
             'account_money' => Yii::t('core_member', 'Account Money'),
             'freezon_money' => Yii::t('core_member', 'Freezon Money'),
             'package_money' => Yii::t('core_member', 'Package Money'),
+            'is_auto_into' => Yii::t('core_member', 'Is Auto Into'),
             'package_earning' => Yii::t('core_member', 'Package Earning'),
             'project_total_money' => Yii::t('core_member', 'Project Total Money'),
             'project_earning' => Yii::t('core_member', 'Project Earning'),

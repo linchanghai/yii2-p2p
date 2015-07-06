@@ -64,6 +64,7 @@ class v0_1_0 extends Migration
             'member_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'account_money' => Schema::TYPE_DECIMAL . '(9,2) NOT NULL default \'0.00\'',
             'freezon_money' => Schema::TYPE_DECIMAL . '(9,2) NOT NULL default \'0.00\'',
+            'is_auto_into' => Schema::TYPE_SMALLINT . ' NOT NULL default 0',
             'package_money' => Schema::TYPE_DECIMAL . '(9,2) NOT NULL default \'0.00\'',
             'package_earning' => Schema::TYPE_DECIMAL . '(9,2) NOT NULL default \'0.00\'',
             'project_total_money' => Schema::TYPE_INTEGER . '(11) default \'0\'',

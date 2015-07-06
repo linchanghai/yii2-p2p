@@ -44,11 +44,49 @@ class RecordBehavior extends Behavior
 
     public $saveTime = 1;
 
+    /** @var string the attribute show the errors of record */
+    public $errorAttribute = 'record';
+
+    /** @var \yii\db\ActiveRecord */
+    protected $target;
+
     public function events()
     {
         return [
+            ActiveRecord::EVENT_AFTER_VALIDATE => 'validateRecord',
             ActiveRecord::EVENT_AFTER_INSERT => 'createRecord',
         ];
+    }
+
+    /**
+     * @param \yii\base\ModelEvent $event
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function validateRecord($event)
+    {
+        /** @var ActiveRecord $sender */
+        $sender = $event->sender;
+        $targetConfig = [];
+        $this->attributes = array_merge($this->attributes,['saveTime'=>$this->saveTime]);
+        foreach ($this->attributes as $key => $value) {
+            if (is_int($value)) {
+                $targetConfig[$key] = $value;
+            } else if (CheckHelper::isCallable($value)) {
+                $targetConfig[$key] = call_user_func($value, $sender);
+            } else {
+                $targetConfig[$key] = ArrayHelper::getValue($sender, $value);
+            }
+        }
+        $targetConfig['class'] = $this->targetClass;
+
+        $this->saveTime = (int)$targetConfig['saveTime'];
+        unset($targetConfig['saveTime']);
+
+        $this->target = Yii::createObject($targetConfig);
+
+        if (!$this->target->validate()) {
+            $sender->addErrors($this->errorAttribute, Json::encode($this->target->getErrors()));
+        }
     }
 
     /**
@@ -57,26 +95,11 @@ class RecordBehavior extends Behavior
      */
     public function createRecord($event)
     {
-        $targetConfig = [];
-        $this->attributes = array_merge($this->attributes,['saveTime'=>$this->saveTime]);
-        foreach ($this->attributes as $key => $value) {
-            if (is_int($value)) {
-                $targetConfig[$key] = $value;
-            } else if (CheckHelper::isCallable($value)) {
-                $targetConfig[$key] = call_user_func($value, $event->sender);
-            } else {
-                $targetConfig[$key] = ArrayHelper::getValue($event->sender, $value);
-            }
-        }
-        $targetConfig['class'] = $this->targetClass;
-
-        $this->saveTime = (int)$targetConfig['saveTime'];
-        unset($targetConfig['saveTime']);
-
-        for($i=0;$i<$this->saveTime;$i++){
-            $target = Yii::createObject($targetConfig);
-            if (!$target->save()) {
-                throw new Exception('Save target error: ' . Json::encode($target));
+        $times = $this->saveTime;
+        while($times--) {
+            $target = clone($this->target);
+            if (!$target->save(false)) {
+                throw new Exception('Save target error: ' . Json::encode($this->target));
             }
         }
     }
