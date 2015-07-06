@@ -10,5 +10,5 @@ namespace core\sms;
 
 class Module extends \kiwi\base\Module
 {
-
+    public static $active = true;
 } 

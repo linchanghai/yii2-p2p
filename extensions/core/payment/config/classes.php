@@ -7,7 +7,6 @@
 
 return [
     'class' => [
-        'BasePayment' => 'core\payment\services\OnlinePay',
         'Chinabank' => 'core\payment\services\Chinabank',
         'Baofoo' => 'core\payment\services\Baofoo',
         'Ecpss' => 'core\payment\services\Ecpss',
