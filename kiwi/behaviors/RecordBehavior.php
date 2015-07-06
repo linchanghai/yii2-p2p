@@ -42,6 +42,8 @@ class RecordBehavior extends Behavior
     /** @var array the attributes map that can instance of target class */
     public $attributes = [];
 
+    public $saveTime = 1;
+
     public function events()
     {
         return [
@@ -56,6 +58,7 @@ class RecordBehavior extends Behavior
     public function createRecord($event)
     {
         $targetConfig = [];
+        $this->attributes = array_merge($this->attributes,['saveTime'=>$this->saveTime]);
         foreach ($this->attributes as $key => $value) {
             if (is_int($value)) {
                 $targetConfig[$key] = $value;
@@ -66,10 +69,15 @@ class RecordBehavior extends Behavior
             }
         }
         $targetConfig['class'] = $this->targetClass;
-        $target = Yii::createObject($targetConfig);
 
-        if (!$target->save()) {
-            throw new Exception('Save target error: ' . Json::encode($target));
+        $this->saveTime = (int)$targetConfig['saveTime'];
+        unset($targetConfig['saveTime']);
+
+        for($i=0;$i<$this->saveTime;$i++){
+            $target = Yii::createObject($targetConfig);
+            if (!$target->save()) {
+                throw new Exception('Save target error: ' . Json::encode($target));
+            }
         }
     }
 }

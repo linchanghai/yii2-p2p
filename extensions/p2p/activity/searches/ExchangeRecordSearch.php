@@ -18,7 +18,7 @@ class ExchangeRecordSearch extends ExchangeRecord
     public function rules()
     {
         return [
-            [['exchange_records_id', 'member_id', 'product_map_id', 'create_time', 'is_delete'], 'integer'],
+            [['exchange_records_id', 'member_id', 'product_map_id', 'quantity', 'create_time', 'is_delete'], 'integer'],
             [['note'], 'safe'],
         ];
     }
@@ -59,6 +59,7 @@ class ExchangeRecordSearch extends ExchangeRecord
             'exchange_records_id' => $this->exchange_records_id,
             'member_id' => $this->member_id,
             'product_map_id' => $this->product_map_id,
+            'quantity' => $this->quantity,
             'create_time' => $this->create_time,
             'is_delete' => $this->is_delete,
         ]);
