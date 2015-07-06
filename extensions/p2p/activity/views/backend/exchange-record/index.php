@@ -68,6 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'note',
+            'quantity',
             'create_time:datetime',
             // 'is_delete',
 

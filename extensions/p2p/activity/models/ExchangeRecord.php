@@ -15,6 +15,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $member_id
  * @property integer $product_map_id
  * @property string $note
+ * @property integer $quantity
  * @property integer $create_time
  * @property integer $is_delete
  *
@@ -38,8 +39,8 @@ class ExchangeRecord extends \yii\db\ActiveRecord
     {
         return [
             ['note', 'default', 'value' => 'xxx'],
-            [['member_id', 'product_map_id'], 'required'],
-            [['member_id', 'product_map_id', 'create_time', 'is_delete'], 'integer'],
+            [['member_id', 'product_map_id','quantity'], 'required'],
+            [['member_id', 'product_map_id', 'create_time', 'is_delete','quantity'], 'integer'],
             [['note'], 'string', 'max' => 50]
         ];
     }
@@ -54,6 +55,7 @@ class ExchangeRecord extends \yii\db\ActiveRecord
             'member_id' => Yii::t('p2p_activity', 'Member ID'),
             'product_map_id' => Yii::t('p2p_activity', 'Product Map ID'),
             'note' => Yii::t('p2p_activity', 'Note'),
+            'quantity' => Yii::t('p2p_activity', 'Quantity'),
             'create_time' => Yii::t('p2p_activity', 'Create Time'),
             'is_delete' => Yii::t('p2p_activity', 'Is Delete'),
         ];
@@ -88,6 +90,7 @@ class ExchangeRecord extends \yii\db\ActiveRecord
                     'value' => 'productMap.exchange_value',
                     'expire_date' => 'expireDate',
                 ],
+                'saveTime'=>'quantity',
             ],
             'updatePoint' => [
                 'class' => RecordBehavior::className(),

@@ -39,6 +39,7 @@ class v0_1_0 extends Migration
             'member_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'product_map_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'note' => Schema::TYPE_STRING . '(50)',
+            'quantity' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'is_delete' => Schema::TYPE_SMALLINT . '(1) default \'0\'',
 

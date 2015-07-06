@@ -29,15 +29,6 @@ class ActivityController extends Controller
     public function actionListCoupon(){
         $productMapModel =  Kiwi::getProductMap();
 
-        if(Yii::$app->request->isPost){
-            $id = Yii::$app->request->post('id') ;
-            if (($model = $productMapModel->findOne($id)) !== null) {
-                if(Kiwi::getExchangeRecord(['product_map_id'=>$id,'member_id'=>Yii::$app->user->id])->save()) {
-                    Yii::$app->session->setFlash('success',Yii::t('p2p_activity','exchange success'));
-                }
-            }
-        }
-
         $CouponBonus =$productMapModel->find()->where(['type'=>$productMapModel::CouponBonus])->limit(4)->all();
         $CouponCash = $productMapModel->find()->where(['type'=>$productMapModel::CouponCash])->limit(4)->all();
         $CouponAnnual= $productMapModel->find()->where(['type'=>$productMapModel::CouponAnnual])->limit(2)->all();
@@ -45,6 +36,24 @@ class ActivityController extends Controller
             'CouponBonus'=>$CouponBonus,
             'CouponCash'=>$CouponCash,
             'CouponAnnual'=>$CouponAnnual,
+        ]);
+    }
+
+
+    public function actionView($id){
+        $productMapModel =  Kiwi::getProductMap()->findOne($id);
+
+        if(Yii::$app->request->isPost){
+            $quantity = Yii::$app->request->post('quantity') ;
+            if (($model = $productMapModel->findOne($id)) !== null) {
+                if(Kiwi::getExchangeRecord(['product_map_id'=>$id,'member_id'=>Yii::$app->user->id,'quantity'=>$quantity])->save()) {
+                    Yii::$app->session->setFlash('success',Yii::t('p2p_activity','exchange success'));
+                }
+            }
+        }
+
+        return $this->render('exchange',[
+            'productMapModel'=>$productMapModel,
         ]);
     }
 } 
