@@ -9,6 +9,17 @@ use kiwi\web\Controller;
 
 class ProjectInvestController extends Controller
 {
+    public function actionInterestTable($project_id, $invest_money, $annual_id = null) {
+        $InvestPrepareForm = Kiwi::getProjectInvestPrepareForm([
+            'project_id' => $project_id,
+            'money' => $invest_money,
+            'annual_id' => $annual_id
+        ]);
+        return $this->renderPartial('interest', [
+            'invest' => $InvestPrepareForm->getInvestInfo()
+        ]);
+    }
+
     public function actionPrepareInvest($id)
     {
         $InvestPrepareForm = Kiwi::getProjectInvestPrepareForm(['project_id' => $id]);

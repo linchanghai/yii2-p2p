@@ -81,13 +81,17 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depend
     </div>
     <div class="fr investArea">
         <p class="mt10">
-            可投金额: <span class="fs16" id="mostMoney"><?= $project->invest_total_money - $project->invested_money; ?></span> 元
+            可投金额: <span class="fs16"
+                        id="mostMoney"><?= $project->invest_total_money - $project->invested_money; ?></span> 元
         </p>
+
         <p class="mt20">
             起息方式: T(成交日)+1
         </p>
+
         <p class="mt20"><span class="themeColor" id="leastMoney"><?= $project->min_money; ?></span> 元起投</p>
-        <p class="toInvestArea">
+
+        <p class="toInvestArea" data-url="<?= Url::to(['/project/project-invest/interest-table','project_id' => $project->project_id]) ?>">
             <span class="btn themeBtn toInvest">立即投资</span><span class="btn toInvest toCalc">计算</span>
         </p>
     </div>
@@ -109,29 +113,30 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depend
                 </tr>
                 <tr>
                     <td class="textRight">可加入日期</td>
-                    <td>2015-07-07</td>
+                    <td><?= date('Y-m-d', $project->repayment_date); ?></td>
                 </tr>
                 <tr>
                     <td class="textRight">预期年化收益率</td>
-                    <td class="secondColor">12%</td>
+                    <td class="secondColor"><?= $project->interest_rate; ?>%</td>
                 </tr>
                 <tr>
                     <td class="textRight">加入条件</td>
-                    <td class="secondColor">	<?= $project->min_money; ?>元起，以<?= $project->min_money; ?>元的倍数递增</td>
+                    <td class="secondColor">    <?= $project->min_money; ?>元起，以<?= $project->min_money; ?>元的倍数递增</td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <div class="investSingleRule hide">2</div>
-        <div class="investSingleRule hide">3</div>
-        <div class="investSingleRule hide">4</div>
+        <div class="investSingleRule hide"><?= $project->projectMaterial->material; ?></div>
+        <div class="investSingleRule hide"><?= $project->projectLegalOpinion->legal_info; ?></div>
+        <div class="investSingleRule hide"></div>
     </div>
 </div>
 <div class="modal fade" id="investModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">填写投资金额</h4>
             </div>
             <div class="modal-body">
@@ -139,9 +144,10 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depend
                     <div class="fl investModalArea">
                         <div class="clearFix">
                             <label class="fl">投资金额:</label>
+
                             <div class="fl ml10 moneyArea">
                                 <span class="fl operate minus">-</span>
-                                <input type="text" name="" value="1000" class="fl investMoney" />
+                                <input type="text" name="" value="<?= $project->min_money; ?>" class="fl investMoney"/>
                                 <span class="fl operate plus">+</span>
                             </div>
                         </div>
@@ -152,36 +158,7 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depend
                     </div>
                 </form>
                 <div class="mt20 investSingleMoney">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>年化收益率</th>
-                            <th>可获得收益: 200元</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>付息时间: 2015-07-07</td>
-                            <td>支付利息: 20元</td>
-                        </tr>
-                        <tr>
-                            <td>付息时间: 2015-08-07</td>
-                            <td>支付利息: 20元</td>
-                        </tr>
-                        <tr>
-                            <td>付息时间: 2015-09-07</td>
-                            <td>支付利息: 20元</td>
-                        </tr>
-                        <tr>
-                            <td>付息时间: 2015-09-07</td>
-                            <td>支付利息: 20元</td>
-                        </tr>
-                        <tr>
-                            <td>付息时间: 2015-09-07</td>
-                            <td>支付利息: 20元</td>
-                        </tr>
-                        </tbody>
-                    </table>
+
                 </div>
             </div>
             <div class="modal-footer">

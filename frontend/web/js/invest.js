@@ -13,13 +13,16 @@ require(["jquery","common","modal"],function($,c){
             lineMoney;
         mostMoney - myMoney >= 0 ?lineMoney = mostMoney:lineMoney = myMoney;
         $(".toInvest").on("click",function(){
+            investTable();
             $('#investModal').modal();
         });
         $(".plus").on("click",function(){
             Number(investMoney.val())+leastMoney > lineMoney?true:investMoney.val(Number(investMoney.val())+leastMoney);
+            investTable();
         });
         $(".minus").on("click",function(){
             Number(investMoney.val())-leastMoney < leastMoney?investMoney.val(leastMoney):investMoney.val(Number(investMoney.val()) - leastMoney);
+            investTable();
         });
         investMoney.blur(function(){
             $(this).val(c.filterNum($(this).val()));
@@ -27,5 +30,10 @@ require(["jquery","common","modal"],function($,c){
             $(this).val() < leastMoney?$(this).val(leastMoney):true;
             $(this).val() > lineMoney?$(this).val(lineMoney):true;
         });
+
+        function investTable(){
+            var url = $(".toInvestArea").data("url") + "&invest_money=" + investMoney.val();
+            $(".investSingleMoney").load(url);
+        }
     });
 });
