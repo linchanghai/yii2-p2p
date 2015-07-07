@@ -2,6 +2,7 @@
 
 namespace p2p\project\models;
 
+use kiwi\Kiwi;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -21,7 +22,8 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $update_time
  * @property integer $is_delete
  *
- * @property Member $member
+ * @property \core\member\models\Member $member
+ * @property \core\member\models\MemberStatistic $memberStatistic
  * @property Project $project
  * @property ProjectInvest $projectInvest
  */
@@ -84,7 +86,15 @@ class ProjectRepayment extends \kiwi\db\ActiveRecord
      */
     public function getMember()
     {
-        return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
+        return $this->hasOne(Kiwi::getMemberClass(), ['member_id' => 'member_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMemberStatistic()
+    {
+        return $this->hasOne(Kiwi::getMemberStatisticClass(), ['member_id' => 'member_id']);
     }
 
     /**
@@ -101,5 +111,18 @@ class ProjectRepayment extends \kiwi\db\ActiveRecord
     public function getProjectInvest()
     {
         return $this->hasOne(ProjectInvest::className(), ['project_invest_id' => 'project_invest_id']);
+    }
+
+    public function repayment()
+    {
+        if ($this->is_transfer) {
+            return false;
+        }
+
+        $repaymentMoney = $this->interest_money + $this->invest_money;
+        $changeRecordClass = Kiwi::getStatisticChangeRecordClass();
+        $changeRecord = Kiwi::getStatisticChangeRecord(['type' => $changeRecordClass::TYPE_REPAYMENT]);
+        $changeRecord->value = $repaymentMoney;
+        return $changeRecord->save();
     }
 }
