@@ -56,7 +56,8 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
     {
         return [
             ['note', 'default', 'value' => ''],
-            [['type', 'value', 'link_id'], 'required'],
+            [ 'link_id', 'default', 'value' => 0],
+            [['type', 'value'], 'required'],
             [['type', 'link_id'], 'integer'],
             [['value', 'result'], 'number'],
             [['attribute'], 'string', 'max' => 40],

@@ -101,7 +101,7 @@ class v0_1_0 extends Migration
         $this->createTable('{{%member_sign_record}}', [
             'member_sign_record_id' => Schema::TYPE_PK,
             'member_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-            'target_date' => Schema::TYPE_STRING . '(8) NOT NULL',
+            'days' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'ponit' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'is_delete' => Schema::TYPE_SMALLINT . '(1) NOT NULL',

@@ -1,4 +1,5 @@
 <?php
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 $this->title = 'My Yii Application';
 $this->params['home'] = true;
@@ -212,7 +213,16 @@ $this->params['home'] = true;
             </div>
             <div class="fl siteItemRight">
                 <a href="#">签到赚积分</a>
-                <a class="mt10 btn secondBtn" href="#">签到</a>
+                <?php \yii\widgets\Pjax::begin();?>
+                <?php \yii\widgets\ActiveForm::begin([
+                    'method'=>'post',
+                    'action'=>Url::to(['activity/activity/sign']),
+                    'options' => ['data-pjax' => 1]
+                ]) ;
+                echo \kartik\helpers\Html::submitButton('签到',['class'=>"mt10 btn secondBtn" ]);
+                \yii\widgets\ActiveForm::end();
+                ?>
+                <?php \yii\widgets\Pjax::end();?>
             </div>
         </div>
         <div class="mt20 siteItem">
