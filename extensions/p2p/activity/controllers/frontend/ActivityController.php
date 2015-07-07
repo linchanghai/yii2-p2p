@@ -56,4 +56,13 @@ class ActivityController extends Controller
             'productMapModel'=>$productMapModel,
         ]);
     }
+
+    public function actionSign(){
+        $memberSignModel = Kiwi::getMemberSignRecord();
+        if($memberSignModel->validateSign()&& $memberSignModel->memberSign()){
+            echo \kartik\helpers\Html::submitButton('已签到',['class'=>"mt10 btn secondBtn" ]);
+        }else{
+            echo \kartik\helpers\Html::submitButton('签到',['class'=>"mt10 btn secondBtn" ]);
+        }
+    }
 } 

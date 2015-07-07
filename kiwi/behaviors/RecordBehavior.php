@@ -85,7 +85,7 @@ class RecordBehavior extends Behavior
         $this->target = Yii::createObject($targetConfig);
 
         if (!$this->target->validate()) {
-            $sender->addErrors($this->errorAttribute, Json::encode($this->target->getErrors()));
+            $sender->addError($this->errorAttribute, Json::encode($this->target->getErrors()));
         }
     }
 
@@ -98,7 +98,7 @@ class RecordBehavior extends Behavior
         $times = $this->saveTime;
         while($times--) {
             $target = clone($this->target);
-            if (!$target->save(false)) {
+            if (!$target->save()) {
                 throw new Exception('Save target error: ' . Json::encode($this->target));
             }
         }

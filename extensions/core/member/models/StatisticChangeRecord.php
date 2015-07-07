@@ -27,6 +27,7 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
 {
     const TYPE_RECHARGE = 1;
     const TYPE_INVEST = 2;
+    const TYPE_REPAYMENT = 14;
     const TYPE_ACCOUNT_TO_PACKAGE = 3;
     const TYPE_PACKAGE_TO_ACCOUNT = 4;
     const TYPE_PACKAGE_INTEREST = 5;
@@ -56,7 +57,8 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
     {
         return [
             ['note', 'default', 'value' => ''],
-            [['type', 'value', 'link_id'], 'required'],
+            [ 'link_id', 'default', 'value' => 0],
+            [['type', 'value'], 'required'],
             [['type', 'link_id'], 'integer'],
             [['value', 'result'], 'number'],
             [['attribute'], 'string', 'max' => 40],
@@ -121,6 +123,16 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
             static::TYPE_EXCHANGE_POINT => [
                 'targetClass' => Kiwi::getMemberStatisticClass(),
                 'attribute' => 'points',
+                'condition' => ['member_id' => $this->member_id],
+            ],
+            static::TYPE_INVEST => [
+                'targetClass' => Kiwi::getMemberStatisticClass(),
+                'attribute' => 'account_money',
+                'condition' => ['member_id' => $this->member_id],
+            ],
+            static::TYPE_REPAYMENT => [
+                'targetClass' => Kiwi::getMemberStatisticClass(),
+                'attribute' => 'account_money',
                 'condition' => ['member_id' => $this->member_id],
             ],
         ];

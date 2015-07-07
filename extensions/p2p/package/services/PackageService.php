@@ -23,7 +23,7 @@ class PackageService extends Service
     public function autoIntoPackage()
     {
         $memberStatisticClass = Kiwi::getMemberStatisticClass();
-        $query = $memberStatisticClass::find()->where(['is_auto_into' => 1]);
+        $query = $memberStatisticClass::find()->andWhere(['is_auto_into' => 1]);
         /** @var \p2p\package\models\MemberStatistic $memberStatistic */
         foreach ($query->each() as $memberStatistic) {
             $memberStatistic->autoIntoPackage();
