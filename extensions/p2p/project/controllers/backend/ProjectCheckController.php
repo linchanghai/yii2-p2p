@@ -69,13 +69,13 @@ class ProjectCheckController extends Controller
     {
         /** @var \p2p\project\models\Project $model */
         $model = $this->findModel($id);
-        $model->scenario = 'insert';
+        $model->scenario = 'check';
 
         if ($model->load(Yii::$app->request->post())) {
             $model->verify_user = Yii::$app->user->id;
             $model->verify_date = time();
             $model->update();
-            return $this->redirect(['view', 'id' => $model->project_id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

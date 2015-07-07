@@ -26,7 +26,7 @@ if (!isset($model->status)) {
     $model->status = $projectClass::PROJECT_STATUS_PENDING;
 }
 
-$disabled = $model->status == $projectClass::PROJECT_STATUS_PENDING ? '' : 'disabled';
+$disabled = $model->status == $projectClass::PROJECT_STATUS_PENDING ? false : 'disabled';
 
 ?>
 <div class="project-form">
@@ -101,6 +101,9 @@ $disabled = $model->status == $projectClass::PROJECT_STATUS_PENDING ? '' : 'disa
             'filebrowserBrowseUrl' => Url::to(['/elfinder/manager']),
             'preset' => 'standard',
             'language' => Yii::$app->language,
+        ],
+        'options' => [
+            'disabled' => $disabled
         ]
     ]);
     $fieldGroups[] = ['label' => Yii::t('p2p_project', 'Project Legal Opinion'), 'content' => implode('', $fields)];
@@ -113,6 +116,9 @@ $disabled = $model->status == $projectClass::PROJECT_STATUS_PENDING ? '' : 'disa
             'filebrowserBrowseUrl' => Url::to(['/elfinder/manager']),
             'preset' => 'standard',
             'language' => Yii::$app->language,
+        ],
+        'options' => [
+            'disabled' => $disabled
         ]
     ]);
     $fieldGroups[] = ['label' => Yii::t('p2p_project', 'Project Material'), 'content' => implode('', $fields)];

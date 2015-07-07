@@ -64,7 +64,7 @@ $this->params['home'] = true;
             <div class="fl textCenter secondBack colorWhite indexProductBrief">
                 <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/indexPro1.png" width="42" height="73" alt=""/>
 
-                <p class="mt20">短期期项目</p>
+                <p class="mt20">短期项目</p>
             </div>
             <div class="fl backGrey pt20 indexProWrap">
                 <div class="fl indexProList">
