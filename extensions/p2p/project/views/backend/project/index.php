@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $projectClass = Kiwi::getProjectClass();
 $createButton = $status == $projectClass::PROJECT_STATUS_PENDING ? true : false;
-if($createButton) {
+if ($createButton) {
     $buttonTemplate = '<div style="width: 30px">{update} {delete}</div>';
 } else {
     $buttonTemplate = '<div style="width: 30px">{update}</div>';
@@ -45,21 +45,21 @@ if($createButton) {
             'invest_total_money',
             [
                 'label' => Yii::t('p2p_project', 'Interest Rate') . '(%)',
-                'attribute'=>'interest_rate',
+                'attribute' => 'interest_rate',
             ],
             // 'repayment_date',
             [
-                'attribute'=>'repayment_type',
-                'value'=>function ($model) {
-                    return Kiwi::getDataListModel()->projectRepaymentType[$model->repayment_type] ;
+                'attribute' => 'repayment_type',
+                'value' => function ($model) {
+                    return Kiwi::getDataListModel()->projectRepaymentType[$model->repayment_type];
                 },
                 'width' => '175px'
             ],
             // 'release_date',
             [
-                'attribute'=>'project_type',
-                'value'=>function ($model) {
-                    return Kiwi::getDataListModel()->projectType[$model->project_type] ;
+                'attribute' => 'project_type',
+                'value' => function ($model) {
+                    return Kiwi::getDataListModel()->projectType[$model->project_type];
                 },
             ],
             // 'create_user',

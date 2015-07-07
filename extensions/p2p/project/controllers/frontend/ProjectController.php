@@ -21,7 +21,10 @@ class ProjectController extends Controller
         $projectClass = Kiwi::getProjectClass();
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $projectClass::find(),
+            'query' => $projectClass::find()->where([
+                'status' => $projectClass::PROJECT_STATUS_PASSED,
+                'is_delete' => 0
+            ]),
         ]);
 
         $dataProvider->prepare(true);
