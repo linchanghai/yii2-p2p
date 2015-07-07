@@ -15,7 +15,7 @@ class ProjectInvestController extends Controller
             'money' => $invest_money,
             'annual_id' => $annual_id
         ]);
-        return $this->renderPartial('interest', [
+        return $this->renderPartial('interest_table', [
             'invest' => $InvestPrepareForm->getInvestInfo()
         ]);
     }

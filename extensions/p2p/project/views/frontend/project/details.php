@@ -18,6 +18,7 @@ $this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/invest.min.css', [
 
 $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depends' => [\frontend\assets\RequireAsset::className()]]);
 
+$investedRatio = ($project->invested_money / $project->invest_total_money) * 100;
 ?>
 
 <div class="container mt20 investTitleTop">
@@ -30,11 +31,11 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depend
 <div class="container investWrap">
     <div class="fl progressWrap">
         <div class="progress">
-            <div class="progress-bar progress-bar-striped"
-                 style="width: <?= ($project->invested_money / $project->invest_total_money) * 100 ?>%;"></div>
+            <div class="progress-bar progress-bar-striped <?php if($investedRatio == 100) { echo 'parogress-succeed'; }?>"
+                 style="width: <?= $investedRatio ?>%;"></div>
         </div>
         <p class="mt20 fs30 textCenter themeColor">
-            <?= ($project->invested_money / $project->invest_total_money) * 100 ?>%
+            <?= $investedRatio ?>%
         </p>
     </div>
     <div class="fl progressWrapDetail">
@@ -128,7 +129,7 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depend
         </div>
         <div class="investSingleRule hide"><?= $project->projectMaterial->material; ?></div>
         <div class="investSingleRule hide"><?= $project->projectLegalOpinion->legal_info; ?></div>
-        <div class="investSingleRule hide"></div>
+        <div class="investSingleRule hide">Invest Records</div>
     </div>
 </div>
 <div class="modal fade" id="investModal" tabindex="-1" role="dialog">

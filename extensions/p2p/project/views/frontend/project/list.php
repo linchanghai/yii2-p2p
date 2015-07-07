@@ -49,14 +49,16 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depend
     <ul class="container">
         <?php
         /** @var \p2p\project\models\Project $project */
-        foreach ($projects as $project) { ?>
+        foreach ($projects as $project) {
+            $investedRatio = ($project->invested_money / $project->invest_total_money) * 100;
+            ?>
             <li>
                 <div class="proTitle col333 textCenter fs16">
                     <?= $project->project_name; ?>
                 </div>
                 <div class="progress mt20">
-                    <div class="progress-bar progress-bar-striped"
-                         style="width: <?= ($project->invested_money / $project->invest_total_money) * 100 ?>%;"></div>
+                    <div class="progress-bar progress-bar-striped <?php if($investedRatio == 100) { echo 'parogress-succeed'; }?>"
+                         style="width: <?=  $investedRatio; ?>%;"></div>
                 </div>
                 <p class="col666">
                     <?= $project->invested_money; ?> /<span class="col999"><?= $project->invest_total_money; ?></span>
