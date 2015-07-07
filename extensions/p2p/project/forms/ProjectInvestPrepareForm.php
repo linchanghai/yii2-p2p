@@ -148,6 +148,7 @@ class ProjectInvestPrepareForm extends Model
     {
         /** @var \p2p\project\models\ProjectInvest $invest */
         $invest = $this->getInvestInfo();
+        $invest->member_id = Yii::$app->user->id;
         if ($invest->save()) {
             return true;
         } else {

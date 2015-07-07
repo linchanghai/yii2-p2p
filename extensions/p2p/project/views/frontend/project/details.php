@@ -31,7 +31,9 @@ $investedRatio = ($project->invested_money / $project->invest_total_money) * 100
 <div class="container investWrap">
     <div class="fl progressWrap">
         <div class="progress">
-            <div class="progress-bar progress-bar-striped <?php if($investedRatio == 100) { echo 'parogress-succeed'; }?>"
+            <div class="progress-bar progress-bar-striped <?php if ($investedRatio == 100) {
+                echo 'parogress-succeed';
+            } ?>"
                  style="width: <?= $investedRatio ?>%;"></div>
         </div>
         <p class="mt20 fs30 textCenter themeColor">
@@ -92,7 +94,8 @@ $investedRatio = ($project->invested_money / $project->invest_total_money) * 100
 
         <p class="mt20"><span class="themeColor" id="leastMoney"><?= $project->min_money; ?></span> 元起投</p>
 
-        <p class="toInvestArea" data-url="<?= Url::to(['/project/project-invest/interest-table','project_id' => $project->project_id]) ?>">
+        <p class="toInvestArea"
+           data-url="<?= Url::to(['/project/project-invest/interest-table', 'project_id' => $project->project_id]) ?>">
             <span class="btn themeBtn toInvest">立即投资</span><span class="btn toInvest toCalc">计算</span>
         </p>
     </div>
@@ -141,14 +144,19 @@ $investedRatio = ($project->invested_money / $project->invest_total_money) * 100
                 <h4 class="modal-title" id="myModalLabel">填写投资金额</h4>
             </div>
             <div class="modal-body">
-                <form class="clearFix prepInvest" method="post" action="">
+                <form class="clearFix prepInvest" method="post" action="<?= Url::to(['/project/project-invest/save-invest']) ?>">
+                    <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken; ?>"/>
+                    <input type="hidden" name="ProjectInvestPrepareForm[project_id]"
+                           value="<?= $project->project_id; ?>"/>
+
                     <div class="fl investModalArea">
                         <div class="clearFix">
                             <label class="fl">投资金额:</label>
 
                             <div class="fl ml10 moneyArea">
                                 <span class="fl operate minus">-</span>
-                                <input type="text" name="" value="<?= $project->min_money; ?>" class="fl investMoney"/>
+                                <input type="text" name="ProjectInvestPrepareForm[money]"
+                                       value="<?= $project->min_money; ?>" class="fl investMoney"/>
                                 <span class="fl operate plus">+</span>
                             </div>
                         </div>
