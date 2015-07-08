@@ -13,7 +13,7 @@ return [
     ],
     'system' => [
         'label' => Yii::t('core_system', 'System'),
-        'sort' => 1000,
+        'sort' => 700,
         'url' => ['/core_system/setting/index'],
         'items' => [
             'system' => [

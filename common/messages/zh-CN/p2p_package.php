@@ -30,7 +30,7 @@ return [
     'Out package money must be int' => '转入金额必须为整数',
     'Out package money must more than zero' => '转入金额必须为大于零',
     'Out package money must no more than package money' => '钱包余额不足',
-    'Package' => '钱包',
+    'Package' => '钱包管理',
     'Package Interest Record' => '钱包收益记录',
     'Package Interest Record ID' => '',
     'Package Interest Records' => '钱包收益记录',

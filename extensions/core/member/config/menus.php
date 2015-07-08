@@ -7,12 +7,12 @@
 
 return [
     'member' => [
-        'label' => Yii::t('core_member', 'Member'),
-        'sort' => 5000,
+        'label' => Yii::t('core_member', 'Member Manage'),
+        'sort' => 100,
         'url' => ['/core_member/member/index'],
         'items' => [
             'member' => [
-                'label' => Yii::t('core_member', 'Member'),
+                'label' => Yii::t('core_member', 'Member Manage'),
                 'sort' => 100,
                 'url' => ['/core_member/member/index'],
                 'items' => [

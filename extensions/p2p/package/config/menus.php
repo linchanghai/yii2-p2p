@@ -9,7 +9,7 @@
 return [
     'package' => [
         'label' => Yii::t('p2p_package', 'Package'),
-        'sort' => 3000,
+        'sort' => 300,
         'url' => ['/p2p_package/package-interest-record/index'],
         'items' => [
             'package' => [
