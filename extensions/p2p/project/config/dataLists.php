@@ -31,6 +31,7 @@ return [
         'values' => [
             Project::REPAYMENT_TYPE_MONTHLY => Yii::t('p2p_project', 'Monthly Interest Repayment'),
             Project::REPAYMENT_TYPE_DISPOSABLE => Yii::t('p2p_project', 'Disposable Principal and Interest'),
+            Project::REPAYMENT_TYPE_EQUAL_MONTHLY => Yii::t('p2p_project', 'Equal monthly installments of principal and interest'),
         ]
     ]
 ];

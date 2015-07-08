@@ -1,4 +1,5 @@
 <?php
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 $this->title = 'My Yii Application';
 $this->params['home'] = true;
@@ -64,7 +65,7 @@ $this->params['home'] = true;
             <div class="fl textCenter secondBack colorWhite indexProductBrief">
                 <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/indexPro1.png" width="42" height="73" alt=""/>
 
-                <p class="mt20">短期期项目</p>
+                <p class="mt20">短期项目</p>
             </div>
             <div class="fl backGrey pt20 indexProWrap">
                 <div class="fl indexProList">
@@ -212,7 +213,16 @@ $this->params['home'] = true;
             </div>
             <div class="fl siteItemRight">
                 <a href="#">签到赚积分</a>
-                <a class="mt10 btn secondBtn" href="#">签到</a>
+                <?php \yii\widgets\Pjax::begin();?>
+                <?php \yii\widgets\ActiveForm::begin([
+                    'method'=>'post',
+                    'action'=>Url::to(['activity/activity/sign']),
+                    'options' => ['data-pjax' => 1]
+                ]) ;
+                echo \kartik\helpers\Html::submitButton('签到',['class'=>"mt10 btn secondBtn" ]);
+                \yii\widgets\ActiveForm::end();
+                ?>
+                <?php \yii\widgets\Pjax::end();?>
             </div>
         </div>
         <div class="mt20 siteItem">

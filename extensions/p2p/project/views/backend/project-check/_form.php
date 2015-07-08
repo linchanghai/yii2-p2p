@@ -28,18 +28,18 @@ if(isset($model->repayment_date) && isset($model->release_date)) {
         'id' => 'project-form-horizontal',
         'type' => ActiveForm::TYPE_HORIZONTAL,
         'formConfig' => ['labelSpan' => 2],
-        'fullSpan' => 11
+        'fullSpan' => 11,
+        'disabled' => 'disabled'
     ]);
     $fieldGroups = [];
     $fields = ['<br />'];
-    $fields[] = $form->field($model, 'project_name')->textInput(['maxlength' => 255, 'disabled' => 'disabled']);
-    $fields[] = $form->field($model, 'project_no')->textInput(['maxlength' => 255, 'disabled' => 'disabled']);
-    $fields[] = $form->field($model, 'invest_total_money')->textInput(['maxlength' => 255, 'disabled' => 'disabled']);
-    $fields[] = $form->field($model, 'interest_rate')->textInput(['maxlength' => 255, 'disabled' => 'disabled']);
+    $fields[] = $form->field($model, 'project_name')->textInput(['maxlength' => 255]);
+    $fields[] = $form->field($model, 'project_no')->textInput(['maxlength' => 255]);
+    $fields[] = $form->field($model, 'invest_total_money')->textInput(['maxlength' => 255]);
+    $fields[] = $form->field($model, 'interest_rate')->textInput(['maxlength' => 255]);
     $fields[] = $form->field($model, 'repayment_date')->widget(DateTimePicker::className(),[
         'options' => [
             'value' => $repayment_date,
-            'disabled' => 'disabled'
         ],
         'pluginOptions' => [
             'language' => Yii::$app->language,
@@ -50,7 +50,6 @@ if(isset($model->repayment_date) && isset($model->release_date)) {
     $fields[] = $form->field($model, 'release_date')->widget(DateTimePicker::className(),[
         'options' => [
             'value' => $release_date,
-            'disabled' => 'disabled'
         ],
         'pluginOptions' => [
             'language' => Yii::$app->language,
@@ -69,17 +68,17 @@ if(isset($model->repayment_date) && isset($model->release_date)) {
 //            'autoclose'=>true,
 //        ]
 //    ]);
-    $fields[] = $form->field($model, 'min_money')->textInput(['maxlength' => 255, 'disabled' => 'disabled']);
-    $fields[] = $form->field($model, 'status')->dropDownList(Kiwi::getDataListModel()->projectStatus);
+    $fields[] = $form->field($model, 'min_money')->textInput(['maxlength' => 255]);
+    $fields[] = $form->field($model, 'status')->dropDownList(Kiwi::getDataListModel()->projectStatus, ['disabled' => false]);
     $fieldGroups[] = ['label' => Yii::t('p2p_project','Project Base Info'), 'content' => implode('', $fields)];
 
     $fields = ['<br />'];
     $projectDetails = $model->projectDetails ?:\kiwi\Kiwi::getProjectDetails();
-    $fields[] = $form->field($projectDetails, 'project_introduce')->textarea(['disabled' => 'disabled']);
-    $fields[] = $form->field($projectDetails, 'loan_person_info')->textarea(['disabled' => 'disabled']);
-    $fields[] = $form->field($projectDetails, 'repayment_source')->textarea(['disabled' => 'disabled']);
-    $fields[] = $form->field($projectDetails, 'collateral_info')->textarea(['disabled' => 'disabled']);
-    $fields[] = $form->field($projectDetails, 'risk_control_info')->textarea(['disabled' => 'disabled']);
+    $fields[] = $form->field($projectDetails, 'project_introduce')->textarea();
+    $fields[] = $form->field($projectDetails, 'loan_person_info')->textarea();
+    $fields[] = $form->field($projectDetails, 'repayment_source')->textarea();
+    $fields[] = $form->field($projectDetails, 'collateral_info')->textarea();
+    $fields[] = $form->field($projectDetails, 'risk_control_info')->textarea();
     $fieldGroups[] = ['label' => Yii::t('p2p_project','Project Details'), 'content' => implode('', $fields)];
 
     $fields = ['<br />'];
