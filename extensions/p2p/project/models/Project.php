@@ -32,20 +32,21 @@ use yii\behaviors\TimestampBehavior;
  */
 class Project extends \kiwi\db\ActiveRecord
 {
-    const PROJECT_TYPE_NORMAL = 0;
-    const PROJECT_TYPE_TRANSFER = 1;
-    const PROJECT_TYPE_NOVICE = 2;
-
-    const PROJECT_STATUS_PENDING = 0;
-    const PROJECT_STATUS_PASSED = 1;
-    const PROJECT_STATUS_FAIlED = 2;
-    const PROJECT_STATUS_Repaying = 3;
-    const PROJECT_STATUS_End = 4;
-
-    const PROJECT_REPAYMENT_TYPE_MONTHLY = 0;
-    const PROJECT_REPAYMENT_TYPE_DISPOSABLE = 1;
-
     use ProjectTrait;
+
+    const TYPE_NORMAL = 0;
+    const TYPE_TRANSFER = 1;
+
+    const TYPE_NOVICE = 2;
+    const STATUS_PENDING = 0;
+    const STATUS_INVESTING = 1;
+    const STATUS_FAILED = 2;
+    const STATUS_REPAYMENT = 3;
+    const STATUS_END = 4;
+
+    const REPAYMENT_TYPE_MONTHLY = 0;
+    const REPAYMENT_TYPE_ONETIME = 1;
+    const REPAYMENT_TYPE_EQUAL_MONTHLY = 2;
 
     public static $enableLogicDelete = true;
 
@@ -64,8 +65,9 @@ class Project extends \kiwi\db\ActiveRecord
     public function scenarios()
     {
         return [
-            static::SCENARIO_DEFAULT => ['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'min_money'],
+            static::SCENARIO_DEFAULT => ['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'min_money', 'status'],
             'insert' => ['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'min_money'],
+            'check' => ['status']
         ];
     }
 
@@ -77,12 +79,11 @@ class Project extends \kiwi\db\ActiveRecord
         return [
             [['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'min_money'], 'required'],
             [['project_name', 'project_no'], 'unique'],
-            [['invest_total_money', 'repayment_type', 'invested_money', 'min_money', 'status'], 'integer'],
+            [['invest_total_money', 'repayment_type', 'invested_money', 'min_money', 'status', 'project_type'], 'integer'],
             [['interest_rate'], 'number'],
 //            [['verify_user'], 'string'],
             [['project_name'], 'string', 'max' => 100],
             [['project_no'], 'string', 'max' => 30],
-            [['project_type'], 'string', 'max' => 20],
             ['repayment_date', 'date', 'format' => 'yyyy-MM-dd HH:mm', 'timestampAttribute' => 'repayment_date', 'on' => ['insert']],
             ['release_date', 'date', 'format' => 'yyyy-MM-dd HH:mm', 'timestampAttribute' => 'release_date', 'on' => ['insert']],
             [['repayment_date', 'release_date'], 'validateDate', 'on' => ['insert']],

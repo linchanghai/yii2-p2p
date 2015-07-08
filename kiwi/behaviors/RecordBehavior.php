@@ -66,8 +66,12 @@ class RecordBehavior extends Behavior
     {
         /** @var ActiveRecord $sender */
         $sender = $event->sender;
+        if (strpos($sender->className(), 'Search') !== false) {
+            return;
+        }
+
         $targetConfig = [];
-        $this->attributes = array_merge($this->attributes,['saveTime'=>$this->saveTime]);
+        $this->attributes = array_merge($this->attributes, ['saveTime' => $this->saveTime]);
         foreach ($this->attributes as $key => $value) {
             if (is_int($value)) {
                 $targetConfig[$key] = $value;
@@ -95,8 +99,12 @@ class RecordBehavior extends Behavior
      */
     public function createRecord($event)
     {
+        if (!$this->target) {
+            return;
+        }
+
         $times = $this->saveTime;
-        while($times--) {
+        while ($times--) {
             $target = clone($this->target);
             if (!$target->save()) {
                 throw new Exception('Save target error: ' . Json::encode($this->target));

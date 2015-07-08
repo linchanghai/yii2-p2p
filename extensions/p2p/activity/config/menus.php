@@ -3,7 +3,7 @@
 return [
     'activity' => [
         'label' => Yii::t('p2p_activity', 'ActivityManagement'),
-        'sort' => 2000,
+        'sort' => 500,
         'url' => ['/p2p_activity/product/index'],
         'items' => [
             'activity' => [

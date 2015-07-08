@@ -3,7 +3,7 @@
 return [
     'capital' => [
         'label' => Yii::t('p2p_recharge', 'CapitalManagement'),
-        'sort' => 2100,
+        'sort' => 200,
         'url' => ['/p2p_recharge/recharge-record/index'],
         'items' => [
             'capital' => [

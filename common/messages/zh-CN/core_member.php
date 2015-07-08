@@ -59,6 +59,7 @@ return [
     'Id Card Status' => '是否实名认证',
     'Is First Invest' => '是否为新手投资',
     'Member' => '用户',
+    'Member Manage' => '用户管理',
     'Members' => '用户',
     'Mobile' => '手机号',
     'Mobile Status' => '是否手机认证',

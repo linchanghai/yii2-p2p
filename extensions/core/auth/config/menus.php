@@ -8,7 +8,7 @@
 return [
     'auth' => [
         'label' => Yii::t('core_auth', 'Auth'),
-        'sort' => 1500,
+        'sort' => 600,
         'url' => ['/core_auth/user/index'],
         'items' => [
             'auth' => [

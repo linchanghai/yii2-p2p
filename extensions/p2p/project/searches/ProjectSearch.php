@@ -85,7 +85,9 @@ class ProjectSearch extends Project
     public function frontendSearch($params)
     {
         $projectClass = Kiwi::getProjectClass();
-        $query = $projectClass::find();
+        $query = $projectClass::find()->where([
+            'status' => $projectClass::STATUS_INVESTING,
+        ]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

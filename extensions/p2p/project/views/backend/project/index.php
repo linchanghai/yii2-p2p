@@ -9,20 +9,20 @@ use kiwi\Kiwi;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $projectClass = Kiwi::getProjectClass();
-if ($status == $projectClass::PROJECT_STATUS_PASSED) {
+if ($status == $projectClass::STATUS_INVESTING) {
     $this->title = Yii::t('p2p_project', 'Project Passed');
-} else if ($status == $projectClass::PROJECT_STATUS_FAIlED) {
+} else if ($status == $projectClass::STATUS_FAILED) {
     $this->title = Yii::t('p2p_project', 'Project Failed');
-} else if ($status == $projectClass::PROJECT_STATUS_Repaying) {
+} else if ($status == $projectClass::STATUS_REPAYMENT) {
     $this->title = Yii::t('p2p_project', 'Project Repaying');
-} else if ($status == $projectClass::PROJECT_STATUS_End) {
+} else if ($status == $projectClass::STATUS_END) {
     $this->title = Yii::t('p2p_project', 'Project End');
 }
 $this->title = Yii::t('p2p_project', 'Projects');
 $this->params['breadcrumbs'][] = $this->title;
 
 $projectClass = Kiwi::getProjectClass();
-$createButton = $status == $projectClass::PROJECT_STATUS_PENDING ? true : false;
+$createButton = $status == $projectClass::STATUS_PENDING ? true : false;
 if($createButton) {
     $buttonTemplate = '<div style="width: 30px">{update} {delete}</div>';
 } else {

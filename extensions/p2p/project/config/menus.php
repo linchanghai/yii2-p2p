@@ -3,7 +3,7 @@
 return [
     'project' => [
         'label' => Yii::t('p2p_project', 'Project'),
-        'sort' => 2000,
+        'sort' => 400,
         'url' => ['/p2p_project/project/index'],
         'items' => [
             'project' => [

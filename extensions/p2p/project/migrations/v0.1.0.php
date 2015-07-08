@@ -19,7 +19,7 @@ class v0_1_0 extends Migration
             'project_name' => Schema::TYPE_STRING . '(100) NOT NULL',
             'project_no' => Schema::TYPE_STRING . '(30) NOT NULL',
             'invest_total_money' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-            'interest_rate' => Schema::TYPE_DECIMAL . '(3,2) NOT NULL',
+            'interest_rate' => Schema::TYPE_DECIMAL . '(4,2) NOT NULL',
             'repayment_date' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'repayment_type' => Schema::TYPE_SMALLINT . '(1) NOT NULL',
             'release_date' => Schema::TYPE_INTEGER . '(11) NOT NULL',

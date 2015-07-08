@@ -41,14 +41,13 @@ class ProjectController extends Controller
         $searchModel = Kiwi::getProjectSearch();
         $dataProvider =  $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
             'ProjectSearch' => [
-                'status' => [$projectClass::PROJECT_STATUS_PENDING, $projectClass::PROJECT_STATUS_PASSED],
-                'id_delete' => 0,
+                'status' => [$projectClass::STATUS_PENDING, $projectClass::STATUS_INVESTING],
             ]]));
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'status' => $projectClass::PROJECT_STATUS_PENDING,
+            'status' => $projectClass::STATUS_PENDING,
         ]);
     }
 
@@ -95,7 +94,7 @@ class ProjectController extends Controller
         $model->scenario = 'insert';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->project_id]);
+            return $this->redirect('index');
         } else {
             return $this->render('update', [
                 'model' => $model,

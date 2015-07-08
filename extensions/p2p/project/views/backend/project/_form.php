@@ -23,10 +23,10 @@ if (isset($model->repayment_date) && isset($model->release_date)) {
 }
 $projectClass = Kiwi::getProjectClass();
 if (!isset($model->status)) {
-    $model->status = $projectClass::PROJECT_STATUS_PENDING;
+    $model->status = $projectClass::STATUS_PENDING;
 }
 
-$disabled = $model->status == $projectClass::PROJECT_STATUS_PENDING ? '' : 'disabled';
+$disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
 
 ?>
 <div class="project-form">
