@@ -45,7 +45,7 @@ class Project extends \kiwi\db\ActiveRecord
     const STATUS_END = 4;
 
     const REPAYMENT_TYPE_MONTHLY = 0;
-    const REPAYMENT_TYPE_DISPOSABLE = 1;
+    const REPAYMENT_TYPE_ONETIME = 1;
     const REPAYMENT_TYPE_EQUAL_MONTHLY = 2;
 
     public static $enableLogicDelete = true;
@@ -66,7 +66,7 @@ class Project extends \kiwi\db\ActiveRecord
     {
         return [
             static::SCENARIO_DEFAULT => ['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'min_money', 'status'],
-            'insert' => ['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'min_money', 'status'],
+            'insert' => ['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'min_money'],
             'check' => ['status']
         ];
     }

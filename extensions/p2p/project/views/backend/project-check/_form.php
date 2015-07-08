@@ -69,7 +69,7 @@ if(isset($model->repayment_date) && isset($model->release_date)) {
 //        ]
 //    ]);
     $fields[] = $form->field($model, 'min_money')->textInput(['maxlength' => 255]);
-    $fields[] = $form->field($model, 'status')->dropDownList(Kiwi::getDataListModel()->projectStatus, ['disabled' => false]);
+    $fields[] = $form->field($model, 'status')->dropDownList(Kiwi::getDataListModel()->projectCheckStatus, ['disabled' => false]);
     $fieldGroups[] = ['label' => Yii::t('p2p_project','Project Base Info'), 'content' => implode('', $fields)];
 
     $fields = ['<br />'];

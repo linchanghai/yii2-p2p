@@ -23,7 +23,6 @@ class ProjectFailedController extends ProjectController
         $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
             'ProjectSearch' => [
                 'status' => $projectClass::STATUS_FAILED,
-                'id_delete' => 0,
             ]]));
 
         return $this->render('index', [

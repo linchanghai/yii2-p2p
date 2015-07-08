@@ -22,7 +22,6 @@ class ProjectRepayingController extends ProjectController
         $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
             'ProjectSearch' => [
                 'status' => $projectClass::STATUS_REPAYMENT,
-                'id_delete' => 0,
             ]]));
 
         return $this->render('index', [

@@ -27,10 +27,18 @@ return [
         ]
     ],
 
+    'projectCheckStatus' => [
+        'values' => [
+            Project::STATUS_PENDING => Yii::t('p2p_project', 'Pending Check'),
+            Project::STATUS_INVESTING => Yii::t('p2p_project', 'Passed Check'),
+            Project::STATUS_FAILED => Yii::t('p2p_project', 'Failed Check'),
+        ]
+    ],
+
     'projectRepaymentType' => [
         'values' => [
             Project::REPAYMENT_TYPE_MONTHLY => Yii::t('p2p_project', 'Monthly Interest Repayment'),
-            Project::REPAYMENT_TYPE_DISPOSABLE => Yii::t('p2p_project', 'Disposable Principal and Interest'),
+            Project::REPAYMENT_TYPE_ONETIME => Yii::t('p2p_project', 'One-time principal and interest'),
             Project::REPAYMENT_TYPE_EQUAL_MONTHLY => Yii::t('p2p_project', 'Equal monthly installments of principal and interest'),
         ]
     ]
