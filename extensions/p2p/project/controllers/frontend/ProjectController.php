@@ -22,7 +22,7 @@ class ProjectController extends Controller
 
         $dataProvider = new ActiveDataProvider([
             'query' => $projectClass::find()->where([
-                'status' => $projectClass::PROJECT_STATUS_PASSED,
+                'status' => $projectClass::STATUS_INVESTING,
             ]),
         ]);
 
