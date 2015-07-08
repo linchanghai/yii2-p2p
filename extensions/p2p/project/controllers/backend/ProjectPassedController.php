@@ -22,7 +22,6 @@ class ProjectPassedController extends ProjectController
         $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
             'ProjectSearch' => [
                 'status' => $projectClass::PROJECT_STATUS_PASSED,
-                'is_delete' => 0,
             ]]));
 
         return $this->render('index', [

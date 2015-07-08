@@ -38,7 +38,6 @@ class ProjectCheckController extends Controller
         $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
             'ProjectSearch' => [
                 'status' => Project::PROJECT_STATUS_PENDING,
-                'is_delete' => 0,
             ]]));
 
         return $this->render('index', [

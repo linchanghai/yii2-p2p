@@ -23,7 +23,6 @@ class ProjectController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $projectClass::find()->where([
                 'status' => $projectClass::PROJECT_STATUS_PASSED,
-                'is_delete' => 0
             ]),
         ]);
 

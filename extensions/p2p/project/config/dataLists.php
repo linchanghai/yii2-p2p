@@ -27,6 +27,14 @@ return [
         ]
     ],
 
+    'projectCheckStatus' => [
+        'values' => [
+            Project::PROJECT_STATUS_PENDING => Yii::t('p2p_project', 'Pending Check'),
+            Project::PROJECT_STATUS_PASSED => Yii::t('p2p_project', 'Passed Check'),
+            Project::PROJECT_STATUS_FAIlED => Yii::t('p2p_project', 'Failed Check'),
+        ]
+    ],
+
     'projectRepaymentType' => [
         'values' => [
             Project::PROJECT_REPAYMENT_TYPE_MONTHLY => Yii::t('p2p_project', 'Monthly Interest Repayment'),

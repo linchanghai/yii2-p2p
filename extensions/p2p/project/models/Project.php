@@ -66,7 +66,7 @@ class Project extends \kiwi\db\ActiveRecord
     {
         return [
             static::SCENARIO_DEFAULT => ['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'min_money', 'status'],
-            'insert' => ['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'min_money', 'status'],
+            'insert' => ['project_name', 'project_no', 'invest_total_money', 'interest_rate', 'repayment_date', 'repayment_type', 'release_date', 'project_type', 'min_money'],
             'check' => ['status']
         ];
     }

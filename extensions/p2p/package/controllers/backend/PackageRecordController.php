@@ -27,7 +27,6 @@ class PackageRecordController extends Controller
         $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
             'PackageRecordSearch' => [
                 'status' => $packageRecordClass::TYPE_INTO,
-                'id_delete' => 0,
             ]]));
 
         return $this->render('index', [
@@ -44,7 +43,6 @@ class PackageRecordController extends Controller
         $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
             'PackageRecordSearch' => [
                 'status' => $packageRecordClass::TYPE_OUT,
-                'id_delete' => 0,
             ]]));
 
         return $this->render('index', [

@@ -22,7 +22,6 @@ class ProjectEndController extends ProjectController
         $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
             'ProjectSearch' => [
                 'status' => $projectClass::PROJECT_STATUS_End,
-                'is_delete' => 0,
             ]]));
 
         return $this->render('index', [
