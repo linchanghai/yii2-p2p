@@ -21,14 +21,14 @@ class ProjectPassedController extends ProjectController
         $searchModel = Kiwi::getProjectSearch();
         $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
             'ProjectSearch' => [
-                'status' => $projectClass::PROJECT_STATUS_PASSED,
+                'status' => $projectClass::STATUS_INVESTING,
                 'id_delete' => 0,
             ]]));
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'status' => $projectClass::PROJECT_STATUS_PASSED,
+            'status' => $projectClass::STATUS_INVESTING,
         ]);
     }
 }

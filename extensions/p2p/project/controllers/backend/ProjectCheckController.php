@@ -37,7 +37,7 @@ class ProjectCheckController extends Controller
         $searchModel = Kiwi::getProjectSearch();
         $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
             'ProjectSearch' => [
-                'status' => Project::PROJECT_STATUS_PENDING,
+                'status' => Project::STATUS_PENDING,
                 'id_delete' => 0,
             ]]));
 

@@ -32,20 +32,21 @@ use yii\behaviors\TimestampBehavior;
  */
 class Project extends \kiwi\db\ActiveRecord
 {
-    const PROJECT_TYPE_NORMAL = 0;
-    const PROJECT_TYPE_TRANSFER = 1;
-    const PROJECT_TYPE_NOVICE = 2;
-
-    const PROJECT_STATUS_PENDING = 0;
-    const PROJECT_STATUS_PASSED = 1;
-    const PROJECT_STATUS_FAIlED = 2;
-    const PROJECT_STATUS_Repaying = 3;
-    const PROJECT_STATUS_End = 4;
-
-    const PROJECT_REPAYMENT_TYPE_MONTHLY = 0;
-    const PROJECT_REPAYMENT_TYPE_DISPOSABLE = 1;
-
     use ProjectTrait;
+
+    const TYPE_NORMAL = 0;
+    const TYPE_TRANSFER = 1;
+
+    const TYPE_NOVICE = 2;
+    const STATUS_PENDING = 0;
+    const STATUS_INVESTING = 1;
+    const STATUS_FAILED = 2;
+    const STATUS_REPAYMENT = 3;
+
+    const STATUS_END = 4;
+    const REPAYMENT_TYPE_MONTHLY = 0;
+
+    const REPAYMENT_TYPE_DISPOSABLE = 1;
 
     public static $enableLogicDelete = true;
 
