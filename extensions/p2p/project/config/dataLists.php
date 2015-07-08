@@ -11,35 +11,35 @@ use p2p\project\models\Project;
 return [
     'projectType' => [
         'values' => [
-            Project::PROJECT_TYPE_NORMAL => Yii::t('p2p_project', 'Normal Project'),
-            Project::PROJECT_TYPE_TRANSFER => Yii::t('p2p_project', 'Transfer Project'),
-            Project::PROJECT_TYPE_NOVICE => Yii::t('p2p_project', 'Novice Project'),
+            Project::TYPE_NORMAL => Yii::t('p2p_project', 'Normal Project'),
+            Project::TYPE_TRANSFER => Yii::t('p2p_project', 'Transfer Project'),
+            Project::TYPE_NOVICE => Yii::t('p2p_project', 'Novice Project'),
         ]
     ],
 
     'projectStatus' => [
         'values' => [
-            Project::PROJECT_STATUS_PENDING => Yii::t('p2p_project', 'Pending Check'),
-            Project::PROJECT_STATUS_PASSED => Yii::t('p2p_project', 'Passed Check'),
-            Project::PROJECT_STATUS_FAIlED => Yii::t('p2p_project', 'Failed Check'),
-            Project::PROJECT_STATUS_Repaying => Yii::t('p2p_project', 'Repaying Project'),
-            Project::PROJECT_STATUS_End => Yii::t('p2p_project', 'Project End'),
+            Project::STATUS_PENDING => Yii::t('p2p_project', 'Pending Check'),
+            Project::STATUS_INVESTING => Yii::t('p2p_project', 'Passed Check'),
+            Project::STATUS_FAILED => Yii::t('p2p_project', 'Failed Check'),
+            Project::STATUS_REPAYMENT => Yii::t('p2p_project', 'Repaying Project'),
+            Project::STATUS_END => Yii::t('p2p_project', 'Project End'),
         ]
     ],
 
     'projectCheckStatus' => [
         'values' => [
-            Project::PROJECT_STATUS_PENDING => Yii::t('p2p_project', 'Pending Check'),
-            Project::PROJECT_STATUS_PASSED => Yii::t('p2p_project', 'Passed Check'),
-            Project::PROJECT_STATUS_FAIlED => Yii::t('p2p_project', 'Failed Check'),
+            Project::STATUS_PENDING => Yii::t('p2p_project', 'Pending Check'),
+            Project::STATUS_INVESTING => Yii::t('p2p_project', 'Passed Check'),
+            Project::STATUS_FAILED => Yii::t('p2p_project', 'Failed Check'),
         ]
     ],
 
     'projectRepaymentType' => [
         'values' => [
-            Project::PROJECT_REPAYMENT_TYPE_MONTHLY => Yii::t('p2p_project', 'Monthly Interest Repayment'),
-            Project::PROJECT_REPAYMENT_TYPE_ONETIME => Yii::t('p2p_project', 'One-time principal and interest'),
-            Project::PROJECT_REPAYMENT_TYPE_EQUAL_MONTHLY => Yii::t('p2p_project', 'Equal monthly installments of principal and interest'),
+            Project::REPAYMENT_TYPE_MONTHLY => Yii::t('p2p_project', 'Monthly Interest Repayment'),
+            Project::REPAYMENT_TYPE_ONETIME => Yii::t('p2p_project', 'One-time principal and interest'),
+            Project::REPAYMENT_TYPE_EQUAL_MONTHLY => Yii::t('p2p_project', 'Equal monthly installments of principal and interest'),
         ]
     ]
 ];

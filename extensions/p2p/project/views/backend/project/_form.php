@@ -23,10 +23,10 @@ if (isset($model->repayment_date) && isset($model->release_date)) {
 }
 $projectClass = Kiwi::getProjectClass();
 if (!isset($model->status)) {
-    $model->status = $projectClass::PROJECT_STATUS_PENDING;
+    $model->status = $projectClass::STATUS_PENDING;
 }
 
-$disabled = $model->status == $projectClass::PROJECT_STATUS_PENDING ? false : 'disabled';
+$disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
 
 ?>
 <div class="project-form">
@@ -101,9 +101,6 @@ $disabled = $model->status == $projectClass::PROJECT_STATUS_PENDING ? false : 'd
             'filebrowserBrowseUrl' => Url::to(['/elfinder/manager']),
             'preset' => 'standard',
             'language' => Yii::$app->language,
-        ],
-        'options' => [
-            'disabled' => $disabled
         ]
     ]);
     $fieldGroups[] = ['label' => Yii::t('p2p_project', 'Project Legal Opinion'), 'content' => implode('', $fields)];
@@ -116,9 +113,6 @@ $disabled = $model->status == $projectClass::PROJECT_STATUS_PENDING ? false : 'd
             'filebrowserBrowseUrl' => Url::to(['/elfinder/manager']),
             'preset' => 'standard',
             'language' => Yii::$app->language,
-        ],
-        'options' => [
-            'disabled' => $disabled
         ]
     ]);
     $fieldGroups[] = ['label' => Yii::t('p2p_project', 'Project Material'), 'content' => implode('', $fields)];

@@ -22,7 +22,7 @@ use yii\base\ModelEvent;
  * @property \p2p\project\models\Project $project
  *
  * @package p2p\project\forms
- * @author 1079140464@qq.com
+ * @author changhai.lin <1079140464@qq.com>
  */
 class ProjectInvestPrepareForm extends Model
 {

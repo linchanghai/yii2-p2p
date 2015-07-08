@@ -37,7 +37,7 @@ class ProjectCheckController extends Controller
         $searchModel = Kiwi::getProjectSearch();
         $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
             'ProjectSearch' => [
-                'status' => Project::PROJECT_STATUS_PENDING,
+                'status' => Project::STATUS_PENDING,
             ]]));
 
         return $this->render('index', [
@@ -74,7 +74,7 @@ class ProjectCheckController extends Controller
             $model->verify_user = Yii::$app->user->id;
             $model->verify_date = time();
             $model->update();
-            return $this->redirect(['index']);
+            return $this->redirect('index');
         } else {
             return $this->render('update', [
                 'model' => $model,

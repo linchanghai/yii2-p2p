@@ -21,13 +21,13 @@ class ProjectEndController extends ProjectController
         $searchModel = Kiwi::getProjectSearch();
         $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
             'ProjectSearch' => [
-                'status' => $projectClass::PROJECT_STATUS_End,
+                'status' => $projectClass::STATUS_END,
             ]]));
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'status' => $projectClass::PROJECT_STATUS_End,
+            'status' => $projectClass::STATUS_END,
         ]);
     }
 }
