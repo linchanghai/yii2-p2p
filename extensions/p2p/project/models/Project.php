@@ -42,7 +42,6 @@ class Project extends \kiwi\db\ActiveRecord
     const STATUS_INVESTING = 1;
     const STATUS_FAILED = 2;
     const STATUS_REPAYMENT = 3;
-
     const STATUS_END = 4;
 
     const REPAYMENT_TYPE_MONTHLY = 0;
