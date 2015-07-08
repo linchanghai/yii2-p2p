@@ -49,11 +49,11 @@ class ExchangeRecordSearch extends ExchangeRecord
 
         $this->load($params);
 
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
-        }
+//        if (!$this->validate()) {
+//            // uncomment the following line if you do not want to return any records when validation fails
+//            // $query->where('0=1');
+//            return $dataProvider;
+//        }
 
         $query->andFilterWhere([
             'exchange_records_id' => $this->exchange_records_id,

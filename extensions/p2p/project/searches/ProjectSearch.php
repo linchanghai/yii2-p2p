@@ -82,4 +82,49 @@ class ProjectSearch extends Project
 
         return $dataProvider;
     }
+    public function frontendSearch($params)
+    {
+        $projectClass = Kiwi::getProjectClass();
+        $query = $projectClass::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+       if($params){
+           if(isset($params['rate'])){
+               switch($params['rate']){
+                   case 9:
+                       $query->andWhere(['<=', 'interest_rate',9]);
+                       break;
+                   case 10:
+                       $query->andWhere(['between', 'interest_rate',9,13]);
+                       break;
+                   case 13:
+                       $query->andWhere(['>=', 'interest_rate',13]);
+                       break;
+               }
+           }
+           if(isset($params['date'])){
+               switch($params['date']){
+                   case 1:
+                       $query->andWhere(['<=', 'repayment_date',time()+30* 3600 * 24]);
+                       break;
+                   case 2:
+                       $query->andWhere(['between', 'repayment_date',time()+30* 3600 * 24,time()+3*30* 3600 * 24]);
+                       break;
+                   case 3:
+                       $query->andWhere(['between', 'repayment_date',time()+3*30* 3600 * 24,time()+6*30* 3600 * 24]);
+                       break;
+                   case 4:
+                       $query->andWhere(['>=', 'repayment_date',time()+6*30* 3600 * 24]);
+                       break;
+               }
+           }
+       }
+
+
+
+        return $dataProvider;
+    }
 }
