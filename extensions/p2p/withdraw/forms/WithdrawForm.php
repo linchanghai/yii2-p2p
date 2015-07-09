@@ -7,8 +7,9 @@
 
 namespace p2p\withdraw\forms;
 
-
 use kiwi\base\Model;
+use kiwi\Kiwi;
+use yii;
 
 class WithdrawForm extends Model
 {
@@ -20,8 +21,56 @@ class WithdrawForm extends Model
 
     public $withdrawFee;
 
+    public function rules()
+    {
+        return [
+            [['withdrawMoney', 'canWithdrawMoney', 'withdrawFee'], 'required'],
+            [['withdrawMoney', 'canWithdrawMoney', 'withdrawFee'], 'number', 'min' => 0],
+            [['withdrawMoney', 'canWithdrawMoney', 'withdrawFee'], 'validateMoney'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'withdrawMoney' => Yii::t('p2p_withdraw', 'Withdraw Money'),
+            'canWithdrawMoney' => Yii::t('p2p_withdraw', 'Can Withdraw Money'),
+            'withdrawFee' => Yii::t('p2p_withdraw', 'Withdraw Fee'),
+        ];
+    }
+
+    public function validateMoney()
+    {
+        if ($this->withdrawMoney + $this->withdrawFee > $this->canWithdrawMoney) {
+            $this->addError('withdrawMoney', '可提现金额不足！');
+        }
+    }
+
     public function withdraw()
     {
+        if (!$this->validate()) {
+            return false;
+        }
 
+        return $this->createWithdrawRecord();
     }
-} 
+
+    public function createWithdrawRecord()
+    {
+        $withdrawRecordClass = Kiwi::getWithdrawRecordClass();
+        $withdrawRecord = Kiwi::getWithdrawRecord([
+//            'member_id' => Yii::$app->user->id,
+            'member_id' => 1,
+            'counter_fee' => $this->withdrawFee,
+            'money' => $this->withdrawMoney,
+            'status' => $withdrawRecordClass::STATUS_PENDING
+        ]);
+
+        if (!$withdrawRecord->save()) {
+            $this->addError('withdrawMoney', yii\helpers\Json::encode($withdrawRecord->getErrors()));
+            return false;
+        }
+
+        return true;
+    }
+}

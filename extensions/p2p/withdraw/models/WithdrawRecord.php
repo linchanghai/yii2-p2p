@@ -3,6 +3,7 @@
 namespace p2p\withdraw\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "deposit_record".
@@ -14,8 +15,10 @@ use Yii;
  * @property string $deposit_type
  * @property string $first_verify_user
  * @property integer $first_verify_date
+ * @property string $first_verify_memo
  * @property string $second_verify_user
  * @property integer $second_verify_date
+ * @property string $second_verify_memo
  * @property integer $status
  * @property integer $create_time
  * @property integer $update_time
@@ -45,11 +48,11 @@ class WithdrawRecord extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['member_id', 'money', 'counter_fee', 'create_time'], 'required'],
+            [['member_id', 'money', 'counter_fee'], 'required'],
             [['member_id', 'first_verify_date', 'second_verify_date', 'status', 'create_time', 'update_time', 'is_delete'], 'integer'],
             [['money', 'counter_fee'], 'number'],
             [['deposit_type'], 'string', 'max' => 45],
-            [['first_verify_user', 'second_verify_user'], 'string', 'max' => 80]
+            [['first_verify_user', 'second_verify_user', 'first_verify_memo', 'second_verify_memo'], 'string', 'max' => 80]
         ];
     }
 
@@ -66,12 +69,25 @@ class WithdrawRecord extends \kiwi\db\ActiveRecord
             'deposit_type' => Yii::t('p2p_withdraw', 'Deposit Type'),
             'first_verify_user' => Yii::t('p2p_withdraw', 'First Verify User'),
             'first_verify_date' => Yii::t('p2p_withdraw', 'First Verify Date'),
+            'first_verify_memo' => Yii::t('p2p_withdraw', 'First Verify Memo'),
             'second_verify_user' => Yii::t('p2p_withdraw', 'Second Verify User'),
             'second_verify_date' => Yii::t('p2p_withdraw', 'Second Verify Date'),
+            'second_verify_memo' => Yii::t('p2p_withdraw', 'Second Verify Memo'),
             'status' => Yii::t('p2p_withdraw', 'Status'),
             'create_time' => Yii::t('p2p_withdraw', 'Create Time'),
             'update_time' => Yii::t('p2p_withdraw', 'Update Time'),
             'is_delete' => Yii::t('p2p_withdraw', 'Is Delete'),
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => 'update_time',
+            ],
         ];
     }
 }
