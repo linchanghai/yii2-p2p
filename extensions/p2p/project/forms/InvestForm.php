@@ -11,9 +11,13 @@ namespace p2p\project\forms;
 use kiwi\base\Model;
 use kiwi\Kiwi;
 use Yii;
+use yii\base\Exception;
 
 /**
  * Class InvestForm
+ *
+ * @property \p2p\project\models\Project project
+ *
  * @package p2p\project\forms
  * @author jeremy.zhou(gao_lujie@live.cn)
  */
@@ -29,7 +33,7 @@ class InvestForm extends Model
     public $annual_id;
 
     /** @var \p2p\project\models\Project */
-    protected $project;
+    protected $_project;
 
     /**
      * @inheritdoc
@@ -38,8 +42,7 @@ class InvestForm extends Model
     {
         return [
             [['project_id', 'money'], 'required'],
-            ['project_id', 'validateProject'],
-            ['money', 'validateMoney'],
+            ['money', 'number', 'integerOnly' => true, 'min' => $this->project->min_money, 'max' => $this->project->invest_total_money - $this->project->invested_money],
         ];
     }
 
@@ -50,7 +53,6 @@ class InvestForm extends Model
     {
         return [
             'money' => Yii::t('p2p_project', 'Money'),
-            'project_id' => Yii::t('p2p_project', 'Project'),
             'annual_id' => Yii::t('p2p_project', 'Annual'),
         ];
     }
@@ -58,39 +60,54 @@ class InvestForm extends Model
     /**
      * validate if the project exist and the project status is investing
      */
-    public function validateProject()
+    public function getProject()
     {
-        $projectClass = Kiwi::getProjectClass();
-        $this->project = $projectClass::findOne($this->project_id);
-        if (!$this->project || $this->project->status != $projectClass::STATUS_INVESTING) {
-            $this->addError('project_id', 'Invalid Project ID');
+        if (!$this->_project) {
+            $projectClass = Kiwi::getProjectClass();
+            $this->_project = $projectClass::findOne($this->project_id);
+            if (!$this->_project || $this->_project->status != $projectClass::STATUS_INVESTING) {
+                throw new Exception('Invalid Project ID');
+            }
         }
-    }
-
-    public function validateMoney()
-    {
-        if ($this->hasErrors('project_id')) {
-            return false;
-        }
-
-        /** @var \yii\validators\NumberValidator $numberValidator */
-        $numberValidator = Yii::createObject([
-            'class' => 'yii\validators\NumberValidator',
-            'integerOnly' => true,
-            'min' => $this->project->min_money,
-            'max' => $this->project->invest_total_money - $this->project->invested_money,
-        ]);
-
-        $numberValidator->validateAttribute($this, 'money');
-
+        return $this->_project;
     }
 
     public function invest()
+    {
+        if (!$this->validate()) {
+            return false;
+        }
+
+        return $this->getInvestInfo()->save();
+    }
+
+    /**
+     * @return \p2p\project\models\ProjectInvest
+     * @throws Exception
+     */
+    public function getInvestInfo()
     {
         $invest = Kiwi::getProjectInvest();
         $invest->member_id = Yii::$app->user->id;
         $invest->project_id = $this->project_id;
         $invest->invest_money = $this->money;
-        $invest->save();
+        $invest->actual_invest_money = $this->money;
+        $invest->rate = $this->project->interest_rate;
+
+        $InterestHelperClass = Kiwi::getInterestHelperClass();
+        list($totalInterestMoney, $repayments) = $InterestHelperClass::calculateInterest($this->money, $invest->rate, time(), $this->getProject()->repayment_date, 20);
+
+        $invest->interest_money = $totalInterestMoney;
+
+        foreach ($repayments as $key => $repayment) {
+            $repayments[$key] = Kiwi::getProjectRepayment([
+                'interest_money' => $repayment['interestMoney'],
+                'invest_money' => $repayment['principalMoney'],
+                'repayment_date' => $repayment['repaymentDate'],
+            ]);
+        }
+
+        $invest->setRelation('projectRepayments', $repayments);
+        return $invest;
     }
 } 
