@@ -18,13 +18,8 @@ class ProjectController extends Controller
 {
     public function actionList()
     {
-        $projectClass = Kiwi::getProjectClass();
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $projectClass::find()->where([
-                'status' => $projectClass::STATUS_INVESTING,
-            ]),
-        ]);
+        $searchModel = Kiwi::getProjectSearch();
+        $dataProvider = $searchModel->frontendSearch(\Yii::$app->request->queryParams);
 
         $dataProvider->prepare(true);
 

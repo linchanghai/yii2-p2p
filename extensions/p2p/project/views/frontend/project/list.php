@@ -26,22 +26,23 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depend
         </li>
     </ul>
 </div>
+<?php \yii\widgets\Pjax::begin();?>
 <div class="investFilter">
     <div class="container">
         <div class="clearFix mt10 filterLine">
             <label>项目期限:</label>
-            <a class="active" href="#">全部</a>
-            <a href="#">一个月以内</a>
-            <a href="#">1-3个月</a>
-            <a href="#">3-6个月</a>
-            <a href="#">6个月以上</a>
+            <a <?= Yii::$app->request->get('date') ? null : 'class="active"'?> href="<?= Url::to(array_merge(\Yii::$app->request->queryParams,['/project/project/list','date'=>0]))?>">全部</a>
+            <a <?= Yii::$app->request->get('date')==1 ? 'class="active"':null ?> href="<?= Url::to(array_merge(\Yii::$app->request->queryParams,['/project/project/list','date'=>1]))?>">一个月以内</a>
+            <a <?= Yii::$app->request->get('date')==2 ? 'class="active"':null ?>href="<?= Url::to(array_merge(\Yii::$app->request->queryParams,['/project/project/list','date'=>2]))?>">1-3个月</a>
+            <a <?= Yii::$app->request->get('date')==3 ? 'class="active"':null ?>href="<?= Url::to(array_merge(\Yii::$app->request->queryParams,['/project/project/list','date'=>3]))?>">3-6个月</a>
+            <a <?= Yii::$app->request->get('date')==4 ? 'class="active"':null ?>href="<?= Url::to(array_merge(\Yii::$app->request->queryParams,['/project/project/list','date'=>4]))?>">6个月以上</a>
         </div>
         <div class="clearFix mt10 filterLine">
             <label>项目收益:</label>
-            <a class="active" href="#">全部</a>
-            <a href="#">9%以下</a>
-            <a href="#">9%-13%</a>
-            <a href="#">13%以上</a>
+            <a <?= Yii::$app->request->get('rate') ? null : 'class="active"'?> href="<?= Url::to(array_merge(\Yii::$app->request->queryParams,['/project/project/list','rate'=>0]))?>">全部</a>
+            <a <?= Yii::$app->request->get('rate')==9 ? 'class="active"':null ?>href="<?= Url::to(array_merge(\Yii::$app->request->queryParams,['/project/project/list','rate'=>9]))?>">9%以下</a>
+            <a <?= Yii::$app->request->get('rate')==10 ? 'class="active"':null ?>href="<?= Url::to(array_merge(\Yii::$app->request->queryParams,['/project/project/list','rate'=>10]))?>">9%-13%</a>
+            <a <?= Yii::$app->request->get('rate')==13 ? 'class="active"':null ?>href="<?= Url::to(array_merge(\Yii::$app->request->queryParams,['/project/project/list','rate'=>13]))?>">13%以上</a>
         </div>
     </div>
 </div>
@@ -93,3 +94,4 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depend
         <?php } ?>
     </ul>
 </div>
+<?php \yii\widgets\Pjax::end();?>
