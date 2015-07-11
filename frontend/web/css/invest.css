@@ -317,3 +317,8 @@
 .integralTopRight {
   background: #ed7c5e;
 }
+
+.afterInvestArea {
+  width: 360px;
+  margin: 40px auto 0 auto;
+}

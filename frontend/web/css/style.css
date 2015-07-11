@@ -404,6 +404,10 @@ html input[disabled] {
   content: "\e084";
 }
 
+.glyphicon-open:before {
+  content: "\e167";
+}
+
 .fl {
   float: left;
 }
@@ -492,6 +496,14 @@ html input[disabled] {
   padding-top: 20px;
 }
 
+.pt10 {
+  padding-top: 10px;
+}
+
+.p20 {
+  padding: 20px;
+}
+
 .hide {
   display: none !important;
 }
@@ -526,6 +538,10 @@ html input[disabled] {
 
 .backGrey {
   background: #f3f5fb;
+}
+
+.backWhite {
+  background: #fff;
 }
 
 .colorWhite {

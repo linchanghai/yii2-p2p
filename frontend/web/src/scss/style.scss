@@ -98,6 +98,9 @@ html input[disabled] {
 .glyphicon-ok-sign:before{
   content: "\e084";
 }
+.glyphicon-open:before {
+  content: "\e167";
+}
 .fl{
   float: left;
 }
@@ -165,6 +168,12 @@ html input[disabled] {
 .pt20{
   padding-top: 20px;
 }
+.pt10{
+  padding-top: 10px;
+}
+.p20{
+  padding: 20px;
+}
 .hide{
   display: none!important;
 }
@@ -191,6 +200,9 @@ html input[disabled] {
 }
 .backGrey{
   background: $backColor;
+}
+.backWhite{
+  background: #fff;
 }
 .colorWhite{
   color: #fff;
