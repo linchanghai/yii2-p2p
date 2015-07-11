@@ -2,7 +2,7 @@
 
 namespace p2p\activity\models;
 
-use kiwi\behaviors\ChangeLogBehavior;
+use kiwi\behaviors\ChangeBehavior;
 use kiwi\behaviors\RecordBehavior;
 use kiwi\Kiwi;
 use Yii;

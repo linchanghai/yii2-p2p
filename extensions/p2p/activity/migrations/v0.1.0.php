@@ -18,7 +18,7 @@ class v0_1_0 extends Migration
             'activity_id' => Schema::TYPE_PK,
             'activity_type' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'activity_send_type' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-            'activity_send_value' => Schema::TYPE_STRING . '(45) NOT NULL',
+            'activity_send_value' => Schema::TYPE_DECIMAL . '(8, 2) NOT NULL',
             'valid_date' => Schema::TYPE_INTEGER . '(11) NOT NULL default \'0\'',
             'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'update_time' => Schema::TYPE_INTEGER . '(11)',
