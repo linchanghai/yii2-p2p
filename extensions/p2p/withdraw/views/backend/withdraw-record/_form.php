@@ -27,11 +27,34 @@ use kiwi\Kiwi;
 
     <?= $form->field($model, 'deposit_type')->textInput(['value' => Kiwi::getDataListModel()->withdrawStatus[$model->deposit_type]]) ?>
 
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-9">
-            <?= Html::submitButton($model->isNewRecord ? Yii::t('p2p_withdraw', 'Create') : Yii::t('p2p_withdraw', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <?php
+    $withdrawClass = Kiwi::getWithdrawRecord();
+    echo $form->field($model, 'first_verify_memo')->textarea([
+        'maxlength' => 255,
+        'disabled' => $model->status == $withdrawClass::STATUS_PENDING ? false : 'disabled'
+    ]);
+    if ($model->status != $withdrawClass::STATUS_PENDING) {
+        if ($model->status == $withdrawClass::STATUS_FIRST_VERIFY_SUCCESS) {
+            echo $form->field($model, 'status')->dropDownList(Kiwi::getDataListModel()->withdrawSecondVerifyStatus, ['disabled' => false]);
+        }
+
+        echo $form->field($model, 'second_verify_memo')->textarea([
+            'maxlength' => 255,
+            'disabled' => $model->status == $withdrawClass::STATUS_FIRST_VERIFY_SUCCESS ? false : 'disabled'
+        ]);
+    }
+    ?>
+
+    <?php
+    $withdrawClass = Kiwi::getWithdrawRecordClass();
+    if ($model->status == $withdrawClass::STATUS_PENDING || $model->status == $withdrawClass::STATUS_FIRST_VERIFY_SUCCESS) {
+        ?>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-9">
+                <?= Html::submitButton($model->isNewRecord ? Yii::t('p2p_withdraw', 'Create') : Yii::t('p2p_withdraw', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            </div>
         </div>
-    </div>
+    <?php } ?>
 
     <?php ActiveForm::end(); ?>
 

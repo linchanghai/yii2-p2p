@@ -11,6 +11,15 @@ use kiwi\Kiwi;
 
 $this->title = Yii::t('p2p_withdraw', 'Withdraw Records');
 $this->params['breadcrumbs'][] = $this->title;
+
+$withdrawClass = Kiwi::getWithdrawRecordClass();
+if(isset($status) && $status) {
+    if ($status == $withdrawClass::STATUS_PENDING || $status == $withdrawClass::STATUS_FIRST_VERIFY_SUCCESS) {
+        $buttonTemplate = '<div style="width: 30px">{update} {delete}</div>';
+    } else {
+        $buttonTemplate = '<div style="width: 15px">{update}</div>';
+    }
+}
 ?>
 <div class="withdraw-record-index">
 
@@ -40,19 +49,19 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'money',
             'counter_fee',
-            'deposit_type',
+//            'deposit_type',
 //             'first_verify_user',
 //             'first_verify_date',
 //             'second_verify_user',
 //             'second_verify_date',
-            'status',
+//            'status',
             'create_time:datetime',
             'update_time:datetime',
             // 'is_delete',
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '<div style="width: 30px">{update} {delete}</div>'
+                'template' => isset($buttonTemplate) ?: '<div style="width: 30px">{update} {delete}</div>'
             ],
         ],
         'export' => false,

@@ -15,9 +15,16 @@ return [
             WithdrawRecord::STATUS_SUCCESS => Yii::t('p2p_withdraw', 'Withdraw Success'),
             WithdrawRecord::STATUS_FAIL => Yii::t('p2p_withdraw', 'Withdraw Fail'),
             WithdrawRecord::STATUS_FIRST_VERIFY_SUCCESS => Yii::t('p2p_withdraw', 'Withdraw First Verify Success'),
-            WithdrawRecord::STATUS_SECOND_VERIFY_SUCCESS => Yii::t('p2p_withdraw', 'Withdraw Second Verify Success'),
         ]
     ],
+
+    'withdrawSecondVerifyStatus' => [
+        'values' => [
+            WithdrawRecord::STATUS_SUCCESS => Yii::t('p2p_withdraw', 'Withdraw Success'),
+            WithdrawRecord::STATUS_FAIL => Yii::t('p2p_withdraw', 'Withdraw Fail'),
+        ]
+    ],
+
 
     'WithdrawType' => [
         'values' => [

@@ -63,8 +63,11 @@ class WithdrawForm extends Model
             'member_id' => 1,
             'counter_fee' => $this->withdrawFee,
             'money' => $this->withdrawMoney,
-            'status' => $withdrawRecordClass::STATUS_PENDING
+            'status' => $withdrawRecordClass::STATUS_PENDING,
+            'type' => $withdrawRecordClass::TYPE_MANUAL
         ]);
+
+        $withdrawRecord->scenario = 'insert';
 
         if (!$withdrawRecord->save()) {
             $this->addError('withdrawMoney', yii\helpers\Json::encode($withdrawRecord->getErrors()));

@@ -14,6 +14,11 @@ use yii\filters\VerbFilter;
  */
 class WithdrawRecordController extends Controller
 {
+    public function getViewPath()
+    {
+        return $this->module->getViewPath() . DIRECTORY_SEPARATOR . 'withdraw-record';
+    }
+
     public function behaviors()
     {
         return [
@@ -32,123 +37,37 @@ class WithdrawRecordController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = Kiwi::getWithdrawRecordSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionAuto()
-    {
-        $withdrawClass = Kiwi::getWithdrawRecord();
-        $searchModel = Kiwi::getWithdrawRecordSearch();
-        $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
-            'WithdrawRecordSearch' => [
-                'deposit_type' => $withdrawClass::TYPE_AUTO
-            ]
-        ]));
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionPending()
-    {
-        $withdrawClass = Kiwi::getWithdrawRecord();
+        $withdrawClass = Kiwi::getWithdrawRecordClass();
         $searchModel = Kiwi::getWithdrawRecordSearch();
         $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
             'WithdrawRecordSearch' => [
                 'deposit_type' => $withdrawClass::TYPE_MANUAL,
                 'status' => $withdrawClass::STATUS_PENDING
-            ]
-        ]));
+            ]]));
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionSuccess()
-    {
-        $withdrawClass = Kiwi::getWithdrawRecord();
-        $searchModel = Kiwi::getWithdrawRecordSearch();
-        $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
-            'WithdrawRecordSearch' => [
-                'deposit_type' => $withdrawClass::TYPE_MANUAL,
-                'status' => $withdrawClass::STATUS_SUCCESS
-            ]
-        ]));
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionFail()
-    {
-        $withdrawClass = Kiwi::getWithdrawRecord();
-        $searchModel = Kiwi::getWithdrawRecordSearch();
-        $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
-            'WithdrawRecordSearch' => [
-                'deposit_type' => $withdrawClass::TYPE_MANUAL,
-                'status' => $withdrawClass::STATUS_FAIL
-            ]
-        ]));
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionFirst()
-    {
-        $withdrawClass = Kiwi::getWithdrawRecord();
-        $searchModel = Kiwi::getWithdrawRecordSearch();
-        $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
-            'WithdrawRecordSearch' => [
-                'deposit_type' => $withdrawClass::TYPE_MANUAL,
-                'status' => $withdrawClass::STATUS_FIRST_VERIFY_SUCCESS
-            ]
-        ]));
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionSecond()
-    {
-        $withdrawClass = Kiwi::getWithdrawRecord();
-        $searchModel = Kiwi::getWithdrawRecordSearch();
-        $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
-            'WithdrawRecordSearch' => [
-                'deposit_type' => $withdrawClass::TYPE_MANUAL,
-                'status' => $withdrawClass::STATUS_SECOND_VERIFY_SUCCESS
-            ]
-        ]));
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'status' => $withdrawClass::STATUS_PENDING
         ]);
     }
 
     public function actionUpdate($id)
     {
-        /** @var \p2p\project\models\Project $model */
+        /** @var \p2p\withdraw\models\WithdrawRecord $model */
         $model = $this->findModel($id);
-//        $model->scenario = 'check';
+        $model->scenario = 'verify';
 
+        $withdrawClass = Kiwi::getWithdrawRecordClass();
         if ($model->load(Yii::$app->request->post())) {
+            if (isset($model->second_verify_memo) && $model->second_verify_memo) {
+                $model->second_verify_user = Yii::$app->user->id;
+                $model->second_verify_date = time();
+            } else if (isset($model->first_verify_memo) && $model->first_verify_memo) {
+                $model->first_verify_user = Yii::$app->user->id;
+                $model->first_verify_date = time();
+                $model->status = $withdrawClass::STATUS_FIRST_VERIFY_SUCCESS;
+            }
             $model->update();
             return $this->redirect('index');
         } else {
