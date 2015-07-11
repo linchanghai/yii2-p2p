@@ -2,6 +2,7 @@
 
 namespace p2p\activity\models;
 
+use kiwi\Kiwi;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -29,6 +30,7 @@ class Activity extends \yii\db\ActiveRecord
     const TYPE_SHARE = 5;
     const TYPE_SUBSCRIBE = 6;
     const TYPE_APP = 7;
+    const TYPE_SIGNUP = 8;
 
     const SEND_TYPE_POINTS = 1;
     const SEND_TYPE_ANNUAL = 2;
@@ -44,9 +46,24 @@ class Activity extends \yii\db\ActiveRecord
             self::TYPE_SHARE => Yii::t('p2p_activity','Share'),
             self::TYPE_SUBSCRIBE => Yii::t('p2p_activity','Subscribe'),
             self::TYPE_APP => Yii::t('p2p_activity','App'),
+            self::TYPE_SIGNUP => Yii::t('p2p_activity','Signup'),
         ];
     }
 
+    public function getActivityEvent(){
+        $eventList =  [
+//            self::TYPE_BIND_EMAIL => Yii::t('p2p_activity','Bind Email'),
+//            self::TYPE_BIND_PHONE => Yii::t('p2p_activity','Bind Phone'),
+//            self::TYPE_INVEST => Yii::t('p2p_activity','Invest'),
+//            self::TYPE_RECHARGE => Yii::t('p2p_activity','Recharge'),
+//            self::TYPE_SHARE => Yii::t('p2p_activity','Share'),
+//            self::TYPE_SUBSCRIBE => Yii::t('p2p_activity','Subscribe'),
+//            self::TYPE_APP => Yii::t('p2p_activity','App'),
+            self::TYPE_SIGNUP => [Kiwi::getSignupFormClass(),'afterSignup'],
+        ];
+
+        return $eventList[$this->activity_type];
+    }
     public function getSendType(){
         return [
             self::SEND_TYPE_POINTS => Yii::t('p2p_activity','Points'),

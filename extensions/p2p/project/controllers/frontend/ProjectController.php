@@ -25,6 +25,7 @@ class ProjectController extends Controller
 
         return $this->render('list', [
             'projects' => $dataProvider->models,
+            'pages' =>$dataProvider->pagination,
         ]);
     }
 

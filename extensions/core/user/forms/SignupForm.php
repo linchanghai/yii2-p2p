@@ -8,6 +8,9 @@ use yii\base\ModelEvent;
 
 /**
  * Class SignupForm
+ *
+ * @method void signup()
+ *
  * @package core\user\forms
  * @author Lujie.Zhou(lujie.zhou@jago-ag.cn)
  */
@@ -16,6 +19,8 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+
+    public $user;
 
     /**
      * @inheritdoc
@@ -38,47 +43,20 @@ class SignupForm extends Model
         ];
     }
 
-
     /**
      * Signs user up.
-     *
-     * @return \core\user\models\User|null the saved model or null if saving fails
+     * @return mixed
      */
-    public function signup()
+    protected function signupInternal()
     {
-        if (!$this->validate()) {
-            return false;
-        }
-
-        if ($this->beforeSignup()) {
-            /** @var \core\user\models\User $user */
-            $user = Kiwi::createObject(Yii::$app->user->identityClass);
-            $user->username = $this->username;
-            $user->email = $this->email;
-            $user->setPassword($this->password);
-            $user->generateAuthKey();
-            $user->status = 1;
-            $user->save();
-
-            $this->afterSignup();
-            return $user;
-        }
-
-        return null;
-    }
-
-    const BEFORE_SIGNUP = 'beforeSignup';
-    const AFTER_SIGNUP = 'afterSignup';
-
-    public function beforeSignup()
-    {
-        $event = new ModelEvent();
-        $this->trigger(static::BEFORE_SIGNUP, $event);
-        return $event->isValid;
-    }
-
-    public function afterSignup()
-    {
-        $this->trigger(static::AFTER_SIGNUP);
+        /** @var \core\user\models\User $user */
+        $this->user = Kiwi::createObject(Yii::$app->user->identityClass);
+        $this->user->username = $this->username;
+        $this->user->email = $this->email;
+        $this->user->setPassword($this->password);
+        $this->user->generateAuthKey();
+        $this->user->status = 1;
+        $this->user->save();
+        return $this->user;
     }
 }

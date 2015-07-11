@@ -2,7 +2,9 @@
 
 namespace p2p\activity\models;
 
+use core\member\models\Member;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "activity_record".
@@ -33,7 +35,7 @@ class ActivityRecord extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['member_id', 'activity_id', 'create_time'], 'required'],
+            [['member_id', 'activity_id'], 'required'],
             [['member_id', 'activity_id', 'is_delete'], 'integer'],
             [['note'], 'string', 'max' => 50],
             [['create_time'], 'string', 'max' => 45]
@@ -71,4 +73,14 @@ class ActivityRecord extends \yii\db\ActiveRecord
         return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
     }
 
+    public function behaviors()
+    {
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => false,
+            ],
+        ];
+    }
 }

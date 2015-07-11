@@ -94,4 +94,6 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depend
         <?php } ?>
     </ul>
 </div>
+
+<?= \yii\widgets\LinkPager::widget(['pagination' => $pages]); //todo?>
 <?php \yii\widgets\Pjax::end();?>
