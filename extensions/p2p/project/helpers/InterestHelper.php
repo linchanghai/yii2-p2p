@@ -15,11 +15,11 @@ use kiwi\helpers\ArrayHelper;
 class InterestHelper
 {
     /**
-     * @param $money the invest money
-     * @param $rate the rate of year
-     * @param $startDate start get interest date
-     * @param $endDate get all money and interest date
-     * @param $repaymentDay get interest day of every month
+     * @param integer|float $money the invest money
+     * @param float $rate the rate of year
+     * @param integer $startDate start get interest date
+     * @param integer $endDate get all money and interest date
+     * @param integer $repaymentDay get interest day of every month
      * @return array the invest info
      */
     public static function calculateInterest($money, $rate, $startDate, $endDate, $repaymentDay)
