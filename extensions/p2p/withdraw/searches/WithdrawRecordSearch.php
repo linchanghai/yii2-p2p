@@ -43,7 +43,8 @@ class WithdrawRecordSearch extends WithdrawRecord
      */
     public function search($params)
     {
-        $query = WithdrawRecord::find();
+        $withdrawClass = Kiwi::getWithdrawRecordClass();
+        $query = $withdrawClass::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

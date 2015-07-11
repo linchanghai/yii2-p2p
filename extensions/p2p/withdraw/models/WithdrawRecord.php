@@ -33,7 +33,6 @@ class WithdrawRecord extends \kiwi\db\ActiveRecord
     const STATUS_SUCCESS = 1;
     const STATUS_FAIL = 2;
     const STATUS_FIRST_VERIFY_SUCCESS = 3;
-    const STATUS_SECOND_VERIFY_SUCCESS = 3;
 
     /**
      * @inheritdoc
@@ -43,6 +42,15 @@ class WithdrawRecord extends \kiwi\db\ActiveRecord
         return 'deposit_record';
     }
 
+    public function scenarios()
+    {
+        return [
+            static::SCENARIO_DEFAULT => ['member_id', 'money', 'counter_fee', 'deposit_type', 'status'],
+            'insert' => ['member_id', 'money', 'counter_fee', 'deposit_type'],
+            'verify' => ['first_verify_memo', 'second_verify_memo', 'status']
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -50,7 +58,7 @@ class WithdrawRecord extends \kiwi\db\ActiveRecord
     {
         return [
             [['member_id', 'money', 'counter_fee'], 'required'],
-            [['member_id', 'first_verify_date', 'second_verify_date', 'status', 'create_time', 'update_time', 'is_delete'], 'integer'],
+            [['member_id', 'first_verify_date', 'second_verify_date', 'status', 'create_time', 'update_time'], 'integer'],
             [['money', 'counter_fee'], 'number'],
             [['deposit_type'], 'string', 'max' => 45],
             [['first_verify_user', 'second_verify_user', 'first_verify_memo', 'second_verify_memo'], 'string', 'max' => 80]
