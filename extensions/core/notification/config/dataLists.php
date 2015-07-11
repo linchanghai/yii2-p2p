@@ -17,6 +17,7 @@ return [
     'notificationEvents' => [
         'label' => Yii::t('core_notification', 'Events'),
         'values' => [
+            
         ]
     ]
 ];

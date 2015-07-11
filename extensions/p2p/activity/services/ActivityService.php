@@ -15,7 +15,7 @@ use yii\base\Event;
 class ActivityService extends Service
 {
 
-    public function attachEvents()
+    public function attachActivities()
     {
         /** @var \p2p\activity\models\Activity[] $activities */
         $activities = Kiwi::getActivity()->find()->all();
