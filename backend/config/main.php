@@ -36,7 +36,7 @@ return [
             'access' => ['@'], //глобальный доступ к фаил менеджеру @ - для авторизорованных , ? - для гостей , чтоб открыть всем ['@', '?']
             'disabledCommands' => ['netmount'], //отключение ненужных команд https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#commands
             'roots' => [
-                [
+                'root' => [
                     'baseUrl' => 'http://localhost/p2p/upload',
                     'basePath' => '@upload',
                     'path' =>  '/',

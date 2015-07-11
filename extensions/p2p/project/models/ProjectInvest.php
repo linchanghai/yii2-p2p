@@ -32,6 +32,11 @@ use yii\behaviors\TimestampBehavior;
  */
 class ProjectInvest extends \kiwi\db\ActiveRecord
 {
+    const STATUS_PENDING = 0;
+    const STATUS_REPAYMENT = 1;
+    const STATUS_FINISHED = 2;
+    const STATUS_CANCELED = 3;
+
     /**
      * @inheritdoc
      */

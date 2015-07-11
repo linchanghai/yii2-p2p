@@ -92,6 +92,12 @@ html input[disabled] {
 .glyphicon-phone-alt:before {
   content: "\e183";
 }
+.glyphicon-exclamation-sign:before {
+  content: "\e101";
+}
+.glyphicon-ok-sign:before{
+  content: "\e084";
+}
 .fl{
   float: left;
 }
@@ -151,6 +157,11 @@ html input[disabled] {
 .mt40{
   margin-top: 40px;
 }
+.prt2{
+  position: relative;
+  top: 2px;
+  margin-right: 4px;
+}
 .pt20{
   padding-top: 20px;
 }
@@ -171,6 +182,9 @@ html input[disabled] {
 }
 .warningColor{
   color: $warningColor;
+}
+.errorColor{
+  color: $errorColor;
 }
 .secondColor{
   color: $secondColor;
@@ -236,9 +250,11 @@ html input[disabled] {
   line-height: 36px;
 }
 .themeBtn{
+  color: #fff;
   background: $themeColor;
 }
 .secondBtn{
+  color: #fff;
   background: $secondColor;
 }
 .progress {

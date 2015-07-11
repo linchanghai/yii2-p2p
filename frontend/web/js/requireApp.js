@@ -4,11 +4,13 @@ requirejs.config({
         "jquery" : "jquery.min",
         "bxslider": "jquery.bxslider.min",
         "textslider": "jquery.textslider",
-        "modal": "modal"
+        "modal": "modal",
+        "placeholder": "placeholder"
     },
     shim:{
         "bxslider": ["jquery"],
         "textslider":["jquery"],
+        "placeholder":["jquery"],
         "modal": ["jquery"]
     //    "cartFly":["jquery"],
     //    "modal": ["jquery"],

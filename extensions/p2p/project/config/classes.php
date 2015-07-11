@@ -20,6 +20,7 @@ return [
         //forms
         'ProjectInvestPrepareForm' => 'p2p\project\forms\ProjectInvestPrepareForm',
         'ProjectInvestForm' => 'p2p\project\forms\ProjectInvestForm',
+        'InvestForm' => 'p2p\project\forms\InvestForm',
 
         //helpers
         'InterestHelper' => 'p2p\project\helpers\InterestHelper',

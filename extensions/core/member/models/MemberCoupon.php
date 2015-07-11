@@ -13,7 +13,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $member_coupon_id
  * @property integer $member_id
  * @property integer $type
- * @property string $value
+ * @property float $value
  * @property integer $used_time
  * @property integer $expire_date
  * @property integer $status
@@ -25,7 +25,11 @@ use yii\behaviors\TimestampBehavior;
  */
 class MemberCoupon extends \kiwi\db\ActiveRecord
 {
+    const TYPE_BONUS = 1;
+    const TYPE_CASH = 2;
+    const TYPE_ANNUAL = 3;
 
+    const STATUS_UNUSED = 0;
     const STATUS_USED = 1;
 
     /**
