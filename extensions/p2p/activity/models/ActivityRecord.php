@@ -2,7 +2,8 @@
 
 namespace p2p\activity\models;
 
-use core\member\models\Member;
+use kiwi\behaviors\RecordBehavior;
+use kiwi\Kiwi;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -17,9 +18,9 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $is_delete
  *
  * @property Activity $activity
- * @property Member $member
+ * @property \core\member\models\Member $member
  */
-class ActivityRecord extends \yii\db\ActiveRecord
+class ActivityRecord extends \kiwi\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -62,7 +63,7 @@ class ActivityRecord extends \yii\db\ActiveRecord
      */
     public function getActivity()
     {
-        return $this->hasOne(Activity::className(), ['activity_id' => 'activity_id']);
+        return $this->hasOne(Kiwi::getActivityClass(), ['activity_id' => 'activity_id']);
     }
 
     /**
@@ -70,7 +71,7 @@ class ActivityRecord extends \yii\db\ActiveRecord
      */
     public function getMember()
     {
-        return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
+        return $this->hasOne(Kiwi::getMemberClass(), ['member_id' => 'member_id']);
     }
 
     public function behaviors()
@@ -81,6 +82,44 @@ class ActivityRecord extends \yii\db\ActiveRecord
                 'createdAtAttribute' => 'create_time',
                 'updatedAtAttribute' => false,
             ],
+            'record' => $this->getRecordBehavior(),
         ];
+    }
+
+    public function getRecordBehavior()
+    {
+        $behavior = ['class' => RecordBehavior::className()];
+        $activity = $this->activity;
+        if ($activity->activity_send_type == $activity::SEND_TYPE_POINTS) {
+            $statisticChangeRecordClass = Kiwi::getStatisticChangeRecordClass();
+            $behavior['targetClass'] = $statisticChangeRecordClass;
+            $behavior['attributes'] = [
+                'type' => $statisticChangeRecordClass::TYPE_ACTIVITY_POINT,
+                'value' => 'activity.activity_send_value',
+                'member_id' => Yii::$app->user->id,
+            ];
+        } else {
+            $memberCouponClass = Kiwi::getMemberCouponClass();
+            $behavior['targetClass'] = $memberCouponClass;
+            $behavior['attributes'] = [
+                'value' => 'activity.activity_send_value',
+                'member_id' => Yii::$app->user->id,
+                'expire_date' => strtotime("+ {$activity->valid_date} day"),
+            ];
+            switch ($activity->activity_send_type) {
+                case $activity::SEND_TYPE_ANNUAL:
+                    $behavior['attributes']['type'] = $memberCouponClass::TYPE_ANNUAL;
+                    break;
+                case $activity::SEND_TYPE_BONUS:
+                    $behavior['attributes']['type'] = $memberCouponClass::TYPE_BONUS;
+                    break;
+                case $activity::SEND_TYPE_CASH:
+                    $behavior['attributes']['type'] = $memberCouponClass::TYPE_CASH;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return $behavior;
     }
 }

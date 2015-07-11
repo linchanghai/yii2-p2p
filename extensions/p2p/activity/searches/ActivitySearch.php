@@ -18,7 +18,7 @@ class ActivitySearch extends Activity
     public function rules()
     {
         return [
-            [['activity_id', 'activity_type', 'activity_send_type', 'vaild_date', 'create_time', 'update_time', 'is_delete'], 'integer'],
+            [['activity_id', 'activity_type', 'activity_send_type', 'valid_date', 'create_time', 'update_time', 'is_delete'], 'integer'],
             [['activity_send_value'], 'safe'],
         ];
     }
@@ -59,7 +59,7 @@ class ActivitySearch extends Activity
             'activity_id' => $this->activity_id,
             'activity_type' => $this->activity_type,
             'activity_send_type' => $this->activity_send_type,
-            'vaild_date' => $this->vaild_date,
+            'valid_date' => $this->valid_date,
             'create_time' => $this->create_time,
             'update_time' => $this->update_time,
             'is_delete' => $this->is_delete,

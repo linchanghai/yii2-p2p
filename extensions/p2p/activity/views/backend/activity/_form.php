@@ -1,5 +1,6 @@
 <?php
 
+use kiwi\Kiwi;
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 
@@ -16,13 +17,13 @@ use kartik\widgets\ActiveForm;
         'fullSpan' => 11
     ]); ?>
 
-    <?= $form->field($model, 'activity_type')->dropDownList($model->getActivityType()) ?>
+    <?= $form->field($model, 'activity_type')->dropDownList(Kiwi::getDataListModel()->activityTypes) ?>
 
-    <?= $form->field($model, 'activity_send_type')->dropDownList($model->getSendType()) ?>
+    <?= $form->field($model, 'activity_send_type')->dropDownList(Kiwi::getDataListModel()->activitySendTypes) ?>
 
     <?= $form->field($model, 'activity_send_value')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'vaild_date')->textInput() ?>
+    <?= $form->field($model, 'valid_date')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('p2p_activity', 'Create') : Yii::t('p2p_activity', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

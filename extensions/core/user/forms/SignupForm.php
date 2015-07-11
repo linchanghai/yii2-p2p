@@ -20,6 +20,7 @@ class SignupForm extends Model
     public $email;
     public $password;
 
+    /** @var \core\user\models\User */
     public $user;
 
     /**
@@ -49,7 +50,6 @@ class SignupForm extends Model
      */
     protected function signupInternal()
     {
-        /** @var \core\user\models\User $user */
         $this->user = Kiwi::createObject(Yii::$app->user->identityClass);
         $this->user->username = $this->username;
         $this->user->email = $this->email;
@@ -57,6 +57,7 @@ class SignupForm extends Model
         $this->user->generateAuthKey();
         $this->user->status = 1;
         $this->user->save();
+        Yii::$app->user->login($this->user);
         return $this->user;
     }
 }

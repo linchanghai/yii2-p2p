@@ -2,7 +2,7 @@
 
 namespace core\member\models;
 
-use kiwi\behaviors\ChangeLogBehavior;
+use kiwi\behaviors\ChangeBehavior;
 use kiwi\Kiwi;
 use Yii;
 use yii\base\Exception;
@@ -39,7 +39,8 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
     const TYPE_INVEST_EMPIRICAL = 11;
     const TYPE_USER_POINT_REGISTER = 12;
 
-    const TYPE_EXCHANGE_POINT = 13;
+    const TYPE_EXCHANGE_POINT = 21;
+    const TYPE_ACTIVITY_POINT = 22;
 
     public $types = [];
     /**
@@ -62,7 +63,7 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
             [['type', 'link_id'], 'integer'],
             [['value', 'result'], 'number'],
             [['attribute'], 'string', 'max' => 40],
-            [['note'], 'string', 'max' => 255]
+            [['note'], 'string', 'max' => 255],
         ];
     }
 
@@ -88,7 +89,7 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
     public function behaviors()
     {
         return [
-            'changeLog' => $this->getChangeLogBehaviorConfig($this->type),
+            'changeLog' => $this->getChangeBehavior(),
             'time' => [
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'create_time',
@@ -97,7 +98,7 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
         ];
     }
 
-    public function getChangeLogBehaviorConfig($type)
+    public function getChangeBehavior()
     {
         $types = [
             static::TYPE_ACCOUNT_TO_PACKAGE => [
@@ -125,6 +126,11 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
                 'attribute' => 'points',
                 'condition' => ['member_id' => $this->member_id],
             ],
+            static::TYPE_ACTIVITY_POINT => [
+                'targetClass' => Kiwi::getMemberStatisticClass(),
+                'attribute' => 'points',
+                'condition' => ['member_id' => $this->member_id],
+            ],
             static::TYPE_INVEST => [
                 'targetClass' => Kiwi::getMemberStatisticClass(),
                 'attribute' => 'account_money',
@@ -139,12 +145,12 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
 
         $types = ArrayHelper::merge($types, $this->types);
 
-        if (empty($types[$type])) {
-            throw new Exception('Invalid Type: ' . $type);
+        if (empty($types[$this->type])) {
+            throw new Exception('Invalid Type: ' . $this->type);
         }
 
-        $config = $types[$type];
-        $config['class'] = ChangeLogBehavior::className();
+        $config = $types[$this->type];
+        $config['class'] = ChangeBehavior::className();
 
         $this->attribute = $config['attribute'];
 
