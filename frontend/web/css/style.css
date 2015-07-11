@@ -396,6 +396,14 @@ html input[disabled] {
   content: "\e183";
 }
 
+.glyphicon-exclamation-sign:before {
+  content: "\e101";
+}
+
+.glyphicon-ok-sign:before {
+  content: "\e084";
+}
+
 .fl {
   float: left;
 }
@@ -474,6 +482,12 @@ html input[disabled] {
   margin-top: 40px;
 }
 
+.prt2 {
+  position: relative;
+  top: 2px;
+  margin-right: 4px;
+}
+
 .pt20 {
   padding-top: 20px;
 }
@@ -500,6 +514,10 @@ html input[disabled] {
 
 .warningColor {
   color: #E3A703;
+}
+
+.errorColor {
+  color: #C5002E;
 }
 
 .secondColor {
@@ -581,10 +599,12 @@ html input[disabled] {
 }
 
 .themeBtn {
+  color: #fff;
   background: #ed7c5e;
 }
 
 .secondBtn {
+  color: #fff;
   background: #5e9eed;
 }
 

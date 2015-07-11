@@ -96,7 +96,7 @@ $investedRatio = ($project->invested_money / $project->invest_total_money) * 100
 
         <p class="toInvestArea"
            data-url="<?= Url::to(['/project/project-invest/interest-table', 'project_id' => $project->project_id]) ?>">
-            <span class="btn themeBtn toInvest">立即投资</span><span class="btn toInvest toCalc">计算</span>
+            <span class="btn secondBtn toInvest">立即投资</span><span class="btn toInvest themeBtn toCalc">计算</span>
         </p>
     </div>
 </div>
@@ -163,15 +163,16 @@ $investedRatio = ($project->invested_money / $project->invest_total_money) * 100
                         <p class="mt20">账户余额: <span id="myMoney">1000</span>元 </p>
                     </div>
                     <div class="fr">
-                        <button class="btn largeBtn investNow" type="submit">确认投资</button>
+                        <button class="btn largeBtn secondBtn investNow" type="submit">确认投资</button>
                     </div>
                 </form>
                 <div class="mt20 investSingleMoney">
 
                 </div>
             </div>
-            <div class="modal-footer">
-                <a class="btn regularBtn themeBtn" href="#">充值</a>
+            <div class="clearFix modal-footer">
+                <a class="fr btn regularBtn secondBtn" href="#">充值</a>
+                <span class="fr themeColor mt10 mr16"><i class="glyphicon glyphicon-exclamation-sign"></i>充值余额不足，充值后可购买</span>
             </div>
         </div>
     </div>
