@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kiwi\Kiwi;
 
 /* @var $this yii\web\View */
 /* @var $model p2p\withdraw\models\WithdrawRecord */
@@ -10,7 +11,13 @@ use yii\widgets\ActiveForm;
 
 <div class="withdraw-record-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'id' => 'withdraw-record-form-horizontal',
+        'type' => ActiveForm::TYPE_HORIZONTAL,
+        'formConfig' => ['labelSpan' => 2],
+        'fullSpan' => 11,
+        'disabled' => 'disabled'
+    ]); ?>
 
     <?= $form->field($model, 'member_id')->textInput() ?>
 
@@ -18,16 +25,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'counter_fee')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'deposit_type')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'create_time')->textInput() ?>
-
-    <?= $form->field($model, 'update_time')->textInput() ?>
-
-    <?= $form->field($model, 'is_delete')->textInput() ?>
+    <?= $form->field($model, 'deposit_type')->textInput(['value' => Kiwi::getDataListModel()->withdrawStatus[$model->deposit_type]]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('p2p_withdraw', 'Create') : Yii::t('p2p_withdraw', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <div class="col-sm-offset-2 col-sm-9">
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('p2p_withdraw', 'Create') : Yii::t('p2p_withdraw', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

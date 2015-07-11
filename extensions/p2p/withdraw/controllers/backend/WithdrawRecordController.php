@@ -125,6 +125,39 @@ class WithdrawRecordController extends Controller
         ]);
     }
 
+    public function actionSecond()
+    {
+        $withdrawClass = Kiwi::getWithdrawRecord();
+        $searchModel = Kiwi::getWithdrawRecordSearch();
+        $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
+            'WithdrawRecordSearch' => [
+                'deposit_type' => $withdrawClass::TYPE_MANUAL,
+                'status' => $withdrawClass::STATUS_SECOND_VERIFY_SUCCESS
+            ]
+        ]));
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionUpdate($id)
+    {
+        /** @var \p2p\project\models\Project $model */
+        $model = $this->findModel($id);
+//        $model->scenario = 'check';
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->update();
+            return $this->redirect('index');
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
+
     /**
      * Finds the WithdrawRecord model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

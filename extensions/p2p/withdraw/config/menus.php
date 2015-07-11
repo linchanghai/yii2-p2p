@@ -3,7 +3,7 @@
 return [
     'capital' => [
         'label' => Yii::t('p2p_recharge', 'CapitalManagement'),
-        'sort' => 2100,
+        'sort' => 200,
         'url' => ['/p2p_recharge/recharge-record/index'],
         'items' => [
             'withdraw' => [
@@ -14,11 +14,17 @@ return [
                         'label' => Yii::t('p2p_withdraw', 'PendingRecord'),
                         'sort' => 100,
                         'url' => ['/p2p_withdraw/withdraw-record/pending'],
+                        'activeUrls' => [['/p2p_withdraw/withdraw-record/update']]
                     ],
                     'first' => [
                         'label' => Yii::t('p2p_withdraw', 'FirstRecord'),
                         'sort' => 200,
                         'url' => ['/p2p_withdraw/withdraw-record/first'],
+                    ],
+                    'second' => [
+                        'label' => Yii::t('p2p_withdraw', 'Second Record'),
+                        'sort' => 250,
+                        'url' => ['/p2p_withdraw/withdraw-record/second'],
                     ],
                     'auto' => [
                         'label' => Yii::t('p2p_withdraw', 'AutoRecord'),

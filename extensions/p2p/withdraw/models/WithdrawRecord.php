@@ -33,6 +33,7 @@ class WithdrawRecord extends \kiwi\db\ActiveRecord
     const STATUS_SUCCESS = 1;
     const STATUS_FAIL = 2;
     const STATUS_FIRST_VERIFY_SUCCESS = 3;
+    const STATUS_SECOND_VERIFY_SUCCESS = 3;
 
     /**
      * @inheritdoc
