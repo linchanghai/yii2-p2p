@@ -11,9 +11,9 @@ use yii\helpers\Url;
 /* @var $this \yii\web\View */
 $this->params['project-list'] = true;
 
-$this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/invest.min.css', ['depends' => [\frontend\assets\RequireAsset::className()]]);
+$this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/invest.min.css', ['depends' => [\frontend\assets\AppAsset::className()]]);
 
-$this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depends' => [\frontend\assets\RequireAsset::className()]]);
+$this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depends' => [\frontend\assets\AppAsset::className()]]);
 ?>
 
 <div class="investTitle backGrey">
@@ -84,7 +84,7 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depend
                     </div>
                 </div>
                 <a class="checkItem"
-                   href="<?= Url::to(['/project/project/details', 'project_id' => $project->project_id]) ?>">
+                   href="<?= Url::to(['/project/project/details', 'id' => $project->project_id]) ?>">
                     查看详情
                 </a>
                 <a class="checkItem" href="<?= Url::to(['/project/project-invest/prepare-invest', 'id' => $project->project_id]) ?>">
