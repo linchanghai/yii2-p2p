@@ -98,8 +98,20 @@ html input[disabled] {
 .glyphicon-ok-sign:before{
   content: "\e084";
 }
+.glyphicon-ok:before {
+  content: "\e013";
+}
 .glyphicon-open:before {
   content: "\e167";
+}
+.glyphicon-th-list:before {
+  content: "\e012";
+}
+.glyphicon-sort:before {
+  content: "\e150";
+}
+.glyphicon-info-sign:before {
+  content: "\e086";
 }
 .fl{
   float: left;
@@ -134,6 +146,9 @@ html input[disabled] {
 .disTab{
   display: table-cell;
   vertical-align: middle;
+}
+.invisible{
+  visibility: hidden;
 }
 .halfArea{
   width: 50%;
@@ -180,6 +195,9 @@ html input[disabled] {
 .mr16{
   margin-right: 16px;
 }
+.mr10{
+  margin-right: 10px;
+}
 .show{
   display: block!important;
 }
@@ -191,6 +209,9 @@ html input[disabled] {
 }
 .warningColor{
   color: $warningColor;
+}
+.accountColor{
+  color: $accountColor;
 }
 .errorColor{
   color: $errorColor;
@@ -608,4 +629,15 @@ button.close {
 }
 .modal-footer .btn-block + .btn-block {
   margin-left: 0;
+}
+.containerSide{
+  float: left;
+  width: 200px;
+}
+.containerMain{
+  float: right;
+  width: 860px;
+}
+.paddingModal .modal-body{
+  padding: 20px 30px 50px 30px;
 }
