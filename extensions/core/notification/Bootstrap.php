@@ -8,12 +8,13 @@
 namespace core\notification;
 
 
+use kiwi\Kiwi;
 use yii\base\BootstrapInterface;
 
 class Bootstrap implements BootstrapInterface
 {
     public function bootstrap($app)
     {
-        
+        Kiwi::getNotificationService()->attachNotifications();
     }
 } 

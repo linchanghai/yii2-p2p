@@ -56,6 +56,7 @@ class SignupForm extends Model
         $this->user->setPassword($this->password);
         $this->user->generateAuthKey();
         $this->user->status = 1;
+        $this->user->mobile = '13216634306';
         $this->user->save();
         Yii::$app->user->login($this->user);
         return $this->user;

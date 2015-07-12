@@ -14,11 +14,11 @@ use Yii;
 use yii\base\Event;
 
 /**
- * Class NotificationServices
+ * Class NotificationService
  * @package core\notification\services
  * @author jeremy.zhou(gao_lujie@live.cn)
  */
-class NotificationServices extends Service
+class NotificationService extends Service
 {
     /**
      * attach event to trigger send notification
@@ -45,7 +45,7 @@ class NotificationServices extends Service
         $message = $notificationTemplate->getMessage($data);
         $receiver = $notificationTemplate->getReceiver($data);
         $sendMethod = 'send' . $notificationTemplate->type;
-        if ($receiver && method_exists($this, $sendMethod)) {
+        if ($message && $receiver && method_exists($this, $sendMethod)) {
             if ($this->$sendMethod($receiver, $message, $title)) {
                 Yii::info("Send {$notificationTemplate->type} notification {$title} to {$receiver} Success", __METHOD__);
             } else {
@@ -72,7 +72,9 @@ class NotificationServices extends Service
      */
     public function sendMail($to, $content, $title)
     {
-        return Yii::$app->mailer->compose('notificationTemplate', ['content' => $content])
+        return Yii::$app->mailer->compose()
+            ->setTextBody($content)
+            ->setHtmlBody($content)
             ->setSubject($title)
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
             ->setTo($to)

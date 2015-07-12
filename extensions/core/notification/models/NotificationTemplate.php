@@ -2,7 +2,9 @@
 
 namespace core\notification\models;
 
+use kiwi\Kiwi;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%notification_template}}".
@@ -31,10 +33,22 @@ class NotificationTemplate extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['event', 'type', 'title', 'template', 'receiver', 'active'], 'required'],
+            [['event', 'type', 'title', 'template', 'active'], 'required'],
             [['active'], 'integer'],
             [['event', 'type', 'title', 'receiver'], 'string', 'max' => 255],
-            [['template'], 'string', 'max' => 1023]
+            [['template'], 'string', 'max' => 1023],
+            ['event', 'in', 'range' => array_keys(Kiwi::getDataListModel()->notificationEvents)],
+            ['type', 'in', 'range' => array_keys(Kiwi::getDataListModel()->notificationTypes)],
+            ['receiver', 'default', 'value' => function ($model, $attribute) {
+                switch ($model->type) {
+                    case 'sms':
+                        return 'user.mobile';
+                    case 'mail':
+                        return 'user.email';
+                    default:
+                        return 'user.id';
+                }
+            }],
         ];
     }
 
@@ -52,5 +66,69 @@ class NotificationTemplate extends \kiwi\db\ActiveRecord
             'receiver' => Yii::t('core_notification', 'Receiver'),
             'active' => Yii::t('core_notification', 'Active'),
         ];
+    }
+
+    /**
+     * get event info
+     * @return array [$className, $eventName]
+     */
+    public function getEventInfo()
+    {
+        $eventParts = explode('::', $this->event);
+        return [$eventParts[0], $eventParts[1]];
+    }
+
+    /**
+     * get message with template fill the data to vars
+     * @param array $data the data source
+     * @return string
+     */
+    public function getMessage($data)
+    {
+        $varNames = $this->getVarNamesFromTemplate();
+        $varValues = [];
+        foreach ($varNames as $varKey => $varName) {
+            $varValues[$varKey] = ArrayHelper::getValue($data, $varName);
+        }
+        return strtr($this->template, $varValues);
+    }
+
+    /**
+     * get send to receiver value maybe phone number or email address
+     * @param $data
+     * @return mixed
+     */
+    public function getReceiver($data)
+    {
+        return ArrayHelper::getValue($data, $this->receiver);
+    }
+
+    /**
+     * get var names in template between left key and right key
+     * @param string $leftKey
+     * @param string $rightKey
+     * @return array the var names
+     */
+    public function getVarNamesFromTemplate($leftKey = '{', $rightKey = '}')
+    {
+        $templateChars = str_split($this->template);
+        $varNames = [];
+        $tempVarName = [];
+        $isVarChar = false;
+        while ($templateChars) {
+            $char = array_shift($templateChars);
+            if ($char == $leftKey) {
+                $isVarChar = true;
+                $tempVarName = [];
+            } else if ($char == $rightKey && $isVarChar) {
+                $tempVarName = implode('', $tempVarName);
+                $varNames[$leftKey . $tempVarName . $rightKey] = $tempVarName;
+                $isVarChar = false;
+                $tempVarName = [];
+            } else if ($isVarChar) {
+                $tempVarName[] = $char;
+            }
+        }
+        return $varNames;
     }
 }
