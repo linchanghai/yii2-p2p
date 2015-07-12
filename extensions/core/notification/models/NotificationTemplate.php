@@ -2,6 +2,7 @@
 
 namespace core\notification\models;
 
+use kiwi\Kiwi;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -10,8 +11,8 @@ use yii\helpers\ArrayHelper;
  *
  * @property integer $notification_template_id
  * @property string $event
- * @property string $title
  * @property string $type
+ * @property string $title
  * @property string $template
  * @property string $receiver
  * @property integer $active
@@ -32,10 +33,22 @@ class NotificationTemplate extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['event', 'title', 'type', 'template', 'receiver'], 'required'],
+            [['event', 'type', 'title', 'template', 'active'], 'required'],
             [['active'], 'integer'],
-            [['event', 'title', 'type', 'receiver'], 'string', 'max' => 255],
-            [['template'], 'string', 'max' => 1023]
+            [['event', 'type', 'title', 'receiver'], 'string', 'max' => 255],
+            [['template'], 'string', 'max' => 1023],
+            ['event', 'in', 'range' => array_keys(Kiwi::getDataListModel()->notificationEvents)],
+            ['type', 'in', 'range' => array_keys(Kiwi::getDataListModel()->notificationTypes)],
+            ['receiver', 'default', 'value' => function ($model, $attribute) {
+                switch ($model->type) {
+                    case 'sms':
+                        return 'user.mobile';
+                    case 'mail':
+                        return 'user.email';
+                    default:
+                        return 'user.id';
+                }
+            }],
         ];
     }
 
@@ -47,8 +60,8 @@ class NotificationTemplate extends \kiwi\db\ActiveRecord
         return [
             'notification_template_id' => Yii::t('core_notification', 'Notification Template ID'),
             'event' => Yii::t('core_notification', 'Event'),
-            'title' => Yii::t('core_notification', 'Title'),
             'type' => Yii::t('core_notification', 'Type'),
+            'title' => Yii::t('core_notification', 'Title'),
             'template' => Yii::t('core_notification', 'Template'),
             'receiver' => Yii::t('core_notification', 'Receiver'),
             'active' => Yii::t('core_notification', 'Active'),
@@ -74,10 +87,10 @@ class NotificationTemplate extends \kiwi\db\ActiveRecord
     {
         $varNames = $this->getVarNamesFromTemplate();
         $varValues = [];
-        foreach ($varNames as $varName) {
-            $varValues[$varName] = ArrayHelper::getValue($data, $varName);
+        foreach ($varNames as $varKey => $varName) {
+            $varValues[$varKey] = ArrayHelper::getValue($data, $varName);
         }
-        return strtr($this->template, $varNames, $varValues);
+        return strtr($this->template, $varValues);
     }
 
     /**
@@ -102,13 +115,14 @@ class NotificationTemplate extends \kiwi\db\ActiveRecord
         $varNames = [];
         $tempVarName = [];
         $isVarChar = false;
-        while($templateChars) {
+        while ($templateChars) {
             $char = array_shift($templateChars);
             if ($char == $leftKey) {
                 $isVarChar = true;
                 $tempVarName = [];
             } else if ($char == $rightKey && $isVarChar) {
-                $varNames[] = implode('', $tempVarName);
+                $tempVarName = implode('', $tempVarName);
+                $varNames[$leftKey . $tempVarName . $rightKey] = $tempVarName;
                 $isVarChar = false;
                 $tempVarName = [];
             } else if ($isVarChar) {
