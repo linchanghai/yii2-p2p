@@ -31,9 +31,9 @@ class InvestForm extends Model
     /** @var int the project to invest */
     public $project_id;
     /** @var int the invest money */
-    public $investMoney;
+    public $investMoney = 1000;
     /** @var int the bonus money to be used */
-    public $bonusMoney;
+    public $bonusMoney = 0;
     /** @var int the annual member coupon to be used */
     public $annual_id;
     /** @var int the cash member coupon to be used */

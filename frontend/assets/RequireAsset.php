@@ -9,19 +9,18 @@
 namespace frontend\assets;
 
 use yii\web\AssetBundle;
+use yii\web\View;
 
 class RequireAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
-    public $css = [
-        'css/style.min.css',
-        'css/index.min.css',
-    ];
+
     public $js = [
         'js/require.js',
-        'js/requireApp.js',
     ];
-    public $depends = [
+
+    public $jsOptions = [
+        'position' => View::POS_HEAD
     ];
 }

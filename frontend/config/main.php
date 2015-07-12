@@ -28,6 +28,9 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
         ],
+        'view' => [
+            'class' => 'kiwi\web\View',
+        ],
     ],
     'params' => $params,
 ];

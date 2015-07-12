@@ -28,7 +28,7 @@ class View extends \yii\web\View {
         $requireJsConfig = $this->getRequireJsConfig($paths);
         $jsCode = $this->getRequireJsCode();
 
-        $lines = "<script type=\"text/javascript\">var require = {$requireJsConfig};</script>\n" . $lines;
+        $lines = "<script type=\"text/javascript\">require.config({$requireJsConfig});</script>\n" . $lines;
         $modulesJsArray = json_encode(array_keys($paths));
         $lines .= "<script type=\"text/javascript\">require(['jquery'], function() { require({$modulesJsArray}, function() { {$jsCode} }); });</script>\n";
         return $lines;
@@ -56,7 +56,18 @@ class View extends \yii\web\View {
         $i = 0;
         foreach($this->requireJsFiles as $pos => $files) {
             foreach($files as $file => $htmlCode) {
-                $paths['yiiAsset' . $i++][] = preg_replace('#\.js$#', '', $file);
+                $fileParts = explode('/', $file);
+                $fileName = end($fileParts);
+                $fileNameParts = explode('.', $fileName);
+                if (end($fileNameParts) == 'js') {
+                    array_pop($fileNameParts);
+                }
+                if (end($fileNameParts) == 'min') {
+                    array_pop($fileNameParts);
+                }
+                $fileName = implode('.', $fileNameParts);
+
+                $paths[$fileName] = preg_replace('#\.js$#', '', $file);
             }
         }
         return $paths;

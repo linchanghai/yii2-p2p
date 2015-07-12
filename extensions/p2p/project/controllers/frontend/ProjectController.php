@@ -11,7 +11,7 @@ namespace p2p\project\controllers\frontend;
 
 use kiwi\Kiwi;
 use kiwi\web\Controller;
-use yii\data\ActiveDataProvider;
+use Yii;
 use yii\web\NotFoundHttpException;
 
 class ProjectController extends Controller
@@ -29,12 +29,17 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function actionDetails()
+    public function actionDetails($id)
     {
-        $project_id = \Yii::$app->request->get('project_id');
+        $project = $this->findModel($id);
+        $investForm = Kiwi::getInvestForm();
+        if ($investForm->load(Yii::$app->request->post()) && $investForm->invest()) {
+            $this->redirect(['details', ['project_id' => $project]]);
+        }
 
         return $this->render('details', [
-            'project' => $this->findModel($project_id)
+            'project' => $project,
+            'investForm' => $investForm,
         ]);
     }
 
