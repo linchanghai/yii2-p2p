@@ -47,7 +47,8 @@ class WithdrawRecord extends \kiwi\db\ActiveRecord
         return [
             static::SCENARIO_DEFAULT => ['member_id', 'money', 'counter_fee', 'deposit_type', 'status'],
             'insert' => ['member_id', 'money', 'counter_fee', 'deposit_type'],
-            'verify' => ['first_verify_memo', 'second_verify_memo', 'status']
+            'firstVerify' => ['first_verify_memo', 'status'],
+            'secondVerify' => ['second_verify_memo', 'status'],
         ];
     }
 
@@ -60,6 +61,8 @@ class WithdrawRecord extends \kiwi\db\ActiveRecord
             [['member_id', 'money', 'counter_fee'], 'required'],
             [['member_id', 'first_verify_date', 'second_verify_date', 'status', 'create_time', 'update_time'], 'integer'],
             [['money', 'counter_fee'], 'number'],
+            [['first_verify_memo'], 'required', 'on' => ['firstVerify']],
+            [['second_verify_memo', 'status'], 'required', 'on' => ['secondVerify']],
             [['deposit_type'], 'string', 'max' => 45],
             [['first_verify_user', 'second_verify_user', 'first_verify_memo', 'second_verify_memo'], 'string', 'max' => 80]
         ];

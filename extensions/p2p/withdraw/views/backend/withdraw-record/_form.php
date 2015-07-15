@@ -25,7 +25,7 @@ use kiwi\Kiwi;
 
     <?= $form->field($model, 'counter_fee')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'deposit_type')->textInput(['value' => Kiwi::getDataListModel()->withdrawStatus[$model->deposit_type]]) ?>
+    <?= $form->field($model, 'deposit_type')->textInput(['value' => Kiwi::getDataListModel()->withdrawType[$model->deposit_type]]) ?>
 
     <?php
     $withdrawClass = Kiwi::getWithdrawRecord();

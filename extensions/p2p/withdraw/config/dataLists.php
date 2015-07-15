@@ -26,7 +26,7 @@ return [
     ],
 
 
-    'WithdrawType' => [
+    'withdrawType' => [
         'values' => [
             WithdrawRecord::TYPE_AUTO => Yii::t('p2p_withdraw', 'Auto Withdraw'),
             WithdrawRecord::TYPE_MANUAL => Yii::t('p2p_withdraw', 'Manual Withdraw'),
