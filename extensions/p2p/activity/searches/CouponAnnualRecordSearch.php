@@ -19,7 +19,7 @@ class CouponAnnualRecordSearch extends CouponAnnualRecord
     {
         return [
             [['coupon_annual_record_id', 'project_invest_id', 'project_id', 'member_id', 'member_coupon_id', 'create_time', 'is_delete'], 'integer'],
-            [['rate', 'interst_money'], 'number'],
+            [['rate', 'interest_money'], 'number'],
         ];
     }
 
@@ -62,7 +62,7 @@ class CouponAnnualRecordSearch extends CouponAnnualRecord
             'member_id' => $this->member_id,
             'member_coupon_id' => $this->member_coupon_id,
             'rate' => $this->rate,
-            'interst_money' => $this->interst_money,
+            'interest_money' => $this->interest_money,
             'create_time' => $this->create_time,
             'is_delete' => $this->is_delete,
         ]);
