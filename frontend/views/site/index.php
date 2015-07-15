@@ -177,16 +177,22 @@ $this->params['home'] = true;
             </div>
             <div class="fl siteItemRight">
                 <a href="#">签到赚积分</a>
-                <?php \yii\widgets\Pjax::begin();?>
-                <?php \yii\widgets\ActiveForm::begin([
-                    'method'=>'post',
-                    'action'=>Url::to(['activity/activity/sign']),
-                    'options' => ['data-pjax' => 1]
-                ]) ;
-                echo \kartik\helpers\Html::submitButton('签到',['class'=>"mt10 btn secondBtn" ]);
-                \yii\widgets\ActiveForm::end();
+                <?php
+                $memberSignModel = \kiwi\Kiwi::getMemberSignRecord();
+                if ($memberSignModel->validateSign()) {
+                    \yii\widgets\Pjax::begin();
+                    \yii\widgets\ActiveForm::begin([
+                        'method' => 'post',
+                        'action' => Url::to(['activity/activity/sign']),
+                        'options' => ['data-pjax' => 1]
+                    ]);
+                    echo \kartik\helpers\Html::submitButton('签到', ['class' => "mt10 btn secondBtn"]);
+                    \yii\widgets\ActiveForm::end();
+                    \yii\widgets\Pjax::end();
+                } else {
+                    echo \kartik\helpers\Html::submitButton('已签到', ['class' => "mt10 btn secondBtn"]);
+                }
                 ?>
-                <?php \yii\widgets\Pjax::end();?>
             </div>
         </div>
         <div class="mt20 siteItem">
