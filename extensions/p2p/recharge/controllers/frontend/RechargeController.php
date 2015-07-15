@@ -14,6 +14,7 @@ use Yii;
 
 class RechargeController extends Controller
 {
+    public $layout='/account';
     public function actionRecharge()
     {
         $rechargeForm = Kiwi::getRechargeForm();
@@ -21,5 +22,9 @@ class RechargeController extends Controller
             $rechargeForm->pay();
         }
         return $this->render('recharge', ['model' => $rechargeForm]);
+    }
+
+    public function actionSuccess(){
+        return $this->render('success');
     }
 } 
