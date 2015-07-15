@@ -161,6 +161,14 @@ class Configuration extends Object
         $translations = [];
         $urlRules = [];
         foreach ($this->modules as $moduleName => $moduleClass) {
+            $moduleNameParts = explode('_', $moduleName);
+            $modulePrefix = reset($moduleNameParts);
+            if ($modulePrefix == 'data') {
+                continue;
+            }
+            $shortName = end($moduleNameParts);
+
+            $from = $shortName . '/<controller:.+>/<action:.+>';
             $moduleClassParts = explode('\\', $moduleClass);
             array_pop($moduleClassParts);
             $translations[$moduleName] = [
@@ -172,9 +180,6 @@ class Configuration extends Object
                 ],
             ];
 
-            $moduleNameParts = explode('_', $moduleName);
-            $shortName = end($moduleNameParts);
-            $from = $shortName . '/<controller:.+>/<action:.+>';
             $to = $moduleName . '/<controller>/<action>';
             $urlRules[$from] = $to;
         }
