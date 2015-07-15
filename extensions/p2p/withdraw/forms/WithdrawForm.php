@@ -10,9 +10,14 @@ namespace p2p\withdraw\forms;
 use kiwi\base\Model;
 use kiwi\Kiwi;
 use yii;
+use yii\base\ModelEvent;
+use yii\base\Event;
 
 class WithdrawForm extends Model
 {
+    const EVENT_BEFORE_WITHDRAW = 'beforeWithdraw';
+    const EVENT_AFTER_WITHDRAW = 'afterWithdraw';
+
     public $withdrawMoney;
 
     public $actualWithdrawMoney;
@@ -52,15 +57,21 @@ class WithdrawForm extends Model
             return false;
         }
 
-        return $this->createWithdrawRecord();
+        if($this->beforeWithdraw()) {
+            $result = $this->createWithdrawRecord();
+            $this->afterWithdraw();
+        } else {
+            $result = false;
+        }
+
+        return $result;
     }
 
     public function createWithdrawRecord()
     {
         $withdrawRecordClass = Kiwi::getWithdrawRecordClass();
         $withdrawRecord = Kiwi::getWithdrawRecord([
-//            'member_id' => Yii::$app->user->id,
-            'member_id' => 1,
+            'member_id' => Yii::$app->user->id,
             'counter_fee' => $this->withdrawFee,
             'money' => $this->withdrawMoney,
             'status' => $withdrawRecordClass::STATUS_PENDING,
@@ -75,5 +86,35 @@ class WithdrawForm extends Model
         }
 
         return true;
+    }
+
+    public function beforeWithdraw()
+    {
+        $event = new ModelEvent();
+        $this->trigger(static::EVENT_BEFORE_WITHDRAW, $event);
+        return $event->isValid;
+    }
+
+    public function afterWithdraw()
+    {
+        $event = new ModelEvent();
+        $this->trigger(static::EVENT_AFTER_WITHDRAW, $event);
+    }
+
+    public function freezeMoney()
+    {
+        $class = Kiwi::getWithdrawFormClass();
+        Event::on($class, $class::EVENT_AFTER_WITHDRAW, function ($event) {
+            /** @var \p2p\withdraw\forms\WithdrawForm $form */
+            $form = $event->sender;
+
+            $memberStatistic = Kiwi::getMemberStatistic();
+            /** @var \core\member\models\MemberStatistic $memberStatistic */
+            $memberStatistic = $memberStatistic::findOne(['member_id' => Yii::$app->user->id]);
+
+            $memberStatistic->freezon_money = $form->withdrawMoney + $form->withdrawFee;
+            $memberStatistic->account_money -= $memberStatistic->freezon_money;
+            $memberStatistic->save();
+        });
     }
 }

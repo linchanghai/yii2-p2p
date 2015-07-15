@@ -61,7 +61,7 @@ if(isset($status) && $status) {
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => isset($buttonTemplate) ?: '<div style="width: 30px">{update} {delete}</div>'
+                'template' => isset($buttonTemplate) ? $buttonTemplate : '<div style="width: 30px">{update} {delete}</div>'
             ],
         ],
         'export' => false,
