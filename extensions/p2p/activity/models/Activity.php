@@ -52,8 +52,8 @@ class Activity extends \yii\db\ActiveRecord
 
     public function getActivityEvent(){
         $eventList =  [
-//            self::TYPE_BIND_EMAIL => Yii::t('p2p_activity','Bind Email'),
-//            self::TYPE_BIND_PHONE => Yii::t('p2p_activity','Bind Phone'),
+            self::TYPE_BIND_EMAIL => Yii::t('p2p_activity','Bind Email'),
+            self::TYPE_BIND_PHONE =>Yii::t('p2p_activity','Bind Phone'),
 //            self::TYPE_INVEST => Yii::t('p2p_activity','Invest'),
 //            self::TYPE_RECHARGE => Yii::t('p2p_activity','Recharge'),
 //            self::TYPE_SHARE => Yii::t('p2p_activity','Share'),

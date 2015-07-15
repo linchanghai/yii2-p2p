@@ -44,6 +44,7 @@ class BindMobileForm extends Model
         $session = Yii::$app->session;
         $session['mobile'] = ['code' => $code, 'time' => time()];
         //TODO:: sendMessage
+        $result =Yii::$app->sms->send($code, $mobile);
 //                $result = Kiwi::getSmsService()->instance()->send($code, $mobile);
 //            $result = Json::decode($result);
 //            if ($result['statusCode'] == '000000') {
