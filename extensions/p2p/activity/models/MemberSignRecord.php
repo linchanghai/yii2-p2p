@@ -14,7 +14,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $member_sign_record_id
  * @property integer $member_id
  * @property int $days
- * @property integer $ponit
+ * @property integer $point
  * @property integer $create_time
  * @property integer $is_delete
  *
@@ -36,8 +36,8 @@ class MemberSignRecord extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['member_id', 'days', 'ponit'], 'required'],
-            [['member_id', 'ponit', 'create_time', 'is_delete','days'], 'integer'],
+            [['member_id', 'days', 'point'], 'required'],
+            [['member_id', 'point', 'create_time', 'is_delete','days'], 'integer'],
         ];
     }
 
@@ -50,7 +50,7 @@ class MemberSignRecord extends \kiwi\db\ActiveRecord
             'member_sign_record_id' => Yii::t('p2p_activity', 'Member Sign Record ID'),
             'member_id' => Yii::t('p2p_activity', 'Member ID'),
             'days' => Yii::t('p2p_activity', 'Target Date'),
-            'ponit' => Yii::t('p2p_activity', 'Ponit'),
+            'point' => Yii::t('p2p_activity', 'point'),
             'create_time' => Yii::t('p2p_activity', 'Create Time'),
             'is_delete' => Yii::t('p2p_activity', 'Is Delete'),
         ];
@@ -84,7 +84,7 @@ class MemberSignRecord extends \kiwi\db\ActiveRecord
             $this->days = 1;
         }
         $this->member_id = Yii::$app->user->id;
-        $this->ponit = $this->getSignPoint($this->days);
+        $this->point = $this->getSignPoint($this->days);
         if($this->save()){
             return true;
         }else{
@@ -116,7 +116,7 @@ class MemberSignRecord extends \kiwi\db\ActiveRecord
                 'attributes' => [
                     'member_id'=> 'member_id',
                     'type' => $changeRecordClass::TYPE_EXCHANGE_POINT,
-                    'value' => 'ponit',
+                    'value' => 'point',
                     'link_id' => 'member_sign_record_id'
                 ],
             ],
