@@ -11,6 +11,7 @@ namespace p2p\project\controllers\frontend;
 
 use kiwi\Kiwi;
 use kiwi\web\Controller;
+use p2p\project\models\ProjectInvest;
 use Yii;
 use yii\web\NotFoundHttpException;
 
@@ -58,5 +59,12 @@ class ProjectController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionSuccess($id){
+        $projectModel = ProjectInvest::findOne($id);
+        return $this->render('success',[
+            'projectModel'=>$projectModel,
+        ]);
     }
 }
