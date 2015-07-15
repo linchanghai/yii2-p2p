@@ -11,6 +11,7 @@ namespace p2p\project\controllers\frontend;
 
 use kiwi\Kiwi;
 use kiwi\web\Controller;
+use p2p\project\models\ProjectInvest;
 use Yii;
 use yii\web\NotFoundHttpException;
 
@@ -32,9 +33,9 @@ class ProjectController extends Controller
     public function actionDetails($id)
     {
         $project = $this->findModel($id);
-        $investForm = Kiwi::getInvestForm();
+        $investForm = Kiwi::getInvestForm(['project_id' => $id]);
         if ($investForm->load(Yii::$app->request->post()) && $investForm->invest()) {
-            $this->redirect(['details', ['project_id' => $project]]);
+            return $this->redirect(['success', 'id' => $investForm->invest->project_invest_id]);
         }
 
         return $this->render('details', [
@@ -58,5 +59,12 @@ class ProjectController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionSuccess($id){
+        $projectModel = ProjectInvest::findOne($id);
+        return $this->render('success',[
+            'projectModel'=>$projectModel,
+        ]);
     }
 }
