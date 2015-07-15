@@ -3,6 +3,9 @@
 namespace p2p\project\models;
 
 use core\member\models\Member;
+use kiwi\behaviors\ChangeBehavior;
+use kiwi\behaviors\RecordBehavior;
+use kiwi\Kiwi;
 use p2p\project\services\RepaymentBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -79,12 +82,31 @@ class ProjectInvest extends \kiwi\db\ActiveRecord
 
     public function behaviors()
     {
+        $changeRecordClass = Kiwi::getStatisticChangeRecordClass();
         return [
             'time' => [
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'create_time',
                 'updatedAtAttribute' => 'update_time',
             ],
+            'record' => [
+                'class' => RecordBehavior::className(),
+                'targetClass' => $changeRecordClass,
+                'attributes' => [
+                    'member_id'=> 'member_id',
+                    'type' => $changeRecordClass::TYPE_INVEST,
+                    'value' => function($invest) { return -$invest->actual_invest_money; },
+//                    'link_id' => 'project_invest_id'
+                ],
+            ],
+            'change' => [
+                'class' => ChangeBehavior::className(),
+                'targetClass' => Kiwi::getProjectClass(),
+                'attribute' => 'invested_money',
+                'condition' => ['project_id' => $this->project_id],
+                'valueAttribute' => 'invest_money',
+                'resultAttribute' => false,
+            ]
 //            'repayment' => [
 //                RepaymentBehavior::className(),
 //            ]

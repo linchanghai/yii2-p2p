@@ -12,6 +12,7 @@ use kiwi\base\Model;
 use kiwi\Kiwi;
 use Yii;
 use yii\base\Exception;
+use yii\helpers\Json;
 
 /**
  * Class InvestForm
@@ -52,7 +53,7 @@ class InvestForm extends Model
         $memberCouponClass = Kiwi::getMemberCouponClass();
         $now = time();
         return [
-            [['project_id', 'money'], 'required'],
+            [['project_id', 'investMoney'], 'required'],
             ['investMoney', 'number', 'integerOnly' => true, 'min' => $this->project->min_money, 'max' => $this->getMaxInvestMoney()],
             ['bonusMoney', 'number', 'integerOnly' => true, 'min' => 0, 'max' => $this->getMaxBonusMoney()],
             ['annual_id', 'exist', 'targetClass' => $memberCouponClass, 'targetAttribute' => 'member_coupon_id', 'filter' => ['type' => $memberCouponClass::TYPE_ANNUAL, 'status' => $memberCouponClass::STATUS_UNUSED, ['<', 'expire_date', $now]]],
@@ -114,9 +115,8 @@ class InvestForm extends Model
     public function getInvest()
     {
         if (!$this->_invest) {
-            $invest = Kiwi::getProjectInvest();
+            $invest = Kiwi::getProjectInvest(['project_id' => $this->project_id]);
             $invest->member_id = Yii::$app->user->id;
-            $invest->project_id = $this->project_id;
             $invest->invest_money = $this->investMoney;
             $invest->actual_invest_money = $this->investMoney;
             $invest->rate = $this->project->interest_rate;
@@ -136,6 +136,9 @@ class InvestForm extends Model
 
             $invest->setRelation('projectRepayments', $repayments);
             $this->_invest = $invest;
+            if (!$this->_invest->validate()) {
+                $this->addError('investMoney', Json::encode($this->_invest->getErrors()));
+            }
         }
         return $this->_invest;
     }

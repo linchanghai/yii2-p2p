@@ -11,10 +11,6 @@ use kiwi\Kiwi;
 use kiwi\web\Controller;
 class ActivityController extends Controller
 {
-    //todo  login
-
-
-
     public function actionCouponExchange(){
         $id = Yii::$app->request->post('id');
         $ProductMapClass = Kiwi::getProductMapClass();
