@@ -18,8 +18,8 @@ class v0_1_0 extends Migration
             'activity_id' => Schema::TYPE_PK,
             'activity_type' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'activity_send_type' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-            'activity_send_value' => Schema::TYPE_STRING . '(45) NOT NULL',
-            'vaild_date' => Schema::TYPE_INTEGER . '(11) NOT NULL default \'0\'',
+            'activity_send_value' => Schema::TYPE_DECIMAL . '(8, 2) NOT NULL',
+            'valid_date' => Schema::TYPE_INTEGER . '(11) NOT NULL default \'0\'',
             'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'update_time' => Schema::TYPE_INTEGER . '(11)',
             'is_delete' => Schema::TYPE_SMALLINT . '(1) NOT NULL default \'0\'',
@@ -72,7 +72,7 @@ class v0_1_0 extends Migration
             'member_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'member_coupon_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'rate' => Schema::TYPE_DECIMAL . '(8,2) NOT NULL',
-            'interst_money' => Schema::TYPE_DECIMAL . '(8,2) NOT NULL',
+            'interest_money' => Schema::TYPE_DECIMAL . '(8,2) NOT NULL',
             'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'is_delete' => Schema::TYPE_SMALLINT . '(1) NOT NULL default \'0\'',
 
@@ -102,7 +102,7 @@ class v0_1_0 extends Migration
             'member_sign_record_id' => Schema::TYPE_PK,
             'member_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'days' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-            'ponit' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'point' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'is_delete' => Schema::TYPE_SMALLINT . '(1) NOT NULL',
 

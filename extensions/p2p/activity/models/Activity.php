@@ -12,72 +12,27 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $activity_id
  * @property integer $activity_type
  * @property integer $activity_send_type
- * @property string $activity_send_value
- * @property integer $vaild_date
+ * @property float $activity_send_value
+ * @property integer $valid_date
  * @property integer $create_time
  * @property integer $update_time
  * @property integer $is_delete
  *
  * @property ActivityRecord[] $activityRecords
  */
-class Activity extends \yii\db\ActiveRecord
+class Activity extends \kiwi\db\ActiveRecord
 {
-    //TODO:add event name
-    const TYPE_BIND_EMAIL = 1;
-    const TYPE_BIND_PHONE = 2;
-    const TYPE_INVEST = 3;
-    const TYPE_RECHARGE = 4;
-    const TYPE_SHARE = 5;
-    const TYPE_SUBSCRIBE = 6;
-    const TYPE_APP = 7;
-    const TYPE_SIGNUP = 8;
-
     const SEND_TYPE_POINTS = 1;
     const SEND_TYPE_ANNUAL = 2;
     const SEND_TYPE_BONUS = 3;
     const SEND_TYPE_CASH = 4;
 
-    public function getActivityType(){
-        return [
-            self::TYPE_BIND_EMAIL => Yii::t('p2p_activity','Bind Email'),
-            self::TYPE_BIND_PHONE => Yii::t('p2p_activity','Bind Phone'),
-            self::TYPE_INVEST => Yii::t('p2p_activity','Invest'),
-            self::TYPE_RECHARGE => Yii::t('p2p_activity','Recharge'),
-            self::TYPE_SHARE => Yii::t('p2p_activity','Share'),
-            self::TYPE_SUBSCRIBE => Yii::t('p2p_activity','Subscribe'),
-            self::TYPE_APP => Yii::t('p2p_activity','App'),
-            self::TYPE_SIGNUP => Yii::t('p2p_activity','Signup'),
-        ];
-    }
-
-    public function getActivityEvent(){
-        $eventList =  [
-            self::TYPE_BIND_EMAIL => Yii::t('p2p_activity','Bind Email'),
-            self::TYPE_BIND_PHONE =>Yii::t('p2p_activity','Bind Phone'),
-//            self::TYPE_INVEST => Yii::t('p2p_activity','Invest'),
-//            self::TYPE_RECHARGE => Yii::t('p2p_activity','Recharge'),
-//            self::TYPE_SHARE => Yii::t('p2p_activity','Share'),
-//            self::TYPE_SUBSCRIBE => Yii::t('p2p_activity','Subscribe'),
-//            self::TYPE_APP => Yii::t('p2p_activity','App'),
-            self::TYPE_SIGNUP => [Kiwi::getSignupFormClass(),'afterSignup'],
-        ];
-
-        return $eventList[$this->activity_type];
-    }
-    public function getSendType(){
-        return [
-            self::SEND_TYPE_POINTS => Yii::t('p2p_activity','Points'),
-            self::SEND_TYPE_ANNUAL => Yii::t('p2p_activity','Annual'),
-            self::SEND_TYPE_BONUS => Yii::t('p2p_activity','Bonus'),
-            self::SEND_TYPE_CASH => Yii::t('p2p_activity','Cash'),
-        ];
-    }
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'activity';
+        return '{{%activity}}';
     }
 
     /**
@@ -87,8 +42,10 @@ class Activity extends \yii\db\ActiveRecord
     {
         return [
             [['activity_type', 'activity_send_type', 'activity_send_value',], 'required'],
-            [['activity_type', 'activity_send_type', 'vaild_date', 'create_time', 'update_time', 'is_delete'], 'integer'],
-            [['activity_send_value'], 'string', 'max' => 45]
+            [['activity_type', 'activity_send_type', 'valid_date'], 'integer'],
+            ['activity_type', 'in', 'range' => array_keys(Kiwi::getDataListModel()->activityTypes)],
+            ['activity_send_type', 'in', 'range' => array_keys(Kiwi::getDataListModel()->activitySendTypes)],
+            [['activity_send_value'], 'number', 'min' => 0],
         ];
     }
 
@@ -102,7 +59,7 @@ class Activity extends \yii\db\ActiveRecord
             'activity_type' => Yii::t('p2p_activity', 'Activity Type'),
             'activity_send_type' => Yii::t('p2p_activity', 'Activity Send Type'),
             'activity_send_value' => Yii::t('p2p_activity', 'Activity Send Value'),
-            'vaild_date' => Yii::t('p2p_activity', 'Vaild Date'),
+            'valid_date' => Yii::t('p2p_activity', 'Valid Date'),
             'create_time' => Yii::t('p2p_activity', 'Create Time'),
             'update_time' => Yii::t('p2p_activity', 'Update Time'),
             'is_delete' => Yii::t('p2p_activity', 'Is Delete'),
@@ -117,6 +74,9 @@ class Activity extends \yii\db\ActiveRecord
         return $this->hasMany(ActivityRecord::className(), ['activity_id' => 'activity_id']);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
@@ -126,5 +86,18 @@ class Activity extends \yii\db\ActiveRecord
                 'updatedAtAttribute' => 'update_time',
             ],
         ];
+    }
+
+    public function getActivityEvent()
+    {
+        return Kiwi::getDataListModel()->activityTypeEvents[$this->activity_type];
+    }
+
+    public function saveRecord()
+    {
+        return Kiwi::getActivityRecord([
+            'member_id' => Yii::$app->user->id,
+            'activity_id' => $this->activity_id
+        ])->save();
     }
 }

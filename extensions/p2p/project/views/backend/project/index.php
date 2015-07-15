@@ -26,7 +26,7 @@ $createButton = $status == $projectClass::STATUS_PENDING ? true : false;
 if($createButton) {
     $buttonTemplate = '<div style="width: 30px">{update} {delete}</div>';
 } else {
-    $buttonTemplate = '<div style="width: 30px">{update}</div>';
+    $buttonTemplate = '<div style="width: 15px">{update}</div>';
 }
 ?>
 <div class="project-index">

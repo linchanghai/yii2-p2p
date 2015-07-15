@@ -6,7 +6,7 @@
  */
 
 return [
-    'notificationType' => [
+    'notificationTypes' => [
         'label' => Yii::t('core_notification', 'Notification type'),
         'values' => [
             'mail' => Yii::t('core_notification', 'Email'),
@@ -17,6 +17,7 @@ return [
     'notificationEvents' => [
         'label' => Yii::t('core_notification', 'Events'),
         'values' => [
+            'core\user\forms\SignupForm::afterSignup' => Yii::t('core_notification', 'Signup'),
         ]
     ]
 ];

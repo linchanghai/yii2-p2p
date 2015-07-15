@@ -1,5 +1,6 @@
 <?php
 
+use kiwi\Kiwi;
 use yii\helpers\Html;
 use kartik\grid\GridView;
 
@@ -22,10 +23,40 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
 //            'activity_id',
-            'activity_type',
-            'activity_send_type',
+            [
+                'attribute' => 'activity_type',
+                'vAlign' => 'middle',
+                'width' => '180px',
+                'value' => function ($model, $key, $index, $widget) {
+                    /** @var \p2p\activity\models\Activity $model */
+                    return Kiwi::getDataListModel()->activityTypes[$model->activity_type];
+                },
+                'filterType' => GridView::FILTER_SELECT2,
+                'filter' => Kiwi::getDataListModel()->activityTypes,
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear' => true],
+                ],
+                'filterInputOptions' => ['placeholder' => 'Any Type'],
+                'format' => 'raw'
+            ],
+            [
+                'attribute' => 'activity_send_type',
+                'vAlign' => 'middle',
+                'width' => '180px',
+                'value' => function ($model, $key, $index, $widget) {
+                    /** @var \p2p\activity\models\Activity $model */
+                    return Kiwi::getDataListModel()->activitySendTypes[$model->activity_send_type];
+                },
+                'filterType' => GridView::FILTER_SELECT2,
+                'filter' => Kiwi::getDataListModel()->activitySendTypes,
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear' => true],
+                ],
+                'filterInputOptions' => ['placeholder' => 'Any Type'],
+                'format' => 'raw'
+            ],
             'activity_send_value',
-            'vaild_date',
+            'valid_date',
             'create_time:datetime',
             'update_time:datetime',
             // 'is_delete',

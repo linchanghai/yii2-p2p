@@ -23,6 +23,7 @@ return [
     'Auth Key' => '',
     'Bind Email Account' => '',
     'Email Verify Token' => '',
+    'Is Auto Into' => '',
     'Is Delete' => '',
     'Is Deleted' => '',
     'Link ID' => '',

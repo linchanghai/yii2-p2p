@@ -15,12 +15,12 @@ use yii\db\ActiveRecord;
 use yii\helpers\Json;
 
 /**
- * Class ChangeLogBehavior
+ * Class ChangeBehavior
  *
  * this class is helper to update a value by created record
  *
  * [
- *      'class' => ChangeLogBehavior::className(),
+ *      'class' => ChangeBehavior::className(),
  *      'targetClass' => 'xxx\models\xxx',
  *      'attribute' => 'xxx',
  *      'condition' => ['member_id' => 'xxx']
@@ -29,7 +29,7 @@ use yii\helpers\Json;
  * @package kiwi\behaviors
  * @author jeremy.zhou(gao_lujie@live.cn)
  */
-class ChangeLogBehavior extends Behavior
+class ChangeBehavior extends Behavior
 {
     /** @var ActiveRecord */
     public $targetClass;

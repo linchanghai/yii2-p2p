@@ -133,7 +133,6 @@
 .toCalc{
   width: 26%;
   margin-left: 4%;
-  background-color: $secondColor;
 }
 .investRuleTap{
   padding: 0 20px;
@@ -293,4 +292,8 @@
 }
 .integralTopRight{
   background: $themeColor;
+}
+.afterInvestArea{
+  width: 360px;
+  margin: 40px auto 0 auto;
 }

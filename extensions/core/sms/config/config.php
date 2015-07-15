@@ -7,20 +7,10 @@
  */
 
 return [
-    'frontend' => [
-        'components' => [
-            'sms' => [
-                'class' => 'core\sms\services\ZucpSms',
-                'useFileTransport' => true,
-            ]
+    'components' => [
+        'sms' => [
+            'class' => 'core\sms\services\ZucpSms',
+            'useFileTransport' => true,
         ]
-    ],
-    'backend' => [
-        'components' => [
-            'sms' => [
-                'class' => 'core\sms\services\ZucpSms',
-                'useFileTransport' => true,
-            ]
-        ]
-    ],
+    ]
 ];

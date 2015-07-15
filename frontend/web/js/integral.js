@@ -39,8 +39,8 @@ require(["jquery","common","textslider"],function($,c){
             }else{
                 leastLine.html(Number($(this).val())*leastIntegral);
             }
-
         });
+
 
     });
 });

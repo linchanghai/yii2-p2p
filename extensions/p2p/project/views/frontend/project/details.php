@@ -7,18 +7,27 @@
  */
 
 use kiwi\Kiwi;
+use yii\data\ActiveDataProvider;
+use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\grid\GridView;
+use yii\widgets\ActiveForm;
 
 /* @var $this \yii\web\View */
 /** @var \p2p\project\models\Project $project */
+/** @var \p2p\project\forms\InvestForm $investForm */
 
 $this->params['project-list'] = true;
 
-$this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/invest.min.css', ['depends' => [\frontend\assets\RequireAsset::className()]]);
+$this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/invest.min.css', ['depends' => [\frontend\assets\AppAsset::className()]]);
 
-$this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depends' => [\frontend\assets\RequireAsset::className()]]);
+$this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depends' => [\frontend\assets\AppAsset::className()]]);
 
 $investedRatio = ($project->invested_money / $project->invest_total_money) * 100;
+
+$dataProvider = new ActiveDataProvider(['query' => $project->getProjectInvests()]);
+/** @var \core\member\models\Member $member */
+$member = Yii::$app->user->identity;
 ?>
 
 <div class="container mt20 investTitleTop">
@@ -96,7 +105,7 @@ $investedRatio = ($project->invested_money / $project->invest_total_money) * 100
 
         <p class="toInvestArea"
            data-url="<?= Url::to(['/project/project-invest/interest-table', 'project_id' => $project->project_id]) ?>">
-            <span class="btn themeBtn toInvest">立即投资</span><span class="btn toInvest toCalc">计算</span>
+            <span class="btn secondBtn toInvest">立即投资</span><span class="btn toInvest themeBtn toCalc">计算</span>
         </p>
     </div>
 </div>
@@ -132,7 +141,16 @@ $investedRatio = ($project->invested_money / $project->invest_total_money) * 100
         </div>
         <div class="investSingleRule hide"><?= $project->projectMaterial->material; ?></div>
         <div class="investSingleRule hide"><?= $project->projectLegalOpinion->legal_info; ?></div>
-        <div class="investSingleRule hide">Invest Records</div>
+        <div class="investSingleRule hide">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    'member.username',
+                    'invest_money',
+                    'create_time:datetime',
+                ]
+            ]); ?>
+        </div>
     </div>
 </div>
 <div class="modal fade" id="investModal" tabindex="-1" role="dialog">
@@ -144,8 +162,10 @@ $investedRatio = ($project->invested_money / $project->invest_total_money) * 100
                 <h4 class="modal-title" id="myModalLabel">填写投资金额</h4>
             </div>
             <div class="modal-body">
-                <form class="clearFix prepInvest" method="post" action="<?= Url::to(['/project/project-invest/save-invest']) ?>">
-                    <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken; ?>"/>
+                <?php $form = ActiveForm::begin([
+                    'action' => ['/project/project-invest/save-invest'],
+                    'options' => ['class' => 'clearFix prepInvest']
+                ]) ?>
                     <input type="hidden" name="ProjectInvestPrepareForm[project_id]"
                            value="<?= $project->project_id; ?>"/>
 
@@ -155,23 +175,23 @@ $investedRatio = ($project->invested_money / $project->invest_total_money) * 100
 
                             <div class="fl ml10 moneyArea">
                                 <span class="fl operate minus">-</span>
-                                <input type="text" name="ProjectInvestPrepareForm[money]"
-                                       value="<?= $project->min_money; ?>" class="fl investMoney"/>
+                                <?= Html::activeTextInput($investForm, 'investMoney', ['class' => 'fl investMoney']); ?>
                                 <span class="fl operate plus">+</span>
                             </div>
                         </div>
-                        <p class="mt20">账户余额: <span id="myMoney">1000</span>元 </p>
+                        <p class="mt20">账户余额: <span id="myMoney"><?= $member->memberStatistic->account_money ?></span>元 </p>
                     </div>
                     <div class="fr">
-                        <button class="btn largeBtn investNow" type="submit">确认投资</button>
+                        <button class="btn largeBtn secondBtn investNow" type="submit">确认投资</button>
                     </div>
-                </form>
+                <?php $form->end() ?>
                 <div class="mt20 investSingleMoney">
 
                 </div>
             </div>
-            <div class="modal-footer">
-                <a class="btn regularBtn themeBtn" href="#">充值</a>
+            <div class="clearFix modal-footer">
+                <a class="fr btn regularBtn secondBtn" href="#">充值</a>
+                <span class="fr themeColor mt10 mr16"><i class="glyphicon glyphicon-exclamation-sign"></i>充值余额不足，充值后可购买</span>
             </div>
         </div>
     </div>

@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'activity_send_value') ?>
 
-    <?= $form->field($model, 'vaild_date') ?>
+    <?= $form->field($model, 'valid_date') ?>
 
     <?php // echo $form->field($model, 'create_time') ?>
 

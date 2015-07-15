@@ -78,7 +78,7 @@ class RecordBehavior extends Behavior
             } else if (CheckHelper::isCallable($value)) {
                 $targetConfig[$key] = call_user_func($value, $sender);
             } else {
-                $targetConfig[$key] = ArrayHelper::getValue($sender, $value);
+                $targetConfig[$key] = ArrayHelper::getValue($sender, $value) ?: $value;
             }
         }
         $targetConfig['class'] = $this->targetClass;

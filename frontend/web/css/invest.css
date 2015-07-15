@@ -144,7 +144,6 @@
 .toCalc {
   width: 26%;
   margin-left: 4%;
-  background-color: #5e9eed;
 }
 
 .investRuleTap {
@@ -317,4 +316,9 @@
 
 .integralTopRight {
   background: #ed7c5e;
+}
+
+.afterInvestArea {
+  width: 360px;
+  margin: 40px auto 0 auto;
 }

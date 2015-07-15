@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'activity_type',
             'activity_send_type',
             'activity_send_value',
-            'vaild_date',
+            'valid_date',
             'create_time:datetime',
             'update_time:datetime',
             'is_delete',

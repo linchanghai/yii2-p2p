@@ -92,6 +92,27 @@ html input[disabled] {
 .glyphicon-phone-alt:before {
   content: "\e183";
 }
+.glyphicon-exclamation-sign:before {
+  content: "\e101";
+}
+.glyphicon-ok-sign:before{
+  content: "\e084";
+}
+.glyphicon-ok:before {
+  content: "\e013";
+}
+.glyphicon-open:before {
+  content: "\e167";
+}
+.glyphicon-th-list:before {
+  content: "\e012";
+}
+.glyphicon-sort:before {
+  content: "\e150";
+}
+.glyphicon-info-sign:before {
+  content: "\e086";
+}
 .fl{
   float: left;
 }
@@ -126,6 +147,9 @@ html input[disabled] {
   display: table-cell;
   vertical-align: middle;
 }
+.invisible{
+  visibility: hidden;
+}
 .halfArea{
   width: 50%;
   height: 100%;
@@ -151,14 +175,28 @@ html input[disabled] {
 .mt40{
   margin-top: 40px;
 }
+.prt2{
+  position: relative;
+  top: 2px;
+  margin-right: 4px;
+}
 .pt20{
   padding-top: 20px;
+}
+.pt10{
+  padding-top: 10px;
+}
+.p20{
+  padding: 20px;
 }
 .hide{
   display: none!important;
 }
 .mr16{
   margin-right: 16px;
+}
+.mr10{
+  margin-right: 10px;
 }
 .show{
   display: block!important;
@@ -172,11 +210,20 @@ html input[disabled] {
 .warningColor{
   color: $warningColor;
 }
+.accountColor{
+  color: $accountColor;
+}
+.errorColor{
+  color: $errorColor;
+}
 .secondColor{
   color: $secondColor;
 }
 .backGrey{
   background: $backColor;
+}
+.backWhite{
+  background: #fff;
 }
 .colorWhite{
   color: #fff;
@@ -236,9 +283,11 @@ html input[disabled] {
   line-height: 36px;
 }
 .themeBtn{
+  color: #fff;
   background: $themeColor;
 }
 .secondBtn{
+  color: #fff;
   background: $secondColor;
 }
 .progress {
@@ -580,4 +629,15 @@ button.close {
 }
 .modal-footer .btn-block + .btn-block {
   margin-left: 0;
+}
+.containerSide{
+  float: left;
+  width: 200px;
+}
+.containerMain{
+  float: right;
+  width: 860px;
+}
+.paddingModal .modal-body{
+  padding: 20px 30px 50px 30px;
 }

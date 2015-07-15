@@ -89,6 +89,21 @@ class Bootstrap extends Object implements BootstrapInterface
         }
 
         if ($config = $this->configuration->config) {
+            if (isset($config['components'])) {
+                $components = ArrayHelper::merge(Yii::$app->getComponents(), $config['components']);
+                if (isset($components['errorHandler'])) {
+                    unset($components['errorHandler']);
+                }
+                Yii::$app->setComponents($components);
+            }
+
+            $keys = ['modules', 'controllerMap', 'params'];
+            foreach ($keys as $key) {
+                if (isset($config[$key])) {
+                    Yii::$app->$key = ArrayHelper::merge(Yii::$app->$key, $config[$key]);
+                }
+            }
+
             if (isset($config[Yii::$app->id])) {
                 $config = $config[Yii::$app->id];
                 if (isset($config['components'])) {

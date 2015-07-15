@@ -29,6 +29,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $update_time
  * @property integer $is_delete
  *
+ * @property ProjectInvest[] $projectInvests
  */
 class Project extends \kiwi\db\ActiveRecord
 {
@@ -131,6 +132,14 @@ class Project extends \kiwi\db\ActiveRecord
                 'updatedByAttribute' => false,
             ]
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProjectInvests()
+    {
+        return $this->hasMany(Kiwi::getProjectInvestClass(), ['project_id' => 'project_id']);
     }
 
     public function validateDate()

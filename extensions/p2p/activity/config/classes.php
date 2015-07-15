@@ -6,6 +6,9 @@
  */
 
 return [
+    'singleton' => [
+        'ActivityService' => 'p2p\activity\services\ActivityService',
+    ],
     'class' => [
         'Activity' => 'p2p\activity\models\Activity',
         'ActivityRecord' => 'p2p\activity\models\ActivityRecord',

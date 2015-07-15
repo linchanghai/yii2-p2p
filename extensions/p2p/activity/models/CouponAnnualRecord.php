@@ -16,7 +16,7 @@ use Yii;
  * @property integer $member_id
  * @property integer $member_coupon_id
  * @property string $rate
- * @property string $interst_money
+ * @property string $interest_money
  * @property integer $create_time
  * @property integer $is_delete
  *
@@ -43,7 +43,7 @@ class CouponAnnualRecord extends \kiwi\db\ActiveRecord
         return [
             [['coupon_annual_record_id', 'project_invest_id', 'project_id', 'member_id', 'member_coupon_id', 'rate', 'interst_money', 'create_time'], 'required'],
             [['coupon_annual_record_id', 'project_invest_id', 'project_id', 'member_id', 'member_coupon_id', 'create_time', 'is_delete'], 'integer'],
-            [['rate', 'interst_money'], 'number'],
+            [['rate', 'interest_money'], 'number'],
             [['coupon_annual_record_id'], 'unique']
         ];
     }
@@ -60,7 +60,7 @@ class CouponAnnualRecord extends \kiwi\db\ActiveRecord
             'member_id' => Yii::t('p2p_activity', 'Member ID'),
             'member_coupon_id' => Yii::t('p2p_activity', 'Member Coupon ID'),
             'rate' => Yii::t('p2p_activity', 'Rate'),
-            'interst_money' => Yii::t('p2p_activity', 'Interst Money'),
+            'interest_money' => Yii::t('p2p_activity', 'Interst Money'),
             'create_time' => Yii::t('p2p_activity', 'Create Time'),
             'is_delete' => Yii::t('p2p_activity', 'Is Delete'),
         ];

@@ -17,8 +17,12 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Account Money' => '',
     'Annual' => '',
     'Bonus' => '',
+    'Bonus Money' => '',
+    'Cash' => '',
+    'Cash Coupon' => '',
     'CouponCash' => '',
     'Member ID' => '',
     'Money' => '',
@@ -27,6 +31,7 @@ return [
     'Project Invest ID' => '',
     'Project Legal Opinion ID' => '',
     'Project Repayment ID' => '',
+    'Recharge Money' => '',
     'Create Project Details' => '@@@@',
     'Create Project Invest Point Record' => '@@@@',
     'Create Project Legal Opinion' => '@@@@',
@@ -46,7 +51,6 @@ return [
     'Create Time' => '创建时间',
     'Create User' => '创建者',
     'Delete' => '删除',
-    'One-time principal and interest' => '一次性本息',
     'Equal monthly installments of principal and interest' => '按月等额本息',
     'Failed Check' => '审核未通过',
     'Interest Money' => '利息',
@@ -63,6 +67,7 @@ return [
     'Monthly Interest Repayment' => '按月付息 / 到期还本',
     'Normal Project' => '常规项目',
     'Novice Project' => '新手项目',
+    'One-time principal and interest' => '一次性本息',
     'Passed Check' => '审核通过',
     'Pending Check' => '待审核',
     'Project' => '投资项目',

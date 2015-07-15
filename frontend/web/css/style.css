@@ -396,6 +396,34 @@ html input[disabled] {
   content: "\e183";
 }
 
+.glyphicon-exclamation-sign:before {
+  content: "\e101";
+}
+
+.glyphicon-ok-sign:before {
+  content: "\e084";
+}
+
+.glyphicon-ok:before {
+  content: "\e013";
+}
+
+.glyphicon-open:before {
+  content: "\e167";
+}
+
+.glyphicon-th-list:before {
+  content: "\e012";
+}
+
+.glyphicon-sort:before {
+  content: "\e150";
+}
+
+.glyphicon-info-sign:before {
+  content: "\e086";
+}
+
 .fl {
   float: left;
 }
@@ -441,6 +469,10 @@ html input[disabled] {
   vertical-align: middle;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
 .halfArea {
   width: 50%;
   height: 100%;
@@ -474,8 +506,22 @@ html input[disabled] {
   margin-top: 40px;
 }
 
+.prt2 {
+  position: relative;
+  top: 2px;
+  margin-right: 4px;
+}
+
 .pt20 {
   padding-top: 20px;
+}
+
+.pt10 {
+  padding-top: 10px;
+}
+
+.p20 {
+  padding: 20px;
 }
 
 .hide {
@@ -484,6 +530,10 @@ html input[disabled] {
 
 .mr16 {
   margin-right: 16px;
+}
+
+.mr10 {
+  margin-right: 10px;
 }
 
 .show {
@@ -502,12 +552,24 @@ html input[disabled] {
   color: #E3A703;
 }
 
+.accountColor {
+  color: #375473;
+}
+
+.errorColor {
+  color: #C5002E;
+}
+
 .secondColor {
   color: #5e9eed;
 }
 
 .backGrey {
   background: #f3f5fb;
+}
+
+.backWhite {
+  background: #fff;
 }
 
 .colorWhite {
@@ -581,10 +643,12 @@ html input[disabled] {
 }
 
 .themeBtn {
+  color: #fff;
   background: #ed7c5e;
 }
 
 .secondBtn {
+  color: #fff;
   background: #5e9eed;
 }
 
@@ -964,4 +1028,18 @@ button.close {
 
 .modal-footer .btn-block + .btn-block {
   margin-left: 0;
+}
+
+.containerSide {
+  float: left;
+  width: 200px;
+}
+
+.containerMain {
+  float: right;
+  width: 860px;
+}
+
+.paddingModal .modal-body {
+  padding: 20px 30px 50px 30px;
 }
