@@ -79,7 +79,6 @@ class PackageRecord extends \kiwi\db\ActiveRecord
                         return $this->type == $this::TYPE_INTO ? -$this->exchange_cash : $this->exchange_cash;
                     },
                     'member_id' => 'member_id',
-                    'link_id' => 'primaryKey',
                 ]
             ],
             'changePackage' => [
@@ -94,7 +93,6 @@ class PackageRecord extends \kiwi\db\ActiveRecord
                         return $this->type == $this::TYPE_INTO ? $this->exchange_cash : -$this->exchange_cash;
                     },
                     'member_id' => 'member_id',
-                    'link_id' => 'primaryKey',
                 ]
             ],
         ];

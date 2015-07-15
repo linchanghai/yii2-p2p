@@ -50,6 +50,8 @@ class RecordBehavior extends Behavior
     /** @var \yii\db\ActiveRecord */
     protected $target;
 
+    public $relations = ['link_id' => 'primaryKey'];
+
     public function events()
     {
         return [
@@ -101,6 +103,11 @@ class RecordBehavior extends Behavior
     {
         if (!$this->target) {
             return;
+        }
+
+        foreach ($this->relations as $fk => $pk) {
+            if ($this->target->hasAttribute($fk))
+                $this->target->{$fk} = $event->sender->$pk;
         }
 
         $times = $this->saveTime;

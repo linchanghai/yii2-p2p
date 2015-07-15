@@ -96,7 +96,6 @@ class ProjectInvest extends \kiwi\db\ActiveRecord
                     'member_id'=> 'member_id',
                     'type' => $changeRecordClass::TYPE_INVEST,
                     'value' => function($invest) { return -$invest->actual_invest_money; },
-//                    'link_id' => 'project_invest_id'
                 ],
             ],
             'change' => [

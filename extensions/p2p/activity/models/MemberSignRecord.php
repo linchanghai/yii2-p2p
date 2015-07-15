@@ -117,7 +117,6 @@ class MemberSignRecord extends \kiwi\db\ActiveRecord
                     'member_id'=> 'member_id',
                     'type' => $changeRecordClass::TYPE_EXCHANGE_POINT,
                     'value' => 'ponit',
-                    'link_id' => 'member_sign_record_id'
                 ],
             ],
             'time' => [
