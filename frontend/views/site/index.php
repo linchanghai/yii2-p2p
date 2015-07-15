@@ -68,39 +68,21 @@ $this->params['home'] = true;
                 <p class="mt20">短期项目</p>
             </div>
             <div class="fl backGrey pt20 indexProWrap">
+                <?php $projectModels = \kiwi\Kiwi::getProject()->find()->andWhere(['<=','repayment_date',time()+30*24*3600])->limit(3)->all();
+                foreach($projectModels as $projectModel){
+                ?>
                 <div class="fl indexProList">
                     <div class="proTitle col333 textCenter fs16">
-                        汽车宝
+                       <?= $projectModel->project_name?>
                     </div>
-                    <p class="fs12 mt10 indexProDetail">本项目为个人贷款产品本项目为个人贷款产品本项目为个人贷款产品</p>
+                    <p class="fs12 mt10 indexProDetail"><?= $projectModel->projectDetails->project_introduce?></p>
 
                     <div class="progress mt20">
                         <div class="progress-bar progress-bar-striped" style="width: 10%;"></div>
                     </div>
-                    <a class="mt10 disb indexBuy" href="#">立即加入</a>
+                    <a class="mt10 disb indexBuy" href="<?= Url::to(['project/project/details','id'=>$projectModel->project_id])?>">立即加入</a>
                 </div>
-                <div class="fl indexProList">
-                    <div class="proTitle col333 textCenter fs16">
-                        汽车宝
-                    </div>
-                    <p class="fs12 mt10 indexProDetail">本项目为个人贷款产品本项目为个人贷款产品本项目为个人贷款产品</p>
-
-                    <div class="progress mt20">
-                        <div class="progress-bar parogress-succeed progress-bar-striped" style="width: 100%;"></div>
-                    </div>
-                    <a class="mt10 disb indexBuy" href="#">立即加入</a>
-                </div>
-                <div class="fl indexProList">
-                    <div class="proTitle col333 textCenter fs16">
-                        汽车宝
-                    </div>
-                    <p class="fs12 mt10 indexProDetail">本项目为个人贷款产品本项目为个人贷款产品本项目为个人贷款产品</p>
-
-                    <div class="progress mt20">
-                        <div class="progress-bar progress-bar-striped" style="width: 50%;"></div>
-                    </div>
-                    <a class="mt10 disb indexBuy" href="#">立即加入</a>
-                </div>
+                <?php } ?>
             </div>
         </div>
         <div class="clearFix mt20 indexProduct">
@@ -110,39 +92,21 @@ $this->params['home'] = true;
                 <p class="mt20">长期项目</p>
             </div>
             <div class="fl backGrey pt20 indexProWrap">
-                <div class="fl indexProList">
-                    <div class="proTitle col333 textCenter fs16">
-                        汽车宝
-                    </div>
-                    <p class="fs12 mt10 indexProDetail">本项目为个人贷款产品本项目为个人贷款产品本项目为个人贷款产品</p>
+                <?php $projectModels = \kiwi\Kiwi::getProject()->find()->andWhere(['>','repayment_date',time()+30*24*3600])->limit(3)->all();
+                foreach($projectModels as $projectModel){
+                    ?>
+                    <div class="fl indexProList">
+                        <div class="proTitle col333 textCenter fs16">
+                            <?= $projectModel->project_name?>
+                        </div>
+                        <p class="fs12 mt10 indexProDetail"><?= $projectModel->projectDetails->project_introduce?></p>
 
-                    <div class="progress mt20">
-                        <div class="progress-bar progress-bar-striped" style="width: 10%;"></div>
+                        <div class="progress mt20">
+                            <div class="progress-bar progress-bar-striped" style="width: 10%;"></div>
+                        </div>
+                        <a class="mt10 disb indexBuy" href="<?= Url::to(['project/project/details','id'=>$projectModel->project_id])?>">立即加入</a>
                     </div>
-                    <a class="mt10 disb indexBuy" href="#">立即加入</a>
-                </div>
-                <div class="fl indexProList">
-                    <div class="proTitle col333 textCenter fs16">
-                        汽车宝
-                    </div>
-                    <p class="fs12 mt10 indexProDetail">本项目为个人贷款产品本项目为个人贷款产品本项目为个人贷款产品</p>
-
-                    <div class="progress mt20">
-                        <div class="progress-bar parogress-succeed progress-bar-striped" style="width: 100%;"></div>
-                    </div>
-                    <a class="mt10 disb indexBuy" href="#">立即加入</a>
-                </div>
-                <div class="fl indexProList">
-                    <div class="proTitle col333 textCenter fs16">
-                        汽车宝
-                    </div>
-                    <p class="fs12 mt10 indexProDetail">本项目为个人贷款产品本项目为个人贷款产品本项目为个人贷款产品</p>
-
-                    <div class="progress mt20">
-                        <div class="progress-bar progress-bar-striped" style="width: 50%;"></div>
-                    </div>
-                    <a class="mt10 disb indexBuy" href="#">立即加入</a>
-                </div>
+                <?php } ?>
             </div>
         </div>
         <div class="clearFix mt20 indexProduct">
@@ -204,7 +168,7 @@ $this->params['home'] = true;
             </div>
             <div class="fl siteItemRight">
                 <a href="#">充值</a>
-                <a class="mt10 btn themeColor" href="#">充值</a>
+                <a class="mt10 btn themeColor" href="<?= Url::to(['/recharge/recharge/recharge'])?>">充值</a>
             </div>
         </div>
         <div class="mt20 siteItem">
