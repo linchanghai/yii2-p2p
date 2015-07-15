@@ -57,7 +57,7 @@ class WithdrawForm extends Model
             return false;
         }
 
-        if($this->beforeWithdraw()) {
+        if ($this->beforeWithdraw()) {
             $result = $this->createWithdrawRecord();
             $this->afterWithdraw();
         } else {

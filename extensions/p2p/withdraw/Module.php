@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Lujie.Zhou(lujie.zhou@jago-ag.cn) 
+ * @author Lujie.Zhou(lujie.zhou@jago-ag.cn)
  * @Date 2014/11/10
  * @Time 20:11
  */
