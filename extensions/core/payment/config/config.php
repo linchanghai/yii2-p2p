@@ -35,7 +35,7 @@ return [
                         'key' => '',
                     ],
                 ],
-                'callbackUrl' => '/pay/callback'
+                'callbackUrl' => '/pay/callback',
             ]
         ],
         'controllerMap' => [

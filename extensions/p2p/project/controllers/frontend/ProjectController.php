@@ -33,9 +33,9 @@ class ProjectController extends Controller
     public function actionDetails($id)
     {
         $project = $this->findModel($id);
-        $investForm = Kiwi::getInvestForm();
+        $investForm = Kiwi::getInvestForm(['project_id' => $id]);
         if ($investForm->load(Yii::$app->request->post()) && $investForm->invest()) {
-            $this->redirect(['details', ['project_id' => $project]]);
+            $this->redirect(['success', 'id' => $investForm->invest->project_invest_id]);
         }
 
         return $this->render('details', [

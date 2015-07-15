@@ -162,13 +162,10 @@ $member = Yii::$app->user->identity;
                 <h4 class="modal-title" id="myModalLabel">填写投资金额</h4>
             </div>
             <div class="modal-body">
+                <?php \yii\widgets\Pjax::begin() ?>
                 <?php $form = ActiveForm::begin([
-                    'action' => ['/project/project-invest/save-invest'],
-                    'options' => ['class' => 'clearFix prepInvest']
+                    'options' => ['class' => 'clearFix prepInvest', 'data-pjax' => true]
                 ]) ?>
-                    <input type="hidden" name="ProjectInvestPrepareForm[project_id]"
-                           value="<?= $project->project_id; ?>"/>
-
                     <div class="fl investModalArea">
                         <div class="clearFix">
                             <label class="fl">投资金额:</label>
@@ -179,18 +176,20 @@ $member = Yii::$app->user->identity;
                                 <span class="fl operate plus">+</span>
                             </div>
                         </div>
+                        <p class="mt20"><?php echo $investForm->getFirstError('investMoney') ?></p>
                         <p class="mt20">账户余额: <span id="myMoney"><?= $member->memberStatistic->account_money ?></span>元 </p>
                     </div>
                     <div class="fr">
                         <button class="btn largeBtn secondBtn investNow" type="submit">确认投资</button>
                     </div>
                 <?php $form->end() ?>
+                <?php \yii\widgets\Pjax::end() ?>
                 <div class="mt20 investSingleMoney">
 
                 </div>
             </div>
             <div class="clearFix modal-footer">
-                <a class="fr btn regularBtn secondBtn" href="#">充值</a>
+                <a class="fr btn regularBtn secondBtn" href="<?= Url::to(['/recharge/recharge/recharge']) ?>">充值</a>
                 <span class="fr themeColor mt10 mr16"><i class="glyphicon glyphicon-exclamation-sign"></i>充值余额不足，充值后可购买</span>
             </div>
         </div>
