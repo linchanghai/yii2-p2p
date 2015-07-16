@@ -34,8 +34,8 @@ class Bootstrap implements BootstrapInterface
         /** @var \core\member\models\MemberStatistic $memberStatistic */
         $memberStatistic = $memberStatistic::findOne(['member_id' => Yii::$app->user->id]);
 
+        $memberStatistic->account_money -= ($form->withdrawMoney + $form->withdrawFee);
         $memberStatistic->freezon_money += ($form->withdrawMoney + $form->withdrawFee);
-        $memberStatistic->account_money -= $memberStatistic->freezon_money;
         $memberStatistic->save();
     }
 } 
