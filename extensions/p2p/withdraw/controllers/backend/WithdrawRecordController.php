@@ -71,7 +71,7 @@ class WithdrawRecordController extends Controller
                 $model->first_verify_user = Yii::$app->user->id;
                 $model->first_verify_date = time();
             }
-            $model->update();
+            $model->save();
             return $this->redirect('index');
         } else {
             return $this->render('update', [

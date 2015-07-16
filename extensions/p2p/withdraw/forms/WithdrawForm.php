@@ -46,6 +46,12 @@ class WithdrawForm extends Model
 
     public function validateMoney()
     {
+        $memberStatistic = Kiwi::getMemberStatistic();
+        /** @var \core\member\models\MemberStatistic $memberStatistic */
+        $memberStatistic = $memberStatistic::findOne(['member_id' => Yii::$app->user->id]);
+
+        $this->canWithdrawMoney = $memberStatistic->account_money;
+
         if ($this->withdrawMoney + $this->withdrawFee > $this->canWithdrawMoney) {
             $this->addError('withdrawMoney', '可提现金额不足！');
         }

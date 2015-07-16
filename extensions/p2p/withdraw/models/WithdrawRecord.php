@@ -2,6 +2,7 @@
 
 namespace p2p\withdraw\models;
 
+use kiwi\Kiwi;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -101,5 +102,29 @@ class WithdrawRecord extends \kiwi\db\ActiveRecord
                 'updatedAtAttribute' => 'update_time',
             ],
         ];
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        $this->changeFreezeMoney();
+
+        parent::afterSave($insert, $changedAttributes);
+    }
+
+    public function changeFreezeMoney()
+    {
+        $memberStatistic = Kiwi::getMemberStatistic();
+        /** @var \core\member\models\MemberStatistic $memberStatistic */
+        $memberStatistic = $memberStatistic::findOne(['member_id' => $this->member_id]);
+
+        if($this->status == static::STATUS_FAIL) {
+            $memberStatistic->account_money += ($this->money + $this->counter_fee);
+            $memberStatistic->freezon_money -= ($this->money + $this->counter_fee);
+        }
+        if($this->status == static::STATUS_SUCCESS) {
+            $memberStatistic->freezon_money -= ($this->money + $this->counter_fee);
+        }
+
+        $memberStatistic->save();
     }
 }
