@@ -19,12 +19,12 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $status
  * @property integer $create_time
  * @property integer $update_time
- * @property integer $is_delete
  *
- * @property Member $member
  */
 class MemberCoupon extends \kiwi\db\ActiveRecord
 {
+    use MemberTrait;
+
     const TYPE_BONUS = 1;
     const TYPE_CASH = 2;
     const TYPE_ANNUAL = 3;
@@ -72,14 +72,6 @@ class MemberCoupon extends \kiwi\db\ActiveRecord
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMember()
-    {
-        return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
-    }
-
     public function exchangeCoupon(ProductMap $productMap){
         /**@var $memberStatisticModel MemberStatistic **/
         $memberStatisticModel = Kiwi::getMemberCoupon()->findOne(Yii::$app->user->id);
@@ -105,5 +97,20 @@ class MemberCoupon extends \kiwi\db\ActiveRecord
                 'updatedAtAttribute' => 'update_time',
             ],
         ];
+    }
+
+    public function getName()
+    {
+        $names = [
+            static::TYPE_BONUS => Yii::t('core_member', ' Bonus Coupon'),
+            static::TYPE_CASH => Yii::t('core_member', ' Cash Coupon'),
+            static::TYPE_ANNUAL => Yii::t('core_member', ' Annual Coupon'),
+        ];
+        $prefix = [
+            static::TYPE_BONUS => Yii::t('core_member', ' rmb'),
+            static::TYPE_CASH => Yii::t('core_member', ' rmb'),
+            static::TYPE_ANNUAL => Yii::t('core_member', '%'),
+        ];
+        return $this->value . $prefix[$this->type] . $names[$this->type];
     }
 }

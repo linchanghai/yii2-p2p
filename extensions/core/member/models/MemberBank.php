@@ -19,12 +19,12 @@ use yii\behaviors\TimestampBehavior;
  * @property string $branch_name
  * @property integer $create_time
  * @property integer $update_time
- * @property integer $is_delete
  *
- * @property Member $member
  */
 class MemberBank extends \kiwi\db\ActiveRecord
 {
+    use MemberTrait;
+
     /**
      * @inheritdoc
      */
@@ -46,7 +46,7 @@ class MemberBank extends \kiwi\db\ActiveRecord
             [['bank_user_name'], 'string', 'max' => 10],
             [['province', 'city'], 'string', 'max' => 20],
             [['branch_name'], 'string', 'max' => 60],
-            ['member_id','unique']
+            ['member_id', 'unique']
         ];
     }
 
@@ -70,16 +70,9 @@ class MemberBank extends \kiwi\db\ActiveRecord
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMember()
+    public function getCityArea()
     {
-        return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
-    }
-
-    public function getCityArea(){
-        return $this->hasOne(Area::className(),['area_id'=>'city']);
+        return $this->hasOne(Area::className(), ['area_id' => 'city']);
     }
 
     public function behaviors()

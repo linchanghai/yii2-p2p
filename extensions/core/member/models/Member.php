@@ -3,6 +3,7 @@
 namespace core\member\models;
 
 use core\user\models\User;
+use kiwi\Kiwi;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -25,14 +26,11 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $status
  * @property integer $create_time
  * @property integer $update_time
- * @property integer $is_deleted
  *
- * @property MemberBank[] $memberBanks
- * @property MemberStatistic $memberStatistic
- * @property MemberStatus $memberStatus
  */
 class Member extends User
 {
+    use MemberTrait;
     /**
      * @inheritdoc
      */
@@ -86,118 +84,6 @@ class Member extends User
             'update_time' => Yii::t('core_member', 'Update Time'),
             'is_deleted' => Yii::t('core_member', 'Is Deleted'),
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getActivityRecords()
-    {
-        return $this->hasMany(ActivityRecord::className(), ['member_id' => 'member_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getConponAnnualRecords()
-    {
-        return $this->hasMany(ConponAnnualRecord::className(), ['member_id' => 'member_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getConponBonusRecords()
-    {
-        return $this->hasMany(ConponBonusRecord::className(), ['member_id' => 'member_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getConponCashRecords()
-    {
-        return $this->hasMany(ConponCashRecord::className(), ['member_id' => 'member_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDepositRecords()
-    {
-        return $this->hasMany(DepositRecord::className(), ['member_id' => 'member_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getExchangeRecords()
-    {
-        return $this->hasMany(ExchangeRecord::className(), ['member_id' => 'member_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMemberBank()
-    {
-        return $this->hasOne(MemberBank::className(), ['member_id' => 'member_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMemberConpons()
-    {
-        return $this->hasMany(MemberCoupon::className(), ['member_id' => 'member_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMemberStatistic()
-    {
-        return $this->hasOne(MemberStatistic::className(), ['member_id' => 'member_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMemberStatus()
-    {
-        return $this->hasOne(MemberStatus::className(), ['member_id' => 'member_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPackageRecords()
-    {
-        return $this->hasMany(PackageRecord::className(), ['member_id' => 'member_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProjectInvestPointRecords()
-    {
-        return $this->hasMany(ProjectInvestPointRecord::className(), ['member_id' => 'member_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProjectRepayments()
-    {
-        return $this->hasMany(ProjectRepayment::className(), ['member_id' => 'member_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRechargeRecords()
-    {
-        return $this->hasMany(RechargeRecord::className(), ['member_id' => 'member_id']);
     }
 
     /**

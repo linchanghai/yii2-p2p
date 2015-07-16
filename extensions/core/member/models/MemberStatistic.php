@@ -28,10 +28,11 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $update_time
  * @property integer $is_delete
  *
- * @property Member $member
  */
 class MemberStatistic extends \kiwi\db\ActiveRecord
 {
+    use MemberTrait;
+
     /**
      * @inheritdoc
      */

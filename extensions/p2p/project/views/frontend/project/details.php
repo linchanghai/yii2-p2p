@@ -12,6 +12,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this \yii\web\View */
 /** @var \p2p\project\models\Project $project */
@@ -178,6 +179,23 @@ $member = Yii::$app->user->identity;
                         </div>
                         <p class="mt20"><?php echo $investForm->getFirstError('investMoney') ?></p>
                         <p class="mt20">账户余额: <span id="myMoney"><?= $member->memberStatistic->account_money ?></span>元 </p>
+                        <p class="mt20">
+                            <?php
+                            echo Html::activeTextInput($investForm, 'bonusMoney');
+                            ?>
+                        </p>
+                        <p class="mt20">
+                            <?php if ($member->memberCashCoupons) {
+                                $cashCoupons = ArrayHelper::map($member->memberCashCoupons, 'member_coupon_id', 'name');
+                                echo Html::activeDropDownList($investForm, 'cash_id', $cashCoupons);
+                            } ?>
+                        </p>
+                        <p class="mt20">
+                            <?php if ($member->memberAnnualCoupons) {
+                                echo Html::activeDropDownList($investForm, 'cash_id',
+                                    ArrayHelper::map($member->memberAnnualCoupons, 'member_coupon_id', 'name'));
+                            } ?>
+                        </p>
                     </div>
                     <div class="fr">
                         <button class="btn largeBtn secondBtn investNow" type="submit">确认投资</button>
