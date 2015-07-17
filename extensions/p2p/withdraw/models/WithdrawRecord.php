@@ -163,14 +163,14 @@ class WithdrawRecord extends \kiwi\db\ActiveRecord
             'attribute' => 'freezon_money',
             'value' => -($this->money + $this->counter_fee),
             'member_id' => $this->member_id,
-            'link_id' => $this->withdraw_record_id,
+            'link_id' => $this->primaryKey,
         ]);
         $accountMoneychangeRecord = Kiwi::getStatisticChangeRecord([
             'type' => $changeRecordClass::TYPE_WITHDRAW_FAIL,
             'attribute' => 'account_money',
             'value' => $this->money + $this->counter_fee,
             'member_id' => $this->member_id,
-            'link_id' => $this->withdraw_record_id,
+            'link_id' => $this->primaryKey,
         ]);
         if (!$frezonMoneychangeRecord->save()) {
             throw new Exception('Update account money error: ' . Json::encode($frezonMoneychangeRecord->getErrors()));
@@ -188,7 +188,7 @@ class WithdrawRecord extends \kiwi\db\ActiveRecord
             'attribute' => 'freezon_money',
             'value' => -($this->money + $this->counter_fee),
             'member_id' => $this->member_id,
-            'link_id' => $this->withdraw_record_id,
+            'link_id' => $this->primaryKey,
         ]);
         if (!$frezonMoneychangeRecord->save()) {
             throw new Exception('Update account money error: ' . Json::encode($frezonMoneychangeRecord->getErrors()));

@@ -127,7 +127,7 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
             ],
             static::TYPE_WITHDRAW_FAIL => [
                 'targetClass' => Kiwi::getMemberStatisticClass(),
-                'attribute' => 'account_money',
+                'attribute' => $this->attribute,
                 'condition' => ['member_id' => $this->member_id],
             ],
             static::TYPE_WITHDRAW_SUCCESS => [

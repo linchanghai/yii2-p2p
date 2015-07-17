@@ -22,12 +22,12 @@ return [
                         'url' => ['/p2p_withdraw/withdraw-first/index'],
                         'activeUrls' => [['/p2p_withdraw/withdraw-first/update']]
                     ],
-                    'auto' => [
-                        'label' => Yii::t('p2p_withdraw', 'AutoRecord'),
-                        'sort' => 300,
-                        'url' => ['/p2p_withdraw/withdraw-auto/index'],
-                        'activeUrls' => [['/p2p_withdraw/withdraw-auto/update']]
-                    ],
+//                    'auto' => [
+//                        'label' => Yii::t('p2p_withdraw', 'AutoRecord'),
+//                        'sort' => 300,
+//                        'url' => ['/p2p_withdraw/withdraw-auto/index'],
+//                        'activeUrls' => [['/p2p_withdraw/withdraw-auto/update']]
+//                    ],
                     'success' => [
                         'label' => Yii::t('p2p_withdraw', 'SuccessRecord'),
                         'sort' => 400,
