@@ -1,4 +1,5 @@
 <?php
+use yii\helpers\Url;
 /* @var $this \yii\web\View */
 $this->beginContent('@app/views/layouts/main.php');
 ?>
@@ -7,9 +8,9 @@ $this->beginContent('@app/views/layouts/main.php');
         <dl>
             <dt><a href="#"><i class="glyphicon glyphicon-th-list fs16"></i>我的账户</a></dt>
         </dl>
-        <dl class="current">
+        <dl >
             <dt><a href="#"><i class="glyphicon glyphicon-hdd fs16"></i>资产管理</a></dt>
-            <dd class="active"><a href="#">充值提现</a></dd>
+            <dd ><a href="#">充值提现</a></dd>
             <dd><a href="#">理财管理</a></dd>
             <dd><a href="#">资金流水</a></dd>
         </dl>
@@ -25,9 +26,9 @@ $this->beginContent('@app/views/layouts/main.php');
             <dd><a href="#">密码设置</a></dd>
             <dd><a href="#">我的消息</a></dd>
         </dl>
-        <dl>
+        <dl class="<?= in_array(Yii::$app->request->pathInfo,['member/member-coupon/bonus-view'] )?'current':''?>">
             <dt><a href="#"><i class="glyphicon glyphicon-sort fs16"></i>互动管理</a></dt>
-            <dd><a href="#">我的优惠券</a></dd>
+            <dd class="<?= (Yii::$app->request->pathInfo == 'member/member-coupon/bonus-view')?'active':''?>"><a href="<?= Url::to(['/member/member-coupon/bonus-view'])?>">我的优惠券</a></dd>
             <dd><a href="#">邀请好友</a></dd>
         </dl>
     </div>
