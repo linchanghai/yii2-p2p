@@ -26,15 +26,17 @@ use yii\helpers\ArrayHelper;
 class StatisticChangeRecord extends \kiwi\db\ActiveRecord
 {
     const TYPE_RECHARGE = 1;
+
+    const TYPE_WITHDRAW_APPLY = 6;
+    const TYPE_WITHDRAW_SUCCESS = 8;
+    const TYPE_WITHDRAW_FAIL = 9;
+
     const TYPE_INVEST = 2;
     const TYPE_REPAYMENT = 14;
+
     const TYPE_ACCOUNT_TO_PACKAGE = 3;
     const TYPE_PACKAGE_TO_ACCOUNT = 4;
     const TYPE_PACKAGE_INTEREST = 5;
-    const TYPE_WITHDRAW_APPLY = 6;
-    const TYPE_WITHDRAW_FORBIDDEN = 7;
-    const TYPE_WITHDRAW_SUCCESS = 8;
-    const TYPE_WITHDRAW_FAIL = 9;
 
     const TYPE_INVEST_EMPIRICAL = 11;
     const TYPE_USER_POINT_REGISTER = 12;
@@ -111,16 +113,35 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
                 'attribute' => $this->attribute,
                 'condition' => ['member_id' => $this->member_id],
             ],
+
             static::TYPE_RECHARGE => [
+                'targetClass' => Kiwi::getMemberStatisticClass(),
+                'attribute' => $this->attribute,
+                'condition' => ['member_id' => $this->member_id],
+            ],
+
+            static::TYPE_WITHDRAW_APPLY => [
+                'targetClass' => Kiwi::getMemberStatisticClass(),
+                'attribute' => $this->attribute,
+                'condition' => ['member_id' => $this->member_id],
+            ],
+            static::TYPE_WITHDRAW_FAIL => [
                 'targetClass' => Kiwi::getMemberStatisticClass(),
                 'attribute' => 'account_money',
                 'condition' => ['member_id' => $this->member_id],
             ],
+            static::TYPE_WITHDRAW_SUCCESS => [
+                'targetClass' => Kiwi::getMemberStatisticClass(),
+                'attribute' => 'freezon_money',
+                'condition' => ['member_id' => $this->member_id],
+            ],
+
             static::TYPE_INVEST_EMPIRICAL => [
                 'targetClass' => Kiwi::getMemberStatisticClass(),
                 'attribute' => 'empirical_value',
                 'condition' => ['member_id' => $this->member_id],
             ],
+
             static::TYPE_EXCHANGE_POINT => [
                 'targetClass' => Kiwi::getMemberStatisticClass(),
                 'attribute' => 'points',
@@ -131,6 +152,7 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
                 'attribute' => 'points',
                 'condition' => ['member_id' => $this->member_id],
             ],
+
             static::TYPE_INVEST => [
                 'targetClass' => Kiwi::getMemberStatisticClass(),
                 'attribute' => 'account_money',

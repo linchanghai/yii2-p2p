@@ -17,25 +17,5 @@ class Bootstrap implements BootstrapInterface
 {
     public function bootstrap($app)
     {
-        $this->attachEvents($app);
-    }
-
-    public function attachEvents($app)
-    {
-        Event::on(Kiwi::getWithdrawFormClass(), 'beforeWithdraw', [$this, 'freezeMoney']);
-    }
-
-    public function freezeMoney($event)
-    {
-        /** @var \p2p\withdraw\forms\WithdrawForm $form */
-        $form = $event->sender;
-
-        $memberStatistic = Kiwi::getMemberStatistic();
-        /** @var \core\member\models\MemberStatistic $memberStatistic */
-        $memberStatistic = $memberStatistic::findOne(['member_id' => Yii::$app->user->id]);
-
-        $memberStatistic->account_money -= ($form->withdrawMoney + $form->withdrawFee);
-        $memberStatistic->freezon_money += ($form->withdrawMoney + $form->withdrawFee);
-        $memberStatistic->save();
     }
 } 

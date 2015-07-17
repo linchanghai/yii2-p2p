@@ -2,14 +2,17 @@
 
 namespace p2p\withdraw\models;
 
+use kiwi\behaviors\RecordBehavior;
 use kiwi\Kiwi;
 use Yii;
+use yii\base\Exception;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\Json;
 
 /**
- * This is the model class for table "deposit_record".
+ * This is the model class for table "withdraw_record".
  *
- * @property integer $deposit_record_id
+ * @property integer $withdraw_record_id
  * @property integer $member_id
  * @property string $money
  * @property string $counter_fee
@@ -95,11 +98,36 @@ class WithdrawRecord extends \kiwi\db\ActiveRecord
 
     public function behaviors()
     {
+        $changeRecordClass = Kiwi::getStatisticChangeRecordClass();
         return [
             'time' => [
                 'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'create_time',
                 'updatedAtAttribute' => 'update_time',
+            ],
+            'accountMoneyRecord' => [
+                'class' => RecordBehavior::className(),
+                'targetClass' => $changeRecordClass,
+                'attributes' => [
+                    'member_id' => 'member_id',
+                    'type' => $changeRecordClass::TYPE_WITHDRAW_APPLY,
+                    'attribute' => function() { return 'account_money'; },
+                    'value' => function ($withdraw) {
+                        return -($withdraw->money + $withdraw->counter_fee);
+                    },
+                ],
+            ],
+            'freezonMoneyRecord' => [
+                'class' => RecordBehavior::className(),
+                'targetClass' => $changeRecordClass,
+                'attributes' => [
+                    'member_id' => 'member_id',
+                    'type' => $changeRecordClass::TYPE_WITHDRAW_APPLY,
+                    'attribute' => function() { return 'freezon_money'; },
+                    'value' => function ($withdraw) {
+                        return $withdraw->money + $withdraw->counter_fee;
+                    },
+                ],
             ],
         ];
     }
@@ -117,14 +145,53 @@ class WithdrawRecord extends \kiwi\db\ActiveRecord
         /** @var \core\member\models\MemberStatistic $memberStatistic */
         $memberStatistic = $memberStatistic::findOne(['member_id' => $this->member_id]);
 
-        if($this->status == static::STATUS_FAIL) {
-            $memberStatistic->account_money += ($this->money + $this->counter_fee);
-            $memberStatistic->freezon_money -= ($this->money + $this->counter_fee);
+        if ($this->status == static::STATUS_FAIL) {
+            $this->unfreezonMoney();
         }
-        if($this->status == static::STATUS_SUCCESS) {
-            $memberStatistic->freezon_money -= ($this->money + $this->counter_fee);
+        if ($this->status == static::STATUS_SUCCESS) {
+            $this->withdrawMoney();
         }
 
         $memberStatistic->save();
+    }
+
+    public function unfreezonMoney()
+    {
+        $changeRecordClass = Kiwi::getStatisticChangeRecordClass();
+        $frezonMoneychangeRecord = Kiwi::getStatisticChangeRecord([
+            'type' => $changeRecordClass::TYPE_WITHDRAW_FAIL,
+            'attribute' => 'freezon_money',
+            'value' => -($this->money + $this->counter_fee),
+            'member_id' => $this->member_id,
+            'link_id' => $this->withdraw_record_id,
+        ]);
+        $accountMoneychangeRecord = Kiwi::getStatisticChangeRecord([
+            'type' => $changeRecordClass::TYPE_WITHDRAW_FAIL,
+            'attribute' => 'account_money',
+            'value' => $this->money + $this->counter_fee,
+            'member_id' => $this->member_id,
+            'link_id' => $this->withdraw_record_id,
+        ]);
+        if (!$frezonMoneychangeRecord->save()) {
+            throw new Exception('Update account money error: ' . Json::encode($frezonMoneychangeRecord->getErrors()));
+        }
+        if (!$accountMoneychangeRecord->save()) {
+            throw new Exception('Update account money error: ' . Json::encode($accountMoneychangeRecord->getErrors()));
+        }
+    }
+
+    public function withdrawMoney()
+    {
+        $changeRecordClass = Kiwi::getStatisticChangeRecordClass();
+        $frezonMoneychangeRecord = Kiwi::getStatisticChangeRecord([
+            'type' => $changeRecordClass::TYPE_WITHDRAW_SUCCESS,
+            'attribute' => 'freezon_money',
+            'value' => -($this->money + $this->counter_fee),
+            'member_id' => $this->member_id,
+            'link_id' => $this->withdraw_record_id,
+        ]);
+        if (!$frezonMoneychangeRecord->save()) {
+            throw new Exception('Update account money error: ' . Json::encode($frezonMoneychangeRecord->getErrors()));
+        }
     }
 }

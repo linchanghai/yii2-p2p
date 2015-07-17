@@ -12,6 +12,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /* @var $this \yii\web\View */
 /** @var \p2p\project\models\Project $project */
@@ -178,6 +179,29 @@ $member = Yii::$app->user->identity;
                         </div>
                         <p class="mt20"><?php echo $investForm->getFirstError('investMoney') ?></p>
                         <p class="mt20">账户余额: <span id="myMoney"><?= $member->memberStatistic->account_money ?></span>元 </p>
+                        <p class="mt20">
+                            <?php
+                            echo '红包：';
+                            echo Html::activeTextInput($investForm, 'bonusMoney');
+                            echo '可用红包：', ($member->memberStatistic->bonus - $member->memberStatistic->used_bonus), '元';
+                            ?>
+                        </p>
+                        <p class="mt20">
+                            <?php if ($member->memberCashCoupons) {
+                                echo '现金劵：';
+                                $cashCoupons = ArrayHelper::map($member->memberCashCoupons, 'member_coupon_id', 'name');
+                                $cashCoupons = ArrayHelper::merge(['0' => '不使用现金劵'], $cashCoupons);
+                                echo Html::activeDropDownList($investForm, 'cash_id', $cashCoupons);
+                            } ?>
+                        </p>
+                        <p class="mt20">
+                            <?php if ($member->memberAnnualCoupons) {
+                                echo '年化劵：';
+                                $annualCoupons = ArrayHelper::map($member->memberAnnualCoupons, 'member_coupon_id', 'name');
+                                $annualCoupons = ArrayHelper::merge(['0' => '不使用年化劵'], $annualCoupons);
+                                echo Html::activeDropDownList($investForm, 'annual_id', $annualCoupons);
+                            } ?>
+                        </p>
                     </div>
                     <div class="fr">
                         <button class="btn largeBtn secondBtn investNow" type="submit">确认投资</button>
