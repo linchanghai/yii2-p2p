@@ -1,4 +1,5 @@
 <?php
+use yii\helpers\Url;
 /* @var $this \yii\web\View */
 $this->beginContent('@app/views/layouts/main.php');
 ?>
@@ -27,7 +28,7 @@ $this->beginContent('@app/views/layouts/main.php');
         </dl>
         <dl>
             <dt><a href="#"><i class="glyphicon glyphicon-sort fs16"></i>互动管理</a></dt>
-            <dd><a href="#">我的优惠券</a></dd>
+            <dd><a href="<?= Url::to(['/member/member-coupon/bonus-view'])?>">我的优惠券</a></dd>
             <dd><a href="#">邀请好友</a></dd>
         </dl>
     </div>
