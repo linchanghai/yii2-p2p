@@ -46,6 +46,12 @@ class WithdrawForm extends Model
 
     public function validateMoney()
     {
+        $memberStatistic = Kiwi::getMemberStatistic();
+        /** @var \core\member\models\MemberStatistic $memberStatistic */
+        $memberStatistic = $memberStatistic::findOne(['member_id' => Yii::$app->user->id]);
+
+        $this->canWithdrawMoney = $memberStatistic->account_money;
+
         if ($this->withdrawMoney + $this->withdrawFee > $this->canWithdrawMoney) {
             $this->addError('withdrawMoney', '可提现金额不足！');
         }
@@ -57,7 +63,7 @@ class WithdrawForm extends Model
             return false;
         }
 
-        if($this->beforeWithdraw()) {
+        if ($this->beforeWithdraw()) {
             $result = $this->createWithdrawRecord();
             $this->afterWithdraw();
         } else {
@@ -75,7 +81,7 @@ class WithdrawForm extends Model
             'counter_fee' => $this->withdrawFee,
             'money' => $this->withdrawMoney,
             'status' => $withdrawRecordClass::STATUS_PENDING,
-            'type' => $withdrawRecordClass::TYPE_MANUAL
+            'deposit_type' => $withdrawRecordClass::TYPE_MANUAL
         ]);
 
         $withdrawRecord->scenario = 'insert';
@@ -99,22 +105,5 @@ class WithdrawForm extends Model
     {
         $event = new ModelEvent();
         $this->trigger(static::EVENT_AFTER_WITHDRAW, $event);
-    }
-
-    public function freezeMoney()
-    {
-        $class = Kiwi::getWithdrawFormClass();
-        Event::on($class, $class::EVENT_AFTER_WITHDRAW, function ($event) {
-            /** @var \p2p\withdraw\forms\WithdrawForm $form */
-            $form = $event->sender;
-
-            $memberStatistic = Kiwi::getMemberStatistic();
-            /** @var \core\member\models\MemberStatistic $memberStatistic */
-            $memberStatistic = $memberStatistic::findOne(['member_id' => Yii::$app->user->id]);
-
-            $memberStatistic->freezon_money = $form->withdrawMoney + $form->withdrawFee;
-            $memberStatistic->account_money -= $memberStatistic->freezon_money;
-            $memberStatistic->save();
-        });
     }
 }

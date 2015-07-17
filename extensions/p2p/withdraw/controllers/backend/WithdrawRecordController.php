@@ -56,9 +56,13 @@ class WithdrawRecordController extends Controller
     {
         /** @var \p2p\withdraw\models\WithdrawRecord $model */
         $model = $this->findModel($id);
-        $model->scenario = 'verify';
 
         $withdrawClass = Kiwi::getWithdrawRecordClass();
+        if ($model->status == $withdrawClass::STATUS_PENDING) {
+            $model->scenario = 'firstVerify';
+        } else {
+            $model->scenario = 'secondVerify';
+        }
         if ($model->load(Yii::$app->request->post())) {
             if (isset($model->second_verify_memo) && $model->second_verify_memo) {
                 $model->second_verify_user = Yii::$app->user->id;
@@ -66,9 +70,8 @@ class WithdrawRecordController extends Controller
             } else if (isset($model->first_verify_memo) && $model->first_verify_memo) {
                 $model->first_verify_user = Yii::$app->user->id;
                 $model->first_verify_date = time();
-                $model->status = $withdrawClass::STATUS_FIRST_VERIFY_SUCCESS;
             }
-            $model->update();
+            $model->save();
             return $this->redirect('index');
         } else {
             return $this->render('update', [

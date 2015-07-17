@@ -25,10 +25,13 @@ use kiwi\Kiwi;
 
     <?= $form->field($model, 'counter_fee')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'deposit_type')->textInput(['value' => Kiwi::getDataListModel()->withdrawStatus[$model->deposit_type]]) ?>
+    <?= $form->field($model, 'deposit_type')->textInput(['value' => Kiwi::getDataListModel()->withdrawType[$model->deposit_type]]) ?>
 
     <?php
     $withdrawClass = Kiwi::getWithdrawRecord();
+    if ($model->status == $withdrawClass::STATUS_PENDING) {
+        echo $form->field($model, 'status')->dropDownList(Kiwi::getDataListModel()->withdrawFirstVerifyStatus, ['disabled' => false]);
+    }
     echo $form->field($model, 'first_verify_memo')->textarea([
         'maxlength' => 255,
         'disabled' => $model->status == $withdrawClass::STATUS_PENDING ? false : 'disabled'

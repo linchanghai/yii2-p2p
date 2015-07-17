@@ -65,9 +65,10 @@ class MemberSignRecord extends \kiwi\db\ActiveRecord
     }
 
     public function validateSign(){
-        $model = $this->find()->orderBy(['create_time'=> SORT_DESC])->one();
+        $model = $this->find()->orderBy(['create_time'=> SORT_DESC,'member_id'=>Yii::$app->user->id])->one();
+
         if($model){
-            if(strtotime(date('Y-m-d'))>$model->create_time&& strtotime(date('Y-m-d',strtotime('-1 day')))<=$model->create_time){
+            if(strtotime(date('Y-m-d',strtotime('+1 day')))>$model->create_time&& strtotime(date('Y-m-d'))<=$model->create_time){
                 return false;
             }
         }

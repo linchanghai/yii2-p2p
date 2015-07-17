@@ -11,7 +11,8 @@ use kiwi\helpers\ArrayHelper;
 use kiwi\Kiwi;
 use Yii;
 
-class WithdrawFailController extends WithdrawRecordController {
+class WithdrawFailController extends WithdrawRecordController
+{
 
     /**
      * Lists all WithdrawRecord models.

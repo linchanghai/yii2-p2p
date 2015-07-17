@@ -13,7 +13,7 @@ $this->title = Yii::t('p2p_withdraw', 'Withdraw Records');
 $this->params['breadcrumbs'][] = $this->title;
 
 $withdrawClass = Kiwi::getWithdrawRecordClass();
-if(isset($status) && $status) {
+if (isset($status) && $status) {
     if ($status == $withdrawClass::STATUS_PENDING || $status == $withdrawClass::STATUS_FIRST_VERIFY_SUCCESS) {
         $buttonTemplate = '<div style="width: 30px">{update} {delete}</div>';
     } else {
