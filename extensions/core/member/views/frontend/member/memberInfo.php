@@ -23,4 +23,13 @@ use \yii\widgets\ActiveForm;
             'data-url'=>  Url::to(['/member/member/send-email'])]);
     ActiveForm::end();
     Pjax::end();
+
+    if(isset($member->real_name)&&isset($member->id_card)){
+        echo $member->real_name;
+        echo $member->id_card;
+    }else{
+        echo Html::a('实名认证',['/member/member/save-real-name']);
+    }
+
+
 ?>

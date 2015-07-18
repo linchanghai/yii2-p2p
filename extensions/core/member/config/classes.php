@@ -17,5 +17,6 @@ return [
         'BindEmailForm' => 'core\member\forms\BindEmailForm',
         'BindMobileForm' => 'core\member\forms\BindMobileForm',
         'UserVerifyForm' => 'core\member\forms\UserVerifyForm',
+        'NewPasswordForm' => 'core\member\forms\NewPasswordForm',
     ]
 ];

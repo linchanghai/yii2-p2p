@@ -7,11 +7,13 @@
 
 namespace core\member\controllers\frontend;
 
+use core\member\forms\ResetPasswordForm;
 use kartik\helpers\Html;
 use kiwi\Kiwi;
 use kiwi\web\Controller;
 use Yii;
 use yii\helpers\Json;
+use yii\helpers\Url;
 
 class MemberController extends Controller
 {
@@ -19,14 +21,12 @@ class MemberController extends Controller
         $model = Kiwi::getUserVerifyForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->render('realNameVerify', [
-                'model' => $model,
-            ]);
-        } else {
-            return $this->render('realNameVerify', [
-                'model' => $model,
-            ]);
+            return $this->redirect(['/member/member/member-info']);
         }
+            return $this->render('realNameVerify', [
+                'model' => $model,
+            ]);
+
     }
 
     public function actionMemberBank(){
@@ -119,5 +119,23 @@ class MemberController extends Controller
             'member'=>Yii::$app->user->identity,
             'memberStatus'=>Yii::$app->user->identity->memberStatus,
         ]);
+    }
+
+    public function actionResetPassword()
+    {
+        $model = Kiwi::getNewPasswordForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->resetPassword()) {
+            Yii::$app->user->logout();
+            Yii::$app->getSession()->setFlash('success','Reset Password Success!');
+            return $this->redirect(['/site/login']);
+//            return $this->render('index',[
+//                'customer' => $this->findModel(Yii::$app->user->id),
+//            ]);
+        } else {
+            return $this->render('resetPassword', [
+                'model' => $model,
+            ]);
+        }
     }
 } 
