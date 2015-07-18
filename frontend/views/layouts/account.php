@@ -14,13 +14,20 @@ $this->beginContent('@app/views/layouts/main.php');
         <dl>
             <dt><a href="#"><i class="glyphicon glyphicon-th-list fs16"></i>我的账户</a></dt>
         </dl>
-        <dl class="<?= in_array(Yii::$app->request->pathInfo, ['recharge/recharge/recharge-list', 'withdraw/withdraw/withdraw-list']) ? 'current' : '' ?>">
+        <dl class="<?= in_array(Yii::$app->request->pathInfo, [
+            'recharge/recharge/recharge-list',
+            'withdraw/withdraw/withdraw-list'
+        ]) ? 'current' : '' ?>">
             <dt><a href="#"><i class="glyphicon glyphicon-hdd fs16"></i>资产管理</a></dt>
             <dd class="<?= (Yii::$app->request->pathInfo == 'recharge/recharge/recharge-list') ? 'active' : '' ?>">
                 <a href="<?= Url::to(['/recharge/recharge/recharge-list']) ?>">充值管理</a></dd>
             <dd class="<?= (Yii::$app->request->pathInfo == 'withdraw/withdraw/withdraw-list') ? 'active' : '' ?>">
                 <a href="<?= Url::to(['/withdraw/withdraw/withdraw-list']) ?>">提现管理</a></dd>
-            <dd class="<?= (Yii::$app->request->pathInfo == 'package/package/package-list') ? 'active' : '' ?>">
+            <dd class="<?= in_array(Yii::$app->request->pathInfo, [
+                'package/package-record/package-list',
+                'package/package-record/into-list',
+                'package/package-record/out-list',
+            ]) ? 'active' : '' ?>">
                 <a href="<?= Url::to(['/package/package-record/package-list']) ?>">钱包管理</a></dd>
             <dd><a href="#">资金流水</a></dd>
         </dl>
