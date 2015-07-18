@@ -16,7 +16,11 @@ $this->beginContent('@app/views/layouts/main.php');
         </dl>
         <dl class="<?= in_array(Yii::$app->request->pathInfo, [
             'recharge/recharge/recharge-list',
-            'withdraw/withdraw/withdraw-list'
+            'withdraw/withdraw/withdraw-list',
+            'package/package-record/package-list',
+            'package/package-record/into-list',
+            'package/package-record/out-list',
+            'member/statistic-change/statistic-list'
         ]) ? 'current' : '' ?>">
             <dt><a href="#"><i class="glyphicon glyphicon-hdd fs16"></i>资产管理</a></dt>
             <dd class="<?= (Yii::$app->request->pathInfo == 'recharge/recharge/recharge-list') ? 'active' : '' ?>">
@@ -29,7 +33,8 @@ $this->beginContent('@app/views/layouts/main.php');
                 'package/package-record/out-list',
             ]) ? 'active' : '' ?>">
                 <a href="<?= Url::to(['/package/package-record/package-list']) ?>">钱包管理</a></dd>
-            <dd><a href="#">资金流水</a></dd>
+            <dd class="<?= (Yii::$app->request->pathInfo == 'member/statistic-change/statistic-list') ? 'active' : '' ?>">
+                <a href="<?= Url::to(['/member/statistic-change/statistic-list'])?>">资金流水</a></dd>
         </dl>
         <dl>
             <dt><a href="#"><i class="glyphicon glyphicon-yen fs16"></i>理财管理</a></dt>
