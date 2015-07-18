@@ -22,3 +22,8 @@ echo '总投资金额: ', $memberStatistic->project_total_money, '<br />';
 echo '总投资收益: ', $memberStatistic->project_earning, '<br />';
 echo '待收本金: ', $memberStatistic->collect_principal, '<br />';
 echo '待收利息: ', $memberStatistic->collect_interest, '<br />';
+echo '积分：', $memberStatistic->points, '<br />';
+echo '经验值：', $memberStatistic->empirical_value, '<br />';
+echo '红包：', $memberStatistic->bonus, '<br />';
+echo '已使用红包：', $memberStatistic->used_bonus, '<br />';
+echo '新手：', $memberStatistic->is_first_invest, '<br />';
