@@ -5,11 +5,7 @@ namespace p2p\package\controllers\backend;
 use kiwi\helpers\ArrayHelper;
 use kiwi\Kiwi;
 use Yii;
-use p2p\package\models\PackageRecord;
-use p2p\package\searches\PackageRecordSearch;
 use kiwi\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * PackageRecordController implements the CRUD actions for PackageRecord model.

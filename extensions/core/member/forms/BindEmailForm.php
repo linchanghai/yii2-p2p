@@ -50,7 +50,7 @@ class BindEmailForm extends Model
             $email = $this->email;
         }
         if ($memberModel->save()) {
-            return Yii::$app->mailer->compose('emailResetToken', ['email' => $memberModel, 'user' => Yii::$app->user->identity])
+            return Yii::$app->mailer->compose('bindEmail', ['email' => $memberModel, 'user' => Yii::$app->user->identity])
                 ->setFrom(Yii::$app->params['supportEmail'])
                 ->setTo($email)
                 ->setSubject('email reset for ' . Yii::$app->name)
