@@ -1,4 +1,4 @@
-require(["jquery","common","placeholder","modal"],function($,c){
+require(["jquery","common","placeholder","modal","tooltip"],function($,c){
     $(function(){
 
         var accountdt = $("#accountSide dt");
@@ -58,6 +58,14 @@ require(["jquery","common","placeholder","modal"],function($,c){
             }else{
                 return false;
             }
+        });
+
+        $(".showTips").hover(function(){
+            $(this).tooltip("toggle");
+        });
+
+        $(".switchWrap").on("click",function(){
+            $(this).children(".switch").toggleClass("switchToggle");
         })
 
 
