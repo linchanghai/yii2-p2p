@@ -20,6 +20,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/style.min.css',
         'css/index.min.css',
+        'css/account.min.css'
     ];
     public $js = [
         "js/jquery.bxslider.min.js",
@@ -27,6 +28,7 @@ class AppAsset extends AssetBundle
         "js/modal.js",
         "js/placeholder.js",
         'js/common.js',
+        'js/account.js'
     ];
     public $depends = [
         'frontend\assets\RequireAsset',
