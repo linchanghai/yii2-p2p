@@ -1,11 +1,17 @@
 <?php
+use frontend\assets\AppAsset;
+use yii\helpers\Url;
+
 /* @var $this \yii\web\View */
 $this->beginContent('@app/views/layouts/main.php');
+
+$this->registerCssFile('/css/account.min.css', ['depends' => [AppAsset::className()]]);
+$this->registerJsFile('/js/account.js', ['depends' => [AppAsset::className()]]);
 ?>
 <div class="container twoContainer">
     <div class="containerSide accountSide" id="accountSide">
         <dl>
-            <dt><a href="#"><i class="glyphicon glyphicon-th-list fs16"></i>我的账户</a></dt>
+            <dt><a href="<?= Url::to(['/member/member/index']) ?>"><i class="glyphicon glyphicon-th-list fs16"></i>我的账户</a></dt>
         </dl>
         <dl class="current">
             <dt><a href="#"><i class="glyphicon glyphicon-hdd fs16"></i>资产管理</a></dt>

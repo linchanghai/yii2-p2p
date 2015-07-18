@@ -14,6 +14,13 @@ use yii\helpers\Json;
 
 class MemberController extends Controller
 {
+    public $layout = '/account';
+
+    public function actionIndex()
+    {
+        return $this->render('index');
+    }
+
     public function actionSaveRealName(){
         $model = Kiwi::getUserVerifyForm();
 

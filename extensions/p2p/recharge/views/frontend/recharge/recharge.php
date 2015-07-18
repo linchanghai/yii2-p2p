@@ -10,10 +10,6 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
 /** @var \p2p\recharge\forms\RechargeForm $model */
-$this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/account.min.css', ['depends' => [\frontend\assets\AppAsset::className()]]);
-
-$this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/account.js', ['depends' => [\frontend\assets\AppAsset::className()]]);
-
 ?>
 <div class="containerMain recharge">
     <ul class="clearFix rechargeTitle">
