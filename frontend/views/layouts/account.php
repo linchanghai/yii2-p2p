@@ -29,11 +29,12 @@ $this->beginContent('@app/views/layouts/main.php');
             <dd><a href="#">债券转让</a></dd>
             <dd><a href="#">资产统计</a></dd>
         </dl>
-        <dl class="<?= in_array(Yii::$app->request->pathInfo, ['/member/member/member-info']) ? 'current' : '' ?>">
+        <dl class="<?= in_array(Yii::$app->request->pathInfo, ['/member/member/member-info','member/member/reset-password']) ? 'current' : '' ?>">
             <dt><a href="#"><i class="glyphicon glyphicon-user fs16"></i>个人信息</a></dt>
             <dd class="<?= in_array(Yii::$app->request->pathInfo, ['member/member/member-info']) ? 'active' : '' ?>"><a
                     href="<?= Url::to(['/member/member/member-info']) ?>">基本信息</a></dd>
-            <dd><a href="#">密码设置</a></dd>
+            <dd class="<?= in_array(Yii::$app->request->pathInfo, ['member/member/reset-password']) ? 'active' : '' ?>">
+            <a href="<?= Url::to(['/member/member/reset-password']) ?>">密码设置</a></dd>
             <dd><a href="#">我的消息</a></dd>
         </dl>
         <dl class="<?= in_array(Yii::$app->request->pathInfo, ['member/member-coupon/bonus-view', 'member/member-coupon/annual-view', 'member/member-coupon/cash-view']) ? 'current' : '' ?>">
