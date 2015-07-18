@@ -89,4 +89,11 @@ class MemberController extends Controller
     public function actionSendMobileCode(){
 
     }
+
+    public function actionMemberInfo(){
+        return $this->render('memberInfo',[
+            'member'=>Yii::$app->user->identity,
+            'memberStatus'=>Yii::$app->user->identity->memberStatus,
+        ]);
+    }
 } 
