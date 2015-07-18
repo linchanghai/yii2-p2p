@@ -7,7 +7,6 @@
 
 namespace p2p\recharge\controllers\frontend;
 
-
 use kiwi\Kiwi;
 use kiwi\web\Controller;
 use Yii;
@@ -23,7 +22,9 @@ class RechargeController extends Controller
         if ($rechargeForm->load(Yii::$app->request->post())) {
             $rechargeForm->pay();
         }
-        return $this->render('recharge', ['model' => $rechargeForm]);
+        return $this->render('recharge', [
+            'model' => $rechargeForm
+        ]);
     }
 
     public function actionSuccess()
@@ -36,7 +37,9 @@ class RechargeController extends Controller
         $rechargeRecordClass = Kiwi::getRechargeRecordClass();
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $rechargeRecordClass::find()->andWhere(['member_id' => Yii::$app->user->id]),
+            'query' => $rechargeRecordClass::find()->andWhere([
+                'member_id' => Yii::$app->user->id
+            ]),
             'pagination' => [
                 'pageSize' => 20,
             ],
