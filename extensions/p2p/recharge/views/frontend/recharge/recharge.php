@@ -10,6 +10,8 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
 /** @var \p2p\recharge\forms\RechargeForm $model */
+/** @var \core\member\models\Member $member */
+$member = Yii::$app->user->identity;
 ?>
 <div class="containerMain recharge">
     <ul class="clearFix rechargeTitle">
@@ -20,12 +22,12 @@ use yii\helpers\Html;
         <dt class="fl mr16">资金渠道:</dt>
         <dd class="fl payWayWrap">
             <label class="singleWay" for="pay1">
-                <input class="fl" checked type="radio" id="pay1" name="RechargeForm[method]">
+                <input class="fl" checked type="radio" id="pay1" value="localPay" name="RechargeForm[method]">
                 <img class="fl active" src="https://images.iqianjin.com/images/banks/lwrite/wangyin.png?v=201507091931"
                      width="136" height="36" alt=""/>
             </label>
             <label class="singleWay" for="pay2">
-                <input class="fl" type="radio" id="pay2" name="RechargeForm[method]">
+                <input class="fl" type="radio" id="pay2" value="localPay" name="RechargeForm[method]">
                 <img class="fl" src="https://images.iqianjin.com/images/banks/lwrite/wangyin.png?v=201507091931"
                      width="136" height="36" alt=""/>
             </label>
@@ -95,11 +97,11 @@ use yii\helpers\Html;
     <ul class="mt10 rechargeArea">
         <li class="mt10">
             <label class="mr16">可投金额:</label>
-            <span>0.00元</span>
+            <span><?= $member->memberStatistic->account_money ?>元</span>
         </li>
         <li class="mt10">
-            <label class="mr16" for="chargeMoney">充值金额:</label>
             <?= $form->field($model, 'money')->textInput(['class' => "formControl mr16"]); ?>
+            <?= $model->getFirstError('method'); ?>
         </li>
         <li class="mt10">
             <label class="invisible mr16">充值</label>

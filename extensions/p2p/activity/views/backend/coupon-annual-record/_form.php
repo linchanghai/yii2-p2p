@@ -27,7 +27,7 @@ use kartik\widgets\ActiveForm;
 
     <?= $form->field($model, 'rate')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'interst_money')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'interest_money')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'create_time')->textInput() ?>
 

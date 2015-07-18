@@ -44,6 +44,8 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
     const TYPE_EXCHANGE_POINT = 21;
     const TYPE_ACTIVITY_POINT = 22;
 
+    const TYPE_BONUS_USED = 31;
+
     public $types = [];
     /**
      * @inheritdoc
@@ -116,7 +118,7 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
 
             static::TYPE_RECHARGE => [
                 'targetClass' => Kiwi::getMemberStatisticClass(),
-                'attribute' => $this->attribute,
+                'attribute' => 'account_money',
                 'condition' => ['member_id' => $this->member_id],
             ],
 
@@ -161,6 +163,12 @@ class StatisticChangeRecord extends \kiwi\db\ActiveRecord
             static::TYPE_REPAYMENT => [
                 'targetClass' => Kiwi::getMemberStatisticClass(),
                 'attribute' => 'account_money',
+                'condition' => ['member_id' => $this->member_id],
+            ],
+
+            static::TYPE_BONUS_USED => [
+                'targetClass' => Kiwi::getMemberStatisticClass(),
+                'attribute' => 'used_bonus',
                 'condition' => ['member_id' => $this->member_id],
             ],
         ];

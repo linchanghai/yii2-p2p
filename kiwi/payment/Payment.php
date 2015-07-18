@@ -55,7 +55,7 @@ class Payment extends Component implements PaymentInterface
         }
 
         $this->paymentMethod->callbackUrl = Url::to([$this->callbackUrl, 'method' => $method], true);
-        $this->paymentMethod->returnUrl = Url::to([$this->returnUrl, 'method' => $method], true);
+        $this->paymentMethod->returnUrl = Url::to([$this->returnUrl, 'method' => $method, 'id' => $this->paymentMethod->id], true);
     }
 
     public function pay($method, $money)

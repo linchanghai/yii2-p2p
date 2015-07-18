@@ -11,6 +11,7 @@ namespace p2p\activity\services;
 use kiwi\base\Service;
 use kiwi\Kiwi;
 use Yii;
+use yii\base\Event;
 use yii\base\Exception;
 
 class CashService extends Service
@@ -48,12 +49,17 @@ class CashService extends Service
         }
         /** @var \core\member\models\MemberCoupon $cashCoupon */
         $cashCoupon = Kiwi::getMemberCoupon()->findOne($investForm->cash_id);
+        $cashCoupon->used_time = time();
+        $cashCoupon->status = $cashCoupon::STATUS_USED;
+        if (!$cashCoupon->save()) {
+            throw new Exception('Update Cash Coupon Error!');
+        }
         $cashRecord = Kiwi::getCouponCashRecord();
         $cashRecord->member_id = Yii::$app->user->id;
         $cashRecord->project_id = $investForm->project->project_id;
         $cashRecord->project_invest_id = $investForm->invest->project_invest_id;
         $cashRecord->member_coupon_id = $cashCoupon->member_coupon_id;
-        $cashRecord->discount_money = $cashCoupon->value;
+        $cashRecord->discount_money = intval($cashCoupon->value);
         if (!$cashRecord->save()) {
             throw new Exception('Save Cash Record Error!');
         }

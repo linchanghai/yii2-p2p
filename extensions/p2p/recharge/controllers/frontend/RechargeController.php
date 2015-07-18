@@ -11,10 +11,12 @@ namespace p2p\recharge\controllers\frontend;
 use kiwi\Kiwi;
 use kiwi\web\Controller;
 use Yii;
+use yii\web\NotFoundHttpException;
 
 class RechargeController extends Controller
 {
     public $layout='/account';
+
     public function actionRecharge()
     {
         $rechargeForm = Kiwi::getRechargeForm();
@@ -24,7 +26,11 @@ class RechargeController extends Controller
         return $this->render('recharge', ['model' => $rechargeForm]);
     }
 
-    public function actionSuccess(){
-        return $this->render('success');
+    public function actionSuccess($id) {
+        $rechargeRecord = Kiwi::getRechargeRecord()->findOne(['transaction_id' => $id]);
+        if (!$rechargeRecord) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        return $this->render('success', ['model' => $rechargeRecord]);
     }
 } 

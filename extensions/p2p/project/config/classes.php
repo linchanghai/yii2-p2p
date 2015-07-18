@@ -18,8 +18,6 @@ return [
         'ProjectRepaymentSearch' => 'p2p\project\searches\ProjectRepaymentSearch',
 
         //forms
-        'ProjectInvestPrepareForm' => 'p2p\project\forms\ProjectInvestPrepareForm',
-        'ProjectInvestForm' => 'p2p\project\forms\ProjectInvestForm',
         'InvestForm' => 'p2p\project\forms\InvestForm',
 
         //helpers

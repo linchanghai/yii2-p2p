@@ -6,6 +6,7 @@ use core\member\models\Member;
 use p2p\project\models\Project;
 use p2p\project\models\ProjectInvest;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%coupon_annual_record}}".
@@ -41,10 +42,9 @@ class CouponAnnualRecord extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['coupon_annual_record_id', 'project_invest_id', 'project_id', 'member_id', 'member_coupon_id', 'rate', 'interst_money', 'create_time'], 'required'],
-            [['coupon_annual_record_id', 'project_invest_id', 'project_id', 'member_id', 'member_coupon_id', 'create_time', 'is_delete'], 'integer'],
+            [['project_invest_id', 'project_id', 'member_id', 'member_coupon_id', 'rate', 'interest_money'], 'required'],
+            [['project_invest_id', 'project_id', 'member_id', 'member_coupon_id'], 'integer'],
             [['rate', 'interest_money'], 'number'],
-            [['coupon_annual_record_id'], 'unique']
         ];
     }
 
@@ -63,6 +63,17 @@ class CouponAnnualRecord extends \kiwi\db\ActiveRecord
             'interest_money' => Yii::t('p2p_activity', 'Interst Money'),
             'create_time' => Yii::t('p2p_activity', 'Create Time'),
             'is_delete' => Yii::t('p2p_activity', 'Is Delete'),
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => false,
+            ],
         ];
     }
 

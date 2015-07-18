@@ -6,6 +6,7 @@
  */
 
 namespace kiwi\base;
+use yii\base\Exception;
 use yii\base\ModelEvent;
 
 /**
@@ -30,9 +31,16 @@ class Model extends \yii\base\Model
         }
 
         if ($this->beforeInternal($name)) {
-            $result = $this->$method();
-            $this->afterInternal($name);
-            return $result;
+            $trans = \Yii::$app->db->beginTransaction();
+            try {
+                $result = $this->$method();
+                $this->afterInternal($name);
+                $trans->commit();
+                return $result;
+            } catch (Exception $e) {
+                $trans->rollBack();
+                throw $e;
+            }
         }
         return false;
     }

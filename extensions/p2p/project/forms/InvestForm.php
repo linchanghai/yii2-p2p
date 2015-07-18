@@ -56,8 +56,26 @@ class InvestForm extends Model
             [['project_id', 'investMoney'], 'required'],
             ['investMoney', 'number', 'integerOnly' => true, 'min' => $this->project->min_money, 'max' => $this->getMaxInvestMoney()],
             ['bonusMoney', 'number', 'integerOnly' => true, 'min' => 0, 'max' => $this->getMaxBonusMoney()],
-            ['annual_id', 'exist', 'targetClass' => $memberCouponClass, 'targetAttribute' => 'member_coupon_id', 'filter' => ['type' => $memberCouponClass::TYPE_ANNUAL, 'status' => $memberCouponClass::STATUS_UNUSED, ['<', 'expire_date', $now]]],
-            ['cash_id', 'exist', 'targetClass' => $memberCouponClass, 'targetAttribute' => 'member_coupon_id', 'filter' => ['type' => $memberCouponClass::TYPE_CASH, 'status' => $memberCouponClass::STATUS_UNUSED, ['<', 'expire_date', $now]]],
+            ['cash_id', 'exist',
+                'targetClass' => $memberCouponClass,
+                'targetAttribute' => 'member_coupon_id',
+                'filter' => ['AND',
+                    ['type' => $memberCouponClass::TYPE_CASH],
+                    ['member_id' => Yii::$app->user->id],
+                    ['status' => $memberCouponClass::STATUS_UNUSED],
+                    ['>', 'expire_date', $now]
+                ]
+            ],
+            ['annual_id', 'exist',
+                'targetClass' => $memberCouponClass,
+                'targetAttribute' => 'member_coupon_id',
+                'filter' => ['AND',
+                    ['type' => $memberCouponClass::TYPE_ANNUAL],
+                    ['member_id' => Yii::$app->user->id],
+                    ['status' => $memberCouponClass::STATUS_UNUSED],
+                    ['>', 'expire_date', $now]
+                ]
+            ],
         ];
     }
 
