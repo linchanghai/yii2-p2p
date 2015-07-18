@@ -12,6 +12,7 @@ use kiwi\Kiwi;
 use kiwi\web\Controller;
 use Yii;
 use yii\helpers\Json;
+use yii\helpers\Url;
 
 class MemberController extends Controller
 {
@@ -19,14 +20,12 @@ class MemberController extends Controller
         $model = Kiwi::getUserVerifyForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->render('realNameVerify', [
-                'model' => $model,
-            ]);
-        } else {
-            return $this->render('realNameVerify', [
-                'model' => $model,
-            ]);
+            return $this->redirect(['/member/member/member-info']);
         }
+            return $this->render('realNameVerify', [
+                'model' => $model,
+            ]);
+
     }
 
     public function actionMemberBank(){
