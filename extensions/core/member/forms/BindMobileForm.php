@@ -15,11 +15,14 @@ use Yii;
 class BindMobileForm extends Model
 {
     public $mobile;
-
+    public $code;
     public function rules()
     {
         return [
-            ['mobile', 'number', 'min' => 11, 'max' => 11, 'integerOnly' => true]
+            ['mobile', 'string', 'min' => 11, 'max' => 11],
+            ['mobile', 'number', 'integerOnly' => true],
+            ['mobile', 'required'],
+            ['code','integer']
         ];
     }
 
@@ -40,28 +43,27 @@ class BindMobileForm extends Model
 
     public function sendMobileCode()
     {
+        $memberStatusModel = Kiwi::getMemberStatus()->findOne(['member_id' => Yii::$app->user->id]);
+        if($memberStatusModel->mobile_status){
+           if($this->mobile != Yii::$app->user->identity->mobile) {
+               $this->addError('mobile',Yii::t('core_member','The number is different from the mobile you bind'));
+               return false;
+           }
+        }
         $code = $this->getCode(4);
         $session = Yii::$app->session;
         $session['mobile'] = ['code' => $code, 'time' => time()];
         //TODO:: sendMessage
-        $result =Yii::$app->sms->send($code, $mobile);
-//                $result = Kiwi::getSmsService()->instance()->send($code, $mobile);
-//            $result = Json::decode($result);
-//            if ($result['statusCode'] == '000000') {
-//                return true;
-//            } else {
-//                return false;
-//            }
-
+        return Yii::$app->sms->send($code, $this->mobile);
     }
 
-    public function setMobileStatus($mobileCode)
+    public function setMobileStatus()
     {
         $session = Yii::$app->session;
         if (time() - $session['mobile']['time'] > 300) {
             return false;
         }
-        if ($session['mobile']['code'] != $mobileCode) {
+        if ($session['mobile']['code'] != $this->code) {
             return false;
         }
         /** @var  $memberStatusModel  MemberStatus */
@@ -77,10 +79,10 @@ class BindMobileForm extends Model
             }
         } else {
             //绑定
-            $memberModel = Kiwi::getMember()->findOne(['member_id' => Yii::$app->user->id]);
+            $member =  Yii::$app->user->identity;
             $memberStatusModel->mobile_status = 1;
-            $memberModel->mobile = $this->mobile;
-            if ($memberModel->save() && $memberModel->save()) {
+            $member->mobile = $this->mobile;
+            if ($memberStatusModel->save() && $member->save()) {
                 $session->remove('mobile');
                 return true;
             } else {
