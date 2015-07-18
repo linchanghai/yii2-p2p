@@ -14,6 +14,7 @@ use yii\data\ActiveDataProvider;
 
 class MessageController extends Controller{
         public function actionMyMessage(){
+            $this->layout='/account';
             $dataProvider = new ActiveDataProvider([
                 'query' => Message::find()->andWhere(['to'=>Yii::$app->user->id]),
                 'pagination' => [

@@ -3,9 +3,11 @@
 
 namespace p2p\project\controllers\frontend;
 
+use p2p\project\models\ProjectInvest;
 use Yii;
 use kiwi\Kiwi;
 use kiwi\web\Controller;
+use yii\data\ActiveDataProvider;
 
 class ProjectInvestController extends Controller
 {
@@ -68,5 +70,20 @@ class ProjectInvestController extends Controller
         if ($InvestForm->load(Yii::$app->request->post())) {
             $InvestForm->payInvest();
         }
+    }
+
+
+    public function actionGridView(){
+        $this->layout = '/account';
+        $dataProvider = new ActiveDataProvider([
+            'query' => ProjectInvest::find()->andWhere(['member_id'=>Yii::$app->user->id]),
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+        $models = $dataProvider->getModels();
+        return $this->render('gridView', [
+            'models' => $models,
+        ]);
     }
 } 

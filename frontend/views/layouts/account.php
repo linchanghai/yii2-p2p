@@ -33,7 +33,7 @@ $this->beginContent('@app/views/layouts/main.php');
         </dl>
         <dl>
             <dt><a href="#"><i class="glyphicon glyphicon-yen fs16"></i>理财管理</a></dt>
-            <dd><a href="#">投资记录</a></dd>
+            <dd><a href="<?= Url::to(['/project/project-invest/grid-view']) ?>">投资记录</a></dd>
             <dd><a href="#">债券转让</a></dd>
             <dd><a href="#">资产统计</a></dd>
         </dl>
@@ -43,7 +43,7 @@ $this->beginContent('@app/views/layouts/main.php');
                     href="<?= Url::to(['/member/member/member-info']) ?>">基本信息</a></dd>
             <dd class="<?= in_array(Yii::$app->request->pathInfo, ['member/member/reset-password']) ? 'active' : '' ?>">
             <a href="<?= Url::to(['/member/member/reset-password']) ?>">密码设置</a></dd>
-            <dd class="<?= in_array(Yii::$app->request->pathInfo, ['member/member/my-message']) ? 'active' : '' ?>">
+            <dd class="<?= in_array(Yii::$app->request->pathInfo, ['message/message/my-message']) ? 'active' : '' ?>">
                 <a href="<?= Url::to(['/message/message/my-message']) ?>">我的消息</a></dd>
         </dl>
         <dl class="<?= in_array(Yii::$app->request->pathInfo, ['member/member-coupon/bonus-view', 'member/member-coupon/annual-view', 'member/member-coupon/cash-view']) ? 'current' : '' ?>">

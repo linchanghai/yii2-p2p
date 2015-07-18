@@ -11,6 +11,6 @@ echo date('Y-m-d H:i:s',$model->created_at);
 }
 ?>
 
-?>
+
 
 </div>
