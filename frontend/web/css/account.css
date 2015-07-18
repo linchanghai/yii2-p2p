@@ -172,3 +172,161 @@
 .rechargeSucceed {
   padding: 50px 60px;
 }
+
+.twoContainer {
+  margin-top: 20px;
+}
+
+.iAccount {
+  height: 160px;
+  padding-top: 28px;
+  overflow: hidden;
+}
+.iAccount li {
+  float: left;
+  width: 215px;
+  padding-left: 20px;
+  border-right: 1px #e1e3e7 solid;
+}
+.iAccount .progress {
+  width: 148px;
+}
+.iAccount .regularBtn {
+  margin-top: 36px;
+}
+
+.showSecurity a {
+  margin-right: 15px;
+  padding: 4px;
+  border-radius: 50%;
+  background: #e1e3e7;
+}
+.showSecurity a:hover {
+  color: inherit;
+  background: inherit;
+}
+.showSecurity .secondColor:hover {
+  color: inherit;
+  background: inherit;
+}
+
+.showTips {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  background: #e1e3e7;
+  cursor: pointer;
+}
+
+.switchWrap {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  text-align: left;
+  overflow: hidden;
+  line-height: 8px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  width: 100px;
+}
+
+.switch {
+  display: inline-block;
+  width: 150%;
+  position: relative;
+  top: 0;
+  left: 0;
+  -webkit-transition: left 0.5s;
+  -moz-transition: left 0.5s;
+  -o-transition: left 0.5s;
+  transition: left 0.5s;
+  border: 1px solid #cccccc;
+}
+
+.switchToggle {
+  left: -50%;
+}
+
+.switch-item, .switch-middle {
+  float: left;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  height: 100%;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.switch-item {
+  text-align: center;
+  z-index: 1;
+  width: 33%;
+}
+
+.switch-middle {
+  text-align: center;
+  margin-bottom: -1px;
+  z-index: 100;
+  width: 34%;
+  border-left: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  background: #fff;
+}
+
+.switch-left {
+  color: #ffffff;
+  background-color: #5e9eed;
+}
+
+.switch-right {
+  background-color: #f0f0f0;
+}
+
+.accountOverviewLeft {
+  width: 25%;
+  height: 240px;
+  border-right: 1px #e1e3e7 solid;
+}
+
+.accountOverviewRight {
+  width: 73%;
+  margin-left: 2%;
+}
+.accountOverviewRight li {
+  float: left;
+  width: 33%;
+  height: 100%;
+  padding: 10px 0 10px 20px;
+  border-right: 1px #e1e3e7 solid;
+}
+
+.accountOverviewUp {
+  padding-bottom: 10px;
+  border-bottom: 1px #e1e3e7 solid;
+}
+
+.accountOverviewDown .fl {
+  padding-left: 30px;
+}
+
+.accountInvestTitle {
+  height: 48px;
+  line-height: 48px;
+  padding: 0 20px;
+  border-bottom: 1px #e1e3e7 solid;
+}
+
+.searchTypeWrap {
+  padding: 10px 0;
+}
+
+.searchType {
+  margin-right: 20px;
+}
