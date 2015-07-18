@@ -6,6 +6,7 @@ requirejs.config({
         "textslider": "jquery.textslider",
         "modal": "modal",
         "placeholder": "placeholder",
+        "datePicker": "jquery.datetimepicker",
         "tooltip":"tooltip"
     },
     shim:{
@@ -13,6 +14,7 @@ requirejs.config({
         "textslider":["jquery"],
         "placeholder":["jquery"],
         "tooltip": ["jquery"],
+        "datePicker": ["jquery"],
         "modal": ["jquery"]
     //    "cartFly":["jquery"],
     //    "modal": ["jquery"],

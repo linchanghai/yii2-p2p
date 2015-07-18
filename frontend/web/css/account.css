@@ -330,3 +330,35 @@
 .searchType {
   margin-right: 20px;
 }
+
+.itemTitle {
+  height: 48px;
+  line-height: 48px;
+  padding: 0 20px;
+  border-bottom: 1px #e1e3e7 solid;
+}
+
+.fundsFlow {
+  border: 1px #e1e3e7 solid;
+}
+
+.filterLine a.active {
+  background: #5e9eed;
+}
+.filterLine a:hover {
+  color: #5e9eed;
+}
+.filterLine span, .filterLine input {
+  margin-top: 5px;
+}
+
+.datePicker {
+  display: inline-block;
+  width: 120px;
+  height: 26px;
+  line-height: 26px;
+  border: 1px solid #ccc;
+  margin: 0 10px;
+  text-indent: 6px;
+  background: #fcfcfc;
+}
