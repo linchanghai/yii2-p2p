@@ -44,7 +44,6 @@ $this->beginContent('@app/views/layouts/main.php');
         </dl>
     </div>
     <?= $content; ?>
-
 </div>
 <?php
 $this->endContent();
