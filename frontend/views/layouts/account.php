@@ -20,7 +20,8 @@ $this->beginContent('@app/views/layouts/main.php');
                 <a href="<?= Url::to(['/recharge/recharge/recharge-list']) ?>">充值管理</a></dd>
             <dd class="<?= (Yii::$app->request->pathInfo == 'withdraw/withdraw/withdraw-list') ? 'active' : '' ?>">
                 <a href="<?= Url::to(['/withdraw/withdraw/withdraw-list']) ?>">提现管理</a></dd>
-            <dd><a href="#">理财管理</a></dd>
+            <dd class="<?= (Yii::$app->request->pathInfo == 'package/package/package-list') ? 'active' : '' ?>">
+                <a href="<?= Url::to(['/package/package-record/package-list']) ?>">钱包管理</a></dd>
             <dd><a href="#">资金流水</a></dd>
         </dl>
         <dl>
