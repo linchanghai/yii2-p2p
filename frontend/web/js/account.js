@@ -68,6 +68,39 @@ require(["jquery","common","placeholder","modal","tooltip"],function($,c){
             $(this).children(".switch").toggleClass("switchToggle");
         })
 
+        $(".myWalletAreaTap li").on("click",function(){
+            $(this).addClass("active").siblings("li").removeClass("active");
+            $(".myWalletSingle").eq($(this).index()).removeClass("hide").siblings(".myWalletSingle").addClass("hide");
+        });
+
+
+        $("#walletSubmit").submit(function(){
+            var myWalletNumber = $("#myWalletNumber"),myWalletOver = parseFloat($("#myWalletOver").html()).toFixed(2);
+            if(parseFloat(myWalletOver - parseFloat(myWalletNumber.val()).toFixed(2)).toFixed(2) > 0 ){
+                $(".errorColor").addClass("hide");
+            }else{
+                $(".errorColor").removeClass("hide");
+                return false;
+            }
+        });
+
+        var myWalletNumber = $("#myWalletNumber");
+
+        $("#walletInForm").submit(function(){
+            var myMoneyNow = parseFloat($("#myMoney").html()).toFixed(2);
+            if(parseFloat(myMoneyNow - parseFloat(myWalletNumber.val()).toFixed(2)).toFixed(2) > 0 ){
+                $(".errorColor").addClass("hide");
+            }else{
+                $(".errorColor").removeClass("hide");
+                return false;
+            }
+        });
+
+        myWalletNumber.keyup(function(){
+            $(this).val(c.filterNum($(this).val()));
+            $(this).val() > 0? true:$(this).val("");
+            $("#willBe").html(parseFloat($(this).val()*.07).toFixed(2));
+        })
 
     });
 });

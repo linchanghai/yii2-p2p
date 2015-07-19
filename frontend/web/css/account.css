@@ -1,3 +1,7 @@
+a:hover {
+  color: #5e9eed;
+}
+
 .loginWrap {
   padding: 50px 30px 40px 100px;
 }
@@ -90,7 +94,7 @@
   line-height: 50px;
   font-size: 16px;
   text-align: center;
-  background: #e1e3e7;
+  background: #fff;
   color: #333;
 }
 .rechargeTitle .active {
@@ -361,4 +365,75 @@
   margin: 0 10px;
   text-indent: 6px;
   background: #fcfcfc;
+}
+
+.walletInfoItem {
+  float: left;
+  width: 22%;
+  height: 100px;
+  padding: 10px  20px;
+  border-right: 1px #e1e3e7 solid;
+}
+
+.walletInfoRight {
+  float: left;
+  width: 56%;
+  padding: 10px 20px;
+}
+
+.walletInfoRight1 {
+  line-height: 32px;
+}
+
+.myWalletAreaTap {
+  padding: 0 20px;
+}
+.myWalletAreaTap li {
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 30px;
+  border-bottom: 3px transparent solid;
+  margin-bottom: -3px;
+  cursor: pointer;
+}
+.myWalletAreaTap .active {
+  color: #5e9eed;
+  border-color: #5e9eed;
+}
+
+.myWalletAreaDetail {
+  padding: 0 20px;
+}
+
+.myWalletOutLeft {
+  width: 478px;
+}
+.myWalletOutLeft label {
+  display: inline-block;
+  width: 136px;
+}
+
+.formControl:focus {
+  border-color: #5e9eed;
+}
+
+.myWalletOutResult {
+  padding: 50px 30px 20px 30px;
+}
+
+.myWalletOutResultDown {
+  padding-bottom: 30px;
+  border-bottom: 1px #e1e3e7 solid;
+}
+
+.myWalletIn li {
+  float: left;
+  padding-left: 20px;
+  width: 33%;
+  border-right: 1px #e1e3e7 solid;
+}
+
+.myWalletNow {
+  border-top: 1px #e1e3e7 solid;
 }

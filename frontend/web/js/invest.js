@@ -15,6 +15,7 @@ require(["jquery", "common", "modal"], function ($, c) {
             investTable();
             $('#investModal').modal();
         });
+        var investMoney;
         $('#investModal').on("click", '.plus', function () {
             investMoney = $(".investMoney"),
             Number(investMoney.val()) + leastMoney > lineMoney ? true : investMoney.val(Number(investMoney.val()) + leastMoney);
