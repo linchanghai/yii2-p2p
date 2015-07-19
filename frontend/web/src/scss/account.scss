@@ -1,4 +1,7 @@
 @import "settings";
+a:hover{
+  color: $secondColor;
+}
 .loginWrap{
   padding: 50px 30px 40px 100px;
 }
@@ -87,7 +90,7 @@
     line-height: 50px;
     font-size: 16px;
     text-align: center;
-    background: $borderColor;
+    background: #fff;
     color: #333;
   }
   .active{
@@ -345,4 +348,69 @@
   margin: 0 10px;
   text-indent: 6px;
   background: #fcfcfc;
+}
+.walletInfoItem{
+  float: left;
+  width: 22%;
+  height: 100px;
+  padding: 10px  20px;
+  border-right: 1px $borderColor solid;
+}
+.walletInfoRight{
+  float: left;
+  width: 56%;
+  padding: 10px 20px;
+}
+.walletInfoRight1{
+  line-height: 32px;
+}
+.myWalletAreaTap{
+  padding: 0 20px;
+  li{
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 30px;
+    border-bottom: 3px transparent solid;
+    margin-bottom: -3px;
+    cursor: pointer;
+  }
+  .active{
+    color: $secondColor;
+    border-color: $secondColor;
+  }
+}
+.myWalletAreaDetail{
+  padding: 0 20px;
+}
+.myWalletOutLeft{
+  width: 478px;
+  label{
+    display: inline-block;
+    width: 136px;
+  }
+}
+.formControl:focus{
+  border-color: $secondColor;
+}
+.myWalletOutResult{
+  padding: 50px 30px 20px 30px;
+}
+.myWalletOutResultDown{
+  padding-bottom: 30px;
+  border-bottom: 1px $borderColor solid;
+}
+.myWalletIn{
+  li{
+    float: left;
+    padding-left: 20px;
+    width: 33%;
+    border-right: 1px $borderColor solid;
+  }
+}
+.myWalletNow{
+  border-top: 1px $borderColor solid;
+}
+.myWalletOutAgree{
+
 }

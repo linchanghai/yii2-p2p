@@ -4,8 +4,9 @@
     </dl>
     <dl class="current">
         <dt><a href="#"><i class="glyphicon glyphicon-hdd fs16"></i>资产管理</a></dt>
-        <dd class="active"><a href="#">充值提现</a></dd>
+        <dd><a href="#">充值提现</a></dd>
         <dd><a href="#">理财管理</a></dd>
+        <dd class="active"><a href="#">钻点钱包</a></dd>
         <dd><a href="#">资金流水</a></dd>
     </dl>
     <dl>
