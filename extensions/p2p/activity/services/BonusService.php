@@ -45,11 +45,14 @@ class BonusService extends Service
         if (!$investForm->bonusMoney) {
             return;
         }
-        $bonusRecord = Kiwi::getCouponBonusRecord();
-        $bonusRecord->member_id = Yii::$app->user->id;
-        $bonusRecord->project_id = $investForm->project->project_id;
-        $bonusRecord->project_invest_id = $investForm->invest->project_invest_id;
-        $bonusRecord->discount_money = $investForm->bonusMoney;
+
+        $bonusRecord = Kiwi::getCouponBonusRecord([
+            'member_id' => Yii::$app->user->id,
+            'project_id' => $investForm->project->project_id,
+            'project_invest_id' => $investForm->invest->project_invest_id,
+            'discount_money' => $investForm->bonusMoney,
+        ]);
+
         if (!$bonusRecord->save()) {
             throw new Exception('Save Bonus Record Error!');
         }

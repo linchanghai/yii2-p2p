@@ -11,10 +11,11 @@ use kiwi\Kiwi;
 use kiwi\web\Controller;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\web\NotFoundHttpException;
 
 class RechargeController extends Controller
 {
-    public $layout = '/account';
+    public $layout='/account';
 
     public function actionRecharge()
     {
@@ -27,9 +28,12 @@ class RechargeController extends Controller
         ]);
     }
 
-    public function actionSuccess()
-    {
-        return $this->render('success');
+    public function actionSuccess($id) {
+        $rechargeRecord = Kiwi::getRechargeRecord()->findOne(['transaction_id' => $id]);
+        if (!$rechargeRecord) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        return $this->render('success', ['model' => $rechargeRecord]);
     }
 
     public function actionRechargeList()

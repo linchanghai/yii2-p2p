@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'raw'
             ],
 //            'member_coupon_id',
-             'interst_money',
+             'interest_money',
              'create_time:datetime',
             // 'is_delete',
         ],

@@ -1,18 +1,19 @@
 <?php
+
+use frontend\assets\AppAsset;
 use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
-$this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/account.min.css', ['depends' => [\frontend\assets\AppAsset::className()]]);
-
-$this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/account.js', ['depends' => [\frontend\assets\AppAsset::className()]]);
-
 $this->beginContent('@app/views/layouts/main.php');
+
+$this->registerCssFile('/css/account.min.css', ['depends' => [AppAsset::className()]]);
+$this->registerJsFile('/js/account.js', ['depends' => [AppAsset::className()]]);
 ?>
 
 <div class="container twoContainer">
     <div class="containerSide accountSide" id="accountSide">
         <dl>
-            <dt><a href="#"><i class="glyphicon glyphicon-th-list fs16"></i>我的账户</a></dt>
+            <dt><a href="<?= Url::to(['/member/member/index']) ?>"><i class="glyphicon glyphicon-th-list fs16"></i>我的账户</a></dt>
         </dl>
         <dl class="<?= in_array(Yii::$app->request->pathInfo, [
             'recharge/recharge/recharge-list',

@@ -105,7 +105,7 @@ $member = Yii::$app->user->identity;
         <p class="mt20"><span class="themeColor" id="leastMoney"><?= $project->min_money; ?></span> 元起投</p>
 
         <p class="toInvestArea"
-           data-url="<?= Url::to(['/project/project-invest/interest-table', 'project_id' => $project->project_id]) ?>">
+           data-url="<?= Url::to(['/project/project/interest-info', 'project_id' => $project->project_id]) ?>">
             <span class="btn secondBtn toInvest">立即投资</span><span class="btn toInvest themeBtn toCalc">计算</span>
         </p>
     </div>
@@ -177,12 +177,14 @@ $member = Yii::$app->user->identity;
                                 <span class="fl operate plus">+</span>
                             </div>
                         </div>
+                        <p class="mt20"><?php echo \yii\helpers\Json::encode($investForm->getErrors()) ?></p>
                         <p class="mt20"><?php echo $investForm->getFirstError('investMoney') ?></p>
                         <p class="mt20">账户余额: <span id="myMoney"><?= $member->memberStatistic->account_money ?></span>元 </p>
                         <p class="mt20">
                             <?php
                             echo '红包：';
                             echo Html::activeTextInput($investForm, 'bonusMoney');
+                            echo $investForm->getFirstError('bonusMoney');
                             echo '可用红包：', ($member->memberStatistic->bonus - $member->memberStatistic->used_bonus), '元';
                             ?>
                         </p>
@@ -190,16 +192,18 @@ $member = Yii::$app->user->identity;
                             <?php if ($member->memberCashCoupons) {
                                 echo '现金劵：';
                                 $cashCoupons = ArrayHelper::map($member->memberCashCoupons, 'member_coupon_id', 'name');
-                                $cashCoupons = ArrayHelper::merge(['0' => '不使用现金劵'], $cashCoupons);
+                                $cashCoupons = ArrayHelper::merge(['' => '不使用现金劵'], $cashCoupons);
                                 echo Html::activeDropDownList($investForm, 'cash_id', $cashCoupons);
+                                echo $investForm->getFirstError('cash_id');
                             } ?>
                         </p>
                         <p class="mt20">
                             <?php if ($member->memberAnnualCoupons) {
                                 echo '年化劵：';
                                 $annualCoupons = ArrayHelper::map($member->memberAnnualCoupons, 'member_coupon_id', 'name');
-                                $annualCoupons = ArrayHelper::merge(['0' => '不使用年化劵'], $annualCoupons);
-                                echo Html::activeDropDownList($investForm, 'annual_id', $annualCoupons);
+                                $annualCoupons = ArrayHelper::merge(['' => '不使用年化劵'], $annualCoupons);
+                                echo Html::activeDropDownList($investForm, 'annual_id', $annualCoupons, ['class' => 'annualCoupon']);
+                                echo $investForm->getFirstError('annual_id');
                             } ?>
                         </p>
                     </div>

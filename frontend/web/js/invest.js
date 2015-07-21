@@ -29,10 +29,15 @@ require(["jquery", "common", "modal"], function ($, c) {
             Math.round($(this).val() % leastMoney) == 0 ? true : $(this).val(Math.round($(this).val() / leastMoney));
             $(this).val() < leastMoney ? $(this).val(leastMoney) : true;
             $(this).val() > lineMoney ? $(this).val(lineMoney) : true;
+        }).on('change', '.annualCoupon', function() {
+            investTable();
         });
 
         function investTable() {
-            var url = $(".toInvestArea").data("url") + "&invest_money=" + $(".investMoney").val();
+            var url = $(".toInvestArea").data("url") + "&investMoney=" + $(".investMoney").val();
+            if ($('.annualCoupon').val()) {
+                url = url + '&annual_id=' + $('.annualCoupon').val();
+            }
             $(".investSingleMoney").load(url);
         }
     });

@@ -44,6 +44,16 @@ class ProjectController extends Controller
         ]);
     }
 
+    public function actionInterestInfo($project_id) {
+        $investForm = Kiwi::getInvestForm(['project_id' => $project_id]);
+        $investForm->load(Yii::$app->request->get(), '');
+        $investForm->validate();
+
+        return $this->renderPartial('interestInfo', [
+            'invest' => $investForm->getInvest()
+        ]);
+    }
+
     /**
      * Finds the Project model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -62,9 +72,13 @@ class ProjectController extends Controller
     }
 
     public function actionSuccess($id){
-        $projectModel = ProjectInvest::findOne($id);
+        $invest = Kiwi::getProjectInvest()->findOne($id);
+        if (!$invest) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
         return $this->render('success',[
-            'projectModel'=>$projectModel,
+            'projectModel'=> $invest,
         ]);
     }
 }

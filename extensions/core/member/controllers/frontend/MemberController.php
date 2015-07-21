@@ -17,6 +17,13 @@ use yii\helpers\Url;
 
 class MemberController extends Controller
 {
+    public $layout = '/account';
+
+    public function actionIndex()
+    {
+        return $this->render('index');
+    }
+
     public function actionSaveRealName(){
         $model = Kiwi::getUserVerifyForm();
 

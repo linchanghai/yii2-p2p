@@ -8,6 +8,9 @@
 return [
     'singleton' => [
         'ActivityService' => 'p2p\activity\services\ActivityService',
+        'AnnualService' => 'p2p\activity\services\AnnualService',
+        'BonusService' => 'p2p\activity\services\BonusService',
+        'CashService' => 'p2p\activity\services\CashService',
     ],
     'class' => [
         'Activity' => 'p2p\activity\models\Activity',

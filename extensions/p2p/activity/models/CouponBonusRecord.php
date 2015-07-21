@@ -3,9 +3,12 @@
 namespace p2p\activity\models;
 
 use core\member\models\Member;
+use kiwi\behaviors\RecordBehavior;
+use kiwi\Kiwi;
 use p2p\project\models\Project;
 use p2p\project\models\ProjectInvest;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%coupon_bonus_record}}".
@@ -38,8 +41,8 @@ class CouponBonusRecord extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['coupon_bonus_record_id', 'project_invest_id', 'project_id', 'member_id', 'discount_money', 'create_time', 'is_delete'], 'required'],
-            [['coupon_bonus_record_id', 'project_invest_id', 'project_id', 'member_id', 'discount_money', 'create_time', 'is_delete'], 'integer']
+            [['project_invest_id', 'project_id', 'member_id', 'discount_money'], 'required'],
+            [['project_invest_id', 'project_id', 'member_id', 'discount_money'], 'integer']
         ];
     }
 
@@ -56,6 +59,27 @@ class CouponBonusRecord extends \kiwi\db\ActiveRecord
             'discount_money' => Yii::t('p2p_activity', 'Discount Money'),
             'create_time' => Yii::t('p2p_activity', 'Create Time'),
             'is_delete' => Yii::t('p2p_activity', 'Is Delete'),
+        ];
+    }
+
+    public function behaviors()
+    {
+        $changeRecordClass = Kiwi::getStatisticChangeRecordClass();
+        return [
+            'time' => [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => false,
+            ],
+            'updateBonus' => [
+                'class' => RecordBehavior::className(),
+                'targetClass' => $changeRecordClass,
+                'attributes' => [
+                    'member_id'=> 'member_id',
+                    'type' => $changeRecordClass::TYPE_BONUS_USED,
+                    'value' => 'discount_money',
+                ],
+            ],
         ];
     }
 

@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'member_id',
             'member_coupon_id',
             'rate',
-            'interst_money',
+            'interest_money',
             'create_time:datetime',
             'is_delete',
         ],
