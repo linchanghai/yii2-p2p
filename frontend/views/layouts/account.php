@@ -3,7 +3,8 @@
 use frontend\assets\AppAsset;
 use yii\helpers\Url;
 
-/* @var $this \yii\web\View */
+/** @var $this \yii\web\View */
+/** @var string $content */
 $this->beginContent('@app/views/layouts/main.php');
 
 $this->registerCssFile('/css/account.min.css', ['depends' => [AppAsset::className()]]);
@@ -33,7 +34,7 @@ $this->registerJsFile('/js/account.js', ['depends' => [AppAsset::className()]]);
                 'package/package-record/into-list',
                 'package/package-record/out-list',
             ]) ? 'active' : '' ?>">
-                <a href="<?= Url::to(['/package/package-record/package-list']) ?>">钱包管理</a></dd>
+                <a href="<?= Url::to(['/package/package/index']) ?>">钱包管理</a></dd>
             <dd class="<?= (Yii::$app->request->pathInfo == 'member/statistic-change/statistic-list') ? 'active' : '' ?>">
                 <a href="<?= Url::to(['/member/statistic-change/statistic-list'])?>">资金流水</a></dd>
         </dl>
