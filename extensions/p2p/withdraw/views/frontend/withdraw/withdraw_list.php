@@ -11,6 +11,7 @@ use yii\helpers\Url;
 ?>
 <div class="containerMain">
     <ul class="clearFix rechargeTitle">
+        <li><a href="<?= Url::to(['/withdraw/withdraw/withdraw']) ?>">提现申请</a></li>
         <li><a class="active" href="#">提现记录</a></li>
     </ul>
     <br>
