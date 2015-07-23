@@ -54,6 +54,7 @@ class MemberCouponController extends Controller
         $models = $dataProvider->getModels();
         return $this->render('cashView', [
             'models' => $models,
+            'page'=>$dataProvider->pagination,
         ]);
     }
 
@@ -79,6 +80,7 @@ class MemberCouponController extends Controller
         $models = $dataProvider->getModels();
         return $this->render('annualView', [
             'models' => $models,
+            'page'=>$dataProvider->pagination,
         ]);
     }
 } 
