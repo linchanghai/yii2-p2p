@@ -27,6 +27,7 @@ class AppAsset extends AssetBundle
         "js/modal.js",
         "js/placeholder.js",
         'js/common.js',
+        'js/tooltip.js'
     ];
     public $depends = [
         'frontend\assets\RequireAsset',
