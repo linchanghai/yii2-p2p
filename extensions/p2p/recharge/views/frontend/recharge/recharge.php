@@ -7,7 +7,7 @@
 
 use kiwi\Kiwi;
 use yii\widgets\ActiveForm;
-use yii\helpers\Html;
+use yii\helpers\Url;
 
 /** @var \p2p\recharge\forms\RechargeForm $model */
 /** @var \core\member\models\Member $member */
@@ -16,6 +16,7 @@ $member = Yii::$app->user->identity;
 <div class="containerMain recharge">
     <ul class="clearFix rechargeTitle">
         <li><a class="active" href="#">网银支付</a></li>
+        <li><a href="<?= Url::to(['/recharge/recharge/recharge-list']) ?>">充值记录</a></li>
     </ul>
     <?php $form = ActiveForm::begin(['options' => ['class' => 'rechargeContainer']]); ?>
     <dl class="clearFix payWays">
