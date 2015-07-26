@@ -341,7 +341,7 @@ html input[disabled] {
   a{
     color: #74859c;
     &:hover{
-      color: $themeColor;
+      color: $secondColor;
     }
   }
   .glyphicon-phone{
@@ -355,9 +355,9 @@ html input[disabled] {
 }
 .loginArea{
   margin-left: 20px;
-  color: $themeColor;
+  color: $secondColor;
   a{
-    color: $themeColor;
+    color: $secondColor;
     margin-left: 0;
   }
   label{
@@ -376,8 +376,8 @@ html input[disabled] {
     font-size: 16px;
   }
   .active{
-    color: $themeColor;
-    border-bottom: 3px $themeColor solid;
+    color: $secondColor;
+    border-bottom: 3px $secondColor solid;
   }
 }
 //footer
@@ -504,6 +504,9 @@ html input[disabled] {
 .table-bordered > thead > tr > th,
 .table-bordered > thead > tr > td {
   border-bottom-width: 2px;
+}
+.table-hover > tbody > tr:hover {
+  background-color: #f5f5f5;
 }
 .close {
   float: right;

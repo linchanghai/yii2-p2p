@@ -709,7 +709,7 @@ html input[disabled] {
   color: #74859c;
 }
 .headerTools a:hover {
-  color: #ed7c5e;
+  color: #5e9eed;
 }
 .headerTools .glyphicon-phone {
   margin-top: 10px;
@@ -721,10 +721,10 @@ html input[disabled] {
 
 .loginArea {
   margin-left: 20px;
-  color: #ed7c5e;
+  color: #5e9eed;
 }
 .loginArea a {
-  color: #ed7c5e;
+  color: #5e9eed;
   margin-left: 0;
 }
 .loginArea label {
@@ -743,8 +743,8 @@ html input[disabled] {
   font-size: 16px;
 }
 .ulNav .active {
-  color: #ed7c5e;
-  border-bottom: 3px #ed7c5e solid;
+  color: #5e9eed;
+  border-bottom: 3px #5e9eed solid;
 }
 
 .footer {
@@ -882,6 +882,10 @@ html input[disabled] {
 .table-bordered > thead > tr > th,
 .table-bordered > thead > tr > td {
   border-bottom-width: 2px;
+}
+
+.table-hover > tbody > tr:hover {
+  background-color: #f5f5f5;
 }
 
 .close {

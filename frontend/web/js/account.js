@@ -102,5 +102,19 @@ require(["jquery","common","placeholder","modal","tooltip"],function($,c){
             $("#willBe").html(parseFloat($(this).val()*.07).toFixed(2));
         })
 
+        //my messages
+        $(".messagesTable tr").on("click",function(){
+            $(this).toggleClass("toggleContent");
+
+        });
+
+        $("#allMsg").on("change",function(){
+            if($(this).prop("checked") == false){
+                $(".msgCheck").prop("checked",false);
+            }else{
+                $(".msgCheck").prop("checked",true);
+            }
+        })
+
     });
 });

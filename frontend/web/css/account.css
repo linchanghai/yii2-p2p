@@ -2,6 +2,10 @@ a:hover {
   color: #5e9eed;
 }
 
+.themeColor:hover {
+  color: #ed7c5e;
+}
+
 .loginWrap {
   padding: 50px 30px 40px 100px;
 }
@@ -335,11 +339,18 @@ a:hover {
   margin-right: 20px;
 }
 
-.itemTitle {
+.itemTitle, .itemBottom {
   height: 48px;
   line-height: 48px;
   padding: 0 20px;
+}
+
+.itemTitle {
   border-bottom: 1px #e1e3e7 solid;
+}
+
+.itemBottom {
+  border-top: 1px #e1e3e7 solid;
 }
 
 .fundsFlow {
@@ -436,4 +447,47 @@ a:hover {
 
 .myWalletNow {
   border-top: 1px #e1e3e7 solid;
+}
+
+.messagesTable {
+  width: 840px;
+  margin: 0 auto;
+  padding: 0 5px;
+}
+.messagesTable tr {
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  transition: all 1s ease;
+}
+.messagesTable td {
+  padding: 12px 10px !important;
+  cursor: pointer;
+}
+
+.messageContent, .removeMsg {
+  display: none;
+}
+
+.toggleContent .originDate {
+  display: none;
+}
+.toggleContent .messageContent, .toggleContent .removeMsg {
+  display: block;
+}
+
+.messageRight {
+  width: 160px;
+  text-align: right;
+}
+
+.insideDate {
+  color: #5d5d5d;
+}
+
+.myInfo td {
+  padding: 15px 10px !important;
+}
+
+.myMessageBottom a {
+  margin-left: 10px;
 }
