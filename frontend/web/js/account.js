@@ -134,5 +134,18 @@ require(["jquery","common","placeholder","modal","tooltip"],function($,c){
             }
         }
 
+        //logout
+        var logTime = 5,countTime = $("#countTime");
+        function countBack(){
+            if(logTime > 1){
+                logTime--;
+                countTime.html(logTime);
+            }else{
+                window.location.href = "/";
+            }
+        }
+
+        setInterval(countBack,1000);
+
     });
 });
