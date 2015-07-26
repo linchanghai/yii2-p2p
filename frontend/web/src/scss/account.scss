@@ -461,3 +461,16 @@ a:hover{
     margin-left: 10px;
   }
 }
+.formGroupUnion{
+  .formControl,.itemInput{
+    width: 48%;
+  }
+  .itemInput{
+    height: 34px;
+  }
+}
+.registerForm{
+  .formGroupUnion{
+    width: 360px;
+  }
+}

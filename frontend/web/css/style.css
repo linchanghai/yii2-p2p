@@ -1306,3 +1306,10 @@ button.close {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
+
+.btnDisabled {
+  background: #e2e2e2 !important;
+  cursor: default !important;
+  color: #bdbdbd !important;
+  border-color: #e2e2e2 !important;
+}

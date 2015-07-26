@@ -491,3 +491,14 @@ a:hover {
 .myMessageBottom a {
   margin-left: 10px;
 }
+
+.formGroupUnion .formControl, .formGroupUnion .itemInput {
+  width: 48%;
+}
+.formGroupUnion .itemInput {
+  height: 34px;
+}
+
+.registerForm .formGroupUnion {
+  width: 360px;
+}

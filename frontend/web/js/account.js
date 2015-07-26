@@ -114,7 +114,25 @@ require(["jquery","common","placeholder","modal","tooltip"],function($,c){
             }else{
                 $(".msgCheck").prop("checked",true);
             }
-        })
+        });
+
+        var codeSend = $("#codeSend"),idTime,countLoop;
+        codeSend.on("click",function(){
+            idTime = 59;
+            $(this).attr("disabled", "disabled").addClass("btnDisabled");
+            countDown();
+            countLoop = setInterval(countDown, 1000);
+        });
+
+        function countDown(){
+            codeSend.html("重新发送"+idTime+"s");
+            if (idTime > 0) {
+                return idTime--;
+            } else {
+                clearInterval(countLoop);
+                codeSend.removeAttr("disabled").removeClass("btnDisabled").html("发送短信验证码");
+            }
+        }
 
     });
 });
