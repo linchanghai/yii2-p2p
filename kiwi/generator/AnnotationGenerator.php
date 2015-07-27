@@ -32,11 +32,36 @@ class AnnotationGenerator extends Object
 
     public function generate()
     {
-        $classes = ['Application', 'Kiwi', 'Configuration', 'DataListModel', 'SettingModel'];
+        $classes = ['User', 'Application', 'Kiwi', 'Configuration', 'DataListModel', 'SettingModel'];
         foreach ($classes as $class) {
             $generateFunc = 'generate' . ucfirst($class);
             $this->$generateFunc();
         }
+    }
+
+    public function generateUser()
+    {
+        $identityClass = Yii::$app->user->identityClass;
+
+        $content = <<<EOF
+<?php
+
+namespace yii\web;
+
+use yii\base\Component;
+
+exit("This file should not be included, only analyzed by your IDE");
+
+/**
+ * @property \\{$identityClass} \$identity
+ * @property \\{$identityClass} \$identityClass
+ */
+class User extends Component
+{
+}
+EOF;
+        $classFile = $this->annotationDir . '/_User.php';
+        file_put_contents($classFile, $content);
     }
 
     public function generateApplication()
@@ -46,7 +71,7 @@ class AnnotationGenerator extends Object
         foreach ($components as $name => $definition) {
             $class = is_array($definition) ? $definition['class'] : $definition;
             $class = '\\' . trim($class, '\\');
-            $annotations[] = " * @property {$class} {$name}";
+            $annotations[] = " * @property {$class} \${$name}";
         }
 
 
@@ -124,7 +149,7 @@ EOF;
         if ($configuration = Kiwi::getConfiguration()) {
             $annotations = [];
             foreach ($configuration->configValues as $key => $value) {
-                $annotations[] = " * @property array {$key}";
+                $annotations[] = " * @property array \${$key}";
             }
             foreach ($configuration->configValues as $key => $value) {
                 $key = ucfirst($key);
@@ -158,7 +183,7 @@ EOF;
             $dataListKeys = array_keys($dataList);
             $annotations = array_map(function ($key) {
                 $key = lcfirst($key);
-                return " * @property array {$key}";
+                return " * @property array \${$key}";
             }, $dataListKeys);
 
             $annotations = implode("\n", $annotations);
@@ -188,7 +213,7 @@ EOF;
             foreach ($setting as $tabKey => $tabConfig) {
                 foreach ($tabConfig['groups'] as $groupKey => $groupConfig) {
                     foreach ($groupConfig['fields'] as $fieldKey => $fieldConfig) {
-                        $annotations[] = " * @property string {$tabKey}_{$groupKey}_{$fieldKey}";
+                        $annotations[] = " * @property string \${$tabKey}_{$groupKey}_{$fieldKey}";
                     }
                 }
             }

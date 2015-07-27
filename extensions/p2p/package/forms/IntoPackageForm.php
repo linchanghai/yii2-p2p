@@ -19,7 +19,7 @@ use yii\helpers\Json;
  */
 class IntoPackageForm extends Model
 {
-    public $money;
+    public $intoMoney;
 
     public function rules()
     {
@@ -27,7 +27,8 @@ class IntoPackageForm extends Model
         $member = Yii::$app->user->identity;
         $accountMoney = $member->memberStatistic->account_money;
         return [
-            ['money', 'number', 'min' => 1, 'max' => $accountMoney, 'integerOnly' => true,
+            ['intoMoney', 'required'],
+            ['intoMoney', 'number', 'min' => 1, 'max' => $accountMoney, 'integerOnly' => true,
                 'message' => Yii::t('p2p_package', 'Into package money must be int'),
                 'tooSmall' => Yii::t('p2p_package', 'Into package money must more than zero'),
                 'tooBig' => Yii::t('p2p_package', 'Into package money must no more than account money'),
@@ -38,7 +39,7 @@ class IntoPackageForm extends Model
     public function attributeLabels()
     {
         return [
-            'money' => Yii::t('p2p_package', 'Into money'),
+            'intoMoney' => Yii::t('p2p_package', 'Into money'),
         ];
     }
 
@@ -50,10 +51,10 @@ class IntoPackageForm extends Model
 
         $packageRecord = Kiwi::getPackageRecord();
         $packageRecord->type = $packageRecord::TYPE_INTO;
-        $packageRecord->exchange_cash = $this->money;
+        $packageRecord->exchange_cash = $this->intoMoney;
         $packageRecord->member_id = Yii::$app->user->id;
         if (!$packageRecord->save(false)) {
-            $this->addError('money', Json::encode($packageRecord->getErrors()));
+            $this->addError('intoMoney', Json::encode($packageRecord->getErrors()));
             return false;
         }
         return true;
