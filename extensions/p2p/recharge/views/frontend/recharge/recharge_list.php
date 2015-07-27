@@ -11,6 +11,7 @@ use yii\helpers\Url;
 ?>
 <div class="containerMain">
     <ul class="clearFix rechargeTitle">
+        <li><a href="<?= Url::to(['/recharge/recharge/recharge']) ?>">网银支付</a></li>
         <li><a class="active" href="#">充值记录</a></li>
     </ul>
     <br>
