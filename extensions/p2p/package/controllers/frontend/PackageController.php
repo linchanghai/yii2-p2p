@@ -40,4 +40,19 @@ class PackageController extends Controller
         $memberStatistic->is_auto_into = $isAuto ? 1 : 0;
         return Json::encode(['status' => $memberStatistic->save()]);
     }
+
+    public function actionInto()
+    {
+        $intoPackageForm = Kiwi::getIntoPackageForm();
+        if ($intoPackageForm->load(Yii::$app->request->post()) && $intoPackageForm->intoPackage()) {
+            $this->redirect(['index']);
+        }
+        return $this->render('into', ['model' => $intoPackageForm]);
+    }
+
+    public function actionOut()
+    {
+        $outPackageForm = Kiwi::getOutPackageForm();
+        return $this->render('out', ['model' => $outPackageForm]);
+    }
 } 

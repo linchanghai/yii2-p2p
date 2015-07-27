@@ -23,7 +23,9 @@ $this->registerJs($js);
 ?>
 <div class="containerMain">
     <ul class="clearFix rechargeTitle">
-        <li><a class="active" href="#">钻点钱包</a></li>
+        <li><a class="active" href="<?= Url::to(['/package/package/index']) ?>">钻点钱包</a></li>
+        <li><a href="<?= Url::to(['/package/package/into']) ?>">转入</a></li>
+        <li><a href="<?= Url::to(['/package/package/out']) ?>">转出</a></li>
     </ul>
     <div class="rechargeContainer clearFix p20 myWallet">
         <div class="walletInfoItem displayTable">
@@ -90,8 +92,8 @@ $this->registerJs($js);
                     foreach ($models as $model) {
                         ?>
                         <tr>
-                            <td><?php date('Y-m-d H:i:s', $model->create_time) ?></td>
-                            <td><?php $model->exchange_cash ?>元</td>
+                            <td><?= date('Y-m-d H:i:s', $model->create_time) ?></td>
+                            <td><?= $model->exchange_cash ?>元</td>
                             <td>成功</td>
                             <td>转入</td>
                             <td><a href="#">合同明细</a></td>
@@ -118,8 +120,8 @@ $this->registerJs($js);
                     foreach ($models as $model) {
                         ?>
                         <tr>
-                            <td><?php date('Y-m-d H:i:s', $model->create_time) ?></td>
-                            <td><?php $model->exchange_cash ?>元</td>
+                            <td><?= date('Y-m-d H:i:s', $model->create_time) ?></td>
+                            <td><?= $model->exchange_cash ?>元</td>
                             <td>成功</td>
                             <td>转出</td>
                             <td><a href="#">合同明细</a></td>

@@ -99,7 +99,8 @@ require(["jquery","common","placeholder","modal","tooltip"],function($,c){
         myWalletNumber.keyup(function(){
             $(this).val(c.filterNum($(this).val()));
             $(this).val() > 0? true:$(this).val("");
-            $("#willBe").html(parseFloat($(this).val()*.07).toFixed(2));
+            var rate = $('#package-rate').text() / 100;
+            $("#willBe").html(parseFloat($(this).val()* rate).toFixed(2));
         })
 
         //my messages
