@@ -4,6 +4,7 @@
 namespace p2p\project\controllers\frontend;
 
 use p2p\project\models\ProjectInvest;
+use p2p\project\models\ProjectRepayment;
 use Yii;
 use kiwi\Kiwi;
 use kiwi\web\Controller;
@@ -75,14 +76,33 @@ class ProjectInvestController extends Controller
 
     public function actionGridView(){
         $this->layout = '/account';
+        $query = ProjectInvest::find()->andWhere(['member_id'=>Yii::$app->user->id]);
+        if(Yii::$app->request->isGet){
+            switch(Yii::$app->request->get('status')){
+                case ProjectInvest::STATUS_REPAYMENT:
+                    $query = $query->andWhere(['status'=>ProjectInvest::STATUS_REPAYMENT]);
+                    break;
+                case ProjectInvest::STATUS_FINISHED:
+                    $query = $query->andWhere(['status'=>ProjectInvest::STATUS_FINISHED]);
+                    break;
+            }
+        }
         $dataProvider = new ActiveDataProvider([
-            'query' => ProjectInvest::find()->andWhere(['member_id'=>Yii::$app->user->id]),
+            'query' =>$query ,
             'pagination' => [
                 'pageSize' => 20,
             ],
         ]);
         $models = $dataProvider->getModels();
         return $this->render('gridView', [
+            'models' => $models,
+            'page'=>$dataProvider->pagination,
+        ]);
+    }
+
+    public function actionRepaymentList($invest_id){
+        $models = ProjectRepayment::find()->andWhere(['member_id'=>Yii::$app->user->id,'project_invest_id'=>$invest_id])->all();
+        return $this->renderPartial('paymentList', [
             'models' => $models,
         ]);
     }

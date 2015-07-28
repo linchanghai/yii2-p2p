@@ -1,26 +1,25 @@
 <?php
-use kartik\form\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 ?>
-<div class="member-form">
-
-    <?php $form = ActiveForm::begin([
-    'id' => 'member-form-horizontal',
-    'type' => ActiveForm::TYPE_HORIZONTAL,
-    'formConfig' => ['labelSpan' => 2],
-    'fullSpan' => 11
-]); ?>
-
-<?= $form->field($model, 'real_name')->textInput(['maxlength' => true]) ?>
-
-<?= $form->field($model, 'id_card')->textInput(['maxlength' => true]) ?>
-
-<div class="form-group">
-    <div class="col-sm-offset-2 col-sm-9">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('core_member', 'Create') : Yii::t('core_member', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+<div class="containerMain backGrey">
+    <div class="itemTitle">
+        实名认证
     </div>
-</div>
+        <div  style="width: 450px;margin: auto;margin-top: 20px">
+            <?php $form = ActiveForm::begin(['method' => 'post']); ?>
+            <div class="formGroup clearFix">
+                <label class="fl glyphicon glyphicon-user inputGroupAdd" for="username"></label>
+                <?= $form->field($model, 'real_name')->textInput(['class' => "fl formControl", 'placeholder' => "真实姓名"])->label(false) ?>
 
-<?php ActiveForm::end(); ?>
-
+            </div>
+            <div class="formGroup mt20 clearFix">
+                <label class="fl glyphicon glyphicon-lock inputGroupAdd" for="username"></label>
+                <?= $form->field($model, 'id_card')->textInput(['class' => "fl formControl", 'placeholder' => "卡号"])->label(false) ?>
+            </div>
+            <div class="formGroup mt20 clearFix">
+                <?= Html::submitButton('保存', ['class' => 'secondBtn largeBtn loginBtn']) ?>
+            </div>
+            <?php ActiveForm::end(); ?>
+        </div>
 </div>

@@ -23,6 +23,9 @@ $this->registerJsFile('/js/account.js', ['depends' => [AppAsset::className()]]);
             'recharge/recharge/recharge-list',
             'withdraw/withdraw/withdraw',
             'withdraw/withdraw/withdraw-list',
+            'package/package/index',
+            'package/package/into',
+            'package/package/out',
             'package/package-record/package-list',
             'package/package-record/into-list',
             'package/package-record/out-list',
@@ -40,6 +43,9 @@ $this->registerJsFile('/js/account.js', ['depends' => [AppAsset::className()]]);
             ]) ? 'active' : '' ?>">
                 <a href="<?= Url::to(['/withdraw/withdraw/withdraw-list']) ?>">提现管理</a></dd>
             <dd class="<?= in_array(Yii::$app->request->pathInfo, [
+                'package/package/index',
+                'package/package/into',
+                'package/package/out',
                 'package/package-record/package-list',
                 'package/package-record/into-list',
                 'package/package-record/out-list',
@@ -48,15 +54,27 @@ $this->registerJsFile('/js/account.js', ['depends' => [AppAsset::className()]]);
             <dd class="<?= (Yii::$app->request->pathInfo == 'member/statistic-change/statistic-list') ? 'active' : '' ?>">
                 <a href="<?= Url::to(['/member/statistic-change/statistic-list']) ?>">资金流水</a></dd>
         </dl>
-        <dl>
+        <dl class="<?= in_array(Yii::$app->request->pathInfo, [
+            'project/project-invest/grid-view',
+        ]) ? 'current' : '' ?>">
             <dt><a href="#"><i class="glyphicon glyphicon-yen fs16"></i>理财管理</a></dt>
-            <dd><a href="<?= Url::to(['/project/project-invest/grid-view']) ?>">投资记录</a></dd>
+            <dd class="<?= in_array(Yii::$app->request->pathInfo, ['project/project-invest/grid-view']) ? 'active' : '' ?>">
+                <a href="<?= Url::to(['/project/project-invest/grid-view']) ?>">投资记录</a></dd>
             <dd><a href="#">债券转让</a></dd>
             <dd><a href="#">资产统计</a></dd>
         </dl>
-        <dl class="<?= in_array(Yii::$app->request->pathInfo, ['member/member/member-info', 'member/member/reset-password', 'message/message/my-message']) ? 'current' : '' ?>">
+        <dl class="<?= in_array(Yii::$app->request->pathInfo, [
+            'member/member/member-info',
+            'member/member/bind-phone',
+            'member/member/save-real-name',
+            'member/member/reset-password',
+            'message/message/my-message']) ? 'current' : '' ?>">
             <dt><a href="#"><i class="glyphicon glyphicon-user fs16"></i>个人信息</a></dt>
-            <dd class="<?= in_array(Yii::$app->request->pathInfo, ['member/member/member-info']) ? 'active' : '' ?>"><a
+            <dd class="<?= in_array(Yii::$app->request->pathInfo, [
+                'member/member/member-info',
+                'member/member/bind-phone',
+                'member/member/save-real-name',
+            ]) ? 'active' : '' ?>"><a
                     href="<?= Url::to(['/member/member/member-info']) ?>">基本信息</a></dd>
             <dd class="<?= in_array(Yii::$app->request->pathInfo, ['member/member/reset-password']) ? 'active' : '' ?>">
                 <a href="<?= Url::to(['/member/member/reset-password']) ?>">密码设置</a></dd>
