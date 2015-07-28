@@ -63,9 +63,18 @@ $this->registerJsFile('/js/account.js', ['depends' => [AppAsset::className()]]);
             <dd><a href="#">债券转让</a></dd>
             <dd><a href="#">资产统计</a></dd>
         </dl>
-        <dl class="<?= in_array(Yii::$app->request->pathInfo, ['member/member/member-info', 'member/member/reset-password', 'message/message/my-message']) ? 'current' : '' ?>">
+        <dl class="<?= in_array(Yii::$app->request->pathInfo, [
+            'member/member/member-info',
+            'member/member/bind-phone',
+            'member/member/save-real-name',
+            'member/member/reset-password',
+            'message/message/my-message']) ? 'current' : '' ?>">
             <dt><a href="#"><i class="glyphicon glyphicon-user fs16"></i>个人信息</a></dt>
-            <dd class="<?= in_array(Yii::$app->request->pathInfo, ['member/member/member-info']) ? 'active' : '' ?>"><a
+            <dd class="<?= in_array(Yii::$app->request->pathInfo, [
+                'member/member/member-info',
+                'member/member/bind-phone',
+                'member/member/save-real-name',
+            ]) ? 'active' : '' ?>"><a
                     href="<?= Url::to(['/member/member/member-info']) ?>">基本信息</a></dd>
             <dd class="<?= in_array(Yii::$app->request->pathInfo, ['member/member/reset-password']) ? 'active' : '' ?>">
                 <a href="<?= Url::to(['/member/member/reset-password']) ?>">密码设置</a></dd>
