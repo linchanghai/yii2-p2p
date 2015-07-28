@@ -8,43 +8,48 @@
 use yii\helpers\Url;
 /** @var \yii\web\View $this */
 
+$js = <<<JS
+if (!$('.autoPackage').data('is-auto')) {
+    $(".switch").toggleClass("switchToggle");
+}
+$('.autoPackage').on('click', function() {
+    var isOn = $(this).find('.switch').hasClass('switchToggle') ? 1 : 0;
+    $.post($(this).data('url'), {isAuto:isOn}, function(response) {
+        if (!response.status) {
+            $(".switch").toggleClass("switchToggle");
+        }
+    }, 'json');
+});
+JS;
+$this->registerJs($js);
+
+
 /** @var \core\member\models\Member $member */
 $member = Yii::$app->user->identity;
 $memberStatistic = $member->memberStatistic;
 $memberStatus = $member->memberStatus;
 $totalMoney = $memberStatistic->account_money + $memberStatistic->freezon_money + $memberStatistic->package_money
     + $memberStatistic->collect_principal + $memberStatistic->collect_interest;
-
-//echo '账户总资产：', $totalMoney, '<br />';
-//echo '账户余额: ', $memberStatistic->account_money, '<br />';
-//echo '冻结金额: ', $memberStatistic->freezon_money, '<br />';
-//echo '钱包余额: ', $memberStatistic->package_money, '<br />';
-//echo '钱包总收益: ', $memberStatistic->package_earning, '<br />';
-//echo '总投资金额: ', $memberStatistic->project_total_money, '<br />';
-//echo '总投资收益: ', $memberStatistic->project_earning, '<br />';
-//echo '待收本金: ', $memberStatistic->collect_principal, '<br />';
-//echo '待收利息: ', $memberStatistic->collect_interest, '<br />';
-//echo '积分：', $memberStatistic->points, '<br />';
-//echo '经验值：', $memberStatistic->empirical_value, '<br />';
-//echo '红包：', $memberStatistic->bonus, '<br />';
-//echo '已使用红包：', $memberStatistic->used_bonus, '<br />';
-//echo '新手：', $memberStatistic->is_first_invest, '<br />';
 ?>
 <div class="containerMain accountCenter">
     <ul class="backGrey clearFix iAccount">
         <li>
             <h3><?=Yii::$app->user->identity->username?></h3>
             <div class="mt10 showSecurity">
-                <a class="glyphicon glyphicon-phone <?= $memberStatus->mobile_status? 'secondColor':''?>" href="<?= Url::to(['/member/member/bind-phone'])?>" title="手机验证"></a>
-                <a class="glyphicon glyphicon-user <?= ($member->real_name&&$member->id_card)? 'secondColor':''?>" href="<?= Url::to(['/member/member/save-real-name'])?>" title="身份验证"></a>
+                <a class="glyphicon glyphicon-phone <?= $memberStatus->mobile_status ? 'secondColor':''?>" href="<?= Url::to(['/member/member/bind-phone'])?>" title="手机验证"></a>
+                <a class="glyphicon glyphicon-user <?= $memberStatus->id_card_status ? 'secondColor':''?>" href="<?= Url::to(['/member/member/save-real-name'])?>" title="身份验证"></a>
                 <a class="glyphicon glyphicon-lock" href="#" title="安全验证"></a>
-                <a class="glyphicon glyphicon-envelope <?= $memberStatus->email_status? 'secondColor':''?>" href="<?= Url::to(['/member/member/member-info'])?>" title="邮箱验证"></a>
+                <a class="glyphicon glyphicon-envelope <?= $memberStatus->email_status ? 'secondColor':''?>" href="<?= Url::to(['/member/member/member-info'])?>" title="邮箱验证"></a>
             </div>
+            <?php
+            $safetyLevel = [0 => '低', 1 => '中', 2 => '高', 3 => '', 4 => '硬'];
+            $safetyValue = $memberStatus->mobile_status + $memberStatus->id_card_status + $memberStatus->email_status;
+            ?>
             <div class="progress mt10">
-                <div class="progress-bar progress-bar-striped secondBack" style="width: 25%;"></div>
+                <div class="progress-bar progress-bar-striped secondBack" style="width: <?= $safetyValue / 4 * 100 ?>%;"></div>
             </div>
             <div class="mt10">
-                安全等级: 低 <a class="secondColor" href="#">(立即提升)</a>
+                安全等级: <?= $safetyLevel[$safetyValue] ?> <a class="secondColor" href="<?= Url::to('/member/member/member-info') ?>">(立即提升)</a>
             </div>
         </li>
         <li>
@@ -58,7 +63,7 @@ $totalMoney = $memberStatistic->account_money + $memberStatistic->freezon_money 
                 <img class="fl" width="45" height="66" src="/images/wallet.png" alt="">
                 <div class="fl ml20">
                     <p class="mb20">钻点钱包</p>
-                    <div class="switchWrap">
+                    <div class="switchWrap autoPackage" data-url="<?= Url::to(['/package/package/auto']) ?>" data-is-auto="<?= $memberStatistic->is_auto_into ?>">
                         <div class="switch clearFix">
                             <span class="switch-item switch-left">ON</span>
                             <span class="switch-middle">&nbsp;</span>
@@ -67,10 +72,10 @@ $totalMoney = $memberStatistic->account_money + $memberStatistic->freezon_money 
                     </div>
                 </div>
             </div>
-            <div class="mt10">已开启余额自动转入钻点钱包</div>
+            <div class="mt10">开启余额自动转入钻点钱包</div>
         </li>
         <li class="lastNoBorder">
-            <a href="<?= Url::to(['recharge/recharge/recharge'])?>" class="btn themeBtn regularBtn largeBtn">充值</a>
+            <a href="<?= Url::to(['/recharge/recharge/recharge'])?>" class="btn themeBtn regularBtn largeBtn">充值</a>
         </li>
     </ul>
     <div class="mt20 p20 backGrey accountOverview clearFix">
@@ -91,14 +96,14 @@ $totalMoney = $memberStatistic->account_money + $memberStatistic->freezon_money 
                         <br>
                         <span><?=  $memberStatistic->package_money?>元</span>
                         <br>
-                        <span>年化收益 7% <a href="#" class="secondColor">转入</a> <a href="#" class="secondColor">转出</a></span>
+                        <span>年化收益 <?= \kiwi\Kiwi::getSettingModel()->P2P_package_packageRate ?>% <a href="<?= Url::to(['/package/package/into']) ?>" class="secondColor">转入</a> <a href="<?= Url::to(['/package/package/out']) ?>" class="secondColor">转出</a></span>
                     </p>
                 </li>
                 <li>
                     <p class="disTab">
                         <span>投资中金额:</span>
                         <br>
-                        <span><?=  $memberStatistic->account_money?>元</span>
+                        <span><?= $memberStatistic->investingMoney ?> 元</span>
                         <br>
                         <span>累计收益 <?= $memberStatistic->project_earning?> 元</span>
                     </p>
@@ -107,7 +112,7 @@ $totalMoney = $memberStatistic->account_money + $memberStatistic->freezon_money 
                     <p class="disTab">
                         <span>账户余额:</span>
                         <br>
-                        <span><?=  $memberStatistic->account_money?>元</span>
+                        <span><?= $memberStatistic->account_money?>元</span>
                         <br>
                     </p>
                 </li>
@@ -128,9 +133,9 @@ $totalMoney = $memberStatistic->account_money + $memberStatistic->freezon_money 
                         <br>
                         <span class="ml20">向好友推荐拿返利红包</span>
                         <br>
-                        <span class="ml20">活动奖励: 42元 红包</span>
+                        <span class="ml20">活动奖励: 元 红包</span>
                         <br>
-                        <span class="ml20">积分兑换: 1张现金券</span>
+                        <span class="ml20">积分兑换: 张现金券</span>
                     </p>
                 </div>
             </div>
@@ -139,7 +144,7 @@ $totalMoney = $memberStatistic->account_money + $memberStatistic->freezon_money 
     <div class="accountInvest mt20 backGrey">
         <div class="accountInvestTitle clearFix">
             <div class="fr">
-                当前投资中的项目: 0
+                当前投资中的项目: <?= \kiwi\Kiwi::getProjectInvest()->investingProjectCount ?>
             </div>
             累计收益: <?= $memberStatistic->project_earning?> 元
         </div>

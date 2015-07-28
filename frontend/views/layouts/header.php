@@ -32,7 +32,7 @@ use yii\helpers\Url;
                             <i class="glyphicon glyphicon-user"></i><?= Yii::$app->user->identity->username ?>
                         </a>
                         <label class="split">|</label>
-                        <a class="myMessages" href="#">
+                        <a class="myMessages" href="<?= Url::to(['/message/message/my-message']) ?>">
                             <i class="glyphicon glyphicon-bell"></i>消息(<?= \kiwi\Kiwi::getMessage()->getUnreadMessageCount() ?>)
                         </a>
                         <label class="split">|</label>
