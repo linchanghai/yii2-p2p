@@ -105,4 +105,8 @@ class Message extends \kiwi\db\ActiveRecord
         }
         return $fromTo;
     }
+
+    public function getUnreadMessageCount(){
+        return $this->find()->where(['to'=>Yii::$app->user->id,'status'=>0])->count();
+    }
 }
