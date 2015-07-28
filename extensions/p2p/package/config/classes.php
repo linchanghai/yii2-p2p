@@ -13,5 +13,8 @@ return [
 
         'PackageInterestRecordSearch' => 'p2p\package\searches\PackageInterestRecordSearch',
         'PackageRecordSearch' => 'p2p\package\searches\PackageRecordSearch',
+
+        'IntoPackageForm' => 'p2p\package\forms\IntoPackageForm',
+        'OutPackageForm' => 'p2p\package\forms\OutPackageForm',
     ],
 ];
