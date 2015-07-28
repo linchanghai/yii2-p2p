@@ -21,7 +21,7 @@ class StatisticChangeController extends Controller
     public function actionStatisticList()
     {
         $searchModel = Kiwi::getStatisticChangeRecordSearch();
-        $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
+        $dataProvider = $searchModel->frontendSearch(ArrayHelper::merge(Yii::$app->request->queryParams, [
             'StatisticChangeRecordSearch' => [
                 'member_id' => Yii::$app->user->id,
             ]]));
