@@ -12,8 +12,11 @@ return [
         'MemberStatus' => 'core\member\models\MemberStatus',
         'MemberStatistic' => 'core\member\models\MemberStatistic',
         'MemberCoupon' => 'core\member\models\MemberCoupon',
-        'MemberSearch' => 'core\member\searches\MemberSearch',
         'StatisticChangeRecord' => 'core\member\models\StatisticChangeRecord',
+
+        'MemberSearch' => 'core\member\searches\MemberSearch',
+        'StatisticChangeRecordSearch' => 'core\member\searches\StatisticChangeRecordSearch',
+
         'BindEmailForm' => 'core\member\forms\BindEmailForm',
         'BindMobileForm' => 'core\member\forms\BindMobileForm',
         'UserVerifyForm' => 'core\member\forms\UserVerifyForm',
