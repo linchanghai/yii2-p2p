@@ -16,10 +16,26 @@ use yii\helpers\Url;
     <div class="fundsFlowContent p20">
         <div class="clearFix mt10 filterLine">
             <label>时间范围:</label>
-            <a class="active" href="#">全部</a>
-            <a href="#">1个月</a>
-            <a href="#">2个月</a>
-            <a href="#">3个月</a>
+            <a <?= Yii::$app->request->get('date') ? null : 'class="active"' ?>
+                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+                    '/member/statistic-change/statistic-list',
+                    'date' => 0
+                ])) ?>">全部</a>
+            <a <?= Yii::$app->request->get('date') == 1 ? 'class="active"' : null ?>
+                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+                    '/member/statistic-change/statistic-list',
+                    'date' => 1
+                ])) ?>">1个月</a>
+            <a <?= Yii::$app->request->get('date') == 2 ? 'class="active"' : null ?>
+                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+                    '/member/statistic-change/statistic-list',
+                    'date' => 2
+                ])) ?>">2个月</a>
+            <a <?= Yii::$app->request->get('date') == 3 ? 'class="active"' : null ?>
+                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+                    '/member/statistic-change/statistic-list',
+                    'date' => 3
+                ])) ?>">3个月</a>
             <span class="fl">从</span>
             <input type="text" placeholder="请选择开始时间" class="fl datePicker">
             <span class="fl">到</span>
@@ -27,12 +43,36 @@ use yii\helpers\Url;
         </div>
         <div class="clearFix mt10 filterLine">
             <label>项目收益:</label>
-            <a class="active" href="#">全部</a>
-            <a href="#">充值</a>
-            <a href="#">提现</a>
-            <a href="#">投资</a>
-            <a href="#">回收</a>
-            <a href="#">转让债券</a>
+            <a <?= Yii::$app->request->get('type') ? null : 'class="active"' ?>
+                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+                    '/member/statistic-change/statistic-list',
+                    'type' => 0
+                ])) ?>">全部</a>
+            <a <?= Yii::$app->request->get('type') == 1 ? 'class="active"' : null ?>
+                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+                    '/member/statistic-change/statistic-list',
+                    'type' => 1
+                ])) ?>">充值</a>
+            <a <?= Yii::$app->request->get('type') == 2 ? 'class="active"' : null ?>
+                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+                    '/member/statistic-change/statistic-list',
+                    'type' => 2
+                ])) ?>">提现</a>
+            <a <?= Yii::$app->request->get('type') == 3 ? 'class="active"' : null ?>
+                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+                    '/member/statistic-change/statistic-list',
+                    'type' => 3
+                ])) ?>">投资</a>
+            <a <?= Yii::$app->request->get('type') == 4 ? 'class="active"' : null ?>
+                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+                    '/member/statistic-change/statistic-list',
+                    'type' => 4
+                ])) ?>">回收</a>
+            <a <?= Yii::$app->request->get('type') == 5 ? 'class="active"' : null ?>
+                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+                    '/member/statistic-change/statistic-list',
+                    'type' => 5
+                ])) ?>">转让债券</a>
         </div>
         <table class="table table-bordered textCenter mt20">
             <thead>
