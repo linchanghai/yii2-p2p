@@ -1,34 +1,37 @@
 <?php
-use kartik\form\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
 list($path, $link) = $this->getAssetManager()->publish('@core/member/web/js');
 $this->registerJsFile($link . '/email.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$cs =<<<CSS
+button[disabled]{
+background-color: #cccccc;
+}
+CSS;
+
+$this->registerCss($cs);
 ?>
-<div class="member-form">
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'member-form-horizontal',
-        'type' => ActiveForm::TYPE_HORIZONTAL,
-        'formConfig' => ['labelSpan' => 2],
-        'fullSpan' => 11
-    ]); ?>
-
-    <?= $form->field($model, 'mobile')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
-    <label class="control-label">
-        <button type="button" class="btn btn-primary" id="send-code"
-                data-url="<?= Url::to(['/member/member/send-mobile-code']); ?>">获取验证码
-        </button>
-    </label>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-9">
-            <?= Html::submitButton( Yii::t('core_member', 'Bind Email Account') , ['class' =>  'btn btn-success' ]) ?>
-        </div>
+<div class="containerMain backGrey">
+    <div class="itemTitle">
+        绑定手机
     </div>
+    <div style="width: 450px;margin: auto;margin-top: 20px">
+        <?php $form = ActiveForm::begin(['method' => 'post','options'=>['class'=>'registerForm']]); ?>
+        <div class="formGroup mt20 clearFix">
+            <label class="fl glyphicon glyphicon-phone inputGroupAdd" for="username"></label>
+            <?= $form->field($model, 'mobile')->textInput(['class' => "fl formControl", 'placeholder' => "手机号"])->label(false) ?>
 
-    <?php ActiveForm::end(); ?>
-
+        </div>
+        <div class="formGroup formGroupUnion mt20 clearFix">
+            <?= $form->field($model, 'code')->textInput(['class' => "fl formControl", 'placeholder' => "输入验证码"])->label(false) ?>
+            <button type="button" class="fr itemInput btn secondBtn" id="send-code"  data-url="<?= Url::to(['/member/member/send-mobile-code']); ?>">发送短信验证码</button>
+        </div>
+        <div class="formGroup mt20 clearFix">
+            <?= Html::submitButton('绑定', ['class' => 'secondBtn largeBtn loginBtn']) ?>
+        </div>
+        <?php ActiveForm::end(); ?>
+    </div>
 </div>
