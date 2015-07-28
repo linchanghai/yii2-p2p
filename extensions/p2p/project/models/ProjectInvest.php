@@ -25,6 +25,8 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $is_delete
  * @property integer $actual_invest_money
  *
+ * @property integer $investingProjectCount
+ *
  * @property ConponAnnualRecord[] $conponAnnualRecords
  * @property ConponBonusRecord[] $conponBonusRecords
  * @property ConponCashRecord[] $conponCashRecords
@@ -170,5 +172,15 @@ class ProjectInvest extends \kiwi\db\ActiveRecord
             'project_id' => 'project_id',
             'member_id' => 'member_id',
         ]);
+    }
+
+    public function getInvestingProjectCount()
+    {
+        return static::find()
+            ->andWhere(['member_id' => Yii::$app->user->id])
+            ->andWhere(['status' => static::STATUS_REPAYMENT])
+            ->select('project_id')
+            ->distinct()
+            ->count();
     }
 }

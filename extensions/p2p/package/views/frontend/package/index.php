@@ -10,8 +10,11 @@ $member = Yii::$app->user->identity;
 $memberStatistic = $member->memberStatistic;
 
 $js = <<<JS
+if (!$('.autoPackage').data('is-auto')) {
+    $(".switch").toggleClass("switchToggle");
+}
 $('.autoPackage').on('click', function() {
-    var isOn = $(this).find('.switch').hasClass('switchToggle');
+    var isOn = $(this).find('.switch').hasClass('switchToggle') ? 1 : 0;
     $.post($(this).data('url'), {isAuto:isOn}, function(response) {
         if (!response.status) {
             $(".switch").toggleClass("switchToggle");
@@ -49,7 +52,7 @@ $this->registerJs($js);
                     余额自动转入钻点钱包
                 </div>
                 <div class="fl ml10">
-                    <div class="switchWrap autoPackage" data-url="<?= Url::to(['/package/package/auto']) ?>">
+                    <div class="switchWrap autoPackage" data-url="<?= Url::to(['/package/package/auto']) ?>" data-is-auto="<?= $memberStatistic->is_auto_into ?>">
                         <div class="switch clearFix">
                             <span class="switch-item switch-left">ON</span>
                             <span class="switch-middle">&nbsp;</span>
