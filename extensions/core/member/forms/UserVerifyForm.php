@@ -58,7 +58,11 @@ class UserVerifyForm extends Model
             if ($this->isNewRecord) {
                 $memberModel->real_name = $this->real_name;
                 $memberModel->id_card = $this->id_card;
-                return $memberModel->save();
+                if($memberModel->save()){
+                    $memberStatusModel = Kiwi::getMemberStatus()->findOne(['member_id' => Yii::$app->user->id]);
+                    $memberStatusModel->id_card_status = 1;
+                    return  $memberStatusModel->save();
+                }
             }
         }
         return false;
