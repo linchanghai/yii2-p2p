@@ -8,6 +8,7 @@
 
 namespace core\member\controllers\frontend;
 
+use kiwi\helpers\ArrayHelper;
 use kiwi\Kiwi;
 use kiwi\web\Controller;
 use Yii;
@@ -19,16 +20,11 @@ class StatisticChangeController extends Controller
 
     public function actionStatisticList()
     {
-        $statisticChangeRecordClass = Kiwi::getStatisticChangeRecordClass();
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $statisticChangeRecordClass::find()->andWhere([
+        $searchModel = Kiwi::getStatisticChangeRecordSearch();
+        $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
+            'StatisticChangeRecordSearch' => [
                 'member_id' => Yii::$app->user->id,
-            ]),
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-        ]);
+            ]]));
 
         $models = $dataProvider->getModels();
 
