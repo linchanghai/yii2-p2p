@@ -33,7 +33,7 @@ use yii\helpers\Url;
                         </a>
                         <label class="split">|</label>
                         <a class="myMessages" href="#">
-                            <i class="glyphicon glyphicon-bell"></i>消息
+                            <i class="glyphicon glyphicon-bell"></i>消息(<?= \kiwi\Kiwi::getMessage()->getUnreadMessageCount() ?>)
                         </a>
                         <label class="split">|</label>
                         <?= Html::a('登出', ['/site/logout'], ['class' => 'loginItem', 'data-method' => 'post']) ?>
