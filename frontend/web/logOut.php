@@ -11,7 +11,7 @@
 </head>
 <body>
 <?php include "header.php" ;?>
-<div class="container recharge">
+<div class="container recharge" id="logOut">
     <div class="rechargeContainer rechargeSucceed">
         <h3 class="textCenter fs20">
             <i class="glyphicon glyphicon-ok fs18 mr10 themeColor"></i>您的账户已经成功退出!

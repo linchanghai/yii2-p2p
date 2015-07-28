@@ -146,7 +146,9 @@ require(["jquery","common","placeholder","modal","tooltip"],function($,c){
             }
         }
 
-        setInterval(countBack,1000);
+        if($("#logOut").length > 0){
+            setInterval(countBack,1000);
+        }
 
     });
 });
