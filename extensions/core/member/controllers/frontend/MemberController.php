@@ -14,6 +14,7 @@ use kiwi\web\Controller;
 use Yii;
 use yii\helpers\Json;
 use yii\helpers\Url;
+use yii\web\NotFoundHttpException;
 
 class MemberController extends Controller
 {
@@ -92,9 +93,9 @@ class MemberController extends Controller
     public function actionBindEmail($token){
         $model = Kiwi::getBindEmailForm();
         if($model->setEmailStatus($token)){
-            return $this->render('success');
+            return $this->redirect(['/member/member/member-info']);
         }else{
-            return $this->render('fail');
+            throw new NotFoundHttpException('404');
         }
     }
 

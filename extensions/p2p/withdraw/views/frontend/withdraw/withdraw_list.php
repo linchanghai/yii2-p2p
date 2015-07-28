@@ -14,7 +14,7 @@ use yii\helpers\Url;
         <li><a href="<?= Url::to(['/withdraw/withdraw/withdraw']) ?>">提现申请</a></li>
         <li><a class="active" href="#">提现记录</a></li>
     </ul>
-    <div class="myWalletAreaDetail">
+    <div class="myWalletAreaDetail backGrey">
         <div class="myWalletSingle p20">
             <table class="table table-bordered textCenter">
                 <thead>
