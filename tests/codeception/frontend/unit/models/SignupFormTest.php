@@ -2,10 +2,11 @@
 
 namespace tests\codeception\frontend\unit\models;
 
+use kiwi\Kiwi;
+use Yii;
 use tests\codeception\frontend\unit\DbTestCase;
 use tests\codeception\common\fixtures\UserFixture;
 use Codeception\Specify;
-use frontend\models\SignupForm;
 
 class SignupFormTest extends DbTestCase
 {
@@ -14,7 +15,7 @@ class SignupFormTest extends DbTestCase
 
     public function testCorrectSignup()
     {
-        $model = new SignupForm([
+        $model = Kiwi::getSignupForm([
             'username' => 'some_username',
             'email' => 'some_email@example.com',
             'password' => 'some_password',
@@ -22,7 +23,7 @@ class SignupFormTest extends DbTestCase
 
         $user = $model->signup();
 
-        $this->assertInstanceOf('common\models\User', $user, 'user should be valid');
+        $this->assertInstanceOf(Yii::$app->user->identityClass, $user, 'user should be valid');
 
         expect('username should be correct', $user->username)->equals('some_username');
         expect('email should be correct', $user->email)->equals('some_email@example.com');
@@ -31,13 +32,13 @@ class SignupFormTest extends DbTestCase
 
     public function testNotCorrectSignup()
     {
-        $model = new SignupForm([
+        $model = Kiwi::getSignupForm([
             'username' => 'troy.becker',
             'email' => 'nicolas.dianna@hotmail.com',
             'password' => 'some_password',
         ]);
 
-        expect('username and email are in use, user should not be created', $model->signup())->null();
+        expect('username and email are in use, user should not be created', $model->signup())->false();
     }
 
     public function fixtures()
