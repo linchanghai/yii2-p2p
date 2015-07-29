@@ -53,6 +53,9 @@ class PackageController extends Controller
     public function actionOut()
     {
         $outPackageForm = Kiwi::getOutPackageForm();
+        if ($outPackageForm->load(Yii::$app->request->post()) && $outPackageForm->outPackage()) {
+            $this->redirect(['index']);
+        }
         return $this->render('out', ['model' => $outPackageForm]);
     }
 } 

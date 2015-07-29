@@ -52,7 +52,7 @@ class OutPackageForm extends Model
         $packageRecord->type = $packageRecord::TYPE_OUT;
         $packageRecord->exchange_cash = $this->outMoney;
         $packageRecord->member_id = Yii::$app->user->id;
-        if (!$packageRecord->save(false)) {
+        if (!$packageRecord->save()) {
             $this->addError('outMoney', Json::encode($packageRecord->getErrors()));
             return false;
         }

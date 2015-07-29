@@ -53,7 +53,7 @@ class IntoPackageForm extends Model
         $packageRecord->type = $packageRecord::TYPE_INTO;
         $packageRecord->exchange_cash = $this->intoMoney;
         $packageRecord->member_id = Yii::$app->user->id;
-        if (!$packageRecord->save(false)) {
+        if (!$packageRecord->save()) {
             $this->addError('intoMoney', Json::encode($packageRecord->getErrors()));
             return false;
         }

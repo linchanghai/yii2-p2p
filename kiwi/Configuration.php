@@ -8,7 +8,7 @@
 namespace kiwi;
 
 
-use kiwi\base\AopTrait;
+use kiwi\base\AspectTrait;
 use kiwi\helpers\DirHelper;
 use Yii;
 use yii\base\Object;
@@ -33,11 +33,11 @@ use yii\helpers\ArrayHelper;
  */
 class Configuration extends Object
 {
-    use AopTrait;
+    use AspectTrait;
 
     public $codePools = ['@extensions'];
 
-    public $defaultConfigFiles = ['classes', 'controllers', 'views', 'config', 'aop'];
+    public $defaultConfigFiles = ['classes', 'controllers', 'views', 'config', 'aspect'];
 
     public $messagePath = '@common/messages';
 
