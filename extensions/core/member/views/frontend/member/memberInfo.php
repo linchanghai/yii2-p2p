@@ -28,7 +28,7 @@ use \yii\widgets\ActiveForm;
                         'options' => ['data-pjax' => 1]
                     ]);
                     echo Html::submitButton($memberStatus->email_status ? '<span class="glyphicon glyphicon-ok themeColor"></span>'.'解除绑定' : '绑定',
-                        ['class' =>'themeColor',
+                        ['class' =>'themeColor backGrey',
                             'id' => 'email-bind',
                             'data-url' => Url::to(['/member/member/send-email'])]);
                     ActiveForm::end();

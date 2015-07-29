@@ -84,9 +84,9 @@ class MemberController extends Controller
     public function actionSendEmail(){
         $model = Kiwi::getBindEmailForm();
         if( $model->sendEmail()){
-            echo Html::button( '已经发送邮件' ) ;
+            echo Html::button( '已经发送邮件',['class' =>' backGrey'] ) ;
         }else{
-            echo Html::button( '发送邮件失败' );
+            echo Html::button( '发送邮件失败',['class' =>' backGrey']  );
         }
     }
 
