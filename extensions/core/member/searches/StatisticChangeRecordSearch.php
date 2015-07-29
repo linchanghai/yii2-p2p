@@ -87,4 +87,54 @@ class StatisticChangeRecordSearch extends StatisticChangeRecord
 
         return $dataProvider;
     }
+
+    public function frontendSearch($params)
+    {
+        $query = static::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pagesize' => 20,
+            ]
+        ]);
+
+        if ($params) {
+            if (isset($params['date'])) {
+                switch ($params['date']) {
+                    case 1:
+                        $query->andWhere(['>=', 'create_time', strtotime('-1 month')]);
+                        break;
+                    case 2:
+                        $query->andWhere(['>=', 'create_time', strtotime('-2 month')]);
+                        break;
+                    case 3:
+                        $query->andWhere(['>=', 'create_time', strtotime('-3 month')]);
+                        break;
+                }
+            }
+
+            if (isset($params['type'])) {
+                switch ($params['type']) {
+                    case 1:
+                        $query->andWhere(['type' => static::TYPE_RECHARGE]);
+                        break;
+                    case 2:
+                        $query->andWhere(['type' => static::TYPE_WITHDRAW_SUCCESS]);
+                        break;
+                    case 3:
+                        $query->andWhere(['type' => static::TYPE_PACKAGE_INTEREST]);
+                        break;
+                    case 4:
+                        $query->andWhere(['type' => static::TYPE_REPAYMENT]);
+                        break;
+                    case 5:
+                        $query->andWhere(['type' => static::TYPE_INVEST]);
+                        break;
+                }
+            }
+        }
+
+        return $dataProvider;
+    }
 }

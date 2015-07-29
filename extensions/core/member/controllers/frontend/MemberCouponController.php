@@ -35,15 +35,10 @@ class MemberCouponController extends Controller
 
     public function actionCashView(){
         $query = MemberCoupon::find()->andWhere(['member_id'=>Yii::$app->user->id,'type'=>MemberCoupon::TYPE_CASH]);
-        if(Yii::$app->request->isGet){
-            switch(Yii::$app->request->get('status')){
-                case MemberCoupon::STATUS_UNUSED:
-                    $query = $query->andWhere(['status'=>MemberCoupon::STATUS_UNUSED]);
-                    break;
-                case MemberCoupon::STATUS_USED:
-                    $query = $query->andWhere(['status'=>MemberCoupon::STATUS_USED]);
-                    break;
-            }
+        $status = Yii::$app->request->get('status');
+        if ($status !== null) {
+            $status = $status ? MemberCoupon::STATUS_USED : MemberCoupon::STATUS_UNUSED;
+            $query = $query->andWhere(['status'=>$status]);
         }
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -60,15 +55,10 @@ class MemberCouponController extends Controller
 
     public function actionAnnualView(){
         $query = MemberCoupon::find()->andWhere(['member_id'=>Yii::$app->user->id,'type'=>MemberCoupon::TYPE_ANNUAL]);
-        if(Yii::$app->request->isGet){
-            switch(Yii::$app->request->get('status')){
-                case MemberCoupon::STATUS_UNUSED:
-                    $query = $query->andWhere(['status'=>MemberCoupon::STATUS_UNUSED]);
-                    break;
-                case MemberCoupon::STATUS_USED:
-                    $query = $query->andWhere(['status'=>MemberCoupon::STATUS_USED]);
-                    break;
-            }
+        $status = Yii::$app->request->get('status');
+        if ($status !== null) {
+            $status = $status ? MemberCoupon::STATUS_USED : MemberCoupon::STATUS_UNUSED;
+            $query = $query->andWhere(['status'=>$status]);
         }
 
         $dataProvider = new ActiveDataProvider([

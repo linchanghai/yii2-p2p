@@ -27,8 +27,8 @@ use \yii\widgets\ActiveForm;
                         'action' => Url::to(['/member/member/send-email']),
                         'options' => ['data-pjax' => 1]
                     ]);
-                    echo Html::submitButton($memberStatus->email_status ? '解除绑定邮箱' : '绑定邮箱',
-                        ['class' =>'themeColor',
+                    echo Html::submitButton($memberStatus->email_status ? '<span class="glyphicon glyphicon-ok themeColor"></span>'.'解除绑定' : '绑定',
+                        ['class' =>'themeColor backGrey',
                             'id' => 'email-bind',
                             'data-url' => Url::to(['/member/member/send-email'])]);
                     ActiveForm::end();
@@ -39,7 +39,7 @@ use \yii\widgets\ActiveForm;
             <tr>
                 <td class="textRight">手机</td>
                 <td><?= $member->mobile ?></td>
-                <td><?= $memberStatus->mobile_status ? Html::a('解除绑定', ['/member/member/bind-phone'], ['class' => 'themeColor']) : Html::a('绑定', ['/member/member/bind-phone'], ['class' => 'themeColor']) ?></td>
+                <td><?= $memberStatus->mobile_status ?'<span class="glyphicon glyphicon-ok themeColor"></span>'. Html::a('解除绑定', ['/member/member/bind-phone'], ['class' => 'themeColor']) :'<span class="glyphicon glyphicon-ok themeColor"></span>'. Html::a('绑定', ['/member/member/bind-phone'], ['class' => 'themeColor']) ?></td>
             </tr>
             <tr>
                 <td class="textRight">真实姓名</td>
