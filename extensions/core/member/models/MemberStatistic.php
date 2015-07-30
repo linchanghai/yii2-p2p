@@ -2,6 +2,7 @@
 
 namespace core\member\models;
 
+use kiwi\Kiwi;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -27,6 +28,8 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $create_time
  * @property integer $update_time
  * @property integer $is_delete
+ *
+ * @property integer $investingMoney
  *
  */
 class MemberStatistic extends \kiwi\db\ActiveRecord
@@ -97,5 +100,14 @@ class MemberStatistic extends \kiwi\db\ActiveRecord
                 'updatedAtAttribute' => 'update_time',
             ],
         ];
+    }
+
+    public function getInvestingMoney()
+    {
+        $projectInvestClass = Kiwi::getProjectInvestClass();
+        return $projectInvestClass::find()
+            ->andWhere(['member_id' => Yii::$app->user->id])
+            ->andWhere(['status' => $projectInvestClass::STATUS_REPAYMENT])
+            ->sum('invest_money') ?: 0;
     }
 }

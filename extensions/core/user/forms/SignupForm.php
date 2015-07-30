@@ -9,7 +9,7 @@ use yii\base\ModelEvent;
 /**
  * Class SignupForm
  *
- * @method void signup()
+ * @method \core\user\models\User signup()
  *
  * @package core\user\forms
  * @author Lujie.Zhou(lujie.zhou@jago-ag.cn)

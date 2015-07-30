@@ -8,7 +8,7 @@
 namespace kiwi\models;
 
 
-use kiwi\base\AopTrait;
+use kiwi\base\AspectTrait;
 use kiwi\db\ActiveRecord;
 use kiwi\helpers\CheckHelper;
 use kiwi\helpers\SerializerHelper;
@@ -66,7 +66,7 @@ use yii\helpers\Json;
  */
 abstract class KeyValueModel extends ActiveRecord
 {
-    use AopTrait;
+    use AspectTrait;
 
     /** @var \yii\db\ActiveRecord */
     public $modelClass;

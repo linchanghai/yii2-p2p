@@ -74,7 +74,7 @@ class PackageRecord extends \kiwi\db\ActiveRecord
                     'type' => $this->type == $this::TYPE_INTO
                         ? $recordClass::TYPE_ACCOUNT_TO_PACKAGE
                         : $recordClass::TYPE_PACKAGE_TO_ACCOUNT,
-                    'attribute' => $recordClass::tableName() . '.' . 'account_money',
+                    'attribute' => function() { return 'account_money'; },
                     'value' => function() {
                         return $this->type == $this::TYPE_INTO ? -$this->exchange_cash : $this->exchange_cash;
                     },
@@ -88,7 +88,7 @@ class PackageRecord extends \kiwi\db\ActiveRecord
                     'type' => $this->type == $this::TYPE_INTO
                         ? $recordClass::TYPE_ACCOUNT_TO_PACKAGE
                         : $recordClass::TYPE_PACKAGE_TO_ACCOUNT,
-                    'attribute' => $recordClass::tableName() . '.' . 'package_money',
+                    'attribute' => function() { return 'package_money'; },
                     'value' => function() {
                         return $this->type == $this::TYPE_INTO ? $this->exchange_cash : -$this->exchange_cash;
                     },

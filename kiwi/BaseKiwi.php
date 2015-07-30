@@ -45,9 +45,9 @@ class BaseKiwi
     {
         $object = Yii::createObject($type, $params);
         return $object;
-        /** @var \kiwi\base\AopInfo $aopInfo */
+        /** @var \kiwi\base\AspectInfo $aopInfo */
         $aopInfo = Yii::createObject(['class' => 'kiwi\base\AopInfo', 'instance' => $object]);
-        /** @var \kiwi\base\Aop $aop */
+        /** @var \kiwi\base\Aspect $aop */
         $aop = Yii::createObject('kiwi\base\Aop', [$aopInfo]);
 
         return $aop;

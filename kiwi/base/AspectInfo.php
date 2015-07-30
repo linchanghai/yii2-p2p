@@ -22,9 +22,9 @@ use yii\db\Transaction;
  * @package kiwi\base
  * @author jeremy.zhou(gao_lujie@live.cn)
  */
-class AopInfo extends Component
+class AspectInfo extends Component
 {
-    /** @var Service */
+    /** @var Model */
     public $instance;
 
     /** @var string function return value */
