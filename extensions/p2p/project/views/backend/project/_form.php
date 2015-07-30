@@ -82,6 +82,11 @@ $disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
     $fields[] = $form->field($model, 'status')->dropDownList([
         $model->status => Kiwi::getDataListModel()->projectStatus[$model->status]
     ], ['disabled' => 'disabled']);
+    $fields[] = '<div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-9">
+                        <a class="btn btn-info pull-right" data-toggle="tab" href="#w0-tab1">下一页</a>
+                    </div>
+                </div>';
     $fieldGroups[] = ['label' => Yii::t('p2p_project', 'Project Base Info'), 'content' => implode('', $fields)];
 
     $fields = ['<br />'];
@@ -91,6 +96,12 @@ $disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
     $fields[] = $form->field($projectDetails, 'repayment_source')->textarea();
     $fields[] = $form->field($projectDetails, 'collateral_info')->textarea();
     $fields[] = $form->field($projectDetails, 'risk_control_info')->textarea();
+    $fields[] = '<div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-9">
+                        <a class="btn btn-info" data-toggle="tab" href="#w0-tab0">上一页</a>
+                        <a class="btn btn-info pull-right" data-toggle="tab" href="#w0-tab2">下一页</a>
+                    </div>
+                </div>';
     $fieldGroups[] = ['label' => Yii::t('p2p_project', 'Project Details'), 'content' => implode('', $fields)];
 
     $fields = ['<br />'];
@@ -103,6 +114,12 @@ $disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
             'language' => Yii::$app->language,
         ]
     ]);
+    $fields[] = '<div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-9">
+                        <a class="btn btn-info" data-toggle="tab" href="#w0-tab1">上一页</a>
+                        <a class="btn btn-info pull-right" data-toggle="tab" href="#w0-tab3">下一页</a>
+                    </div>
+                </div>';
     $fieldGroups[] = ['label' => Yii::t('p2p_project', 'Project Legal Opinion'), 'content' => implode('', $fields)];
 
     $fields = ['<br />'];
@@ -115,18 +132,23 @@ $disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
             'language' => Yii::$app->language,
         ]
     ]);
+    if($disabled != 'disabled') {
+        $submitButton = Html::submitButton(
+            $model->isNewRecord ? Yii::t('p2p_project', 'Create') : Yii::t('p2p_project', 'Update'),
+            [
+                'class' => $model->isNewRecord ? 'btn btn-success pull-right' : 'btn btn-primary pull-right'
+            ]);
+    } else {
+        $submitButton = '';
+    }
+    $fields[] = '<div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-9">
+                        <a class="btn btn-info" data-toggle="tab" href="#w0-tab1">上一页</a>' .
+                        $submitButton
+                . '</div></div>';
     $fieldGroups[] = ['label' => Yii::t('p2p_project', 'Project Material'), 'content' => implode('', $fields)];
-
     echo Tabs::widget(['items' => $fieldGroups]);
     ?>
-
-    <?php if($disabled != 'disabled') { ?>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-9">
-            <?= Html::submitButton($model->isNewRecord ? Yii::t('p2p_project', 'Create') : Yii::t('p2p_project', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        </div>
-    </div>
-    <?php } ?>
 
     <?php ActiveForm::end(); ?>
 

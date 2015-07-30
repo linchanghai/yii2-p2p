@@ -114,16 +114,16 @@ class ProjectSearch extends Project
             if (isset($params['date'])) {
                 switch ($params['date']) {
                     case 1:
-                        $query->andWhere(['<=', 'repayment_date', time() + 30 * 3600 * 24]);
+                        $query->andWhere(['<=', 'repayment_date', strtotime('+1 month')]);
                         break;
                     case 2:
-                        $query->andWhere(['between', 'repayment_date', time() + 30 * 3600 * 24, time() + 3 * 30 * 3600 * 24]);
+                        $query->andWhere(['between', 'repayment_date', strtotime('+1 month'), strtotime('+3 month')]);
                         break;
                     case 3:
-                        $query->andWhere(['between', 'repayment_date', time() + 3 * 30 * 3600 * 24, time() + 6 * 30 * 3600 * 24]);
+                        $query->andWhere(['between', 'repayment_date', strtotime('+3 month'), strtotime('+6 month')]);
                         break;
                     case 4:
-                        $query->andWhere(['>=', 'repayment_date', time() + 6 * 30 * 3600 * 24]);
+                        $query->andWhere(['>=', 'repayment_date', strtotime('+6 month')]);
                         break;
                 }
             }
