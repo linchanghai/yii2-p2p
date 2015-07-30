@@ -40,6 +40,18 @@ if($createButton) {
             ['class' => 'yii\grid\SerialColumn'],
 
 //            'project_id',
+            [
+                'class'=>'kartik\grid\ExpandRowColumn',
+                'width'=>'50px',
+                'value'=>function ($model, $key, $index, $column) {
+                    return GridView::ROW_COLLAPSED;
+                },
+                'detail'=>function ($model, $key, $index, $column) {
+                    return Yii::$app->controller->renderPartial('_details', ['model'=>$model]);
+                },
+                'headerOptions'=>['class'=>'kartik-sheet-style'] ,
+                'expandOneOnly'=>true
+            ],
             'project_name',
             'project_no',
             'invest_total_money',
