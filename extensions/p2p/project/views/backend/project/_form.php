@@ -12,6 +12,13 @@ use kartik\datetime\DateTimePicker;
 /* @var $model p2p\project\models\Project */
 /* @var $form yii\widgets\ActiveForm */
 
+$js = <<<EOF
+$(".btn-page").click(function() {
+$("#w0 li:eq(" + $(this).data("tab") + ")  a").tab("show");
+});
+EOF;
+$this->registerJs($js, $this::POS_END);
+
 if (isset($model->repayment_date) && isset($model->release_date)) {
     $model->repayment_date = date('Y-m-d H:i', $model->repayment_date);
     $model->release_date = date('Y-m-d H:i', $model->release_date);
@@ -84,7 +91,7 @@ $disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
     ], ['disabled' => 'disabled']);
     $fields[] = '<div class="form-group">
                     <div class="col-sm-offset-2 col-sm-9">
-                        <a class="btn btn-info pull-right" data-toggle="tab" href="#w0-tab1">下一页</a>
+                        <a class="btn btn-info btn-page pull-right" data-toggle="tab" href="#w0-tab1" data-tab="1">下一页</a>
                     </div>
                 </div>';
     $fieldGroups[] = ['label' => Yii::t('p2p_project', 'Project Base Info'), 'content' => implode('', $fields)];
@@ -98,8 +105,8 @@ $disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
     $fields[] = $form->field($projectDetails, 'risk_control_info')->textarea();
     $fields[] = '<div class="form-group">
                     <div class="col-sm-offset-2 col-sm-9">
-                        <a class="btn btn-info" data-toggle="tab" href="#w0-tab0">上一页</a>
-                        <a class="btn btn-info pull-right" data-toggle="tab" href="#w0-tab2">下一页</a>
+                        <a class="btn btn-info btn-page" data-toggle="tab" href="#w0-tab0" data-tab="0">上一页</a>
+                        <a class="btn btn-info btn-page pull-right" data-toggle="tab" href="#w0-tab2" data-tab="2">下一页</a>
                     </div>
                 </div>';
     $fieldGroups[] = ['label' => Yii::t('p2p_project', 'Project Details'), 'content' => implode('', $fields)];
@@ -116,8 +123,8 @@ $disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
     ]);
     $fields[] = '<div class="form-group">
                     <div class="col-sm-offset-2 col-sm-9">
-                        <a class="btn btn-info" data-toggle="tab" href="#w0-tab1">上一页</a>
-                        <a class="btn btn-info pull-right" data-toggle="tab" href="#w0-tab3">下一页</a>
+                        <a class="btn btn-info btn-page" data-toggle="tab" href="#w0-tab1" data-tab="1">上一页</a>
+                        <a class="btn btn-info btn-page pull-right" data-toggle="tab" href="#w0-tab3" data-tab="3">下一页</a>
                     </div>
                 </div>';
     $fieldGroups[] = ['label' => Yii::t('p2p_project', 'Project Legal Opinion'), 'content' => implode('', $fields)];
@@ -143,7 +150,7 @@ $disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
     }
     $fields[] = '<div class="form-group">
                     <div class="col-sm-offset-2 col-sm-9">
-                        <a class="btn btn-info" data-toggle="tab" href="#w0-tab1">上一页</a>' .
+                        <a class="btn btn-info btn-page" data-toggle="tab" href="#w0-tab2" data-tab="2">上一页</a>' .
                         $submitButton
                 . '</div></div>';
     $fieldGroups[] = ['label' => Yii::t('p2p_project', 'Project Material'), 'content' => implode('', $fields)];
