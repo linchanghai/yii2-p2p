@@ -22,7 +22,7 @@ class Model extends \yii\base\Model
         if (method_exists($this, $method)) {
             return $this->callInternal($name,$method);
         }
-        parent::__call($name, $params);
+        return parent::__call($name, $params);
     }
 
     public function callInternal($name, $method){
