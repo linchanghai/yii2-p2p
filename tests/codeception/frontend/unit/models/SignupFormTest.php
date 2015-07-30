@@ -10,7 +10,6 @@ use Codeception\Specify;
 
 class SignupFormTest extends DbTestCase
 {
-
     use Specify;
 
     public function testCorrectSignup()
