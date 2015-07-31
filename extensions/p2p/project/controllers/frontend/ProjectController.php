@@ -11,7 +11,6 @@ namespace p2p\project\controllers\frontend;
 
 use kiwi\Kiwi;
 use kiwi\web\Controller;
-use p2p\project\models\ProjectInvest;
 use Yii;
 use yii\web\NotFoundHttpException;
 

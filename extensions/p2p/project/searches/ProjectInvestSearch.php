@@ -73,4 +73,44 @@ class ProjectInvestSearch extends ProjectInvest
 
         return $dataProvider;
     }
+
+    public function frontendSearch($params)
+    {
+        $projectInvestClass = Kiwi::getProjectInvestClass();
+        $query = $projectInvestClass::find()->where([
+            'member_id' => Yii::$app->user->id,
+        ]);
+
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pagesize' => 20,
+            ]
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        $query->andFilterWhere([
+            'project_invest_id' => $this->project_invest_id,
+            'project_id' => $this->project_id,
+            'member_id' => $this->member_id,
+            'rate' => $this->rate,
+            'invest_money' => $this->invest_money,
+            'interest_money' => $this->interest_money,
+            'create_time' => $this->create_time,
+            'update_time' => $this->update_time,
+            'status' => $this->status,
+            'is_delete' => $this->is_delete,
+            'actual_invest_money' => $this->actual_invest_money,
+        ]);
+
+        return $dataProvider;
+    }
 }

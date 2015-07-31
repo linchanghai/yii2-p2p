@@ -24,6 +24,7 @@ class TransferForm extends Model
     const EVENT_AFTER_TRANSFER = 'afterTransfer';
 
     public $project_invest_id;
+    public $min_money;
     public $transfer_money;
     public $discount_rate;
 
@@ -33,7 +34,8 @@ class TransferForm extends Model
     public function rules()
     {
         return [
-            [['project_invest_id', 'transfer_money', 'discount_rate'], 'required'],
+            [['project_invest_id', 'min_money', 'transfer_money', 'discount_rate'], 'required'],
+            ['transfer_money', 'number', 'integerOnly' => true, 'min' => $this->min_money, 'max' => $this->getMaxTransferMoney()]
         ];
     }
 
