@@ -9,5 +9,7 @@ return [
     'class' => [
         'ProjectInvestTransferApply' => 'p2p\transfer\models\ProjectInvestTransferApply',
         'ProjectTransferDiscountRecord' => 'p2p\transfer\models\ProjectTransferDiscountRecord',
+
+        'TransferForm' => 'p2p\transfer\forms\TransferForm'
     ]
 ];

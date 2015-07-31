@@ -53,7 +53,7 @@ class v0_1_0 extends Migration
             'project_invest_id' => Schema::TYPE_PK,
             'project_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'member_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
-            'rate' => Schema::TYPE_DECIMAL . '(3,2) NOT NULL default \'0.00\'',
+            'rate' => Schema::TYPE_DECIMAL . '(4,2) NOT NULL default \'0.00\'',
             'invest_money' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'interest_money' => Schema::TYPE_DECIMAL . '(10,2) NOT NULL',
             'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
