@@ -16,6 +16,8 @@ use yii\base\ModelEvent;
  */
 class Model extends \yii\base\Model
 {
+    use ErrorTrait;
+
     public function __call($name, $params)
     {
         $method = $name . 'Internal';

@@ -8,6 +8,7 @@
 namespace kiwi\db;
 
 use ArrayObject;
+use kiwi\base\ErrorTrait;
 use kiwi\searchers\Searcher;
 use Yii;
 use yii\base\InvalidConfigException;
@@ -23,6 +24,8 @@ use yii\helpers\ArrayHelper;
  */
 class ActiveRecord extends \yii\db\ActiveRecord
 {
+
+    use ErrorTrait;
 
     #region magic function override
 
