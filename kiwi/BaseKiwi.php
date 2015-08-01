@@ -31,12 +31,18 @@ class BaseKiwi
                     }
                 }
             }
+
             $type = ['class' => $className];
             if (isset($arguments[0]) && is_array($arguments[0])) {
                 $type = ArrayHelper::merge($type, $arguments[0]);
             }
             $params = isset($arguments[1]) && is_array($arguments[1]) ? $arguments[1] : [];
-            return Yii::createObject($type, $params);
+
+            if ($className == 'configuration') {
+                return Yii::createObject($type, $params);
+            }
+
+            return Kiwi::createObject($type, $params);
         }
         throw new UnknownMethodException('Calling unknown method: ' . get_called_class() . "::$name()");
     }
@@ -44,13 +50,19 @@ class BaseKiwi
     public static function createObject($type, array $params = [])
     {
         $object = Yii::createObject($type, $params);
-        return $object;
-        /** @var \kiwi\base\AspectInfo $aopInfo */
-        $aopInfo = Yii::createObject(['class' => 'kiwi\base\AopInfo', 'instance' => $object]);
-        /** @var \kiwi\base\Aspect $aop */
-        $aop = Yii::createObject('kiwi\base\Aop', [$aopInfo]);
 
-        return $aop;
+        $aspectConfig = Kiwi::getConfiguration()->aspect;
+        if (empty($aspectConfig[$type['class']])) {
+            return $object;
+        }
+
+        $aspectInfoConfig = ['class' => 'kiwi\base\AopInfo', 'instance' => $object];
+        $aspectInfoConfig = ArrayHelper::merge($aspectInfoConfig, $aspectConfig[$type['class']]);
+        /** @var \kiwi\base\AspectInfo $aspectInfo */
+        $aspectInfo = Yii::createObject($aspectInfoConfig);
+        /** @var \kiwi\base\Aspect $aspect */
+        $aspect = Yii::createObject('kiwi\base\Aspect', [$aspectInfo]);
+        return $aspect;
     }
 
     /**
