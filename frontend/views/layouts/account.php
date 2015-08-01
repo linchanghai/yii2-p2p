@@ -56,11 +56,19 @@ $this->registerJsFile('/js/account.js', ['depends' => [AppAsset::className()]]);
         </dl>
         <dl class="<?= in_array(Yii::$app->request->pathInfo, [
             'project/project-invest/grid-view',
+            'transfer/transfer/enable',
+            'transfer/transfer/pending',
+            'transfer/transfer/completed',
         ]) ? 'current' : '' ?>">
             <dt><a href="#"><i class="glyphicon glyphicon-yen fs16"></i>理财管理</a></dt>
             <dd class="<?= in_array(Yii::$app->request->pathInfo, ['project/project-invest/grid-view']) ? 'active' : '' ?>">
                 <a href="<?= Url::to(['/project/project-invest/grid-view']) ?>">投资记录</a></dd>
-            <dd><a href="#">债券转让</a></dd>
+            <dd class="<?= in_array(Yii::$app->request->pathInfo, [
+                'transfer/transfer/enable',
+                'transfer/transfer/pending',
+                'transfer/transfer/completed',
+            ]) ? 'active' : '' ?>">
+                <a href="<?= Url::to(['/transfer/transfer/enable'])?>">债券转让</a></dd>
             <dd><a href="#">资产统计</a></dd>
         </dl>
         <dl class="<?= in_array(Yii::$app->request->pathInfo, [

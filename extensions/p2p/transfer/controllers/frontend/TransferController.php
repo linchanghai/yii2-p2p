@@ -14,6 +14,8 @@ use kiwi\web\Controller;
 
 class TransferController extends Controller
 {
+    public $layout='/account';
+
     public function actionEnable()
     {
         $searchModel = Kiwi::getProjectInvestSearch();
@@ -22,6 +24,32 @@ class TransferController extends Controller
         $dataProvider->prepare(true);
 
         return $this->render('enableTransfer', [
+            'projectInvests' => $dataProvider->models,
+            'pages' =>$dataProvider->pagination,
+        ]);
+    }
+
+    public function actionPending()
+    {
+        $searchModel = Kiwi::getProjectInvestSearch();
+        $dataProvider = $searchModel->frontendSearch(\Yii::$app->request->queryParams);
+
+        $dataProvider->prepare(true);
+
+        return $this->render('pendingTransfer', [
+            'projectInvests' => $dataProvider->models,
+            'pages' =>$dataProvider->pagination,
+        ]);
+    }
+
+    public function actionCompleted()
+    {
+        $searchModel = Kiwi::getProjectInvestSearch();
+        $dataProvider = $searchModel->frontendSearch(\Yii::$app->request->queryParams);
+
+        $dataProvider->prepare(true);
+
+        return $this->render('completedTransfer', [
             'projectInvests' => $dataProvider->models,
             'pages' =>$dataProvider->pagination,
         ]);
