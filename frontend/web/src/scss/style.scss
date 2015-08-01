@@ -219,6 +219,12 @@ html input[disabled] {
 .secondColor{
   color: $secondColor;
 }
+.greenColor{
+  color: $greenColor;
+}
+.backGreen{
+  background: $greenColor;
+}
 .backGrey{
   background: $backColor;
 }
@@ -231,6 +237,9 @@ html input[disabled] {
     opacity: .8;
     color: #fff;
   }
+}
+a.greenColor:hover{
+  color: $greenColor;
 }
 .textCenter{
   text-align: center;
@@ -874,4 +883,7 @@ button.close {
   cursor: default!important;
   color: #bdbdbd!important;
   border-color: #e2e2e2!important;
+}
+.twoContainer{
+  margin-top: 20px;
 }

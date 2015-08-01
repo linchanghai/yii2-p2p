@@ -1,0 +1,69 @@
+@import "settings";
+a:hover{
+  color: $secondColor;
+}
+.aboutSide{
+  float: left;
+  width: 200px;
+  text-align: center;
+  li{
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px #fff solid;
+  }
+  .aboutSub{
+    height: 40px;
+    line-height: 40px;
+    padding-left: 40px;
+    border-bottom: 1px #fff dotted;
+  }
+  a{
+    display: block;
+  }
+  .active{
+    color: $secondColor;
+    border-left: 3px $secondColor solid;
+  }
+}
+.mediaRight{
+  width: 690px;
+  h4{
+    a{
+      color: #333;
+      font-size: 15px;
+    }
+  }
+  p{
+    color: #999;
+  }
+}
+.aboutBanner{
+  height: 100px;
+  padding: 25px 30px 0;
+  background: $greenColor;
+  color: #fff;
+  a{
+    color: #fff;
+  }
+  span{
+    margin-right: 16px;
+  }
+  .titleDes{
+    opacity: .7;
+    filter: alpha(opacity=70);
+  }
+}
+.aboutContent{
+  padding-bottom: 30px;
+  border-bottom: 1px $borderColor dashed;
+  p,h3{
+    margin-top: 20px;
+  }
+  p{
+    text-indent: 2em;
+  }
+  h3{
+    color: #333;
+    font-size: 16px;
+  }
+}

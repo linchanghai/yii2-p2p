@@ -564,6 +564,14 @@ html input[disabled] {
   color: #5e9eed;
 }
 
+.greenColor {
+  color: #74b974;
+}
+
+.backGreen {
+  background: #74b974;
+}
+
 .backGrey {
   background: #f3f5fb;
 }
@@ -578,6 +586,10 @@ html input[disabled] {
 .colorWhite:hover {
   opacity: .8;
   color: #fff;
+}
+
+a.greenColor:hover {
+  color: #74b974;
 }
 
 .textCenter {
@@ -1312,4 +1324,8 @@ button.close {
   cursor: default !important;
   color: #bdbdbd !important;
   border-color: #e2e2e2 !important;
+}
+
+.twoContainer {
+  margin-top: 20px;
 }

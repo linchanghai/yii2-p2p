@@ -1,0 +1,70 @@
+a:hover {
+  color: #5e9eed;
+}
+
+.aboutSide {
+  float: left;
+  width: 200px;
+  text-align: center;
+}
+.aboutSide li {
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px #fff solid;
+}
+.aboutSide .aboutSub {
+  height: 40px;
+  line-height: 40px;
+  padding-left: 40px;
+  border-bottom: 1px #fff dotted;
+}
+.aboutSide a {
+  display: block;
+}
+.aboutSide .active {
+  color: #5e9eed;
+  border-left: 3px #5e9eed solid;
+}
+
+.mediaRight {
+  width: 690px;
+}
+.mediaRight h4 a {
+  color: #333;
+  font-size: 15px;
+}
+.mediaRight p {
+  color: #999;
+}
+
+.aboutBanner {
+  height: 100px;
+  padding: 25px 30px 0;
+  background: #74b974;
+  color: #fff;
+}
+.aboutBanner a {
+  color: #fff;
+}
+.aboutBanner span {
+  margin-right: 16px;
+}
+.aboutBanner .titleDes {
+  opacity: .7;
+  filter: alpha(opacity=70);
+}
+
+.aboutContent {
+  padding-bottom: 30px;
+  border-bottom: 1px #e1e3e7 dashed;
+}
+.aboutContent p, .aboutContent h3 {
+  margin-top: 20px;
+}
+.aboutContent p {
+  text-indent: 2em;
+}
+.aboutContent h3 {
+  color: #333;
+  font-size: 16px;
+}
