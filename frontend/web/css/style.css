@@ -356,6 +356,10 @@ html input[disabled] {
   content: "\e102";
 }
 
+.glyphicon-map-marker:before {
+  content: "\e062";
+}
+
 .glyphicon-calendar:before {
   content: "\e109";
 }
@@ -564,6 +568,14 @@ html input[disabled] {
   color: #5e9eed;
 }
 
+.greenColor {
+  color: #5cb85c;
+}
+
+.backGreen {
+  background: #5cb85c;
+}
+
 .backGrey {
   background: #f3f5fb;
 }
@@ -578,6 +590,14 @@ html input[disabled] {
 .colorWhite:hover {
   opacity: .8;
   color: #fff;
+}
+
+.textIndent {
+  text-indent: 2em;
+}
+
+a.greenColor:hover {
+  color: #5cb85c;
 }
 
 .textCenter {
@@ -1312,4 +1332,8 @@ button.close {
   cursor: default !important;
   color: #bdbdbd !important;
   border-color: #e2e2e2 !important;
+}
+
+.twoContainer {
+  margin-top: 20px;
 }

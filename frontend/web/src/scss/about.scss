@@ -1,0 +1,163 @@
+@import "settings";
+a:hover{
+  color: $secondColor;
+}
+.aboutSide{
+  float: left;
+  width: 200px;
+  text-align: center;
+  li{
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px #fff solid;
+  }
+  .aboutSub{
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px #fff dotted;
+    a{
+      padding-left: 40px;
+    }
+  }
+  a{
+    display: block;
+    border-left: 3px $backColor solid;
+    &:hover{
+      color: $secondColor;
+      border-left: 3px $secondColor solid;
+    }
+  }
+  .active{
+    color: $secondColor;
+    border-left: 3px $secondColor solid;
+  }
+}
+.mediaRight{
+  width: 650px;
+  h4{
+    a{
+      color: #333;
+      font-size: 15px;
+    }
+  }
+  p{
+    color: #999;
+  }
+}
+.aboutBanner{
+  height: 100px;
+  padding: 25px 30px 0;
+  background: $greenColor;
+  color: #fff;
+  a{
+    color: #fff;
+  }
+  span{
+    margin-right: 16px;
+  }
+  .titleDes{
+    opacity: .7;
+    filter: alpha(opacity=70);
+  }
+}
+.aboutContent{
+  padding-bottom: 30px;
+  border-bottom: 1px $borderColor dashed;
+  p,h3{
+    margin-top: 20px;
+  }
+  p{
+    text-indent: 2em;
+  }
+  h3{
+    color: #333;
+    font-size: 16px;
+  }
+}
+.partner{
+  li{
+    padding: 30px;
+    border-bottom: 1px $borderColor dotted;
+  }
+}
+.announcement{
+  padding: 0 30px 30px 30px;
+  li{
+    margin-top: 20px;
+  }
+}
+.aboutTab{
+  padding-bottom: 20px;
+  border-bottom: 1px $borderColor dashed;
+  li{
+    margin-right: 26px;
+  }
+  a{
+    display: block;
+    height: 35px;
+    line-height: 35px;
+    font-size: 18px;
+    &:hover{
+      color: $greenColor;
+      border-bottom: 3px $greenColor solid;
+    }
+  }
+  .active{
+    color: $greenColor;
+    border-bottom: 3px $greenColor solid;
+  }
+}
+.employ{
+  dl{
+    padding-bottom: 20px;
+    border-bottom: 1px $borderColor dotted;
+  }
+}
+.lawLine{
+  li{
+    padding: 20px 0;
+    border-bottom: 1px $borderColor dotted;
+  }
+}
+// map
+#preview{
+  border: 1px solid #bfd2e1;
+  width: 720px;
+  height: 350px;
+  margin-bottom: 80px;
+  font-family: Arial, Helvetica, sans-serif,"宋体";
+}
+#map_container{
+  height: 368px;
+}
+#float_search_bar{
+  z-index: 2012;
+  position: absolute;
+  width: 480px;
+  height: 31px;
+  background: url("http://dev.baidu.com/wiki/static/map/tuan/images/search_bar.png") repeat-x;
+  background-position: 0 -21px;
+  padding: 3px 0 0 10px;
+}
+#float_search_bar label, #float_search_bar span{
+  color: #0787cb;
+  font-size: 14px;
+}
+#float_search_bar input{
+  width: 180px;
+  height: 16px;
+  margin-top: 1px;
+}
+#float_search_bar input:focus{
+  outline: none;
+}
+#float_search_bar button{
+  border: 0;
+  color: white;
+  width: 77px;
+  height: 20px;
+  background: url("http://dev.baidu.com/wiki/static/map/tuan/images/search_bar.png") no-repeat;
+  background-position: 0 0;
+  margin-right: 5px;
+  cursor: pointer;
+}

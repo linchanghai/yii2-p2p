@@ -13,11 +13,11 @@
 <?php include "header.php" ;?>
 <div class="indexNotice backGrey" id="textSlider">
     <ul class="container">
-        <li>用户: 188 **** 8888 成功领取红包 <label class="themeColor">50</label> 元</li>
-        <li>用户: 187 **** 8888 成功领取红包 <label class="themeColor">60</label> 元</li>
-        <li>用户: 186 **** 8888 成功领取红包 <label class="themeColor">70</label> 元</li>
-        <li>用户: 185 **** 8888 成功领取红包 <label class="themeColor">80</label> 元</li>
-        <li>用户: 184 **** 8888 成功领取红包 <label class="themeColor">90</label> 元</li>
+        <li><i class="glyphicon glyphicon-volume-down fs20"></i> 用户: 188 **** 8888 成功领取红包 <label class="themeColor">50</label> 元</li>
+        <li><i class="glyphicon glyphicon-volume-down fs20"></i> 用户: 187 **** 8888 成功领取红包 <label class="themeColor">60</label> 元</li>
+        <li><i class="glyphicon glyphicon-volume-down fs20"></i> 用户: 186 **** 8888 成功领取红包 <label class="themeColor">70</label> 元</li>
+        <li><i class="glyphicon glyphicon-volume-down fs20"></i> 用户: 185 **** 8888 成功领取红包 <label class="themeColor">80</label> 元</li>
+        <li><i class="glyphicon glyphicon-volume-down fs20"></i> 用户: 184 **** 8888 成功领取红包 <label class="themeColor">90</label> 元</li>
     </ul>
 </div>
 <div class="container integral">
