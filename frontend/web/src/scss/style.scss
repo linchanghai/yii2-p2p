@@ -62,6 +62,9 @@ html input[disabled] {
 .glyphicon-gift:before {
   content: "\e102";
 }
+.glyphicon-map-marker:before {
+  content: "\e062";
+}
 .glyphicon-calendar:before {
   content: "\e109";
 }
@@ -237,6 +240,9 @@ html input[disabled] {
     opacity: .8;
     color: #fff;
   }
+}
+.textIndent{
+  text-indent: 2em;
 }
 a.greenColor:hover{
   color: $greenColor;

@@ -356,6 +356,10 @@ html input[disabled] {
   content: "\e102";
 }
 
+.glyphicon-map-marker:before {
+  content: "\e062";
+}
+
 .glyphicon-calendar:before {
   content: "\e109";
 }
@@ -565,11 +569,11 @@ html input[disabled] {
 }
 
 .greenColor {
-  color: #74b974;
+  color: #5cb85c;
 }
 
 .backGreen {
-  background: #74b974;
+  background: #5cb85c;
 }
 
 .backGrey {
@@ -588,8 +592,12 @@ html input[disabled] {
   color: #fff;
 }
 
+.textIndent {
+  text-indent: 2em;
+}
+
 a.greenColor:hover {
-  color: #74b974;
+  color: #5cb85c;
 }
 
 .textCenter {

@@ -13,7 +13,7 @@
 <?php include "header.php" ;?>
 <div class="container twoContainer">
     <?php include "aboutSide.php" ;?>
-    <div class="containerMain media">
+    <div class="containerMain p20 media">
         <ul>
             <li class="clearFix mb10">
                 <div class="fl mediaLeft">
