@@ -22,7 +22,13 @@ class WithdrawController extends Controller
         if ($withdrawForm->load(Yii::$app->request->post())) {
             $withdrawForm->withdraw();
         }
+
+        $memberStatistic = Kiwi::getMemberStatistic();
+        /** @var \core\member\models\MemberStatistic $memberStatistic */
+        $memberStatistic = $memberStatistic::findOne(['member_id' => Yii::$app->user->id]);
+
         return $this->render('withdraw', [
+            'memberStatistic' => $memberStatistic,
             'model' => $withdrawForm
         ]);
     }

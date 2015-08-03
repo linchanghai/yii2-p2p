@@ -14,7 +14,7 @@ use kiwi\web\Controller;
 
 class TransferController extends Controller
 {
-    public $layout='/account';
+    public $layout = '/account';
 
     public function actionEnable()
     {
@@ -25,7 +25,7 @@ class TransferController extends Controller
 
         return $this->render('enableTransfer', [
             'projectInvests' => $dataProvider->models,
-            'pages' =>$dataProvider->pagination,
+            'pages' => $dataProvider->pagination,
         ]);
     }
 
@@ -38,7 +38,7 @@ class TransferController extends Controller
 
         return $this->render('pendingTransfer', [
             'projectInvests' => $dataProvider->models,
-            'pages' =>$dataProvider->pagination,
+            'pages' => $dataProvider->pagination,
         ]);
     }
 
@@ -51,7 +51,23 @@ class TransferController extends Controller
 
         return $this->render('completedTransfer', [
             'projectInvests' => $dataProvider->models,
-            'pages' =>$dataProvider->pagination,
+            'pages' => $dataProvider->pagination,
+        ]);
+    }
+
+    public function actionCreate($project_invest_id)
+    {
+        $transferForm = Kiwi::getTransferForm([
+            'project_invest_id' => $project_invest_id,
+        ]);
+
+        if ($transferForm->load(\Yii::$app->request->post())) {
+            $transferForm->createTransfer();
+        }
+
+        return $this->render('transfer', [
+            'invest' => $transferForm->invest,
+            'transferForm' => $transferForm,
         ]);
     }
 }

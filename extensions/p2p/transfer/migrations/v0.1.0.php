@@ -15,7 +15,7 @@ class v0_1_0 extends Migration
     public function safeUp()
     {
         $this->createTable('{{%project_invest_transfer_apply}}', [
-            'project_invest_transfer_apple' => Schema::TYPE_PK,
+            'project_invest_transfer_apply_id' => Schema::TYPE_PK,
             'project_invest_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'project_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',
             'member_id' => Schema::TYPE_INTEGER . '(11) NOT NULL',

@@ -37,7 +37,7 @@ use yii\helpers\Url;
                 <td>2015-08-07</td>
                 <td>2</td>
                 <td>8</td>
-                <td><a href="#" class="secondColor">转让</a></td>
+                <td><a href="<?= Url::to(['create', 'project_invest_id' => 1])?>" class="secondColor">转让</a></td>
             </tr>
             </tbody>
         </table>

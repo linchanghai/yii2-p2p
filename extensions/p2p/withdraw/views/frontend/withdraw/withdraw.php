@@ -11,12 +11,9 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /** @var \p2p\withdraw\forms\WithdrawForm $model */
+/** @var \core\member\models\MemberStatistic $memberStatistic */
 
 $form = ActiveForm::begin();
-
-$memberStatistic = Kiwi::getMemberStatistic();
-/** @var \core\member\models\MemberStatistic $memberStatistic */
-$memberStatistic = $memberStatistic::findOne(['member_id' => Yii::$app->user->id]);
 
 ?>
 <div class="containerMain">
