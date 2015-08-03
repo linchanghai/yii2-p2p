@@ -178,14 +178,8 @@ class AspectInfo extends Component
         $this->trigger($eventName, $event);
 
         if ($event->isValid) {
-            $className = end(explode('\\', $this->instance->className()));
-            $eventName = $eventType . $className;
-            $this->trigger($eventName, $event);
-        }
-
-        if ($event->isValid) {
-            $eventName = $eventType . $className . ucfirst($this->name);
-            $this->trigger($eventName, $event);
+            $eventName = $eventType . ucfirst($this->name);
+            $this->instance->trigger($eventName, $event);
         }
 
         return $event->isValid;
@@ -193,12 +187,12 @@ class AspectInfo extends Component
 
     public function beforeCall()
     {
-        return $this->triggerEvent('beforeCall');
+        return $this->triggerEvent('before');
     }
 
     public function afterCall()
     {
-        return $this->triggerEvent('afterCall');
+        return $this->triggerEvent('after');
     }
 
     public function onError()
