@@ -60,7 +60,7 @@ $disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
             'autoclose' => true,
         ]
     ]);
-    $fields[] = $form->field($model, 'repayment_type')->dropDownList(Kiwi::getDataListModel()->projectRepaymentType);
+    $fields[] = $form->field($model, 'repayment_type')->dropDownList(Yii::$app->dataList->projectRepaymentType);
     $fields[] = $form->field($model, 'release_date')->widget(DateTimePicker::className(), [
         'options' => [
             'value' => $release_date
@@ -70,7 +70,7 @@ $disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
             'autoclose' => true,
         ]
     ]);
-    $fields[] = $form->field($model, 'project_type')->dropDownList(Kiwi::getDataListModel()->projectType);
+    $fields[] = $form->field($model, 'project_type')->dropDownList(Yii::$app->dataList->projectType);
     $fields[] = $form->field($model, 'invested_money')->textInput([
         'value' => $model->invested_money ? $model->invested_money : 0,
         'disabled' => 'disabled'
@@ -87,7 +87,7 @@ $disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
     //    ]);
     $fields[] = $form->field($model, 'min_money')->textInput(['maxlength' => 255]);
     $fields[] = $form->field($model, 'status')->dropDownList([
-        $model->status => Kiwi::getDataListModel()->projectStatus[$model->status]
+        $model->status => Yii::$app->dataList->projectStatus[$model->status]
     ], ['disabled' => 'disabled']);
     $fields[] = '<div class="form-group">
                     <div class="col-sm-offset-2 col-sm-9">

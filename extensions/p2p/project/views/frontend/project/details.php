@@ -68,7 +68,7 @@ $member = Yii::$app->user->identity;
 
         <p class="mb20">
             <label>收款方式: </label>
-            <span class="col333"><?= Kiwi::getDataListModel()->projectRepaymentType[$project->repayment_type]; ?></span>
+            <span class="col333"><?= Yii::$app->dataList->projectRepaymentType[$project->repayment_type]; ?></span>
         </p>
 
         <p class="mb20">

@@ -16,7 +16,7 @@ class SettingController extends Controller
 {
     public function actionIndex()
     {
-        $setting = Kiwi::getSettingModel();
+        $setting = Yii::$app->setting;
         if (Yii::$app->getRequest()->getIsPost() && $setting->load(Yii::$app->getRequest()->post())) {
             $setting->save();
         }

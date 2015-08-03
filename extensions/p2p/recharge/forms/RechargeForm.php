@@ -22,7 +22,7 @@ class RechargeForm extends Model
 
     public function rules()
     {
-        $rechargeMethods = Kiwi::getDataListModel()->rechargeMethods;
+        $rechargeMethods = Yii::$app->dataList->rechargeMethods;
         $rechargeMethods = array_keys($rechargeMethods);
         return [
             [['money', 'method'], 'required'],

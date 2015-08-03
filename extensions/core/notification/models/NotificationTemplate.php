@@ -37,8 +37,8 @@ class NotificationTemplate extends \kiwi\db\ActiveRecord
             [['active'], 'integer'],
             [['event', 'type', 'title', 'receiver'], 'string', 'max' => 255],
             [['template'], 'string', 'max' => 1023],
-            ['event', 'in', 'range' => array_keys(Kiwi::getDataListModel()->notificationEvents)],
-            ['type', 'in', 'range' => array_keys(Kiwi::getDataListModel()->notificationTypes)],
+            ['event', 'in', 'range' => array_keys(Yii::$app->dataList->notificationEvents)],
+            ['type', 'in', 'range' => array_keys(Yii::$app->dataList->notificationTypes)],
             ['receiver', 'default', 'value' => function ($model, $attribute) {
                 switch ($model->type) {
                     case 'sms':
