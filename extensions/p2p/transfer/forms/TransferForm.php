@@ -50,7 +50,7 @@ class TransferForm extends Model
     public function attributeLabels()
     {
         return [
-            'project_invest_id' => Yii::t('p2p_transfer', 'Project Invest'),
+            'project_invest_id' => Yii::t('p2p_transfer', 'Project Invest ID'),
             'min_money' => Yii::t('p2p_transfer', 'Min Money'),
             'transfer_money' => Yii::t('p2p_transfer', 'Transfer Money'),
             'discount_rate' => Yii::t('p2p_transfer', 'Discount Rate'),

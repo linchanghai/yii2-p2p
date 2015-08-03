@@ -19,7 +19,7 @@ $form = ActiveForm::begin();
 ?>
 <div class="containerMain">
     <ul class="clearFix rechargeTitle">
-        <li><a class="active" href="#">申请项目转让</a></li>
+        <li><a class="active" href="#">申请债券转让</a></li>
     </ul>
     <br>
     <input type="hidden" name="TransferForm[project_invest_id]" value="<?= $transferForm->project_invest_id?>">
