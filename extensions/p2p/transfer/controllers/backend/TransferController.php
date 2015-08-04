@@ -2,6 +2,7 @@
 
 namespace p2p\transfer\controllers\backend;
 
+use kiwi\Kiwi;
 use Yii;
 use p2p\transfer\models\ProjectInvestTransferApply;
 use p2p\transfer\searches\ProjectInvestTransferApplySearch;
@@ -32,7 +33,7 @@ class TransferController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ProjectInvestTransferApplySearch();
+        $searchModel = Kiwi::getProjectInvestTransferApplySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -82,7 +83,7 @@ class TransferController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->project_invest_transfer_apply_id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -112,7 +113,8 @@ class TransferController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = ProjectInvestTransferApply::findOne($id)) !== null) {
+        $projectInvestTransferApplyClass = Kiwi::getProjectInvestTransferApplyClass();
+        if (($model = $projectInvestTransferApplyClass::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

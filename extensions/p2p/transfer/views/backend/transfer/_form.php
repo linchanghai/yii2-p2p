@@ -1,22 +1,32 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\widgets\ActiveForm;
+use kiwi\Kiwi;
 
 /* @var $this yii\web\View */
 /* @var $model p2p\transfer\models\ProjectInvestTransferApply */
 /* @var $form yii\widgets\ActiveForm */
+
+/** @var p2p\project\models\Project $project */
+$project = $model->project;
+
+/** @var core\member\models\Member $member */
+$member = $model->member;
 ?>
 
 <div class="project-invest-transfer-apply-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'id' => 'project-invest-transfer-apply-form-horizontal',
+        'type' => ActiveForm::TYPE_HORIZONTAL,
+        'formConfig' => ['labelSpan' => 2],
+        'fullSpan' => 11,
+    ]); ?>
 
-    <?= $form->field($model, 'project_invest_id')->textInput() ?>
+    <?= $form->field($project, 'project_name')->textInput() ?>
 
-    <?= $form->field($model, 'project_id')->textInput() ?>
-
-    <?= $form->field($model, 'member_id')->textInput() ?>
+    <?= $form->field($member, 'username')->textInput() ?>
 
     <?= $form->field($model, 'min_money')->textInput() ?>
 
@@ -24,22 +34,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'discount_rate')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'verify_user')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'verify_date')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList(Kiwi::getDataListModel()->transferStatus) ?>
 
     <?= $form->field($model, 'counter_fee')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'create_time')->textInput() ?>
-
-    <?= $form->field($model, 'update_time')->textInput() ?>
-
-    <?= $form->field($model, 'is_delete')->textInput() ?>
-
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('p2p_transfer', 'Create') : Yii::t('p2p_transfer', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <div class="col-sm-offset-2 col-sm-9">
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('p2p_transfer', 'Create') : Yii::t('p2p_transfer', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

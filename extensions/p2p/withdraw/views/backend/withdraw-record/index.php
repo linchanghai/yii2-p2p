@@ -23,7 +23,6 @@ if (isset($status) && $status) {
 ?>
 <div class="withdraw-record-index">
 
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,

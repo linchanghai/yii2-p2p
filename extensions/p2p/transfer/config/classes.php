@@ -10,6 +10,8 @@ return [
         'ProjectInvestTransferApply' => 'p2p\transfer\models\ProjectInvestTransferApply',
         'ProjectTransferDiscountRecord' => 'p2p\transfer\models\ProjectTransferDiscountRecord',
 
-        'TransferForm' => 'p2p\transfer\forms\TransferForm'
+        'TransferForm' => 'p2p\transfer\forms\TransferForm',
+
+        'ProjectInvestTransferApplySearch' => 'p2p\transfer\searches\ProjectInvestTransferApplySearch',
     ]
 ];
