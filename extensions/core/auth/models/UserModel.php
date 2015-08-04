@@ -221,7 +221,7 @@ class UserModel extends ActiveRecord
         $html .= $form->field($this, 'username', $options);
         $html .= $form->field($this, 'email', $options);
         $html .= $form->field($this, 'password', $options)->passwordInput();
-        $html .= $form->field($this, 'status', $options)->inline()->radioList(Kiwi::getDataListModel()->isUserActive);
+        $html .= $form->field($this, 'status', $options)->inline()->radioList(Yii::$app->dataList->isUserActive);
         $html .= $form->field($this, 'roles', $options)->inline()->checkboxList($this->getAttributeData('roles'));
         return $html;
     }

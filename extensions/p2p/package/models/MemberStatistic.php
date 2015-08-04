@@ -53,7 +53,7 @@ class MemberStatistic extends \core\member\models\MemberStatistic
      */
     protected function getTodayInterest()
     {
-        $rate = Kiwi::getSettingModel()->P2P_package_packageRate;
+        $rate = Yii::$app->setting->packageRate;
         $principal = $this->getTodayInterestPrincipal();
         $interest = $principal * $rate / 100 / 365;
         return $interest;

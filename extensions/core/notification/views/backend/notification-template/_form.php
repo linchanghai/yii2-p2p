@@ -17,9 +17,9 @@ use kartik\widgets\ActiveForm;
         'fullSpan' => 11
     ]); ?>
 
-    <?= $form->field($model, 'event')->dropDownList(Kiwi::getDataListModel()->notificationEvents) ?>
+    <?= $form->field($model, 'event')->dropDownList(Yii::$app->dataList->notificationEvents) ?>
 
-    <?= $form->field($model, 'type')->dropDownList(Kiwi::getDataListModel()->notificationTypes) ?>
+    <?= $form->field($model, 'type')->dropDownList(Yii::$app->dataList->notificationTypes) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
@@ -27,7 +27,7 @@ use kartik\widgets\ActiveForm;
 
     <?= $form->field($model, 'receiver')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'active')->dropDownList(Kiwi::getDataListModel()->boolean) ?>
+    <?= $form->field($model, 'active')->dropDownList(Yii::$app->dataList->boolean) ?>
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-9">

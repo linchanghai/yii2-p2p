@@ -23,7 +23,7 @@ $this->params['leftMenuKey'] = 'user';
             'username',
             'email:email',
             ['attribute' => 'status', 'value' => function($model) {
-                $activeList = Kiwi::getDataListModel()->isUserActive;
+                $activeList = Yii::$app->dataList->isUserActive;
                 return $activeList[$model->status];
             }],
             ['class' => 'yii\grid\ActionColumn', 'template' => '{update} {delete}'],

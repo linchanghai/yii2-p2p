@@ -29,10 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'width' => '180px',
                 'value' => function ($model, $key, $index, $widget) {
                     /** @var \p2p\activity\models\Activity $model */
-                    return Kiwi::getDataListModel()->activityTypes[$model->activity_type];
+                    return Yii::$app->dataList->activityTypes[$model->activity_type];
                 },
                 'filterType' => GridView::FILTER_SELECT2,
-                'filter' => Kiwi::getDataListModel()->activityTypes,
+                'filter' => Yii::$app->dataList->activityTypes,
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
@@ -45,10 +45,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'width' => '180px',
                 'value' => function ($model, $key, $index, $widget) {
                     /** @var \p2p\activity\models\Activity $model */
-                    return Kiwi::getDataListModel()->activitySendTypes[$model->activity_send_type];
+                    return Yii::$app->dataList->activitySendTypes[$model->activity_send_type];
                 },
                 'filterType' => GridView::FILTER_SELECT2,
-                'filter' => Kiwi::getDataListModel()->activitySendTypes,
+                'filter' => Yii::$app->dataList->activitySendTypes,
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],

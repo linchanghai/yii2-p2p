@@ -27,8 +27,8 @@ class Bootstrap extends Object implements BootstrapInterface
     public $configuration = 'kiwi\Configuration';
 
     public $initFunctions = [
-        'setNamespaces', 'setModules', 'setModuleConfig',
-        'setModuleClass', 'setControllerMap', 'setViewPathMap',
+        'setNamespaces', 'setModules', 'setModuleClass',
+        'setModuleConfig', 'setControllerMap', 'setViewPathMap',
         'runModuleMigration', 'generatorAnnotation',
         'runModuleBootstrap',
     ];

@@ -35,7 +35,7 @@ $memberStatistic = $member->memberStatistic;
         <div class="clearFix">
             <div class="fl myWalletOutLeft">
                 <label for="">钻点钱包年华收益率: </label>
-                <span class="themeColor"><span id="package-rate"><?= \kiwi\Kiwi::getSettingModel()->P2P_package_packageRate ?></span>%</span>
+                <span class="themeColor"><span id="package-rate"><?= Yii::$app->setting->packageRate ?></span>%</span>
             </div>
         </div>
         <div class="clearFix mt20">
