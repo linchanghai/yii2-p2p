@@ -491,7 +491,8 @@ class ActiveRecord extends \yii\db\ActiveRecord
 
     public static function isEnableLoginDelete()
     {
-        return static::$enableLogicDelete && static::hasAttribute(static::$isDeleteAttribute);
+        $instance = new static;
+        return static::$enableLogicDelete && $instance->hasAttribute(static::$isDeleteAttribute);
     }
 
     /**
