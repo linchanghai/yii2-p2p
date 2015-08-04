@@ -14,61 +14,74 @@ class v0_1_0 extends Migration
 {
     public function safeUp()
     {
-        $this->createTable('{{%page}}', [
-            'page_id' => Schema::TYPE_PK,
-            'key' => Schema::TYPE_STRING . ' NOT NULL',
-            'title' => Schema::TYPE_STRING . ' NOT NULL',
-            'content' => Schema::TYPE_TEXT . ' NOT NULL',
-            'layout' => Schema::TYPE_STRING . ' NOT NULL',
-            'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'created_by' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'updated_by' => Schema::TYPE_INTEGER . ' NOT NULL',
-        ]);
-
-        $this->createTable('{{%block}}', [
-            'block_id' => Schema::TYPE_PK,
-            'key' => Schema::TYPE_STRING . ' NOT NULL',
-            'content' => Schema::TYPE_TEXT . ' NOT NULL',
-            'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'created_by' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'updated_by' => Schema::TYPE_INTEGER . ' NOT NULL',
-        ]);
-
-        $this->createTable('{{%article}}', [
-            'article_id' => Schema::TYPE_PK,
-            'title' => Schema::TYPE_STRING . ' NOT NULL',
-            'content' => Schema::TYPE_TEXT . ' NOT NULL',
-            'category_id' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'created_by' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'updated_by' => Schema::TYPE_INTEGER . ' NOT NULL',
-        ]);
-
-        $this->createTable('{{%post}}', [
-            'post_id' => Schema::TYPE_PK,
-            'title' => Schema::TYPE_STRING . ' NOT NULL',
-            'content' => Schema::TYPE_TEXT . ' NOT NULL',
-            'category_id' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'created_by' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'updated_by' => Schema::TYPE_INTEGER . ' NOT NULL',
-        ]);
-
-        $this->createTable('{{%comment}}', [
-            'comment_id' => Schema::TYPE_PK,
-            'type' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'link_id' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'parent_id' => Schema::TYPE_INTEGER . ' NOT NULL DEFAULT 0',
+        $this->createTable('cms_about', [
+            'cms_about_id' => Schema::TYPE_PK,
+            'title' => Schema::TYPE_STRING . '(100)',
             'content' => Schema::TYPE_STRING . ' NOT NULL',
-            'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'created_by' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'updated_at' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'updated_by' => Schema::TYPE_INTEGER . ' NOT NULL',
+            'img' => Schema::TYPE_STRING . '(100)',
+            'type' => Schema::TYPE_BOOLEAN . '(1) NOT NULL',
+            'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'update_time' => Schema::TYPE_INTEGER . '(11)',
+            'create_by' => Schema::TYPE_STRING . '(45) NOT NULL',
+            'update_by' => Schema::TYPE_STRING . '(45)',
+            'is_delete' => Schema::TYPE_BOOLEAN . '(1) NOT NULL default \'0\'',
+
         ]);
+        $this->createTable('cms_contact', [
+            'cms_contact_id' => Schema::TYPE_PK,
+            'address' => Schema::TYPE_STRING . '(200) NOT NULL',
+            'phone' => Schema::TYPE_STRING . '(100) NOT NULL',
+            'qq' => Schema::TYPE_STRING . '(45) NOT NULL',
+            'weibo' => Schema::TYPE_STRING . '(200) NOT NULL',
+            'weixin' => Schema::TYPE_STRING . '(100) NOT NULL',
+            'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'update_time' => Schema::TYPE_INTEGER . '(11)',
+            'create_by' => Schema::TYPE_STRING . '(45) NOT NULL',
+            'update_by' => Schema::TYPE_STRING . '(45)',
+            'is_delete' => Schema::TYPE_BOOLEAN . '(1) NOT NULL default \'0\'',
+
+        ]);
+        $this->createTable('cms_help', [
+            'cms_help_id' => Schema::TYPE_PK,
+            'title' => Schema::TYPE_STRING . '(45) NOT NULL',
+            'content' => Schema::TYPE_STRING . ' NOT NULL',
+            'type' => Schema::TYPE_BOOLEAN . '(1) NOT NULL default \'0\'',
+            'create_by' => Schema::TYPE_STRING . '(45) NOT NULL',
+            'update_by' => Schema::TYPE_STRING . '(45)',
+            'create_time' => Schema::TYPE_DATETIME . ' NOT NULL',
+            'update_time' => Schema::TYPE_DATETIME . '',
+            'isDelete' => Schema::TYPE_BOOLEAN . '(1) NOT NULL default \'0\'',
+
+        ]);
+        $this->createTable('cms_media', [
+            'cms_media_id' => Schema::TYPE_PK,
+            'title' => Schema::TYPE_STRING . '(100) NOT NULL',
+            'content' => Schema::TYPE_STRING . '',
+            'source_site' => Schema::TYPE_STRING . '(45)',
+            'source_link' => Schema::TYPE_STRING . '(200)',
+            'create_by' => Schema::TYPE_STRING . '(45) NOT NULL',
+            'update_by' => Schema::TYPE_STRING . '(45)',
+            'publisher_date' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'update_time' => Schema::TYPE_INTEGER . '(11)',
+            'is_delete' => Schema::TYPE_BOOLEAN . '(1) NOT NULL default \'0\'',
+
+        ]);
+        $this->createTable('cms_notice', [
+            'cms_notice_id' => Schema::TYPE_PK,
+            'type' => Schema::TYPE_BOOLEAN . '(1) NOT NULL default \'0\'',
+            'img' => Schema::TYPE_STRING . '(100)',
+            'title' => Schema::TYPE_STRING . '(100) NOT NULL',
+            'content' => Schema::TYPE_STRING . ' NOT NULL',
+            'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'update_time' => Schema::TYPE_INTEGER . '(11)',
+            'publihser_date' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'create_by' => Schema::TYPE_STRING . '(45) NOT NULL',
+            'update_by' => Schema::TYPE_STRING . '(45)',
+            'is_delete' => Schema::TYPE_BOOLEAN . '(1) NOT NULL default \'0\'',
+
+        ]);
+
     }
 
     public function safeDown()
