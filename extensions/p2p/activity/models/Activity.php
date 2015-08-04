@@ -43,8 +43,8 @@ class Activity extends \kiwi\db\ActiveRecord
         return [
             [['activity_type', 'activity_send_type', 'activity_send_value',], 'required'],
             [['activity_type', 'activity_send_type', 'valid_date'], 'integer'],
-            ['activity_type', 'in', 'range' => array_keys(Kiwi::getDataListModel()->activityTypes)],
-            ['activity_send_type', 'in', 'range' => array_keys(Kiwi::getDataListModel()->activitySendTypes)],
+            ['activity_type', 'in', 'range' => array_keys(Yii::$app->dataList->activityTypes)],
+            ['activity_send_type', 'in', 'range' => array_keys(Yii::$app->dataList->activitySendTypes)],
             [['activity_send_value'], 'number', 'min' => 0],
         ];
     }
@@ -90,7 +90,7 @@ class Activity extends \kiwi\db\ActiveRecord
 
     public function getActivityEvent()
     {
-        return Kiwi::getDataListModel()->activityTypeEvents[$this->activity_type];
+        return Yii::$app->dataList->activityTypeEvents[$this->activity_type];
     }
 
     public function saveRecord()

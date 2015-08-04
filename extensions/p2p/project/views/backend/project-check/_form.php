@@ -55,7 +55,8 @@ if (isset($model->repayment_date) && isset($model->release_date)) {
             'autoclose' => true,
         ]
     ]);
-    $fields[] = $form->field($model, 'repayment_type')->dropDownList(Kiwi::getDataListModel()->projectRepaymentType, ['disabled' => 'disabled']);
+
+    $fields[] = $form->field($model, 'repayment_type')->dropDownList(Yii::$app->dataList->projectRepaymentType, ['disabled' => 'disabled']);
     $fields[] = $form->field($model, 'release_date')->widget(DatePicker::className(), [
         'options' => [
             'value' => $release_date,
@@ -67,7 +68,7 @@ if (isset($model->repayment_date) && isset($model->release_date)) {
             'autoclose' => true,
         ]
     ]);
-    $fields[] = $form->field($model, 'project_type')->dropDownList(Kiwi::getDataListModel()->projectType, ['disabled' => 'disabled']);
+    $fields[] = $form->field($model, 'project_type')->dropDownList(Yii::$app->dataList->projectType, ['disabled' => 'disabled']);
     //    $fields[] = $form->field($model, 'invested_money')->textInput(['maxlength' => 255]);
     //    $fields[] = $form->field($model, 'verify_user')->textInput(['maxlength' => 255]);
     //    $fields[] = $form->field($model, 'verify_date')->widget(DatePicker::className(),[
@@ -82,7 +83,7 @@ if (isset($model->repayment_date) && isset($model->release_date)) {
     //        ]
     //    ]);
     $fields[] = $form->field($model, 'min_money')->textInput(['maxlength' => 255]);
-    $fields[] = $form->field($model, 'status')->dropDownList(Kiwi::getDataListModel()->projectCheckStatus, ['disabled' => false]);
+    $fields[] = $form->field($model, 'status')->dropDownList(Yii::$app->dataList->projectCheckStatus, ['disabled' => false]);
     $fields[] = '<div class="form-group">
                     <div class="col-sm-offset-2 col-sm-9">
                         <a class="btn btn-info btn-page pull-right" data-toggle="tab" href="#w0-tab1" data-tab="1">下一页</a>

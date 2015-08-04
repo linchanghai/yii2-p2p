@@ -9,11 +9,11 @@ return [
     'singleton' => [
     ],
     'class' => [
-        'ArticleCategory' => 'core\cms\models\ArticleCategory',
-        'Article' => 'core\cms\models\Article',
-        'Block' => 'core\cms\models\Block',
-        'Comment' => 'core\cms\models\Comment',
-        'Page' => 'core\cms\models\Page',
-        'Post' => 'core\cms\models\Post',
+        'CmsAbout' => 'core\cms\models\CmsAbout',
+        'CmsContact' => 'core\cms\models\CmsContact',
+        'CmsHelp' => 'core\cms\models\CmsHelp',
+        'CmsMedia' => 'core\cms\models\CmsMedia',
+        'CmsNotice' => 'core\cms\models\CmsNotice',
+
     ],
 ];

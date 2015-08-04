@@ -24,7 +24,7 @@ class BindEmailForm extends Model
         ];
     }
 
-    public function __construct()
+    public function init()
     {
         $memberModel = Yii::$app->user->identity;
         $this->email = $memberModel->email;
@@ -80,5 +80,4 @@ class BindEmailForm extends Model
         }
         return false;
     }
-
 } 

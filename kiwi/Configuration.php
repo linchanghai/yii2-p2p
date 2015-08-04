@@ -26,7 +26,7 @@ use yii\helpers\ArrayHelper;
  * @property array $views
  * @property array $config
  * @property array $defaultConfig
- * @property array $aop
+ * @property array $aspect
  *
  * @package kiwi
  * @author Lujie.Zhou(lujie.zhou@jago-ag.cn)
@@ -37,7 +37,7 @@ class Configuration extends Object
 
     public $codePools = ['@extensions'];
 
-    public $defaultConfigFiles = ['classes', 'controllers', 'views', 'config', 'aspect'];
+    public $defaultConfigFiles = ['controllers', 'views', 'config', 'aspect'];
 
     public $messagePath = '@common/messages';
 
@@ -132,11 +132,13 @@ class Configuration extends Object
 
     /**
      * get all config value, merge all config files
+     * @param array $configFiles
      * @return array
      */
-    public function getConfigValues()
+    public function getConfigValues($configFiles = [])
     {
         $config = [];
+        $configFiles = $configFiles ?: $this->configFiles;
         foreach ($this->modules as $moduleName => $moduleClass) {
             $classParts = explode('\\', $moduleClass);
             array_pop($classParts);
@@ -144,7 +146,7 @@ class Configuration extends Object
             $moduleDir = Yii::getAlias('@' . $moduleDir);
 
             $configData = [];
-            foreach ($this->configFiles as $configName) {
+            foreach ($configFiles as $configName) {
                 $configFile = $moduleDir . '/config/' . $configName . '.php';
                 if (is_file($configFile)) {
                     $configData[$configName] = include($configFile);
@@ -154,6 +156,12 @@ class Configuration extends Object
             $config = ArrayHelper::merge($config, $configData);
         }
         return $config;
+    }
+
+    public function getClasses()
+    {
+        $configValues = $this->getConfigValues(['classes']);
+        return isset($configValues['classes']) ? $configValues['classes'] : [];
     }
 
     protected function getDefaultConfig()

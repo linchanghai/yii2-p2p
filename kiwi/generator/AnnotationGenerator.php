@@ -213,7 +213,8 @@ EOF;
             foreach ($setting as $tabKey => $tabConfig) {
                 foreach ($tabConfig['groups'] as $groupKey => $groupConfig) {
                     foreach ($groupConfig['fields'] as $fieldKey => $fieldConfig) {
-                        $annotations[] = " * @property string \${$tabKey}_{$groupKey}_{$fieldKey}";
+                        $settingKey = Yii::$app->setting->getSettingKey($tabKey, $groupKey, $fieldKey);
+                        $annotations[] = " * @property string \${$settingKey }";
                     }
                 }
             }

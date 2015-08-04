@@ -96,7 +96,7 @@ $totalMoney = $memberStatistic->account_money + $memberStatistic->freezon_money 
                         <br>
                         <span><?=  $memberStatistic->package_money?>元</span>
                         <br>
-                        <span>年化收益 <?= \kiwi\Kiwi::getSettingModel()->P2P_package_packageRate ?>% <a href="<?= Url::to(['/package/package/into']) ?>" class="secondColor">转入</a> <a href="<?= Url::to(['/package/package/out']) ?>" class="secondColor">转出</a></span>
+                        <span>年化收益 <?= Yii::$app->setting->packageRate ?>% <a href="<?= Url::to(['/package/package/into']) ?>" class="secondColor">转入</a> <a href="<?= Url::to(['/package/package/out']) ?>" class="secondColor">转出</a></span>
                     </p>
                 </li>
                 <li>

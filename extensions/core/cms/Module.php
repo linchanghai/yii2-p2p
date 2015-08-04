@@ -10,7 +10,7 @@ namespace core\cms;
 
 class Module extends \kiwi\base\Module
 {
-//    public static $active = true;
+    public static $active = true;
 
-    public static $version = 'v0.2.0';
+    public static $version = 'v0.1.0';
 } 

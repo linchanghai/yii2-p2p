@@ -63,7 +63,7 @@ if($createButton) {
             [
                 'attribute'=>'repayment_type',
                 'value'=>function ($model) {
-                    return Kiwi::getDataListModel()->projectRepaymentType[$model->repayment_type] ;
+                    return Yii::$app->dataList->projectRepaymentType[$model->repayment_type] ;
                 },
                 'width' => '175px'
             ],
@@ -71,7 +71,7 @@ if($createButton) {
             [
                 'attribute'=>'project_type',
                 'value'=>function ($model) {
-                    return Kiwi::getDataListModel()->projectType[$model->project_type] ;
+                    return Yii::$app->dataList->projectType[$model->project_type] ;
                 },
             ],
             // 'create_user',

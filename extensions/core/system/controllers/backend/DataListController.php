@@ -32,7 +32,7 @@ class DataListController extends Controller
      */
     public function actionIndex($type = '')
     {
-        return $this->render('index', ['dataList' => Kiwi::getDataListModel(), 'type' => $type]);
+        return $this->render('index', ['dataList' => Yii::$app->dataList, 'type' => $type]);
     }
 
     /**
@@ -44,7 +44,7 @@ class DataListController extends Controller
      */
     public function actionCreate($type)
     {
-        $dataList = Kiwi::getDataListModel();
+        $dataList = Yii::$app->dataList;
         if (!$dataList->hasDataList($type, true)) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
@@ -68,7 +68,7 @@ class DataListController extends Controller
      */
     public function actionUpdate($id)
     {
-        $dataList = Kiwi::getDataListModel();
+        $dataList = Yii::$app->dataList;
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $dataList->updateValue($model)) {
@@ -89,7 +89,7 @@ class DataListController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        Kiwi::getDataListModel()->removeValue($model);
+        Yii::$app->dataList->removeValue($model);
 
         return $this->redirect(['index']);
     }

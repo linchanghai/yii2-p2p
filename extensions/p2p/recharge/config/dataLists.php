@@ -5,7 +5,17 @@
  * @license http://www.yincart.com/license/
  */
 
+use kiwi\Kiwi;
+
+$rechargeFormClass = Kiwi::getRechargeFormClass();
+
 return [
+    'events' => [
+        'values' => [
+            $rechargeFormClass . '::afterRecharge' => Yii::t('p2p_recharge', 'Recharge'),
+        ],
+    ],
+
     'rechargeMethods' => [
         'values' => [
             'localPay' => 'LocalPay'
