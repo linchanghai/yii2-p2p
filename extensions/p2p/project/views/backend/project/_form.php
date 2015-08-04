@@ -6,7 +6,7 @@ use kartik\widgets\ActiveForm;
 use yii\bootstrap\Tabs;
 use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Url;
-use kartik\datetime\DateTimePicker;
+use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model p2p\project\models\Project */
@@ -20,20 +20,20 @@ EOF;
 $this->registerJs($js, $this::POS_END);
 
 if (isset($model->repayment_date) && isset($model->release_date)) {
-    $model->repayment_date = date('Y-m-d H:i', $model->repayment_date);
-    $model->release_date = date('Y-m-d H:i', $model->release_date);
+    $model->repayment_date = date('Y-m-d', $model->repayment_date);
+    $model->release_date = date('Y-m-d', $model->release_date);
     $repayment_date = $model->repayment_date;
     $release_date = $model->release_date;
 } else {
-    $repayment_date = date('Y-m-d H:i', time());
-    $release_date = date('Y-m-d H:i', time());
+    $repayment_date = date('Y-m-d', time());
+    $release_date = date('Y-m-d', time());
 }
 $projectClass = Kiwi::getProjectClass();
 if (!isset($model->status)) {
     $model->status = $projectClass::STATUS_PENDING;
 }
 
-$disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
+$disabled = $model->status == $projectClass::STATUS_PENDING ? false : 'disabled';
 
 ?>
 <div class="project-form">
@@ -51,21 +51,25 @@ $disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
     $fields[] = $form->field($model, 'project_no')->textInput(['maxlength' => 255]);
     $fields[] = $form->field($model, 'invest_total_money')->textInput(['maxlength' => 255]);
     $fields[] = $form->field($model, 'interest_rate')->textInput(['maxlength' => 255]);
-    $fields[] = $form->field($model, 'repayment_date')->widget(DateTimePicker::className(), [
+    $fields[] = $form->field($model, 'repayment_date')->widget(DatePicker::className(), [
         'options' => [
             'value' => $repayment_date
         ],
         'pluginOptions' => [
+            'format' => 'yyyy-mm-dd',
+            'todayHighlight' => true,
             'language' => Yii::$app->language,
             'autoclose' => true,
         ]
     ]);
     $fields[] = $form->field($model, 'repayment_type')->dropDownList(Kiwi::getDataListModel()->projectRepaymentType);
-    $fields[] = $form->field($model, 'release_date')->widget(DateTimePicker::className(), [
+    $fields[] = $form->field($model, 'release_date')->widget(DatePicker::className(), [
         'options' => [
-            'value' => $release_date
+            'value' => $release_date,
         ],
         'pluginOptions' => [
+            'format' => 'yyyy-mm-dd',
+            'todayHighlight' => true,
             'language' => Yii::$app->language,
             'autoclose' => true,
         ]
@@ -119,6 +123,9 @@ $disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
             'filebrowserBrowseUrl' => Url::to(['/elfinder/manager']),
             'preset' => 'standard',
             'language' => Yii::$app->language,
+        ],
+        'options' => [
+            'disabled' => $disabled
         ]
     ]);
     $fields[] = '<div class="form-group">
@@ -137,9 +144,12 @@ $disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
             'filebrowserBrowseUrl' => Url::to(['/elfinder/manager']),
             'preset' => 'standard',
             'language' => Yii::$app->language,
+        ],
+        'options' => [
+            'disabled' => $disabled
         ]
     ]);
-    if($disabled != 'disabled') {
+    if ($disabled != 'disabled') {
         $submitButton = Html::submitButton(
             $model->isNewRecord ? Yii::t('p2p_project', 'Create') : Yii::t('p2p_project', 'Update'),
             [
@@ -151,8 +161,8 @@ $disabled = $model->status == $projectClass::STATUS_PENDING ? '' : 'disabled';
     $fields[] = '<div class="form-group">
                     <div class="col-sm-offset-2 col-sm-9">
                         <a class="btn btn-info btn-page" data-toggle="tab" href="#w0-tab2" data-tab="2">上一页</a>' .
-                        $submitButton
-                . '</div></div>';
+        $submitButton
+        . '</div></div>';
     $fieldGroups[] = ['label' => Yii::t('p2p_project', 'Project Material'), 'content' => implode('', $fields)];
     echo Tabs::widget(['items' => $fieldGroups]);
     ?>
