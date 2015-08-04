@@ -18,19 +18,19 @@ $fields[] =  DetailView::widget([
         'repayment_date:datetime',
         [
             'attribute'=>'repayment_type',
-            'value'=> Kiwi::getDataListModel()->projectRepaymentType[$model->repayment_type]
+            'value'=> Yii::$app->dataList->projectRepaymentType[$model->repayment_type]
         ],
         'release_date:datetime',
         [
             'attribute'=>'project_type',
-            'value'=>Kiwi::getDataListModel()->projectType[$model->project_type]
+            'value'=>Yii::$app->dataList->projectType[$model->project_type]
         ],
         'invested_money',
         'min_money',
         [
             'attribute'=>'status',
             'value'=>
-                Kiwi::getDataListModel()->projectStatus[$model->project_type]
+                Yii::$app->dataList->projectStatus[$model->project_type]
 
         ],
     ],

@@ -6,36 +6,45 @@
  * Time: 10:53
  */
 
-use p2p\withdraw\models\WithdrawRecord;
+use kiwi\Kiwi;
+
+$withdrawRecordClass = Kiwi::getWithdrawRecordClass();
+$withdrawFormClass = Kiwi::getWithdrawFormClass();
 
 return [
+    'events' => [
+        'values' => [
+            $withdrawFormClass . '::afterWithdraw' => Yii::t('p2p_withdraw', 'Withdraw'),
+        ]
+    ],
+
     'withdrawStatus' => [
         'values' => [
-            WithdrawRecord::STATUS_PENDING => Yii::t('p2p_withdraw', 'Withdraw Pending'),
-            WithdrawRecord::STATUS_SUCCESS => Yii::t('p2p_withdraw', 'Withdraw Success'),
-            WithdrawRecord::STATUS_FAIL => Yii::t('p2p_withdraw', 'Withdraw Fail'),
-            WithdrawRecord::STATUS_FIRST_VERIFY_SUCCESS => Yii::t('p2p_withdraw', 'Withdraw First Verify Success'),
+            $withdrawRecordClass::STATUS_PENDING => Yii::t('p2p_withdraw', 'Withdraw Pending'),
+            $withdrawRecordClass::STATUS_SUCCESS => Yii::t('p2p_withdraw', 'Withdraw Success'),
+            $withdrawRecordClass::STATUS_FAIL => Yii::t('p2p_withdraw', 'Withdraw Fail'),
+            $withdrawRecordClass::STATUS_FIRST_VERIFY_SUCCESS => Yii::t('p2p_withdraw', 'Withdraw First Verify Success'),
         ]
     ],
 
     'withdrawFirstVerifyStatus' => [
         'values' => [
-            WithdrawRecord::STATUS_FIRST_VERIFY_SUCCESS => Yii::t('p2p_withdraw', 'Withdraw First Verify Success'),
-            WithdrawRecord::STATUS_FAIL => Yii::t('p2p_withdraw', 'Withdraw Fail'),
+            $withdrawRecordClass::STATUS_FIRST_VERIFY_SUCCESS => Yii::t('p2p_withdraw', 'Withdraw First Verify Success'),
+            $withdrawRecordClass::STATUS_FAIL => Yii::t('p2p_withdraw', 'Withdraw Fail'),
         ]
     ],
 
     'withdrawSecondVerifyStatus' => [
         'values' => [
-            WithdrawRecord::STATUS_SUCCESS => Yii::t('p2p_withdraw', 'Withdraw Success'),
-            WithdrawRecord::STATUS_FAIL => Yii::t('p2p_withdraw', 'Withdraw Fail'),
+            $withdrawRecordClass::STATUS_SUCCESS => Yii::t('p2p_withdraw', 'Withdraw Success'),
+            $withdrawRecordClass::STATUS_FAIL => Yii::t('p2p_withdraw', 'Withdraw Fail'),
         ]
     ],
 
     'withdrawType' => [
         'values' => [
-            WithdrawRecord::TYPE_AUTO => Yii::t('p2p_withdraw', 'Auto Withdraw'),
-            WithdrawRecord::TYPE_MANUAL => Yii::t('p2p_withdraw', 'Manual Withdraw'),
+            $withdrawRecordClass::TYPE_AUTO => Yii::t('p2p_withdraw', 'Auto Withdraw'),
+            $withdrawRecordClass::TYPE_MANUAL => Yii::t('p2p_withdraw', 'Manual Withdraw'),
         ]
     ]
 ];

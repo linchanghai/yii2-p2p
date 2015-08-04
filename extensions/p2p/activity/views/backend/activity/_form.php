@@ -17,9 +17,9 @@ use kartik\widgets\ActiveForm;
         'fullSpan' => 11
     ]); ?>
 
-    <?= $form->field($model, 'activity_type')->dropDownList(Kiwi::getDataListModel()->activityTypes) ?>
+    <?= $form->field($model, 'activity_type')->dropDownList(Yii::$app->dataList->activityTypes) ?>
 
-    <?= $form->field($model, 'activity_send_type')->dropDownList(Kiwi::getDataListModel()->activitySendTypes) ?>
+    <?= $form->field($model, 'activity_send_type')->dropDownList(Yii::$app->dataList->activitySendTypes) ?>
 
     <?= $form->field($model, 'activity_send_value')->textInput(['maxlength' => true]) ?>
 

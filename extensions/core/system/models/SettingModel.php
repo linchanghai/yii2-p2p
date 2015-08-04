@@ -29,8 +29,8 @@ class SettingModel extends KeyValueModel
         foreach ($config as $tabKey => $tab) {
             foreach ($tab['groups'] as $groupKey => $group) {
                 foreach ($group['fields'] as $fieldKey => $field) {
-                    $configKey = implode($this->keySeparator, [$tabKey, $groupKey, $fieldKey]);
-                    $definition[$configKey] = $field;
+                    $settingKey = $this->getSettingKey($tabKey, $groupKey, $fieldKey);
+                    $definition[$settingKey] = $field;
                 }
             }
         }
@@ -68,7 +68,7 @@ class SettingModel extends KeyValueModel
                     }
                     $fieldOptions = array_merge($options, ['options' => ['class' => 'form-group', 'data' => $dataOptions]]);
 
-                    $key = implode($this->keySeparator, [$tabKey, $groupKey, $fieldKey]);
+                    $key = $this->getSettingKey($tabKey, $groupKey, $fieldKey);
                     /** @var \yii\bootstrap\ActiveField $activeField */
                     $activeField = $form->field($this, $key, $fieldOptions);
 
@@ -139,5 +139,17 @@ JS;
         Yii::$app->view->registerJs($js);
 
         return Tabs::widget(['items' => $tabItems]);
+    }
+
+    /**
+     * @param $tabKey
+     * @param $groupKey
+     * @param $fieldKey
+     * @return string
+     */
+    public function getSettingKey($tabKey, $groupKey, $fieldKey)
+    {
+        return $fieldKey;
+        return implode($this->keySeparator, [$tabKey, $groupKey, $fieldKey]);
     }
 }

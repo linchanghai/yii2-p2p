@@ -28,10 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'width' => '180px',
                 'value' => function ($model) {
                     /** @var \core\notification\models\NotificationTemplate $model */
-                    return Kiwi::getDataListModel()->notificationEvents[$model->event];
+                    return Yii::$app->dataList->notificationEvents[$model->event];
                 },
                 'filterType' => GridView::FILTER_SELECT2,
-                'filter' => Kiwi::getDataListModel()->notificationEvents,
+                'filter' => Yii::$app->dataList->notificationEvents,
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
@@ -44,10 +44,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'width' => '180px',
                 'value' => function ($model) {
                     /** @var \core\notification\models\NotificationTemplate $model */
-                    return Kiwi::getDataListModel()->notificationTypes[$model->type];
+                    return Yii::$app->dataList->notificationTypes[$model->type];
                 },
                 'filterType' => GridView::FILTER_SELECT2,
-                'filter' => Kiwi::getDataListModel()->notificationTypes,
+                'filter' => Yii::$app->dataList->notificationTypes,
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],

@@ -14,11 +14,11 @@ namespace kiwi\base;
  */
 Trait AspectTrait
 {
-    public $aspectDefault = true;
+    protected $aspectDefault = true;
 
-    public $aspectKeysOnly = [];
+    protected $aspectKeysOnly = [];
 
-    public $aspectKeysExcept = [];
+    protected $aspectKeysExcept = [];
 
     private $_aspectData = [];
 

@@ -19,7 +19,7 @@ use yii\widgets\Pjax;
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->dropDownList(Kiwi::getDataListModel()->boolean) ?>
+    <?= $form->field($model, 'status')->dropDownList(Yii::$app->dataList->boolean) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('core_system', 'Create') : Yii::t('core_system', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

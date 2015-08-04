@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model core\system\models\DataList */
 
-$dataList = Kiwi::getDataListModel();
+$dataList = Yii::$app->dataList;
 $type = $dataList->getDataList($model->type)[$dataList->labelKey];
 
 $this->title = Yii::t('core_system', 'Add {type} Value', ['type' => $type]);

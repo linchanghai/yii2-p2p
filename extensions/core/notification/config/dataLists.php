@@ -19,5 +19,5 @@ return [
         'values' => [
             'core\user\forms\SignupForm::afterSignup' => Yii::t('core_notification', 'Signup'),
         ]
-    ]
+    ],
 ];
