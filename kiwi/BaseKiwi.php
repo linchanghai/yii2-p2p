@@ -51,8 +51,9 @@ class BaseKiwi
     {
         $object = Yii::createObject($type, $params);
 
+        $class = is_string($type) ? $type : $type['class'];
         $aspectConfig = Kiwi::getConfiguration()->aspect;
-        if (empty($aspectConfig[$type['class']])) {
+        if (empty($aspectConfig[$class])) {
             return $object;
         }
 
