@@ -478,7 +478,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
 
     #region logic delete
 
-    public static $enableLogicDelete = false;
+    public static $enableLogicDelete = true;
 
     public static $isDeleteAttribute = 'is_delete';
 
@@ -489,15 +489,32 @@ class ActiveRecord extends \yii\db\ActiveRecord
     const IS_DELETE_TRUE = 1;
     const IS_DELETE_FALSE = 0;
 
+    public static function isEnableLoginDelete()
+    {
+        return static::$enableLogicDelete && static::hasAttribute(static::$isDeleteAttribute);
+    }
+
     /**
      * @inheritdoc
      */
     public function beforeSave($insert)
     {
-        if (static::$enableLogicDelete && $insert) {
+        if ($this->isEnableLoginDelete() && $insert) {
             $this->{static::$isDeleteAttribute} = static::IS_DELETE_FALSE;
         }
         return parent::beforeSave($insert);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function find()
+    {
+        if (static::isEnableLoginDelete()) {
+            $condition = [static::$isDeleteAttribute => static::IS_DELETE_FALSE];
+            return parent::find()->andWhere($condition);
+        }
+        return parent::find();
     }
 
     /**
@@ -509,7 +526,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
             $models = static::findAll($condition);
             static::deleteAllRelations($models);
         }
-        if (static::$enableLogicDelete) {
+        if (static::isEnableLoginDelete()) {
             $attributes = [static::$isDeleteAttribute => static::IS_DELETE_TRUE];
             return static::updateAll($attributes, $condition, $params);
         }
@@ -535,18 +552,6 @@ class ActiveRecord extends \yii\db\ActiveRecord
                 $modelClass::deleteAll($condition);
             }
         }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public static function find()
-    {
-        if (static::$enableLogicDelete) {
-            $condition = [static::$isDeleteAttribute => static::IS_DELETE_FALSE];
-            return parent::find()->andWhere($condition);
-        }
-        return parent::find();
     }
 
     #endregion logic delete
