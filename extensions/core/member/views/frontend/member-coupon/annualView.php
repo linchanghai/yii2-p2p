@@ -2,9 +2,6 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
-$this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/account.min.css', ['depends' => [\frontend\assets\AppAsset::className()]]);
-
-$this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/account.js', ['depends' => [\frontend\assets\AppAsset::className()]]);
 
 ?>
 

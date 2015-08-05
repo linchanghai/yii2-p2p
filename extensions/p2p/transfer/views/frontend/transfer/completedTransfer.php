@@ -7,11 +7,12 @@
  */
 
 use yii\helpers\Url;
+
 ?>
 <div class="containerMain">
     <ul class="clearFix rechargeTitle tabs">
-        <li><a href="<?= Url::to(['/transfer/transfer/enable'])?>">可转让项目</a></li>
-        <li><a href="<?= Url::to(['/transfer/transfer/pending'])?>">转让中项目</a></li>
+        <li><a href="<?= Url::to(['/transfer/transfer/enable']) ?>">可转让项目</a></li>
+        <li><a href="<?= Url::to(['/transfer/transfer/pending']) ?>">转让中项目</a></li>
         <li><a class="active" href="#">已经转让项目</a></li>
     </ul>
     <div class="backGrey p20 fundsRecords">

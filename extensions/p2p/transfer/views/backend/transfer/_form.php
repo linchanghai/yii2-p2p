@@ -45,7 +45,7 @@ $disabled = $model->status == $transferClass::STATUS_PENDING ? false : 'disabled
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-9">
             <?php
-            if(!$disabled) {
+            if (!$disabled) {
                 echo Html::submitButton($model->isNewRecord ? Yii::t('p2p_transfer', 'Create') : Yii::t('p2p_transfer', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']);
             }
             ?>

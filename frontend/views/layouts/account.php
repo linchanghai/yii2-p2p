@@ -7,8 +7,8 @@ use yii\helpers\Url;
 /** @var string $content */
 $this->beginContent('@app/views/layouts/main.php');
 
-$this->registerCssFile('/css/account.min.css', ['depends' => [AppAsset::className()]]);
 $this->registerCssFile('/css/invest.min.css', ['depends' => [AppAsset::className()]]);
+$this->registerCssFile('/css/account.min.css', ['depends' => [AppAsset::className()]]);
 $this->registerJsFile('/js/account.js', ['depends' => [AppAsset::className()]]);
 ?>
 
