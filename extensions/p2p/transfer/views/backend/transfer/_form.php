@@ -13,6 +13,9 @@ $project = $model->project;
 
 /** @var core\member\models\Member $member */
 $member = $model->member;
+
+$transferClass = Kiwi::getProjectInvestTransferApplyClass();
+$disabled = $model->status == $transferClass::STATUS_PENDING ? false : 'disabled';
 ?>
 
 <div class="project-invest-transfer-apply-form">
@@ -22,6 +25,7 @@ $member = $model->member;
         'type' => ActiveForm::TYPE_HORIZONTAL,
         'formConfig' => ['labelSpan' => 2],
         'fullSpan' => 11,
+        'disabled' => $disabled
     ]); ?>
 
     <?= $form->field($project, 'project_name')->textInput() ?>
@@ -40,7 +44,11 @@ $member = $model->member;
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-9">
-            <?= Html::submitButton($model->isNewRecord ? Yii::t('p2p_transfer', 'Create') : Yii::t('p2p_transfer', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?php
+            if(!$disabled) {
+                echo Html::submitButton($model->isNewRecord ? Yii::t('p2p_transfer', 'Create') : Yii::t('p2p_transfer', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']);
+            }
+            ?>
         </div>
     </div>
 
