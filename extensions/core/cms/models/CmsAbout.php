@@ -3,6 +3,7 @@
 namespace core\cms\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -35,7 +36,7 @@ class CmsAbout extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content', 'type', 'create_time', 'create_by'], 'required'],
+            [['content', 'type'], 'required'],
             [['content'], 'string'],
             [['type', 'create_time', 'update_time', 'is_delete'], 'integer'],
             [['title', 'img'], 'string', 'max' => 100],
@@ -70,6 +71,11 @@ class CmsAbout extends \kiwi\db\ActiveRecord
                 'createdAtAttribute' => 'create_time',
                 'updatedAtAttribute' => 'update_time',
             ],
+            'user' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'create_by',
+                'updatedByAttribute' => 'update_by',
+            ]
         ];
     }
 }

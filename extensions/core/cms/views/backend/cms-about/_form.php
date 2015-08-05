@@ -19,15 +19,18 @@ use kartik\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'content')->widget(\mihaildev\ckeditor\CKEditor::className(), [
+        'name' => 'legal_info',
+        'editorOptions' => [
+            'filebrowserBrowseUrl' => \yii\helpers\Url::to(['/elfinder/manager']),
+            'preset' => 'standard',
+            'language' => Yii::$app->language,
+        ]
+    ]); ?>
 
     <?= $form->field($model, 'img')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'type')->textInput() ?>
-
-    <?= $form->field($model, 'create_by')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'update_by')->textInput(['maxlength' => true]) ?>
 
 
     <div class="form-group">

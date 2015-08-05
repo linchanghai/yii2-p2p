@@ -19,17 +19,25 @@ use kartik\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'content')->widget(\mihaildev\ckeditor\CKEditor::className(), [
+        'name' => 'legal_info',
+        'editorOptions' => [
+            'filebrowserBrowseUrl' => \yii\helpers\Url::to(['/elfinder/manager']),
+            'preset' => 'standard',
+            'language' => Yii::$app->language,
+        ]
+    ]);?>
 
     <?= $form->field($model, 'source_site')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'source_link')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'create_by')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'update_by')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'publisher_date')->textInput() ?>
+    <?= $form->field($model, 'publisher_date')->widget(\kartik\widgets\DateTimePicker::className(), [
+        'pluginOptions' => [
+            'language' => Yii::$app->language,
+            'autoclose' => true,
+        ]
+    ]);?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('core_cms', 'Create') : Yii::t('core_cms', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

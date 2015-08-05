@@ -3,6 +3,7 @@
 namespace core\cms\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -36,7 +37,7 @@ class CmsMedia extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'create_by', 'publisher_date', 'create_time'], 'required'],
+            [['title', 'publisher_date'], 'required'],
             [['content'], 'string'],
             [['publisher_date', 'create_time', 'update_time', 'is_delete'], 'integer'],
             [['title'], 'string', 'max' => 100],
@@ -73,6 +74,11 @@ class CmsMedia extends \kiwi\db\ActiveRecord
                 'createdAtAttribute' => 'create_time',
                 'updatedAtAttribute' => 'update_time',
             ],
+            'user' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'create_by',
+                'updatedByAttribute' => 'update_by',
+            ]
         ];
     }
 }

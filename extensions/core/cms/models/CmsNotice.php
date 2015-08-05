@@ -3,6 +3,7 @@
 namespace core\cms\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -37,7 +38,7 @@ class CmsNotice extends \kiwi\db\ActiveRecord
     {
         return [
             [['type', 'create_time', 'update_time', 'publihser_date', 'is_delete'], 'integer'],
-            [['title', 'content', 'create_time', 'publihser_date', 'create_by'], 'required'],
+            [['title', 'content', 'publihser_date'], 'required'],
             [['content'], 'string'],
             [['img', 'title'], 'string', 'max' => 100],
             [['create_by', 'update_by'], 'string', 'max' => 45]
@@ -72,6 +73,12 @@ class CmsNotice extends \kiwi\db\ActiveRecord
                 'createdAtAttribute' => 'create_time',
                 'updatedAtAttribute' => 'update_time',
             ],
+
+            'user' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'create_by',
+                'updatedByAttribute' => 'update_by',
+            ]
         ];
     }
 }
