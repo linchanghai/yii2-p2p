@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
+use kiwi\Kiwi;
 
 /* @var $this yii\web\View */
 /* @var $searchModel p2p\transfer\searches\ProjectInvestTransferApplySearch */
@@ -9,6 +10,14 @@ use kartik\grid\GridView;
 
 $this->title = Yii::t('p2p_transfer', 'Project Invest Transfer Applies');
 $this->params['breadcrumbs'][] = $this->title;
+
+$transferClass = Kiwi::getProjectInvestTransferApplyClass();
+$createButton = $status == $transferClass::STATUS_PENDING ? true : false;
+if($createButton) {
+    $buttonTemplate = '<div style="width: 30px">{update} {delete}</div>';
+} else {
+    $buttonTemplate = '<div style="width: 15px">{update}</div>';
+}
 ?>
 <div class="project-invest-transfer-apply-index">
 
@@ -38,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '<div style="width: 30px">{update} {delete}</div>'
+                'template' => $buttonTemplate
             ],
         ],
         'export' => false,

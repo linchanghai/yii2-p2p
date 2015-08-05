@@ -2,10 +2,10 @@
 
 namespace p2p\transfer\controllers\backend;
 
+use kiwi\helpers\ArrayHelper;
 use kiwi\Kiwi;
 use Yii;
 use p2p\transfer\models\ProjectInvestTransferApply;
-use p2p\transfer\searches\ProjectInvestTransferApplySearch;
 use kiwi\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -15,6 +15,11 @@ use yii\filters\VerbFilter;
  */
 class TransferController extends Controller
 {
+    public function getViewPath()
+    {
+        return $this->module->getViewPath() . DIRECTORY_SEPARATOR . 'transfer';
+    }
+
     public function behaviors()
     {
         return [
@@ -33,12 +38,17 @@ class TransferController extends Controller
      */
     public function actionIndex()
     {
+        $transferClass = Kiwi::getProjectInvestTransferApplyClass();
         $searchModel = Kiwi::getProjectInvestTransferApplySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(ArrayHelper::merge(Yii::$app->request->queryParams, [
+            'ProjectInvestTransferApplySearch' => [
+                'status' => $transferClass::STATUS_PENDING,
+            ]]));
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'status' => $transferClass::STATUS_PENDING,
         ]);
     }
 
