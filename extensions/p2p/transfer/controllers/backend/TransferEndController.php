@@ -12,7 +12,8 @@ use kiwi\helpers\ArrayHelper;
 use Yii;
 use kiwi\Kiwi;
 
-class TransferEndController extends TransferController {
+class TransferEndController extends TransferController
+{
     /**
      * Lists all ProjectInvestTransferApply models.
      * @return mixed

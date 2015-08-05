@@ -22,7 +22,7 @@ $form = ActiveForm::begin();
         <li><a class="active" href="#">申请债券转让</a></li>
     </ul>
     <br>
-    <input type="hidden" name="TransferForm[project_invest_id]" value="<?= $transferForm->project_invest_id?>">
+    <input type="hidden" name="TransferForm[project_invest_id]" value="<?= $transferForm->project_invest_id ?>">
     <?php
     echo $form->field($transferForm, 'min_money')->textInput();
     echo $form->field($transferForm, 'transfer_money')->textInput();

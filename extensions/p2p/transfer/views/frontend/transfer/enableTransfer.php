@@ -7,12 +7,13 @@
  */
 
 use yii\helpers\Url;
+
 ?>
 <div class="containerMain">
     <ul class="clearFix rechargeTitle tabs">
         <li><a class="active" href="#">可转让项目</a></li>
-        <li><a href="<?= Url::to(['/transfer/transfer/pending'])?>">转让中项目</a></li>
-        <li><a href="<?= Url::to(['/transfer/transfer/completed'])?>">已经转让项目</a></li>
+        <li><a href="<?= Url::to(['/transfer/transfer/pending']) ?>">转让中项目</a></li>
+        <li><a href="<?= Url::to(['/transfer/transfer/completed']) ?>">已经转让项目</a></li>
     </ul>
     <div class="backGrey p20 fundsRecords">
         <table class="table table-bordered textCenter mt20 tabContent">
@@ -37,7 +38,7 @@ use yii\helpers\Url;
                 <td>2015-08-07</td>
                 <td>2</td>
                 <td>8</td>
-                <td><a href="<?= Url::to(['create', 'project_invest_id' => 1])?>" class="secondColor">转让</a></td>
+                <td><a href="<?= Url::to(['create', 'project_invest_id' => 1]) ?>" class="secondColor">转让</a></td>
             </tr>
             </tbody>
         </table>

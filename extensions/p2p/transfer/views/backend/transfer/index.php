@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $transferClass = Kiwi::getProjectInvestTransferApplyClass();
 $createButton = $status == $transferClass::STATUS_PENDING ? true : false;
-if($createButton) {
+if ($createButton) {
     $buttonTemplate = '<div style="width: 30px">{update} {delete}</div>';
 } else {
     $buttonTemplate = '<div style="width: 15px">{update}</div>';
@@ -35,12 +35,12 @@ if($createButton) {
             'project.project_name',
             'member.username',
             'min_money',
-             'total_invest_money',
-             'discount_rate',
+            'total_invest_money',
+            'discount_rate',
             // 'status',
             // 'verify_user',
             // 'verify_date',
-             'counter_fee',
+            'counter_fee',
             // 'create_time:datetime',
             // 'update_time:datetime',
             // 'is_delete',
