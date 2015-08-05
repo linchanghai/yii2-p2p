@@ -32,7 +32,7 @@ class AnnotationGenerator extends Object
 
     public function generate()
     {
-        $classes = ['User', 'Application', 'Kiwi', 'Configuration', 'DataListModel', 'SettingModel'];
+        $classes = ['Application', 'Kiwi', 'Configuration', 'DataListModel', 'SettingModel'];
         foreach ($classes as $class) {
             $generateFunc = 'generate' . ucfirst($class);
             $this->$generateFunc();

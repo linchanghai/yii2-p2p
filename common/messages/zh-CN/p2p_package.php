@@ -17,8 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Into Package' => '',
     'Is Delete' => '',
     'Member ID' => '',
+    'Out Package' => '',
     'P2P config' => '',
     'Package Interest Record ID' => '',
     'Package Rate' => '',

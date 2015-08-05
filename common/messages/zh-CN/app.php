@@ -19,8 +19,10 @@
 return [
     'Area ID' => '',
     'Grade' => '',
+    'Incorrect old password.' => '',
     'Language' => '',
     'Name' => '',
     'Parent ID' => '',
     'Path' => '',
+    'The new password can not be the same as the old password.' => '',
 ];
