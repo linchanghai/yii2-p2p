@@ -77,4 +77,41 @@ class WithdrawRecordSearch extends WithdrawRecord
 
         return $dataProvider;
     }
+
+    public function frontendSearch($params)
+    {
+        $withdrawRecordClass = Kiwi::getWithdrawRecordClass();
+        $query = $withdrawRecordClass::find()->where([
+            'deposit_type' => $withdrawRecordClass::TYPE_MANUAL,
+            'member_id' => Yii::$app->user->id
+        ]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pagesize' => 20,
+            ]
+        ]);
+
+        if ($params) {
+            if (isset($params['date'])) {
+                switch ($params['date']) {
+                    case 1:
+                        $query->andWhere(['>=', 'create_time', strtotime('-1 month')]);
+                        break;
+                    case 2:
+                        $query->andWhere(['between', 'create_time', strtotime('-1 month'), strtotime('-3 month')]);
+                        break;
+                    case 3:
+                        $query->andWhere(['between', 'create_time', strtotime('-3 month'), strtotime('-6 month')]);
+                        break;
+                    case 4:
+                        $query->andWhere(['<=', 'create_time', strtotime('-6 month')]);
+                        break;
+                }
+            }
+        }
+
+        return $dataProvider;
+    }
 }

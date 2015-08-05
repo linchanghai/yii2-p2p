@@ -10,7 +10,6 @@ namespace p2p\withdraw\controllers\frontend;
 use kiwi\Kiwi;
 use kiwi\web\Controller;
 use Yii;
-use yii\data\ActiveDataProvider;
 
 class WithdrawController extends Controller
 {
@@ -35,16 +34,8 @@ class WithdrawController extends Controller
 
     public function actionWithdrawList()
     {
-        $withdrawRecordClass = Kiwi::getWithdrawRecordClass();
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $withdrawRecordClass::find()->andWhere([
-                'member_id' => Yii::$app->user->id
-            ]),
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-        ]);
+        $searchModel = Kiwi::getWithdrawRecordSearch();
+        $dataProvider = $searchModel->frontendSearch(Yii::$app->request->queryParams);
 
         $models = $dataProvider->getModels();
 

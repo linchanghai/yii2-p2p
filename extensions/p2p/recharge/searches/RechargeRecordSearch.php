@@ -2,6 +2,7 @@
 
 namespace p2p\recharge\searches;
 
+use kiwi\Kiwi;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -70,6 +71,42 @@ class RechargeRecordSearch extends RechargeRecord
 
         $query->andFilterWhere(['like', 'transaction_id', $this->transaction_id])
             ->andFilterWhere(['like', 'recharge_type', $this->recharge_type]);
+
+        return $dataProvider;
+    }
+
+    public function frontendSearch($params)
+    {
+        $RechargeRecordClass = Kiwi::getRechargeRecordClass();
+        $query = $RechargeRecordClass::find()->where([
+            'member_id' => Yii::$app->user->id
+        ]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pagesize' => 20,
+            ]
+        ]);
+
+        if ($params) {
+            if (isset($params['date'])) {
+                switch ($params['date']) {
+                    case 1:
+                        $query->andWhere(['>=', 'create_time', strtotime('-1 month')]);
+                        break;
+                    case 2:
+                        $query->andWhere(['between', 'create_time', strtotime('-1 month'), strtotime('-3 month')]);
+                        break;
+                    case 3:
+                        $query->andWhere(['between', 'create_time', strtotime('-3 month'), strtotime('-6 month')]);
+                        break;
+                    case 4:
+                        $query->andWhere(['<=', 'create_time', strtotime('-6 month')]);
+                        break;
+                }
+            }
+        }
 
         return $dataProvider;
     }

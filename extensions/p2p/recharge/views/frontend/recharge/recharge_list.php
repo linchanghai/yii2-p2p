@@ -17,10 +17,11 @@ use yii\helpers\Url;
     <div class="backGrey p20 fundsRecords">
         <div class="clearFix mt10 filterLine">
             <label>时间范围:</label>
-            <a class="active" href="#">全部</a>
-            <a href="#">1个月</a>
-            <a href="#">2个月</a>
-            <a href="#">3个月</a>
+            <a <?= Yii::$app->request->get('date') ? null : 'class="active"'?> href="<?= Url::to(array_merge(\Yii::$app->request->queryParams,['/recharge/recharge/recharge-list','date'=>0]))?>">全部</a>
+            <a <?= Yii::$app->request->get('date')==1 ? 'class="active"':null ?> href="<?= Url::to(array_merge(\Yii::$app->request->queryParams,['/recharge/recharge/recharge-list','date'=>1]))?>">一个月以内</a>
+            <a <?= Yii::$app->request->get('date')==2 ? 'class="active"':null ?>href="<?= Url::to(array_merge(\Yii::$app->request->queryParams,['/recharge/recharge/recharge-list','date'=>2]))?>">1-3个月</a>
+            <a <?= Yii::$app->request->get('date')==3 ? 'class="active"':null ?>href="<?= Url::to(array_merge(\Yii::$app->request->queryParams,['/recharge/recharge/recharge-list','date'=>3]))?>">3-6个月</a>
+            <a <?= Yii::$app->request->get('date')==4 ? 'class="active"':null ?>href="<?= Url::to(array_merge(\Yii::$app->request->queryParams,['/recharge/recharge/recharge-list','date'=>4]))?>">6个月以上</a>
         </div>
         <table class="table table-bordered textCenter mt20 tabContent">
             <thead>

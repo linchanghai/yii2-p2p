@@ -10,7 +10,6 @@ namespace p2p\recharge\controllers\frontend;
 use kiwi\Kiwi;
 use kiwi\web\Controller;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
 class RechargeController extends Controller
@@ -38,16 +37,8 @@ class RechargeController extends Controller
 
     public function actionRechargeList()
     {
-        $rechargeRecordClass = Kiwi::getRechargeRecordClass();
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $rechargeRecordClass::find()->andWhere([
-                'member_id' => Yii::$app->user->id
-            ]),
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-        ]);
+        $searchModel = Kiwi::getRechargeRecordSearch();
+        $dataProvider = $searchModel->frontendSearch(Yii::$app->request->queryParams);
 
         $models = $dataProvider->getModels();
 

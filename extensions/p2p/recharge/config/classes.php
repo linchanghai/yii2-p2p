@@ -11,6 +11,9 @@ return [
     ],
     'class' => [
         'RechargeRecord' => 'p2p\recharge\models\RechargeRecord',
+
         'RechargeForm' => 'p2p\recharge\forms\RechargeForm',
+
+        'RechargeRecordSearch' => 'p2p\recharge\searches\RechargeRecordSearch',
     ],
 ];
