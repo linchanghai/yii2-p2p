@@ -34,7 +34,7 @@ $member = $model->member;
 
     <?= $form->field($model, 'discount_rate')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->dropDownList(Kiwi::getDataListModel()->transferStatus) ?>
+    <?= $form->field($model, 'status')->dropDownList(Kiwi::getDataListModel()->transferCheckStatus) ?>
 
     <?= $form->field($model, 'counter_fee')->textInput(['maxlength' => true]) ?>
 

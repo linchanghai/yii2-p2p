@@ -85,8 +85,8 @@ class Project extends \kiwi\db\ActiveRecord
 //            [['verify_user'], 'string'],
             [['project_name'], 'string', 'max' => 100],
             [['project_no'], 'string', 'max' => 30],
-            ['repayment_date', 'date', 'format' => 'yyyy-MM-dd HH:mm', 'timestampAttribute' => 'repayment_date', 'on' => ['insert']],
-            ['release_date', 'date', 'format' => 'yyyy-MM-dd HH:mm', 'timestampAttribute' => 'release_date', 'on' => ['insert']],
+            ['repayment_date', 'date', 'format' => 'yyyy-mm-dd', 'timestampAttribute' => 'repayment_date', 'on' => ['insert']],
+            ['release_date', 'date', 'format' => 'yyyy-mm-dd', 'timestampAttribute' => 'release_date', 'on' => ['insert']],
             [['repayment_date', 'release_date'], 'validateDate', 'on' => ['insert']],
         ];
     }
@@ -144,11 +144,22 @@ class Project extends \kiwi\db\ActiveRecord
 
     public function validateDate()
     {
-        if ($this->repayment_date < time()) {
+        $this->repayment_date = strtotime(date('Y-m-d',$this->repayment_date));
+        $this->release_date = strtotime(date('Y-m-d',$this->release_date));
+
+        if ($this->repayment_date < strtotime(date('Y-m-d',strtotime('+1 day')))) {
             $this->addError('repayment_date', 'repayment_date不能早于当前时间！');
         }
-        if ($this->release_date < time()) {
+        if ($this->release_date < strtotime(date('Y-m-d',strtotime('+1 day')))) {
             $this->addError('release_date', 'release_date不能早于当前时间！');
         }
+    }
+
+    public function canTransfer()
+    {
+        if ($this->create_time < strtotime('-3 month')) {
+            return true;
+        }
+        return false;
     }
 }

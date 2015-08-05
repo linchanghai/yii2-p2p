@@ -17,5 +17,13 @@ return [
             ProjectInvestTransferApply::STATUS_REPAYMENT => Yii::t('p2p_transfer', 'Repayment'),
             ProjectInvestTransferApply::STATUS_END => Yii::t('p2p_transfer', 'Transfer End'),
         ]
-    ]
+    ],
+
+    'transferCheckStatus' => [
+        'values' => [
+            ProjectInvestTransferApply::STATUS_PENDING => Yii::t('p2p_transfer', 'Pending Check'),
+            ProjectInvestTransferApply::STATUS_TRANSFERING => Yii::t('p2p_transfer', 'Passed Check'),
+            ProjectInvestTransferApply::STATUS_FAILED => Yii::t('p2p_transfer', 'Failed Check'),
+        ]
+    ],
 ];

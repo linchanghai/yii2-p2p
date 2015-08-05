@@ -22,6 +22,7 @@ return [
     'Create Recharge Record' => '',
     'Delete' => '',
     'Is Delete' => '',
+    'Recharge' => '',
     'Recharge Record ID' => '',
     'Reset' => '',
     'Search' => '',

@@ -32,7 +32,7 @@ class TransferForm extends Model
     public $discount_rate;
     public $counter_fee;
 
-    /** @var \p2p\project\models\ProjectInvest */
+    /** @var \p2p\project\models\ProjectInvest $_invest */
     protected $_invest;
 
     public function rules()
@@ -69,7 +69,7 @@ class TransferForm extends Model
             $projectInvestClass = Kiwi::getProjectInvestClass();
             $this->_invest = $projectInvestClass::findOne($this->project_invest_id);
 //            if (!$this->_invest || $this->_invest->create_time < strtotime('+3 month')) {
-            if (!$this->_invest) {
+            if (!$this->_invest || !$this->_invest->project->canTransfer()) {
                 throw new Exception('Invalid Project Invest ID');
             }
         }

@@ -6,7 +6,7 @@ use kartik\widgets\ActiveForm;
 use yii\bootstrap\Tabs;
 use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Url;
-use kartik\datetime\DateTimePicker;
+use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model p2p\project\models\Project */
@@ -20,13 +20,13 @@ EOF;
 $this->registerJs($js, $this::POS_END);
 
 if (isset($model->repayment_date) && isset($model->release_date)) {
-    $model->repayment_date = date('Y-m-d H:i', $model->repayment_date);
-    $model->release_date = date('Y-m-d H:i', $model->release_date);
+    $model->repayment_date = date('Y-m-d', $model->repayment_date);
+    $model->release_date = date('Y-m-d', $model->release_date);
     $repayment_date = $model->repayment_date;
     $release_date = $model->release_date;
 } else {
-    $repayment_date = date('Y-m-d H:i', time());
-    $release_date = date('Y-m-d H:i', time());
+    $repayment_date = date('Y-m-d', time());
+    $release_date = date('Y-m-d', time());
 }
 ?>
 <div class="project-form">
@@ -44,21 +44,26 @@ if (isset($model->repayment_date) && isset($model->release_date)) {
     $fields[] = $form->field($model, 'project_no')->textInput(['maxlength' => 255]);
     $fields[] = $form->field($model, 'invest_total_money')->textInput(['maxlength' => 255]);
     $fields[] = $form->field($model, 'interest_rate')->textInput(['maxlength' => 255]);
-    $fields[] = $form->field($model, 'repayment_date')->widget(DateTimePicker::className(), [
+    $fields[] = $form->field($model, 'repayment_date')->widget(DatePicker::className(), [
         'options' => [
             'value' => $repayment_date,
         ],
         'pluginOptions' => [
+            'format' => 'yyyy-mm-dd',
+            'todayHighlight' => true,
             'language' => Yii::$app->language,
             'autoclose' => true,
         ]
     ]);
+
     $fields[] = $form->field($model, 'repayment_type')->dropDownList(Yii::$app->dataList->projectRepaymentType, ['disabled' => 'disabled']);
-    $fields[] = $form->field($model, 'release_date')->widget(DateTimePicker::className(), [
+    $fields[] = $form->field($model, 'release_date')->widget(DatePicker::className(), [
         'options' => [
             'value' => $release_date,
         ],
         'pluginOptions' => [
+            'format' => 'yyyy-mm-dd',
+            'todayHighlight' => true,
             'language' => Yii::$app->language,
             'autoclose' => true,
         ]
@@ -66,11 +71,13 @@ if (isset($model->repayment_date) && isset($model->release_date)) {
     $fields[] = $form->field($model, 'project_type')->dropDownList(Yii::$app->dataList->projectType, ['disabled' => 'disabled']);
     //    $fields[] = $form->field($model, 'invested_money')->textInput(['maxlength' => 255]);
     //    $fields[] = $form->field($model, 'verify_user')->textInput(['maxlength' => 255]);
-    //    $fields[] = $form->field($model, 'verify_date')->widget(DateTimePicker::className(),[
+    //    $fields[] = $form->field($model, 'verify_date')->widget(DatePicker::className(),[
     //        'options' => [
     //            'value' => $verify_date
     //        ],
     //        'pluginOptions' => [
+    //              'format' => 'yyyy-mm-dd',
+    //              'todayHighlight' => true,
     //            'language' => Yii::$app->language,
     //            'autoclose'=>true,
     //        ]
