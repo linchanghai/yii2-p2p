@@ -48,8 +48,8 @@ class v0_1_0 extends Migration
             'type' => Schema::TYPE_BOOLEAN . '(1) NOT NULL default \'0\'',
             'create_by' => Schema::TYPE_STRING . '(45) NOT NULL',
             'update_by' => Schema::TYPE_STRING . '(45)',
-            'create_time' => Schema::TYPE_DATETIME . ' NOT NULL',
-            'update_time' => Schema::TYPE_DATETIME . '',
+            'create_time' => Schema::TYPE_INTEGER . ' NOT NULL',
+            'update_time' => Schema::TYPE_INTEGER . '',
             'isDelete' => Schema::TYPE_BOOLEAN . '(1) NOT NULL default \'0\'',
 
         ]);

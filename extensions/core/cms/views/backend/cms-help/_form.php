@@ -17,7 +17,7 @@ use kartik\widgets\ActiveForm;
         'fullSpan' => 11
     ]); ?>
 
-    <?= $form->field($model, 'cms_help_id')->textInput() ?>
+
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 

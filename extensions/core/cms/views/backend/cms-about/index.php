@@ -19,7 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'cms_about_id',
             'title',
             'content:ntext',
             'img',
@@ -64,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'export' => false,
         'responsive' => true,
-        'toolbar' => Html::a(Yii::t('p2p_activity', 'Create Activity'), ['create'], ['class' => 'btn btn-info']),
+        'toolbar' => Html::a(Yii::t('core_cms', 'Create'), ['create'], ['class' => 'btn btn-info']),
         'containerOptions' => ['style' => 'overflow: auto'], // only set when $responsive = false
         'headerRowOptions' => ['class' => 'kartik-sheet-style'],
         'filterRowOptions' => ['class' => 'kartik-sheet-style'],

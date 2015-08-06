@@ -11,12 +11,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cms-notice-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a(Yii::t('core_cms', 'Create Cms Notice'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'cms_notice_id',
+
             'type',
             'img',
             'title',
@@ -70,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'export' => false,
         'responsive' => true,
-        'toolbar' => Html::a(Yii::t('p2p_activity', 'Create Activity'), ['create'], ['class' => 'btn btn-info']),
+        'toolbar' => Html::a(Yii::t('core_cms', 'Create'), ['create'], ['class' => 'btn btn-info']),
         'containerOptions' => ['style' => 'overflow: auto'], // only set when $responsive = false
         'headerRowOptions' => ['class' => 'kartik-sheet-style'],
         'filterRowOptions' => ['class' => 'kartik-sheet-style'],

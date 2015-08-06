@@ -39,7 +39,7 @@ class CmsMedia extends \kiwi\db\ActiveRecord
         return [
             [['title', 'publisher_date'], 'required'],
             [['content'], 'string'],
-            [['publisher_date', 'create_time', 'update_time', 'is_delete'], 'integer'],
+            [[ 'create_time', 'update_time', 'is_delete'], 'integer'],
             [['title'], 'string', 'max' => 100],
             [['source_site', 'create_by', 'update_by'], 'string', 'max' => 45],
             [['source_link'], 'string', 'max' => 200]

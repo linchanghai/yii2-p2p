@@ -15,8 +15,8 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $type
  * @property string $create_by
  * @property string $update_by
- * @property string $create_time
- * @property string $update_time
+ * @property integer $create_time
+ * @property integer $update_time
  * @property integer $isDelete
  */
 class CmsHelp extends \kiwi\db\ActiveRecord
@@ -35,10 +35,9 @@ class CmsHelp extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cms_help_id', 'title', 'content'], 'required'],
-            [['cms_help_id', 'type', 'isDelete'], 'integer'],
+            [['title', 'content'], 'required'],
+            [['cms_help_id', 'type', 'isDelete','create_time', 'update_time'], 'integer'],
             [['content'], 'string'],
-            [['create_time', 'update_time'], 'safe'],
             [['title', 'create_by', 'update_by'], 'string', 'max' => 45],
             [['cms_help_id'], 'unique']
         ];

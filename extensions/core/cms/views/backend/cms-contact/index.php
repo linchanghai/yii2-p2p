@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'cms_contact_id',
+
             'address',
             'phone',
             'qq',
