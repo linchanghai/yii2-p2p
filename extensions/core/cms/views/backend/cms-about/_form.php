@@ -28,7 +28,13 @@ use kartik\widgets\ActiveForm;
         ]
     ]); ?>
 
-    <?= $form->field($model, 'img')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'img')->widget(\mihaildev\elfinder\InputFile::className(), [
+        'multiple' => false,
+        'template' => '<div class="input-group">{input}<span class="input-group-btn">{button}</span></div>',
+        'options' => ['class' => 'form-control'],
+        'buttonOptions' => ['class' => 'btn btn-default'],
+//        'callbackFunction' => new JsExpression('function(file, id){}')
+    ]); ?>
 
     <?= $form->field($model, 'type')->textInput() ?>
 
