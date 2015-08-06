@@ -30,6 +30,7 @@ class StatisticChangeController extends Controller
 
         return $this->render('statistic_list', [
             'models' => $models,
+            'pagination' => $dataProvider->pagination
         ]);
     }
 }

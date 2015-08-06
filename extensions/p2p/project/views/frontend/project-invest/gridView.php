@@ -1,5 +1,6 @@
 <?php
 use kartik\helpers\Html;
+use yii\widgets\LinkPager;
 
 $js = <<<JS
 $('.fundsRecords').on('click', '.get-repayment', function() {
@@ -36,9 +37,9 @@ $this->registerJs($js);
     <div class="backGrey p20 fundsRecords">
         <div class="clearFix mt10 filterLine">
             <label>状态筛选:</label>
-            <?= Html::a('全部', ['/project/project-invest/grid-view'],['class'=>(Yii::$app->request->get('status')==null)?'active':'']) ?>
-            <?= Html::a('还款中', ['/project/project-invest/grid-view','status'=>1],['class'=>(Yii::$app->request->get('status')=='1')?'active':'']) ?>
-            <?= Html::a('已完成', ['/project/project-invest/grid-view','status'=>2],['class'=>(Yii::$app->request->get('status')=='2')?'active':'']) ?>
+            <?= Html::a('全部', ['/project/project-invest/grid-view'], ['class' => (Yii::$app->request->get('status') == null) ? 'active' : '']) ?>
+            <?= Html::a('还款中', ['/project/project-invest/grid-view', 'status' => 1], ['class' => (Yii::$app->request->get('status') == '1') ? 'active' : '']) ?>
+            <?= Html::a('已完成', ['/project/project-invest/grid-view', 'status' => 2], ['class' => (Yii::$app->request->get('status') == '2') ? 'active' : '']) ?>
 
             <a href="#">转让中</a>
         </div>
@@ -57,29 +58,37 @@ $this->registerJs($js);
             </thead>
             <tbody>
             <?php
-            $status = [1=>'还款中',2=>'已完成'];
-            foreach ($models as $model) {
+            if (isset($models) && $models) {
+                $status = [1 => '还款中', 2 => '已完成'];
+                /** @var \p2p\project\models\ProjectInvest $model */
+                foreach ($models as $model) {
+                    ?>
+                    <tr>
+                        <td><?= $model->project_id ?></td>
+                        <td><?= $model->rate ?></td>
+                        <td><?= $model->invest_money ?></td>
+                        <td><?= date('Y-m-d H:i:s', $model->create_time) ?></td>
+                        <td><?= date('Y-m-d H:i:s', $model->project->repayment_date) ?></td>
+                        <td><?= $model->interest_money ?></td>
+                        <td><?= $status[$model->status] ?></td>
+                        <td><?= \yii\helpers\Html::button('查看还款记录', ['class' => 'get-repayment', 'data-url' => \yii\helpers\Url::to(['project-invest/repayment-list', 'invest_id' => $model->project_invest_id])]) ?></td>
+                    </tr>
+                <?php
+                }
+            } else {
                 ?>
                 <tr>
-                    <td><?= $model->project_id ?></td>
-                    <td><?= $model->rate ?></td>
-                    <td><?= $model->invest_money ?></td>
-                    <td><?= date('Y-m-d H:i:s',$model->create_time )?></td>
-                    <td><?= date('Y-m-d H:i:s',$model->project->repayment_date ) ?></td>
-                    <td><?= $model->interest_money ?></td>
-                    <td><?= $status[$model->status] ?></td>
-                    <td><?= \yii\helpers\Html::button('查看还款记录',['class'=>'get-repayment', 'data-url' => \yii\helpers\Url::to(['project-invest/repayment-list', 'invest_id' => $model->project_invest_id])]) ?></td>
+                    <td colspan=5>
+                        <div class="tableNoInfo">
+                            <i class="glyphicon glyphicon-info-sign secondColor"></i> 暂无数据
+                        </div>
+                    </td>
                 </tr>
-            <?php
-            }
-            ?>
+            <?php } ?>
             </tbody>
         </table>
         <div class="mt20 textCenter">
-            <?=
-            \yii\widgets\LinkPager::widget([
-                'pagination' => $page,
-            ]);
+            <?= LinkPager::widget(['pagination' => $pagination]);
             ?>
         </div>
     </div>

@@ -19,33 +19,55 @@ $this->registerCssFile($link . '/css/message.css');
     <table class="table table-hover messagesTable">
         <tbody>
         <?php
-        foreach($models as $model){?>
-            <tr>
-                <td class="messageLeft">
-                    <input type="checkbox" class="prt2 msgCheck " name="messageId" value="<?= $model->message_id?>"/>
-                    <span class="<?= ($model->status? '':'status_unread')?>"  data-url="<?= Url::to(['/message/message/change-status'])?>" data-id="<?= $model->message_id?>">
+        if (isset($models) && $models) {
+            foreach ($models as $model) {
+                ?>
+                <tr>
+                    <td class="messageLeft">
+                        <input type="checkbox" class="prt2 msgCheck " name="messageId"
+                               value="<?= $model->message_id ?>"/>
+                    <span class="<?= ($model->status ? '' : 'status_unread') ?>"
+                          data-url="<?= Url::to(['/message/message/change-status']) ?>"
+                          data-id="<?= $model->message_id ?>">
                         <?= $model->title ?></span>
-                    <div class="messageContent mt10">
-                        <?= $model->content?>
+
+                        <div class="messageContent mt10">
+                            <?= $model->content ?>
+                        </div>
+                    </td>
+                    <td class="messageRight originDate"><?= date('Y-m-d H:i:s', $model->created_at) ?></td>
+                    <td class="messageRight removeMsg secondColor">
+                        <a class="secondColor deleteMessage" href="javascript:;"
+                           data-url="<?= Url::to(['/message/message/delete']) ?>" data-id="<?= $model->message_id ?>">删除
+                            ×</a>
+
+                        <p class="textRight insideDate mt10"><?= date('Y-m-d H:i:s', $model->created_at) ?></p>
+                    </td>
+                </tr>
+
+            <?php
+            }
+        } else {
+            ?>
+            <tr>
+                <td colspan=5>
+                    <div class="tableNoInfo">
+                        <i class="glyphicon glyphicon-info-sign secondColor"></i> 暂无数据
                     </div>
                 </td>
-                <td class="messageRight originDate"><?= date('Y-m-d H:i:s',$model->created_at)?></td>
-                <td class="messageRight removeMsg secondColor">
-                    <a class="secondColor deleteMessage" href="javascript:;" data-url="<?= Url::to(['/message/message/delete'])?>" data-id="<?= $model->message_id?>">删除 ×</a>
-                    <p class="textRight insideDate mt10"><?= date('Y-m-d H:i:s',$model->created_at)?></p>
-                </td>
             </tr>
-
-        <?php
-        }
-        ?>
+        <?php } ?>
         </tbody>
     </table>
-    <div class="myMessageBottom itemTitle itemBottom clearFix">
-        <div class="fl">
-            <label for="allMsg"><input type="checkbox" id="allMsg" class="prt2">全选</label>
-            <a class="secondColor" href="#">标记为已读</a>
-            <a class="secondColor" href="#">删除</a>
+    <?php
+    if (isset($models) && $models) {
+        ?>
+        <div class="myMessageBottom itemTitle itemBottom clearFix">
+            <div class="fl">
+                <label for="allMsg"><input type="checkbox" id="allMsg" class="prt2">全选</label>
+                <a class="secondColor" href="#">标记为已读</a>
+                <a class="secondColor" href="#">删除</a>
+            </div>
         </div>
-    </div>
+    <?php } ?>
 </div>

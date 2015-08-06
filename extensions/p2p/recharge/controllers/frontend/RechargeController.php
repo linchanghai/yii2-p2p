@@ -44,6 +44,7 @@ class RechargeController extends Controller
 
         return $this->render('recharge_list', [
             'models' => $models,
+            'pagination' => $dataProvider->pagination
         ]);
     }
 } 
