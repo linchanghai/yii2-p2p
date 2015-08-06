@@ -7,6 +7,8 @@
  */
 
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
+use yii\widgets\Pjax;
 
 /* @var $this \yii\web\View */
 $this->params['project-list'] = true;
@@ -95,5 +97,5 @@ $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depend
     </ul>
 </div>
 
-<?= \yii\widgets\LinkPager::widget(['pagination' => $pages]); //todo?>
-<?php \yii\widgets\Pjax::end();?>
+<?= LinkPager::widget(['pagination' => $pages]); //todo?>
+<?php Pjax::end();?>

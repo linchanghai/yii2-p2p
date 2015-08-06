@@ -96,7 +96,7 @@ class ProjectInvestController extends Controller
         $models = $dataProvider->getModels();
         return $this->render('gridView', [
             'models' => $models,
-            'page'=>$dataProvider->pagination,
+            'pagination'=>$dataProvider->pagination,
         ]);
     }
 

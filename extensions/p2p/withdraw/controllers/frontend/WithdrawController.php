@@ -41,6 +41,7 @@ class WithdrawController extends Controller
 
         return $this->render('withdraw_list', [
             'models' => $models,
+            'pagination' => $dataProvider->pagination
         ]);
     }
 } 

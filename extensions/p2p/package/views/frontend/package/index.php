@@ -52,7 +52,8 @@ $this->registerJs($js);
                     余额自动转入钻点钱包
                 </div>
                 <div class="fl ml10">
-                    <div class="switchWrap autoPackage" data-url="<?= Url::to(['/package/package/auto']) ?>" data-is-auto="<?= $memberStatistic->is_auto_into ?>">
+                    <div class="switchWrap autoPackage" data-url="<?= Url::to(['/package/package/auto']) ?>"
+                         data-is-auto="<?= $memberStatistic->is_auto_into ?>">
                         <div class="switch clearFix">
                             <span class="switch-item switch-left">ON</span>
                             <span class="switch-middle">&nbsp;</span>
@@ -92,14 +93,25 @@ $this->registerJs($js);
                     <?php
                     /** @var \p2p\package\models\PackageRecord[] $models */
                     $models = $intoDataProvider->getModels();
-                    foreach ($models as $model) {
+                    if (isset($models) && $models) {
+                        foreach ($models as $model) {
+                            ?>
+                            <tr>
+                                <td><?= date('Y-m-d H:i:s', $model->create_time) ?></td>
+                                <td><?= $model->exchange_cash ?>元</td>
+                                <td>成功</td>
+                                <td>转入</td>
+                                <td><a href="#">合同明细</a></td>
+                            </tr>
+                        <?php }
+                    } else {
                         ?>
                         <tr>
-                            <td><?= date('Y-m-d H:i:s', $model->create_time) ?></td>
-                            <td><?= $model->exchange_cash ?>元</td>
-                            <td>成功</td>
-                            <td>转入</td>
-                            <td><a href="#">合同明细</a></td>
+                            <td colspan=5>
+                                <div class="tableNoInfo">
+                                    <i class="glyphicon glyphicon-info-sign secondColor"></i> 暂无数据
+                                </div>
+                            </td>
                         </tr>
                     <?php } ?>
                     </tbody>
@@ -120,19 +132,32 @@ $this->registerJs($js);
                     <tbody>
                     <?php /** @var \p2p\package\models\PackageRecord[] $models */
                     $models = $outDataProvider->getModels();
-                    foreach ($models as $model) {
+                    if (isset($models) && $models) {
+                        foreach ($models as $model) {
+                            ?>
+                            <tr>
+                                <td><?= date('Y-m-d H:i:s', $model->create_time) ?></td>
+                                <td><?= $model->exchange_cash ?>元</td>
+                                <td>成功</td>
+                                <td>转出</td>
+                                <td><a href="#">合同明细</a></td>
+                            </tr>
+                        <?php }
+                    } else {
                         ?>
                         <tr>
-                            <td><?= date('Y-m-d H:i:s', $model->create_time) ?></td>
-                            <td><?= $model->exchange_cash ?>元</td>
-                            <td>成功</td>
-                            <td>转出</td>
-                            <td><a href="#">合同明细</a></td>
+                            <td colspan=5>
+                                <div class="tableNoInfo">
+                                    <i class="glyphicon glyphicon-info-sign secondColor"></i> 暂无数据
+                                </div>
+                            </td>
                         </tr>
                     <?php } ?>
                     </tbody>
                 </table>
-                <?php LinkPager::widget(['pagination' => $outDataProvider->pagination]) ?>
+                <div class="mt20 textCenter">
+                    <?= LinkPager::widget(['pagination' => $outDataProvider->pagination]) ?>
+                </div>
             </div>
         </div>
     </div>

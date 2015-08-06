@@ -7,6 +7,7 @@
  */
 
 use yii\helpers\Url;
+use \yii\widgets\LinkPager;
 
 ?>
 <div class="containerMain fundsFlow">
@@ -112,5 +113,8 @@ use yii\helpers\Url;
             <?php } ?>
             </tbody>
         </table>
+        <div class="mt20 textCenter">
+            <?= LinkPager::widget(['pagination' => $pagination]) ?>
+        </div>
     </div>
 </div>
