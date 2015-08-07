@@ -54,7 +54,8 @@ class BindMobileForm extends Model
         $session = Yii::$app->session;
         $session['mobile'] = ['code' => $code, 'time' => time()];
         //TODO:: sendMessage
-        return Yii::$app->sms->send($code, $this->mobile);
+        $message = Yii::t('core_member', '短信验证码：{code}', ['code' => $code]);
+        return Yii::$app->sms->send($message, $this->mobile);
     }
 
     public function setMobileStatus()
