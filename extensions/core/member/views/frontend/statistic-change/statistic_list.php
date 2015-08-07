@@ -101,7 +101,7 @@ use \yii\widgets\LinkPager;
             } else {
                 ?>
                 <tr>
-                    <td colspan=5>
+                    <td colspan=10>
                         <div class="tableNoInfo">
                             <i class="glyphicon glyphicon-info-sign secondColor"></i> 暂无数据
                             <p>

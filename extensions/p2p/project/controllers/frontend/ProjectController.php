@@ -19,7 +19,7 @@ class ProjectController extends Controller
     public function actionList()
     {
         $searchModel = Kiwi::getProjectSearch();
-        $dataProvider = $searchModel->frontendSearch(\Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->frontendSearch(Yii::$app->request->queryParams);
 
         $dataProvider->prepare(true);
 

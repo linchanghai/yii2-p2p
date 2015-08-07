@@ -7,6 +7,7 @@
  */
 
 use yii\helpers\Url;
+use \yii\widgets\LinkPager;
 
 ?>
 <div class="containerMain">
@@ -30,28 +31,35 @@ use yii\helpers\Url;
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>N00095</td>
-                <td>100000</td>
-                <td>10%</td>
-                <td>2015-07-07</td>
-                <td>2015-08-07</td>
-                <td>2</td>
-                <td>8</td>
-                <td><a href="<?= Url::to(['create', 'project_invest_id' => 1]) ?>" class="secondColor">转让</a></td>
-            </tr>
+            <?php
+            if (isset($models) && $models) {
+                /** @var \p2p\project\models\ProjectInvest $model */
+                foreach ($models as $model) {
+                    echo '<tr>';
+                    echo '<td>' . $model->project->project_name . '</td>';
+                    echo '<td>' . $model->project->project_name . '</td>';
+                    echo '<td>' . $model->rate . '</td>';
+                    echo '<td>' . date('Y-m-d', $model->create_time) . '</td>';
+                    echo '<td>' . date('Y-m-d', $model->project->repayment_date) . '</td>';
+                    echo '<td>' . $model->rate . '</td>';
+                    echo '<td>' . $model->rate . '</td>';
+                    echo '<td><a href="#" class="secondColor">转让</a></td>';
+                    echo '</tr>';
+                }
+            } else {
+                ?>
+                <tr>
+                    <td colspan=10>
+                        <div class="tableNoInfo">
+                            <i class="glyphicon glyphicon-info-sign secondColor"></i> 暂无数据
+                        </div>
+                    </td>
+                </tr>
+            <?php } ?>
             </tbody>
         </table>
         <div class="mt20 textCenter">
-            <ul class="pagination">
-                <li><a href="#"><</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">></a></li>
-            </ul>
+            <?= LinkPager::widget(['pagination' => $pagination]) ?>
         </div>
     </div>
 </div>

@@ -9,8 +9,10 @@
 namespace p2p\transfer\controllers\frontend;
 
 
+use kiwi\helpers\ArrayHelper;
 use kiwi\Kiwi;
 use kiwi\web\Controller;
+use Yii;
 
 class TransferController extends Controller
 {
@@ -19,39 +21,49 @@ class TransferController extends Controller
     public function actionEnable()
     {
         $searchModel = Kiwi::getProjectInvestSearch();
-        $dataProvider = $searchModel->frontendSearch(\Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->frontendSearch(Yii::$app->request->queryParams);
 
         $dataProvider->prepare(true);
 
         return $this->render('enableTransfer', [
-            'projectInvests' => $dataProvider->models,
-            'pages' => $dataProvider->pagination,
+            'models' => $dataProvider->models,
+            'pagination' => $dataProvider->pagination,
         ]);
     }
 
     public function actionPending()
     {
-        $searchModel = Kiwi::getProjectInvestSearch();
-        $dataProvider = $searchModel->frontendSearch(\Yii::$app->request->queryParams);
+        $projectInvestTransferApplyClass = Kiwi::getProjectInvestTransferApplyClass();
+        $searchModel = Kiwi::getProjectInvestTransferApplySearch();
+        $dataProvider = $searchModel->frontendSearch(ArrayHelper::merge(Yii::$app->request->queryParams, [
+            'ProjectInvestTransferApplySearch' => [
+                'status' => $projectInvestTransferApplyClass::STATUS_PENDING
+            ]
+        ]));
 
         $dataProvider->prepare(true);
 
         return $this->render('pendingTransfer', [
-            'projectInvests' => $dataProvider->models,
-            'pages' => $dataProvider->pagination,
+            'models' => $dataProvider->models,
+            'pagination' => $dataProvider->pagination,
         ]);
     }
 
     public function actionCompleted()
     {
-        $searchModel = Kiwi::getProjectInvestSearch();
-        $dataProvider = $searchModel->frontendSearch(\Yii::$app->request->queryParams);
+        $projectInvestTransferApplyClass = Kiwi::getProjectInvestTransferApplyClass();
+        $searchModel = Kiwi::getProjectInvestTransferApplySearch();
+        $dataProvider = $searchModel->frontendSearch(ArrayHelper::merge(Yii::$app->request->queryParams, [
+            'ProjectInvestTransferApplySearch' => [
+                'status' => $projectInvestTransferApplyClass::STATUS_END
+            ]
+        ]));
 
         $dataProvider->prepare(true);
 
         return $this->render('completedTransfer', [
-            'projectInvests' => $dataProvider->models,
-            'pages' => $dataProvider->pagination,
+            'models' => $dataProvider->models,
+            'pagination' => $dataProvider->pagination,
         ]);
     }
 
@@ -61,7 +73,7 @@ class TransferController extends Controller
             'project_invest_id' => $project_invest_id,
         ]);
 
-        if ($transferForm->load(\Yii::$app->request->post())) {
+        if ($transferForm->load(Yii::$app->request->post())) {
             $transferForm->createTransfer();
         }
 
