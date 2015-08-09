@@ -1,3 +1,3 @@
-/**
- * Created by gezhi on 8/2/15.
- */
+require(["jquery","common"],function($,c){
+
+});

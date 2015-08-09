@@ -21,6 +21,18 @@
     </ul>
 </div>
 <div class="container integral">
+<!--    <div class="mt20 clearFix showIntegral">-->
+<!--        <div class="fl showIntegralLeft">-->
+<!--            <a href="#" class="btn largeBtn secondBack disb fullBtn">签到赚积分</a>-->
+<!--            <div class="h3 mt10">钻点商城为您提供 :</div>-->
+<!--            <div class="clearFix signArea">-->
+<!--                <a><i class="glyphicon glyphicon-ok-sign secondColor mr10"></i>签到有礼</a>-->
+<!--                <a><i class="glyphicon glyphicon-ok-sign secondColor mr10"></i>会员权利</a>-->
+<!--                <a><i class="glyphicon glyphicon-ok-sign secondColor mr10"></i>积分好礼</a>-->
+<!--                <a><i class="glyphicon glyphicon-ok-sign secondColor mr10"></i>活动好礼</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
     <dl class="mt20 clearFix integralLine integralToday">
         <dt>
             <img src="images/integral4.png" width="69" height="80" alt=""/>
@@ -29,7 +41,7 @@
         <dd  class="clearFix">
             <a class="fl integralItem" href="#">
                 <img src="images/integral7.png" width="69" height="80" alt=""/>
-                <p class="mt10">签到赚积分</p>
+                <p class="mt10">新手任务送积分</p>
             </a>
             <a class="fl integralItem" href="#">
                 <img src="images/integral5.png" width="69" height="80" alt=""/>
@@ -37,7 +49,7 @@
             </a>
             <a class="fl integralItem" href="#">
                 <img src="images/integral6.png" width="69" height="80" alt=""/>
-                <p class="mt10">新手任务送积分</p>
+                <p class="mt10">活动送积分</p>
             </a>
         </dd>
     </dl>

@@ -16,12 +16,5 @@ requirejs.config({
         "tooltip": ["jquery"],
         "datePicker": ["jquery"],
         "modal": ["jquery"]
-    //    "cartFly":["jquery"],
-    //    "modal": ["jquery"],
-    //    "placeholder":["jquery"],
-    //    "libraries": ["jquery"],
-    //    "mlselection": ["jquery"],
-    //    "datePicker":["jquery"],
-    //    "ajaxForm": ["jquery"]
     }
 });

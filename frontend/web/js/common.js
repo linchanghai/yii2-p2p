@@ -29,4 +29,9 @@ define(function(require,exports){
         return reg.test(obj);
     };
 
+    $(".hoverItem li").hover(function(){
+        $(this).addClass("activeHover").siblings("li").removeClass("activeHover");
+        $(".hoverSingle").eq($(this).index()).removeClass("hide").siblings(".hoverSingle").addClass("hide");
+    })
+
 });

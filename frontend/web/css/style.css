@@ -56,7 +56,7 @@ a {
 a:active,
 a:hover, a.active {
   outline: 0;
-  color: #ed7c5e;
+  color: #5e9eed;
 }
 
 /* Text-level semantics
@@ -654,6 +654,10 @@ a.greenColor:hover {
   line-height: 40px;
   text-align: center;
   font-size: 18px;
+}
+
+.fullBtn {
+  width: 100%;
 }
 
 .regularBtn {

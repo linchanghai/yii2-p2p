@@ -19,7 +19,6 @@
             <li><a class="active" href="#">转入</a></li>
         </ul>
         <div class="backGrey myWalletArea">
-
             <div class="clearFix fs16 myWalletOutResult">
                 <div class="myWalletOutResultInfo fs18 textCenter">
                     <i class="glyphicon glyphicon-ok-sign secondColor mr10 fs20"></i>成功转入钻点钱包1000元!
