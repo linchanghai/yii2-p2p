@@ -336,6 +336,9 @@ a:hover{
 .filterLine{
   a.active{
     background: $secondColor;
+    &:hover{
+      color: #fff;
+    }
   }
   a:hover{
     color: $secondColor;

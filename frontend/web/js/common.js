@@ -32,6 +32,13 @@ define(function(require,exports){
     $(".hoverItem li").hover(function(){
         $(this).addClass("activeHover").siblings("li").removeClass("activeHover");
         $(".hoverSingle").eq($(this).index()).removeClass("hide").siblings(".hoverSingle").addClass("hide");
-    })
+    });
+
+    $(".tabs li").on("click",function(e){
+        console.log($(this).index())
+        $(this).children("a").addClass("active").parent("li").siblings("li").children("a").removeClass("active");
+        $(".tabContentWrap .tabContent").eq($(this).index()).removeClass("hide").siblings(".tabContent").addClass("hide");
+        e.preventDefault();
+    });
 
 });

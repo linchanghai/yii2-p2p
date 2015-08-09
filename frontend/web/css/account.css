@@ -356,6 +356,9 @@ a:hover {
 .filterLine a.active {
   background: #5e9eed;
 }
+.filterLine a.active:hover {
+  color: #fff;
+}
 .filterLine a:hover {
   color: #5e9eed;
 }
