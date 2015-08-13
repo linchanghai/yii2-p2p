@@ -22,6 +22,14 @@ class CmsController extends \kiwi\web\Controller{
         }
     }
 
+    public function actionLaw(){
+        $lawModels = \kiwi\Kiwi::getCmsLaw()->find()->where([])->limit(4)->all();
+
+            return $this->render('law',[
+                'models'=>$lawModels
+            ]);
+
+    }
     public function actionMediaList(){
         $query = CmsMedia::find()->addOrderBy('create_time DESC');
         $countQuery = clone $query;

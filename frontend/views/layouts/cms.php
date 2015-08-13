@@ -21,8 +21,8 @@ $this->registerJsFile('/js/about.js', ['depends' => [AppAsset::className()]]);
                 <li><a href="#">合作伙伴((后台没有))</a></li>
                 <li><a href="#">官方公告(没皮)</a></li>
                 <li><a href="#">活动公告(前后都没有)</a></li>
-                <li><a href="#">诚聘英才(后台没有)</a></li>
-                <li><a href="#">安全保障(后台没有)</a></li>
+                <li><a href="<?= Url::to(['cms/cms/law'])?>">诚聘英才</a></li>
+                <li><a href="<?= Url::to(['cms/cms/law'])?>">安全保障</a></li>
                 <li><a href="<?= Url::to(['/cms/cms/contact'])?>">联系我们</a></li>
             </ul>
         </div>
