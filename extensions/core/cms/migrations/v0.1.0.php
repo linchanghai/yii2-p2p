@@ -81,7 +81,31 @@ class v0_1_0 extends Migration
             'is_delete' => Schema::TYPE_BOOLEAN . '(1) NOT NULL default \'0\'',
 
         ]);
+        $this->createTable('cms_recruitment', [
+            'cms_recruitment_id' => Schema::TYPE_PK,
+            'type' => Schema::TYPE_BOOLEAN . '(1) NOT NULL',
+            'title' => Schema::TYPE_STRING . '(45) NOT NULL',
+            'content' => Schema::TYPE_STRING . '(45) NOT NULL',
+            'create_by' => Schema::TYPE_STRING . '(45) NOT NULL',
+            'update_by' => Schema::TYPE_STRING . '(45)',
+            'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'update_time' => Schema::TYPE_INTEGER . '(11)',
+            'is_delete' => Schema::TYPE_BOOLEAN . '(1) NOT NULL default \'0\'',
 
+        ]);
+
+        $this->createTable('cms_law', [
+            'cms_law_id' => Schema::TYPE_PK,
+            'title' => Schema::TYPE_STRING . '(150) NOT NULL',
+            'type' => Schema::TYPE_BOOLEAN . '(1) NOT NULL',
+            'content' => Schema::TYPE_STRING . ' NOT NULL',
+            'create_by' => Schema::TYPE_STRING . '(45) NOT NULL',
+            'update_by' => Schema::TYPE_STRING . '(45)',
+            'create_time' => Schema::TYPE_INTEGER . '(11) NOT NULL',
+            'update_time' => Schema::TYPE_INTEGER . '(11)',
+            'is_delete' => Schema::TYPE_BOOLEAN . '(1) NOT NULL default \'0\'',
+
+        ]);
     }
 
     public function safeDown()

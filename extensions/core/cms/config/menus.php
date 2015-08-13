@@ -46,6 +46,18 @@ return [
                         'url' => ['/core_cms/cms-notice/index'],
                         'activeUrls' => [['/core_cms/cms-notice/create'], ['/core_cms/cms-notice/update']],
                     ],
+                    'cmsLaw' => [
+                        'label' => Yii::t('core_cms', 'Law'),
+                        'sort' => 500,
+                        'url' => ['/core_cms/cms-law/index'],
+                        'activeUrls' => [['/core_cms/cms-law/create'], ['/core_cms/cms-law/update']],
+                    ],
+                    'cmsRecruitment' => [
+                        'label' => Yii::t('core_cms', 'Recruitment'),
+                        'sort' => 500,
+                        'url' => ['/core_cms/cms-recruitment/index'],
+                        'activeUrls' => [['/core_cms/cms-recruitment/create'], ['/core_cms/cms-recruitment/update']],
+                    ],
                 ]
             ],        ]
     ],

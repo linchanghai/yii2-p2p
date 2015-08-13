@@ -14,6 +14,8 @@ return [
         'CmsHelp' => 'core\cms\models\CmsHelp',
         'CmsMedia' => 'core\cms\models\CmsMedia',
         'CmsNotice' => 'core\cms\models\CmsNotice',
+        'CmsLaw' => 'core\cms\models\CmsLaw',
+        'CmsRecruitment' => 'core\cms\models\CmsRecruitment',
 
     ],
 ];
