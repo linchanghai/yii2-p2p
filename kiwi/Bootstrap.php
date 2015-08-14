@@ -24,7 +24,7 @@ use yii\helpers\FileHelper;
 class Bootstrap extends Object implements BootstrapInterface
 {
     /** @var Configuration */
-    public $configuration = 'kiwi\Configuration';
+    public $configuration;
 
     public $initFunctions = [
         'setNamespaces', 'setModules', 'setModuleClass',
@@ -45,9 +45,7 @@ class Bootstrap extends Object implements BootstrapInterface
     public function init()
     {
         parent::init();
-
-        Kiwi::registerClass(['singleton' => ['Configuration' => $this->configuration]]);
-        $this->configuration = Kiwi::getConfiguration();
+        $this->configuration = Kiwi::getConfiguration($this->configuration);
     }
 
     /**
