@@ -107,13 +107,11 @@ class BaseKiwi
     }
 
     /**
-     * @param string $type
-     * @param array $params
      * @return Configuration
      * @throws \yii\base\InvalidConfigException
      */
-    public static function getConfiguration($type = 'kiwi\Configuration', $params = [])
+    public static function getConfiguration()
     {
-        return Yii::createObject($type, $params);
+        return Yii::createObject('configuration');
     }
 }
