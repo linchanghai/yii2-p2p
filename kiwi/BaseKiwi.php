@@ -38,10 +38,6 @@ class BaseKiwi
             }
             $params = isset($arguments[1]) && is_array($arguments[1]) ? $arguments[1] : [];
 
-            if ($className == 'configuration') {
-                return Yii::createObject($type, $params);
-            }
-
             return Kiwi::createObject($type, $params);
         }
         throw new UnknownMethodException('Calling unknown method: ' . get_called_class() . "::$name()");
@@ -58,7 +54,7 @@ class BaseKiwi
         }
 
         $aspectInfoConfig = ['class' => 'kiwi\base\AopInfo', 'instance' => $object];
-        $aspectInfoConfig = ArrayHelper::merge($aspectInfoConfig, $aspectConfig[$type['class']]);
+        $aspectInfoConfig = ArrayHelper::merge($aspectInfoConfig, $aspectConfig[$class]);
         /** @var \kiwi\base\AspectInfo $aspectInfo */
         $aspectInfo = Yii::createObject($aspectInfoConfig);
         /** @var \kiwi\base\Aspect $aspect */
@@ -108,5 +104,14 @@ class BaseKiwi
             }
         }
         return $classes;
+    }
+
+    /**
+     * @return Configuration
+     * @throws \yii\base\InvalidConfigException
+     */
+    public static function getConfiguration()
+    {
+        return Yii::createObject('configuration');
     }
 }

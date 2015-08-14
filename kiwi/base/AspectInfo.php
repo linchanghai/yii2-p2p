@@ -52,7 +52,7 @@ class AspectInfo extends Component
      * @var array
      * ['name' => $isolationLevel|true]
      */
-    public $transactionInfo = [];
+    public $transactionConfig = [];
 
     /** @var bool */
     public $isThrowException = true;
@@ -65,9 +65,15 @@ class AspectInfo extends Component
 
     /**
      * @var array
-     * ['name' => ['duration' => '', 'dependency' => '', 'cacheKey' => '', 'getCache' => '', 'setCache' => '']]
+     * ['name' => [
+     *      'duration' => '',
+     *      'dependency' => '',
+     *      'cacheKey' => '',
+     *      'getCache' => '',
+     *      'setCache' => ''
+     * ]]
      */
-    public $cacheInfo = [];
+    public $cacheConfig = [];
 
     public function init()
     {
@@ -95,15 +101,15 @@ class AspectInfo extends Component
 
     public function getCacheInfo($key = null, $checkCallable = true, $default = null)
     {
-        if (empty($this->cacheInfo[$this->name]) || ($key !== null && empty($this->cacheInfo[$this->name][$key]))) {
+        if (empty($this->cacheConfig[$this->name]) || ($key !== null && empty($this->cacheConfig[$this->name][$key]))) {
             return $default;
         }
 
         if ($key === null) {
-            return $this->cacheInfo[$this->name];
+            return $this->cacheConfig[$this->name];
         }
 
-        $info = $this->cacheInfo[$this->name][$key];
+        $info = $this->cacheConfig[$this->name][$key];
         if ($checkCallable && CheckHelper::isCallable($info)) {
             return call_user_func($info, $this);
         }
@@ -127,9 +133,9 @@ class AspectInfo extends Component
         return $this->getCacheInfo('dependency');
     }
 
-    public function getCache()
+    public function getCacheValue()
     {
-        if (!$this->getCacheInfo()) {
+        if ($this->getCacheInfo() === null) {
             return null;
         }
         if ($getCache = $this->getCacheInfo('getCache', false)) {
@@ -143,10 +149,10 @@ class AspectInfo extends Component
         return null;
     }
 
-    public function setCache()
+    public function setCacheValue()
     {
         if (!$this->getCacheInfo()) {
-            return null;
+            return;
         }
         if ($setCache = $this->getCacheInfo('setCache', false)) {
             if (CheckHelper::isCallable($setCache)) {
@@ -206,12 +212,12 @@ class AspectInfo extends Component
 
     public function getTransactionInfo()
     {
-        if (empty($this->transactionInfo[$this->name])) {
+        if (empty($this->transactionConfig[$this->name])) {
             return false;
         }
 
         $isolationLevels = [Transaction::READ_COMMITTED, Transaction::READ_UNCOMMITTED, Transaction::REPEATABLE_READ, Transaction::SERIALIZABLE];
-        return in_array($this->transactionInfo[$this->name], $isolationLevels) ? $this->transactionInfo[$this->name] : null;
+        return in_array($this->transactionConfig[$this->name], $isolationLevels) ? $this->transactionConfig[$this->name] : null;
     }
 
     public function prepareCall()

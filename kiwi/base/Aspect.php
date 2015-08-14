@@ -28,9 +28,9 @@ class Aspect implements Configurable
         return $this->aspectInfo->instance->className();
     }
 
-    public function __construct($aopInfo, $config = [])
+    public function __construct($aspectInfo, $config = [])
     {
-        $this->aspectInfo = $aopInfo;
+        $this->aspectInfo = $aspectInfo;
 
         if (!empty($config)) {
             Yii::configure($this, $config);
@@ -110,9 +110,9 @@ class Aspect implements Configurable
 
     protected function _get($name)
     {
-        if (!$this->aspectInfo->result = $this->aspectInfo->getCache()) {
+        if (!$this->aspectInfo->result = $this->aspectInfo->getCacheValue()) {
             $this->aspectInfo->result = $this->aspectInfo->instance->$name;
-            $this->aspectInfo->setCache();
+            $this->aspectInfo->setCacheValue();
         }
         return $this->aspectInfo->result;
     }
@@ -139,9 +139,9 @@ class Aspect implements Configurable
 
         try {
             if ($this->aspectInfo->beforeCall()) {
-                if (!$this->aspectInfo->result = $this->aspectInfo->getCache()) {
+                if (!$this->aspectInfo->result = $this->aspectInfo->getCacheValue()) {
                     $this->aspectInfo->result = call_user_func_array([$this->aspectInfo->instance, $this->aspectInfo->name], $this->aspectInfo->params);
-                    $this->aspectInfo->setCache();
+                    $this->aspectInfo->setCacheValue();
                 }
                 $this->aspectInfo->afterCall();
 
