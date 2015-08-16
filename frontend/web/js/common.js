@@ -35,7 +35,6 @@ define(function(require,exports){
     });
 
     $(".tabs li").on("click",function(e){
-        console.log($(this).index())
         $(this).children("a").addClass("active").parent("li").siblings("li").children("a").removeClass("active");
         $(".tabContentWrap .tabContent").eq($(this).index()).removeClass("hide").siblings(".tabContent").addClass("hide");
         e.preventDefault();
