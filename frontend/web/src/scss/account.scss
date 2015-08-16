@@ -5,6 +5,12 @@ a:hover{
 .themeColor:hover{
   color: $themeColor;
 }
+body,.twoContainer{
+  background: $borderColor;
+}
+.backGrey{
+  background: #fff;
+}
 .loginWrap{
   padding: 50px 30px 40px 100px;
 }
@@ -18,6 +24,7 @@ a:hover{
   -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
   outline: none;
+  background: $backColor;
   &:focus{
     border-color: $themeColor;
   }
@@ -32,7 +39,7 @@ a:hover{
   font-weight: 400;
   color: #555;
   text-align: center;
-  background-color: #fff;
+  background-color: $backColor;
   border: 1px solid #fff;
   border-right-color: $borderColor;
   border-radius: 4px;
@@ -50,7 +57,7 @@ a:hover{
   width: 360px;
 }
 .accountSide{
-  background: $borderColor;
+  background: $backColor;
   dt,dd{
     height: 50px;
     line-height: 50px;
@@ -67,7 +74,7 @@ a:hover{
   }
   dd{
     display: none;
-    background: $backColor;
+    background: #fff;
     border-bottom: 1px $borderColor solid;
   }
   .current{
@@ -170,6 +177,7 @@ a:hover{
 .rechargeSucceed{
   padding: 50px 60px;
 }
+
 .iAccount{
   height: 160px;
   padding-top: 28px;
