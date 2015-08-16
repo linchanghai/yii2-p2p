@@ -1,5 +1,5 @@
 require.config({
-    baseUrl: "/js",
+    baseUrl: "/web/js",
     paths: {
         "jquery": "jquery.min",
         "common": "common"

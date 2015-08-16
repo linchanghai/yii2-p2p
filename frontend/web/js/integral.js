@@ -1,10 +1,31 @@
-require(["jquery","common","textslider"],function($,c){
+require(["jquery","common","textslider","bxslider"],function($,c){
     $(function(){
 
-        $("#textSlider").textSlider({
+        $(".textSlider").textSlider({
             line:1,
             speed:500,
             timer:3000
+        });
+
+        $("#couponBanner").bxSlider({
+            mode:"fade",
+            auto:true,
+            pause:4000,
+            infiniteLoop:true,
+            tickerHover:true,
+            autoHover:true,
+            nextText:"",
+            prevText:""
+        });
+
+        $("#memberShow").bxSlider({
+            mode:"horizontal",
+            pause:4000,
+            infiniteLoop:true,
+            tickerHover:true,
+            autoHover:true,
+            nextText:"",
+            prevText:""
         });
         //积分计算
         var leastLine = $("#leastLine"),
@@ -40,6 +61,8 @@ require(["jquery","common","textslider"],function($,c){
                 leastLine.html(Number($(this).val())*leastIntegral);
             }
         });
+
+
 
 
     });

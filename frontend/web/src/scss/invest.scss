@@ -199,16 +199,18 @@
 }
 //积分
 .showIntegralLeft{
-  width: 260px;
+  width: 240px;
   padding: 15px;
   border: 1px $borderColor solid;
 }
 .signArea{
+  margin-top: 5px;
   padding-bottom: 10px;
   border-bottom: 1px $borderColor solid;
   a{
     float: left;
     width: 50%;
+    margin-top: 5px;
   }
 }
 .integralLine{
@@ -309,6 +311,151 @@
 .afterInvestArea{
   width: 360px;
   margin: 40px auto 0 auto;
+}
+.memberRights{
+  padding-bottom: 10px;
+  border-bottom: 1px $borderColor solid;
+}
+.toBe{
+  margin-top: 10px;
+}
+.integralTopArea{
+  height: 342px;
+  overflow: hidden;
+}
+.middleIntegral{
+  margin-left: 10px;
+  width: 630px;
+  border-bottom: 1px $borderColor solid;
+}
+.couponBanner{
+  position: relative;
+  width: 630px;
+  height: 300px;
+  li{
+    width: 630px;
+  }
+  img{
+    width: 630px;
+    height: 300px;
+  }
+}
+.bx-pager{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 99;
+  text-align: center;
+  .bx-pager-item{
+    display: inline-block;
+  }
+  a{
+    background: transparent;
+    text-indent: -9999px;
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border: 1px #fff solid;
+  }
+  a.active{
+    background: #fff;
+    border: 1px #fff solid;
+  }
+}
+.textSliderWrap{
+  height: 42px;
+  line-height: 42px;
+  border-left: 1px $borderColor solid;
+  i{
+    position: relative;
+    top: 4px;
+  }
+  .textSlider{
+    width: 50%;
+    padding-left: 12px;
+    border-right: 1px $borderColor solid;
+  }
+}
+.integralTopHot{
+  width: 188px;
+  padding: 0 10px;
+  margin-left: 10px;
+  border: 1px $borderColor solid;
+  dt{
+    padding-top: 8px;
+    height: 36px;
+  }
+  dd{
+    height: 60px;
+    padding: 10px 0;
+    border-top: 1px $borderColor solid;
+  }
+  .btn{
+    margin-top: 8px;
+    padding: 3px 6px;
+  }
+}
+.memberShow{
+  position: relative;
+  height: 40px;
+  ul{
+    height: 40px;
+    overflow: hidden;
+  }
+  a{
+    float: left;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    text-indent: -1000px;
+    background: url(../images/coupon.png) no-repeat;
+  }
+  .bx-pager{
+    display: none;
+  }
+  .bx-prev,.bx-next{
+    position: absolute;
+    top: 8px;
+    width: 12px;
+    height: 22px;
+    background-position: -222px -1392px;
+  }
+  .bx-prev{
+    left: -18px;
+  }
+  .bx-next{
+    right: -8px;
+    background-position: right -1392px;
+  }
+  .r1{
+    background-position: left -157px;
+  }
+  .r2{
+    background-position: -44px -157px;
+  }
+  .r3{
+    background-position: -86px -157px;
+  }
+  .r4{
+    background-position: -129px -157px;
+  }
+  .r5{
+    background-position: -171px -157px;
+  }
+  .r6{
+    background-position: left -1517px;
+  }
+  .r7{
+    background-position: -42px -1517px;
+  }
+  .r8{
+    background-position: -86px -1517px;
+  }
 }
 //fish
 .fishDetail{
