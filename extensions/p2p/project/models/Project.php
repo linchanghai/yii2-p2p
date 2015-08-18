@@ -85,8 +85,8 @@ class Project extends \kiwi\db\ActiveRecord
 //            [['verify_user'], 'string'],
             [['project_name'], 'string', 'max' => 100],
             [['project_no'], 'string', 'max' => 30],
-            ['repayment_date', 'date', 'timestampAttribute' => 'repayment_date', 'on' => ['insert']],
-            ['release_date', 'date', 'timestampAttribute' => 'release_date', 'on' => ['insert']],
+            ['repayment_date', 'date', 'format' => 'yyyy-MM-dd', 'timestampAttribute' => 'repayment_date', 'on' => ['insert']],
+            ['release_date', 'date', 'format' => 'yyyy-MM-dd', 'timestampAttribute' => 'release_date', 'on' => ['insert']],
             [['repayment_date', 'release_date'], 'validateDate', 'on' => ['insert']],
         ];
     }
