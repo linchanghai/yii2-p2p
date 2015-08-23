@@ -135,6 +135,13 @@ require(["jquery","common","placeholder","modal","tooltip"],function($,c){
             }
         }
 
+        if($("#findPwdCode").length > 0){
+            idTime = 59;
+            $("#codeSend").attr("disabled", "disabled").addClass("btnDisabled");
+            countDown();
+            countLoop = setInterval(countDown, 1000);
+        }
+
         //logout
         var logTime = 5,countTime = $("#countTime");
         function countBack(){
@@ -150,5 +157,20 @@ require(["jquery","common","placeholder","modal","tooltip"],function($,c){
             setInterval(countBack,1000);
         }
 
+        //to login
+
+        var toLog = 10,loginNow = $("#loginNow");
+        function countBack(){
+            if(toLog > 1){
+                toLog--;
+                loginNow.html(toLog);
+            }else{
+                window.location.href = $("#loginAddress").attr("href");
+            }
+        }
+
+        if(loginNow.length > 0){
+            setInterval(countBack,1000);
+        }
     });
 });
