@@ -107,11 +107,11 @@ body, .twoContainer {
   line-height: 50px;
   font-size: 16px;
   text-align: center;
-  background: #fff;
   color: #333;
+  background: #f3f5fb;
 }
 .rechargeTitle .active {
-  background: #f3f5fb;
+  background: #fff;
   color: #375473;
 }
 
@@ -539,4 +539,180 @@ body, .twoContainer {
 }
 .addBank .addText {
   margin-top: 5px;
+}
+
+.modifyPwdForm {
+  padding: 50px 0 30px 80px;
+}
+.modifyPwdForm .modInput {
+  width: 250px;
+  padding: 7px 9px;
+  line-height: 18px;
+  color: #595959;
+  vertical-align: middle;
+  background: #fcfcfc;
+  outline: none;
+  border: 1px #e1e3e7 solid;
+}
+.modifyPwdForm .formGroupUnion input {
+  width: 120px;
+  margin-right: 10px;
+}
+.modifyPwdForm .formGroupUnion button {
+  width: 120px;
+}
+.modifyPwdForm .modLabel {
+  width: 170px;
+  padding-top: 5px;
+  margin-right: 10px;
+  text-align: right;
+  font-size: 14px;
+}
+.modifyPwdForm .modBtn {
+  margin-left: 180px;
+}
+
+.withdrawPsw-step {
+  width: 550px;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+.ui-step {
+  padding: 0;
+  font-size: 14px;
+  list-style: none;
+  zoom: 1;
+  position: relative;
+  color: #b7b7b7;
+}
+
+.ui-step li {
+  float: left;
+  height: 50px;
+  margin: 0;
+  width: 50%;
+  position: relative;
+}
+
+.ui-step-3 li {
+  width: 50%;
+}
+
+.ui-step .ui-step-active {
+  color: #383838;
+}
+
+.ui-step .ui-step-line {
+  margin: 0 30px;
+}
+
+.ui-step li .ui-step-line {
+  height: 2px;
+  background: #e3e7e6;
+  display: block;
+  margin-top: 8px;
+  line-height: 1;
+  overflow: hidden;
+}
+
+.ui-step li .ui-step-icon {
+  height: 50px;
+  position: absolute;
+  top: 0;
+  width: 150px;
+  text-align: center;
+  left: -25px;
+  font-family: arial,helvetica,sans-serif;
+}
+
+.ui-step-icon .iconfont {
+  font-size: 30px;
+  margin: 0;
+  color: #b7b7b7;
+  color: rgba(0, 0, 0, 0.25);
+  line-height: 30px;
+  padding: 0;
+  position: absolute;
+  top: -11px;
+  left: 3px;
+  text-shadow: 1px 1px 2px #fff,0 0 0 #ccc,1px 1px 2px #fff;
+}
+
+.ui-step-icon .iconfont {
+  width: 42px;
+  height: 42px;
+  background: url("../images/step-icon-gray.png") no-repeat;
+}
+
+.ui-step-active .iconfont, .ui-step-done .iconfont {
+  width: 42px;
+  height: 42px;
+  background: url("../images/step-icon-light.png") no-repeat;
+}
+
+.ui-step-icon .ui-step-number {
+  line-height: 1.5;
+  font-style: normal;
+  position: absolute;
+  top: -6px;
+  left: -1px;
+  padding: 0 18px;
+  font-size: 21px;
+  font-weight: 800;
+  color: #afb4bc;
+}
+
+.ui-step-active .ui-step-number {
+  color: #fff;
+}
+
+.ui-step li .ui-step-icon {
+  height: 50px;
+  position: absolute;
+  top: 0;
+  width: 150px;
+  text-align: center;
+  left: -25px;
+  font-family: arial,helvetica,sans-serif;
+}
+
+.ui-step-icon .ui-step-text {
+  height: 20px;
+  line-height: 20px;
+  position: relative;
+  text-shadow: 0 1px 0 #fff;
+  top: 52px;
+  left: -49px;
+}
+
+.ui-step-active .ui-step-text {
+  color: #19bd9b;
+}
+
+.ui-step li.ui-step-end {
+  position: absolute;
+  top: 0;
+  width: 150px;
+  zoom: 1;
+}
+
+.ui-step li.ui-step-end {
+  right: -145px;
+}
+
+.ui-step li.ui-step-end .ui-step-line {
+  display: none;
+}
+
+.ui-step-active .ui-step-line {
+  background: #19bd9b;
+}
+
+.ui-step-4 li {
+  width: 33%;
+}
+
+.stepForm {
+  margin-top: 60px;
 }

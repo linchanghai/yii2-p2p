@@ -490,6 +490,14 @@ html input[disabled] {
   margin-left: 10px;
 }
 
+.mt2 {
+  margin-top: 2px;
+}
+
+.mt6 {
+  margin-top: 6px;
+}
+
 .mt10 {
   margin-top: 10px;
 }
@@ -614,6 +622,10 @@ a.greenColor:hover {
 
 .verB {
   vertical-align: bottom;
+}
+
+.curp {
+  cursor: pointer;
 }
 
 .col333 {
