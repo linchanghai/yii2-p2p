@@ -7,7 +7,7 @@
  */
 
 use yii\helpers\Url;
-use \yii\widgets\LinkPager;
+use yii\widgets\LinkPager;
 
 ?>
 <div class="containerMain fundsFlow">
@@ -18,22 +18,22 @@ use \yii\widgets\LinkPager;
         <div class="clearFix mt10 filterLine">
             <label>时间范围:</label>
             <a <?= Yii::$app->request->get('date') ? null : 'class="active"' ?>
-                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+                href="<?= Url::to(array_merge(Yii::$app->request->queryParams, [
                     '/member/statistic-change/statistic-list',
                     'date' => 0
                 ])) ?>">全部</a>
             <a <?= Yii::$app->request->get('date') == 1 ? 'class="active"' : null ?>
-                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+                href="<?= Url::to(array_merge(Yii::$app->request->queryParams, [
                     '/member/statistic-change/statistic-list',
                     'date' => 1
                 ])) ?>">1个月</a>
             <a <?= Yii::$app->request->get('date') == 2 ? 'class="active"' : null ?>
-                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+                href="<?= Url::to(array_merge(Yii::$app->request->queryParams, [
                     '/member/statistic-change/statistic-list',
                     'date' => 2
                 ])) ?>">2个月</a>
             <a <?= Yii::$app->request->get('date') == 3 ? 'class="active"' : null ?>
-                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+                href="<?= Url::to(array_merge(Yii::$app->request->queryParams, [
                     '/member/statistic-change/statistic-list',
                     'date' => 3
                 ])) ?>">3个月</a>
@@ -45,34 +45,34 @@ use \yii\widgets\LinkPager;
         <div class="clearFix mt10 filterLine">
             <label>项目收益:</label>
             <a <?= Yii::$app->request->get('type') ? null : 'class="active"' ?>
-                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+                href="<?= Url::to(array_merge(Yii::$app->request->queryParams, [
                     '/member/statistic-change/statistic-list',
                     'type' => 0
                 ])) ?>">全部</a>
-            <a <?= Yii::$app->request->get('type') == 1 ? 'class="active"' : null ?>
-                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+            <a <?= Yii::$app->request->get('type') == 'recharge' ? 'class="active"' : null ?>
+                href="<?= Url::to(array_merge(Yii::$app->request->queryParams, [
                     '/member/statistic-change/statistic-list',
-                    'type' => 1
+                    'type' => 'recharge'
                 ])) ?>">充值</a>
-            <a <?= Yii::$app->request->get('type') == 2 ? 'class="active"' : null ?>
-                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+            <a <?= Yii::$app->request->get('type') == 'withdraw' ? 'class="active"' : null ?>
+                href="<?= Url::to(array_merge(Yii::$app->request->queryParams, [
                     '/member/statistic-change/statistic-list',
-                    'type' => 2
+                    'type' => 'withdraw'
                 ])) ?>">提现</a>
-            <a <?= Yii::$app->request->get('type') == 3 ? 'class="active"' : null ?>
-                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+            <a <?= Yii::$app->request->get('type') == 'invest' ? 'class="active"' : null ?>
+                href="<?= Url::to(array_merge(Yii::$app->request->queryParams, [
                     '/member/statistic-change/statistic-list',
-                    'type' => 3
+                    'type' => 'invest'
                 ])) ?>">投资</a>
-            <a <?= Yii::$app->request->get('type') == 4 ? 'class="active"' : null ?>
-                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+            <a <?= Yii::$app->request->get('type') == 'repayment' ? 'class="active"' : null ?>
+                href="<?= Url::to(array_merge(Yii::$app->request->queryParams, [
                     '/member/statistic-change/statistic-list',
-                    'type' => 4
+                    'type' => 'repayment'
                 ])) ?>">回收</a>
-            <a <?= Yii::$app->request->get('type') == 5 ? 'class="active"' : null ?>
-                href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, [
+            <a <?= Yii::$app->request->get('type') == 'transfer' ? 'class="active"' : null ?>
+                href="<?= Url::to(array_merge(Yii::$app->request->queryParams, [
                     '/member/statistic-change/statistic-list',
-                    'type' => 5
+                    'type' => 'transfer'
                 ])) ?>">转让债券</a>
         </div>
         <table class="table table-bordered textCenter mt20">
@@ -105,7 +105,16 @@ use \yii\widgets\LinkPager;
                         <div class="tableNoInfo">
                             <i class="glyphicon glyphicon-info-sign secondColor"></i> 暂无数据
                             <p>
-                                <a href="#" class="mt20 btn regularBtn">立即充值</a>
+                                <?php if (Yii::$app->request->getQueryParam('type') == 'recharge') { ?>
+                                    <a href="<?= Url::to(['/recharge/recharge/recharge']) ?>"
+                                       class="mt20 btn regularBtn">立即充值</a>
+                                <?php } else if (Yii::$app->request->getQueryParam('type') == 'withdraw') { ?>
+                                    <a href="<?= Url::to(['/withdraw/withdraw/withdraw']) ?>"
+                                       class="mt20 btn regularBtn">立即提现</a>
+                                <?php } else if (Yii::$app->request->getQueryParam('type') == 'invest') { ?>
+                                    <a href="<?= Url::to(['/project/project/list']) ?>"
+                                       class="mt20 btn regularBtn">立即投资</a>
+                                <?php } ?>
                             </p>
                         </div>
                     </td>

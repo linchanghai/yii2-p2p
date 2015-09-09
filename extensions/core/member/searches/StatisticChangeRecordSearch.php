@@ -116,19 +116,19 @@ class StatisticChangeRecordSearch extends StatisticChangeRecord
 
             if (isset($params['type'])) {
                 switch ($params['type']) {
-                    case 1:
+                    case 'recharge':
                         $query->andWhere(['type' => static::TYPE_RECHARGE]);
                         break;
-                    case 2:
+                    case 'withdraw':
                         $query->andWhere(['type' => static::TYPE_WITHDRAW_SUCCESS]);
                         break;
-                    case 3:
+                    case 'invest':
                         $query->andWhere(['type' => static::TYPE_PACKAGE_INTEREST]);
                         break;
-                    case 4:
+                    case 'repayment':
                         $query->andWhere(['type' => static::TYPE_REPAYMENT]);
                         break;
-                    case 5:
+                    case 'transfer':
                         $query->andWhere(['type' => static::TYPE_INVEST]);
                         break;
                 }

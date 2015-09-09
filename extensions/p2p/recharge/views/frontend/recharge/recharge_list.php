@@ -50,7 +50,7 @@ use yii\widgets\LinkPager;
                         <div class="tableNoInfo">
                             <i class="glyphicon glyphicon-info-sign secondColor"></i> 暂无数据
                             <p>
-                                <a href="#" class="mt20 btn regularBtn">立即充值</a>
+                                <a href="<?= Url::to(['/recharge/recharge/recharge']) ?>" class="mt20 btn regularBtn">立即充值</a>
                             </p>
                         </div>
                     </td>
