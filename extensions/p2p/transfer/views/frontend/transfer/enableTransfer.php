@@ -43,7 +43,7 @@ use \yii\widgets\LinkPager;
                     echo '<td>' . date('Y-m-d', $model->project->repayment_date) . '</td>';
                     echo '<td>' . $model->rate . '</td>';
                     echo '<td>' . $model->rate . '</td>';
-                    echo '<td><a href="#" class="secondColor">转让</a></td>';
+                    echo '<td><a href="' . Url::to(['/transfer/transfer/create', 'project_invest_id' => $model->project_invest_id]) . '" class="secondColor">转让</a></td>';
                     echo '</tr>';
                 }
             } else {

@@ -31,8 +31,9 @@ $form = ActiveForm::begin();
             ])->label(null, ['style' => 'width:83px']); ?>
         </li>
         <li class="mt10">
-            <?= $form->field($model, 'withdrawMoney')->textInput(['class' => 'formControl mr16'])
-                ->label(null, ['style' => 'width:83px']); ?>
+            <?= $form->field($model, 'withdrawMoney')->textInput([
+                'class' => 'formControl mr16'
+            ])->label(null, ['style' => 'width:83px']); ?>
         </li>
         <li class="mt10">
             <?= $form->field($model, 'withdrawFee')->textInput([

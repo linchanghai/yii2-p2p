@@ -23,13 +23,40 @@ $form = ActiveForm::begin();
     </ul>
     <br>
     <input type="hidden" name="TransferForm[project_invest_id]" value="<?= $transferForm->project_invest_id ?>">
+    <ul class="mt10 rechargeArea">
+        <li class="mt10">
+            <?= $form->field($transferForm, 'min_money')->textInput([
+                'class' => 'formControl mr16',
+            ])->label(null, ['style' => 'width:83px']); ?>
+        </li>
+        <li class="mt10">
+            <?= $form->field($transferForm, 'transfer_money')->textInput([
+                'class' => 'formControl mr16'
+            ])->label(null, ['style' => 'width:83px']); ?>
+        </li>
+        <li class="mt10">
+            <?= $form->field($transferForm, 'discount_rate')->textInput([
+                'class' => 'formControl mr16',
+            ])->label(null, ['style' => 'width:83px']); ?>
+        </li>
+        <li class="mt10">
+            <?= $form->field($transferForm, 'counter_fee')->textInput([
+                'class' => 'formControl mr16',
+                'value' => 10
+            ])->label(null, ['style' => 'width:83px']); ?>
+        </li>
+        <li class="mt10">
+            <label class="invisible mr16">转让</label>
+            <?= Html::submitButton('申请转让', ['class' => 'mt10 btn regularBtn themeBtn']) ?>
+        </li>
+    </ul>
     <?php
-    echo $form->field($transferForm, 'min_money')->textInput();
-    echo $form->field($transferForm, 'transfer_money')->textInput();
-    echo $form->field($transferForm, 'discount_rate')->textInput();
-    echo $form->field($transferForm, 'counter_fee')->textInput(['value' => 10, 'readonly' => true]);
-
-    echo Html::submitButton('申请转让');
+    //    echo $form->field($transferForm, 'min_money')->textInput();
+    //    echo $form->field($transferForm, 'transfer_money')->textInput();
+    //    echo $form->field($transferForm, 'discount_rate')->textInput();
+    //    echo $form->field($transferForm, 'counter_fee')->textInput(['value' => 10, 'readonly' => true]);
+    //
+    //    echo Html::submitButton('申请转让');
 
     $form->end();
     ?>
