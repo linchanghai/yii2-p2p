@@ -22,12 +22,35 @@ $form = ActiveForm::begin();
         <li><a href="<?= Url::to(['/withdraw/withdraw/withdraw-list']) ?>">提现记录</a></li>
     </ul>
     <br>
+    <ul class="mt10 rechargeArea">
+        <li class="mt10">
+            <?= $form->field($model, 'canWithdrawMoney')->textInput([
+                'class' => 'formControl mr16',
+                'value' => $memberStatistic->account_money,
+                'readonly' => true
+            ])->label(null, ['style' => 'width:83px']); ?>
+        </li>
+        <li class="mt10">
+            <?= $form->field($model, 'withdrawMoney')->textInput(['class' => 'formControl mr16'])
+                ->label(null, ['style' => 'width:83px']); ?>
+        </li>
+        <li class="mt10">
+            <?= $form->field($model, 'withdrawFee')->textInput([
+                'class' => 'formControl mr16',
+                'value' => 10
+            ])->label(null, ['style' => 'width:83px']); ?>
+        </li>
+        <li class="mt10">
+            <label class="invisible mr16">提现</label>
+            <?= Html::submitButton('申请提现', ['class' => 'mt10 btn regularBtn themeBtn']) ?>
+        </li>
+    </ul>
     <?php
-    echo $form->field($model, 'withdrawMoney');
-    echo $form->field($model, 'canWithdrawMoney')->textInput(['value' => $memberStatistic->account_money, 'readonly' => true]);
-    echo $form->field($model, 'withdrawFee')->textInput(['value' => 10]);
-
-    echo Html::submitButton('申请提现');
+    //    echo $form->field($model, 'withdrawMoney');
+    //    echo $form->field($model, 'canWithdrawMoney')->textInput(['value' => $memberStatistic->account_money, 'readonly' => true]);
+    //    echo $form->field($model, 'withdrawFee')->textInput(['value' => 10]);
+    //
+    //    echo Html::submitButton('申请提现');
 
     $form->end();
     ?>
