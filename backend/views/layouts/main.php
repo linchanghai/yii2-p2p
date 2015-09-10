@@ -30,8 +30,8 @@ $menus = Kiwi::getConfiguration()->menus;
 <?php $this->beginBody() ?>
 
 <div class="main-header navbar-fixed-top">
-    <div class="pull-left" style="position: fixed; top: 21px">
-        <img src="<?= Yii::$app->urlManager->baseUrl ?>/images/logo.png"/>
+    <div style="position: fixed;width: 12%;top: -8px">
+        <h1 align="center" style="color: #ffffff;"><strong>悦富喵</strong></h1>
     </div>
     <div class="nav-left">
         <span style="color:#ffffff;"><?= Yii::$app->user->isGuest ? Html::a('登录', ['site/login']) : Yii::$app->user->identity->username . '您好!'; ?></span>
