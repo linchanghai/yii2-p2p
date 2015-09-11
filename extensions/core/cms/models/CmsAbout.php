@@ -22,6 +22,11 @@ use yii\behaviors\TimestampBehavior;
  */
 class CmsAbout extends \kiwi\db\ActiveRecord
 {
+    const TYPE_ABOUT = 1;
+    const TYPE_TEAM = 2;
+    const TYPE_EXPERTS = 3;
+    const TYPE_LAWOFFICE = 4;
+
     /**
      * @inheritdoc
      */
