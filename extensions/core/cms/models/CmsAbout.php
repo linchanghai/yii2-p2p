@@ -26,6 +26,7 @@ class CmsAbout extends \kiwi\db\ActiveRecord
     const TYPE_TEAM = 2;
     const TYPE_EXPERTS = 3;
     const TYPE_LAWOFFICE = 4;
+    const TYPE_HONOR = 5;
 
     /**
      * @inheritdoc

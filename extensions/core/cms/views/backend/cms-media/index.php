@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'cms_media_id',
+
             'title',
             'content:ntext',
             'source_site',

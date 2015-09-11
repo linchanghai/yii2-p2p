@@ -36,7 +36,7 @@ use kartik\widgets\ActiveForm;
 //        'callbackFunction' => new JsExpression('function(file, id){}')
     ]); ?>
 
-    <?= $form->field($model, 'type')->textInput() ?>
+    <?= $form->field($model, 'type')->dropDownList(Yii::$app->dataList->aboutUsType)  ?>
 
 
     <div class="form-group">
