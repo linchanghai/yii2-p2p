@@ -58,6 +58,12 @@ return [
                         'url' => ['/core_cms/cms-recruitment/index'],
                         'activeUrls' => [['/core_cms/cms-recruitment/create'], ['/core_cms/cms-recruitment/update']],
                     ],
+                    'cmsPartner' => [
+                        'label' => Yii::t('core_cms', 'Partner'),
+                        'sort' => 500,
+                        'url' => ['/core_cms/cms-partner/index'],
+                        'activeUrls' => [['/core_cms/cms-partner/create'], ['/core_cms/cms-partner/update']],
+                    ],
                 ]
             ],        ]
     ],

@@ -14,12 +14,12 @@ $this->registerJsFile('/js/about.js', ['depends' => [AppAsset::className()]]);
             <ul>
                 <li><a href="<?= Url::to(['/cms/cms/about'])?>">关于我们</a></li>
                 <li class="aboutSub active"><a href="<?= Url::to(['/cms/cms/team'])?>">团队介绍</a></li>
-                <li class="aboutSub"><a href="<?= Url::to(['/cms/cms/about'])?>">资质荣誉</a></li>
+                <li class="aboutSub"><a href="<?= Url::to(['/cms/cms/about'])?>">资质荣誉(没皮)</a></li>
                 <li class="aboutSub"><a href="<?= Url::to(['/cms/cms/experts'])?>">专家顾问</a></li>
                 <li class="aboutSub"><a href="<?= Url::to(['/cms/cms/law-office'])?>">法律顾问</a></li>
                 <li><a href="<?= Url::to(['/cms/cms/media-list'])?>">媒体报道</a></li>
-                <li><a href="#">合作伙伴((后台没有))</a></li>
-                <li><a href="#">官方公告(没皮)</a></li>
+                <li><a href="<?= Url::to(['/cms/cms/partner-list'])?>">合作伙伴 </a></li>
+                <li><a href="<?= Url::to(['/cms/cms/announcement'])?>">官方公告</a></li>
                 <li><a href="#">活动公告(前后都没有)</a></li>
                 <li><a href="<?= Url::to(['/cms/cms/employ'])?>">诚聘英才</a></li>
                 <li><a href="<?= Url::to(['/cms/cms/law'])?>">安全保障</a></li>

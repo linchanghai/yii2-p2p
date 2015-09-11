@@ -7,6 +7,7 @@
 namespace core\cms\controllers\frontend;
 
 use core\cms\models\CmsMedia;
+use core\cms\models\CmsNotice;
 use yii\data\Pagination;
 
 class CmsController extends \kiwi\web\Controller{
@@ -82,9 +83,51 @@ class CmsController extends \kiwi\web\Controller{
 
     }
     public function actionPartnerList(){
+        $cmsAbout = \kiwi\Kiwi::getCmsPartner()->find()->where([])->limit(2)->all();
+        return $this->render('partner',[
+            'models'=>$cmsAbout
+        ]);
+    }
+
+    public function actionPartner($id){
+        $media = \kiwi\Kiwi::getCmsPartner()->findOne($id);
+        if($media){
+            return $this->render('partnerDetail',[
+                'model'=>$media
+            ]);
+        }else{
+            throw new \yii\web\NotFoundHttpException('页面不存在');
+        }
+    }
+
+    public function actionActivityAnnouncement(){
 
     }
 
+    public function actionAnnouncement(){
+        $query = CmsNotice::find()->addOrderBy('create_time DESC');
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count(),'pageSize'=>10]);
+        $cmsMediaModels = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        return $this->render('announcement', [
+            'models' => $cmsMediaModels,
+            'pages' => $pages,
+        ]);
+    }
+
+    public function actionAnnouncementDetail($id){
+        $media = \kiwi\Kiwi::getCmsNotice()->findOne($id);
+        if($media){
+            return $this->render('announcementDetail',[
+                'model'=>$media
+            ]);
+        }else{
+            throw new \yii\web\NotFoundHttpException('页面不存在');
+        }
+    }
     public function actionEmploy(){
         $lawModels = \kiwi\Kiwi::getCmsRecruitment()->find()->where([])->limit(4)->all();
 
