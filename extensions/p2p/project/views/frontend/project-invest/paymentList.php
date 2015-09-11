@@ -1,6 +1,6 @@
 <?php
 use kartik\helpers\Html;
-use \yii\widgets\LinkPager;
+use yii\widgets\LinkPager;
 
 ?>
 <table class="table table-bordered textCenter mt20 tabContent">

@@ -81,7 +81,6 @@ class ProjectInvestSearch extends ProjectInvest
             'member_id' => Yii::$app->user->id,
         ]);
 
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
@@ -110,6 +109,33 @@ class ProjectInvestSearch extends ProjectInvest
             'is_delete' => $this->is_delete,
             'actual_invest_money' => $this->actual_invest_money,
         ]);
+
+        return $dataProvider;
+    }
+
+    public function enableTransferSearch($params)
+    {
+        $projectInvestClass = Kiwi::getProjectInvestClass();
+        $query = $projectInvestClass::find()->where([
+            'member_id' => Yii::$app->user->id,
+        ]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pagesize' => 20,
+            ]
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        $query->andWhere(['<=', 'create_time', strtotime('-3 month')]);
 
         return $dataProvider;
     }

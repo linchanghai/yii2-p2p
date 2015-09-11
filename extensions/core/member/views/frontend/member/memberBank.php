@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use kartik\widgets\DepDrop;
-use \yii\helpers\Url;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model core\member\models\Member */
