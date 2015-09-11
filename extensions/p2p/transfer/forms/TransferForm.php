@@ -68,8 +68,7 @@ class TransferForm extends Model
         if (!$this->_invest) {
             $projectInvestClass = Kiwi::getProjectInvestClass();
             $this->_invest = $projectInvestClass::findOne($this->project_invest_id);
-//            if (!$this->_invest || $this->_invest->create_time < strtotime('+3 month')) {
-            if (!$this->_invest || !$this->_invest->project->canTransfer()) {
+            if (!$this->_invest || !$this->_invest->canTransfer() || !$this->_invest->project->canTransfer() ) {
                 throw new Exception('Invalid Project Invest ID');
             }
         }

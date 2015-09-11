@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
-use \yii\widgets\ActiveForm;
+use yii\widgets\ActiveForm;
 
 ?>
 <div class="containerMain backGrey">

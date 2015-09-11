@@ -7,11 +7,11 @@
  */
 
 use yii\helpers\Url;
-use \yii\widgets\LinkPager;
+use yii\widgets\LinkPager;
 
 ?>
 <div class="containerMain">
-    <ul class="clearFix rechargeTitle tabs">
+    <ul class="clearFix rechargeTitle">
         <li><a class="active" href="#">可转让项目</a></li>
         <li><a href="<?= Url::to(['/transfer/transfer/pending']) ?>">转让中项目</a></li>
         <li><a href="<?= Url::to(['/transfer/transfer/completed']) ?>">已经转让项目</a></li>

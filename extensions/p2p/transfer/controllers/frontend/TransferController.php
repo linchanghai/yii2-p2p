@@ -8,7 +8,6 @@
 
 namespace p2p\transfer\controllers\frontend;
 
-
 use kiwi\helpers\ArrayHelper;
 use kiwi\Kiwi;
 use kiwi\web\Controller;
@@ -21,7 +20,7 @@ class TransferController extends Controller
     public function actionEnable()
     {
         $searchModel = Kiwi::getProjectInvestSearch();
-        $dataProvider = $searchModel->frontendSearch(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->enableTransferSearch(Yii::$app->request->queryParams);
 
         $dataProvider->prepare(true);
 

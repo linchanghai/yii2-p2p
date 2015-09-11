@@ -2,7 +2,6 @@
 
 namespace p2p\project\models;
 
-use core\member\models\Member;
 use kiwi\behaviors\ChangeBehavior;
 use kiwi\behaviors\RecordBehavior;
 use kiwi\Kiwi;
@@ -30,13 +29,15 @@ use yii\behaviors\TimestampBehavior;
  * @property ConponAnnualRecord[] $conponAnnualRecords
  * @property ConponBonusRecord[] $conponBonusRecords
  * @property ConponCashRecord[] $conponCashRecords
- * @property Project $member
+ * @property \core\member\models\Member $member
  * @property Project $project
  * @property ProjectInvestEmpiricRecord[] $projectInvestPointRecords
  * @property ProjectRepayment[] $projectRepayments
  */
 class ProjectInvest extends \kiwi\db\ActiveRecord
 {
+    use ProjectTrait;
+
     const STATUS_PENDING = 0;
     const STATUS_REPAYMENT = 1;
     const STATUS_FINISHED = 2;
@@ -143,15 +144,7 @@ class ProjectInvest extends \kiwi\db\ActiveRecord
      */
     public function getMember()
     {
-        return $this->hasOne(Member::className(), ['member_id' => 'member_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProject()
-    {
-        return $this->hasOne(Project::className(), ['project_id' => 'project_id']);
+        return $this->hasOne(Kiwi::getMemberClass(), ['member_id' => 'member_id']);
     }
 
     /**
@@ -159,7 +152,7 @@ class ProjectInvest extends \kiwi\db\ActiveRecord
      */
     public function getProjectInvestEmpiricRecords()
     {
-        return $this->hasMany(ProjectInvestEmpiricRecord::className(), ['project_invest_id' => 'project_invest_id']);
+        return $this->hasMany(Kiwi::getProjectInvestEmpiricRecordClass(), ['project_invest_id' => 'project_invest_id']);
     }
 
     /**
@@ -167,7 +160,7 @@ class ProjectInvest extends \kiwi\db\ActiveRecord
      */
     public function getProjectRepayments()
     {
-        return $this->hasMany(ProjectRepayment::className(), [
+        return $this->hasMany(Kiwi::getProjectRepaymentClass(), [
             'project_invest_id' => 'project_invest_id',
             'project_id' => 'project_id',
             'member_id' => 'member_id',
@@ -182,5 +175,13 @@ class ProjectInvest extends \kiwi\db\ActiveRecord
             ->select('project_id')
             ->distinct()
             ->count();
+    }
+
+    public function canTransfer()
+    {
+        if ($this->create_time < strtotime('-3 month')) {
+            return true;
+        }
+        return false;
     }
 }

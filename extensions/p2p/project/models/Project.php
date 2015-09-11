@@ -144,17 +144,17 @@ class Project extends \kiwi\db\ActiveRecord
 
     public function validateDate()
     {
-        if ($this->repayment_date < strtotime(date('Y-m-d',strtotime('+1 day')))) {
+        if ($this->repayment_date < strtotime(date('Y-m-d', strtotime('+1 day')))) {
             $this->addError('repayment_date', 'repayment_date不能早于当前时间！');
         }
-        if ($this->release_date < strtotime(date('Y-m-d',strtotime('+1 day')))) {
+        if ($this->release_date < strtotime(date('Y-m-d', strtotime('+1 day')))) {
             $this->addError('release_date', 'release_date不能早于当前时间！');
         }
     }
 
     public function canTransfer()
     {
-        if ($this->create_time < strtotime('-1 month')) {
+        if ($this->create_time < strtotime('-3 month')) {
             return true;
         }
         return false;
