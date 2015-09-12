@@ -20,12 +20,19 @@ class TransferController extends Controller
     public function actionEnable()
     {
         $searchModel = Kiwi::getProjectInvestSearch();
-        $dataProvider = $searchModel->enableTransferSearch(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->frontendSearch(Yii::$app->request->queryParams);
 
         $dataProvider->prepare(true);
+        $models = $dataProvider->models;
+        /** @var \p2p\project\models\ProjectInvest $model */
+        foreach ($models as $key => $model) {
+            if (!$model->project->canTransfer() || !$model->canTransfer()) {
+                unset($models[$key]);
+            }
+        }
 
         return $this->render('enableTransfer', [
-            'models' => $dataProvider->models,
+            'models' => $models,
             'pagination' => $dataProvider->pagination,
         ]);
     }

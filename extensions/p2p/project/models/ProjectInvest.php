@@ -179,7 +179,7 @@ class ProjectInvest extends \kiwi\db\ActiveRecord
 
     public function canTransfer()
     {
-        if ($this->create_time < strtotime('-3 month')) {
+        if ($this->create_time <= strtotime('-3 month')) {
             return true;
         }
         return false;
