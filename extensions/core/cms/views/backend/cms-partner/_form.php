@@ -5,13 +5,13 @@ use kartik\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model core\cms\models\CmsPartner */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form kartik\widgets\ActiveForm */
 ?>
 
 <div class="cms-partner-form">
 
     <?php $form = ActiveForm::begin([
-        'id' => 'project-form-horizontal',
+        'id' => 'cms-partner-form-horizontal',
         'type' => ActiveForm::TYPE_HORIZONTAL,
         'formConfig' => ['labelSpan' => 2],
         'fullSpan' => 11,
@@ -27,7 +27,7 @@ use kartik\widgets\ActiveForm;
             'preset' => 'standard',
             'language' => Yii::$app->language,
         ]
-    ]);?>
+    ]); ?>
 
     <?= $form->field($model, 'img_icon')->widget(\mihaildev\elfinder\InputFile::className(), [
         'multiple' => false,
@@ -38,7 +38,9 @@ use kartik\widgets\ActiveForm;
     ]); ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('core_cms', 'Create') : Yii::t('core_cms', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <div class="col-sm-offset-2 col-sm-9">
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('core_cms', 'Create') : Yii::t('core_cms', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

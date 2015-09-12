@@ -4,12 +4,13 @@ use kartik\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model p2p\activity\models\CouponCashRecord */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form kartik\widgets\ActiveForm */
 ?>
 
 <div class="coupon-cash-record-form">
 
     <?php $form = ActiveForm::begin([
+        'id' => 'coupon-cash-record-form-horizontal',
         'type' => ActiveForm::TYPE_HORIZONTAL,
         'formConfig' => ['labelSpan' => 2],
         'fullSpan' => 11
@@ -28,7 +29,9 @@ use kartik\widgets\ActiveForm;
     <?= $form->field($model, 'create_time')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('p2p_activity', 'Create') : Yii::t('p2p_activity', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <div class="col-sm-offset-2 col-sm-9">
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('p2p_activity', 'Create') : Yii::t('p2p_activity', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

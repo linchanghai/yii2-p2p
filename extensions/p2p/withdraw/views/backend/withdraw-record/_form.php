@@ -6,7 +6,7 @@ use kiwi\Kiwi;
 
 /* @var $this yii\web\View */
 /* @var $model p2p\withdraw\models\WithdrawRecord */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form kartik\widgets\ActiveForm */
 ?>
 
 <div class="withdraw-record-form">

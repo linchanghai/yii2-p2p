@@ -5,7 +5,7 @@ use kartik\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model core\system\models\UrlRewrite */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form kartik\widgets\ActiveForm */
 ?>
 
 <div class="url-rewrite-form">
@@ -25,8 +25,8 @@ use kartik\widgets\ActiveForm;
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-9">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('core_system', 'Create') : Yii::t('core_system', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-            </div>
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('core_system', 'Create') : Yii::t('core_system', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

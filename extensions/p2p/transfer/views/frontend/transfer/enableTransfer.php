@@ -21,7 +21,7 @@ use yii\widgets\LinkPager;
             <thead>
             <tr>
                 <th>项目名称</th>
-                <th>转让金额(元)</th>
+                <th>可转让金额(元)</th>
                 <th>年化收益率</th>
                 <th>投资日</th>
                 <th>到期日</th>
@@ -37,7 +37,7 @@ use yii\widgets\LinkPager;
                 foreach ($models as $model) {
                     echo '<tr>';
                     echo '<td>' . $model->project->project_name . '</td>';
-                    echo '<td>' . $model->project->project_name . '</td>';
+                    echo '<td>' . $model->project->invested_money . '</td>';
                     echo '<td>' . $model->rate . '</td>';
                     echo '<td>' . date('Y-m-d', $model->create_time) . '</td>';
                     echo '<td>' . date('Y-m-d', $model->project->repayment_date) . '</td>';

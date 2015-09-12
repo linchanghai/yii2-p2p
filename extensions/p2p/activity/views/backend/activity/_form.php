@@ -6,7 +6,7 @@ use kartik\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model p2p\activity\models\Activity */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form kartik\widgets\ActiveForm */
 ?>
 
 <div class="activity-form">

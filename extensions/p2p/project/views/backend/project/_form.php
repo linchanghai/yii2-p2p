@@ -10,7 +10,7 @@ use kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model p2p\project\models\Project */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form kartik\widgets\ActiveForm */
 
 $js = <<<EOF
 $(".btn-page").click(function() {

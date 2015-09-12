@@ -6,7 +6,7 @@ use kiwi\Kiwi;
 
 /* @var $this yii\web\View */
 /* @var $model p2p\transfer\models\ProjectInvestTransferApply */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form kartik\widgets\ActiveForm */
 
 /** @var p2p\project\models\Project $project */
 $project = $model->project;
