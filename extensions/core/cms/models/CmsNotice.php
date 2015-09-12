@@ -37,7 +37,7 @@ class CmsNotice extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type', 'create_time', 'update_time', 'publihser_date', 'is_delete'], 'integer'],
+            [['type', 'create_time', 'update_time',  'is_delete'], 'integer'],
             [['title', 'content', 'publihser_date'], 'required'],
             [['content'], 'string'],
             [['img', 'title'], 'string', 'max' => 100],

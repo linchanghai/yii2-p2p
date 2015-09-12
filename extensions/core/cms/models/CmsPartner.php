@@ -7,33 +7,26 @@ use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "cms_about".
+ * This is the model class for table "cms_partner".
  *
- * @property integer $cms_about_id
+ * @property integer $cms_partner_id
+ * @property string $img_icon
  * @property string $title
  * @property string $content
- * @property string $img
- * @property integer $type
  * @property integer $create_time
  * @property integer $update_time
  * @property string $create_by
  * @property string $update_by
  * @property integer $is_delete
  */
-class CmsAbout extends \kiwi\db\ActiveRecord
+class CmsPartner extends \kiwi\db\ActiveRecord
 {
-    const TYPE_ABOUT = 1;
-    const TYPE_TEAM = 2;
-    const TYPE_EXPERTS = 3;
-    const TYPE_LAWOFFICE = 4;
-    const TYPE_HONOR = 5;
-
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'cms_about';
+        return 'cms_partner';
     }
 
     /**
@@ -42,10 +35,11 @@ class CmsAbout extends \kiwi\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content', 'type'], 'required'],
+            [['img_icon', 'title', 'content', ], 'required'],
             [['content'], 'string'],
-            [['type', 'create_time', 'update_time', 'is_delete'], 'integer'],
-            [['title', 'img'], 'string', 'max' => 100],
+            [['create_time', 'update_time', 'is_delete'], 'integer'],
+            [['img_icon'], 'string', 'max' => 100],
+            [['title'], 'string', 'max' => 200],
             [['create_by', 'update_by'], 'string', 'max' => 45]
         ];
     }
@@ -56,11 +50,10 @@ class CmsAbout extends \kiwi\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'cms_about_id' => Yii::t('core_cms', 'Cms About ID'),
+            'cms_partner_id' => Yii::t('core_cms', 'Cms Partner ID'),
+            'img_icon' => Yii::t('core_cms', 'Img Icon'),
             'title' => Yii::t('core_cms', 'Title'),
             'content' => Yii::t('core_cms', 'Content'),
-            'img' => Yii::t('core_cms', 'Img'),
-            'type' => Yii::t('core_cms', 'Type'),
             'create_time' => Yii::t('core_cms', 'Create Time'),
             'update_time' => Yii::t('core_cms', 'Update Time'),
             'create_by' => Yii::t('core_cms', 'Create By'),

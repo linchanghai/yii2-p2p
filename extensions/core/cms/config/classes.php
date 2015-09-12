@@ -16,6 +16,7 @@ return [
         'CmsNotice' => 'core\cms\models\CmsNotice',
         'CmsLaw' => 'core\cms\models\CmsLaw',
         'CmsRecruitment' => 'core\cms\models\CmsRecruitment',
+        'CmsPartner' => 'core\cms\models\CmsPartner',
 
     ],
 ];

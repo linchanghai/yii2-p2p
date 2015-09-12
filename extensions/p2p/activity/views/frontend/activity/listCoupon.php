@@ -4,6 +4,7 @@ $this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/invest.min.css', [
 
 $this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/integral.js', ['depends' => [\frontend\assets\AppAsset::className()]]);
 
+$this->params['list-coupon'] = 1;
 ?>
 <div class="indexNotice backGrey" id="textSlider">
 

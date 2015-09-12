@@ -1,17 +1,16 @@
 <?php
+
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use kiwi\Kiwi;
-
 /* @var $this yii\web\View */
-/* @var $searchModel core\cms\searches\CmsMediaSearch */
+/* @var $searchModel core\cms\searches\CmsPartnerSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('core_cms', 'Cms Media');
+$this->title = Yii::t('core_cms', 'Cms Partners');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="cms-media-index">
-
+<div class="cms-partner-index">
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -19,11 +18,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-
+            'img_icon',
             'title',
             'content:ntext',
-            'source_site',
-            'source_link',
+            'create_time:datetime',
+             'update_time:datetime',
             [
                 'attribute'=>'create_by',
                 'vAlign'=>'middle',
@@ -56,9 +55,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterInputOptions'=>['placeholder'=>'Any author'],
                 'format'=>'raw'
             ],
-             'publisher_date:datetime',
-             'create_time:datetime',
-             'update_time:datetime',
             // 'is_delete',
 
             ['class' => 'yii\grid\ActionColumn'],
