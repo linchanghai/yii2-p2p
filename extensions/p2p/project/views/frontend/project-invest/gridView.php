@@ -35,7 +35,7 @@ $this->registerJs($js);
     </ul>
 
     <div class="backGrey p20 fundsRecords">
-        <div class="clearFix mt10 filterLine">
+        <div class="clearFix filterLine">
             <label>状态筛选:</label>
             <?= Html::a('全部', ['/project/project-invest/grid-view'], ['class' => (Yii::$app->request->get('status') == null) ? 'active' : '']) ?>
             <?= Html::a('还款中', ['/project/project-invest/grid-view', 'status' => 1], ['class' => (Yii::$app->request->get('status') == '1') ? 'active' : '']) ?>
@@ -80,7 +80,9 @@ $this->registerJs($js);
                 <tr>
                     <td colspan=10>
                         <div class="tableNoInfo">
-                            <i class="glyphicon glyphicon-info-sign secondColor"></i> 暂无数据
+                            <p class="p20">
+                                <i class="glyphicon glyphicon-info-sign secondColor"></i> 暂无数据
+                            </p>
                         </div>
                     </td>
                 </tr>

@@ -16,7 +16,7 @@ use \yii\widgets\LinkPager;
         <li><a class="active" href="#">提现记录</a></li>
     </ul>
     <div class="backGrey p20 fundsRecords">
-        <div class="clearFix mt10 filterLine">
+        <div class="clearFix filterLine">
             <label>时间范围:</label>
             <a <?= Yii::$app->request->get('date') ? null : 'class="active"' ?>
                 href="<?= Url::to(array_merge(\Yii::$app->request->queryParams, ['/withdraw/withdraw/withdraw-list', 'date' => 0])) ?>">全部</a>
@@ -50,7 +50,9 @@ use \yii\widgets\LinkPager;
                 <tr>
                     <td colspan=10>
                         <div class="tableNoInfo">
+                            <p class="p20">
                             <i class="glyphicon glyphicon-info-sign secondColor"></i> 暂无数据
+                            </p>
                         </div>
                     </td>
                 </tr>

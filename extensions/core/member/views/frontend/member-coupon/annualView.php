@@ -12,7 +12,7 @@ use yii\widgets\LinkPager;
         <li><a class="active" href="<?= Url::to(['/member/member-coupon/annual-view']) ?>">年化券</a></li>
     </ul>
     <div class="backGrey p20 fundsRecords">
-        <div class="clearFix mt10 filterLine">
+        <div class="clearFix filterLine">
             <label>状态筛选:</label>
             <?= Html::a('全部', ['/member/member-coupon/annual-view'], ['class' => (Yii::$app->request->get('status') == null) ? 'active' : '']) ?>
             <?= Html::a('已使用', ['/member/member-coupon/annual-view', 'status' => 1], ['class' => Yii::$app->request->get('status') ? 'active' : '']) ?>
@@ -42,7 +42,7 @@ use yii\widgets\LinkPager;
             } else {
                 ?>
                 <tr>
-                    <td colspan=10>
+                    <td colspan=10 style="height: 150px">
                         <div class="tableNoInfo">
                             <i class="glyphicon glyphicon-info-sign secondColor"></i> 暂无数据
                         </div>
