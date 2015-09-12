@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Url;
+
 ?>
 <footer>
     <div class="mt10 footer">
@@ -13,10 +14,10 @@ use yii\helpers\Url;
             </div>
             <ul class="fl footerMenuWrap">
                 <li class="fl footerMenu">
-                    <a href="<?= Url::to(['/cms/cms/about'])?>">关于我们</a>
+                    <a href="<?= Url::to(['/cms/cms/about']) ?>">关于我们</a>
                     <a href="#">平台介绍</a>
-                    <a href="<?= Url::to(['/cms/cms/law-office'])?>">法律法规</a>
-                    <a href="<?= Url::to(['/cms/cms/law'])?>">安全保障</a>
+                    <a href="<?= Url::to(['/cms/cms/law-office']) ?>">法律法规</a>
+                    <a href="<?= Url::to(['/cms/cms/law']) ?>">安全保障</a>
                 </li>
                 <li class="fl footerMenu">
                     <a href="#">新手指南</a>
@@ -25,8 +26,8 @@ use yii\helpers\Url;
                     <a href="#">理财知识</a>
                 </li>
                 <li class="fl footerMenu">
-                    <a href="<?= Url::to(['/cms/cms/contact'])?>">联系我们</a>
-                    <a href="<?= Url::to(['/cms/cms/employ'])?>">诚聘英才</a>
+                    <a href="<?= Url::to(['/cms/cms/contact']) ?>">联系我们</a>
+                    <a href="<?= Url::to(['/cms/cms/employ']) ?>">诚聘英才</a>
                     <a href="#">友情链接</a>
                     <a href="#">网站地图</a>
                 </li>

@@ -50,7 +50,7 @@ class v0_1_0 extends Migration
             'update_by' => Schema::TYPE_STRING . '(45)',
             'create_time' => Schema::TYPE_INTEGER . ' NOT NULL',
             'update_time' => Schema::TYPE_INTEGER . '',
-            'isDelete' => Schema::TYPE_BOOLEAN . '(1) NOT NULL default \'0\'',
+            'is_delete' => Schema::TYPE_BOOLEAN . '(1) NOT NULL default \'0\'',
 
         ]);
         $this->createTable('cms_media', [

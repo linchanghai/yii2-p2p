@@ -17,7 +17,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $update_by
  * @property integer $create_time
  * @property integer $update_time
- * @property integer $isDelete
+ * @property integer $is_delete
  */
 class CmsHelp extends \kiwi\db\ActiveRecord
 {
@@ -36,7 +36,7 @@ class CmsHelp extends \kiwi\db\ActiveRecord
     {
         return [
             [['title', 'content'], 'required'],
-            [['cms_help_id', 'type', 'isDelete','create_time', 'update_time'], 'integer'],
+            [['cms_help_id', 'type', 'is_delete','create_time', 'update_time'], 'integer'],
             [['content'], 'string'],
             [['title', 'create_by', 'update_by'], 'string', 'max' => 45],
             [['cms_help_id'], 'unique']
@@ -57,7 +57,7 @@ class CmsHelp extends \kiwi\db\ActiveRecord
             'update_by' => Yii::t('core_cms', 'Update By'),
             'create_time' => Yii::t('core_cms', 'Create Time'),
             'update_time' => Yii::t('core_cms', 'Update Time'),
-            'isDelete' => Yii::t('core_cms', 'Is Delete'),
+            'is_delete' => Yii::t('core_cms', 'Is Delete'),
         ];
     }
 

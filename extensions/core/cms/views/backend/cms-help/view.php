@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'update_by',
             'create_time',
             'update_time',
-            'isDelete',
+            'is_delete',
         ],
     ]) ?>
 

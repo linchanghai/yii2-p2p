@@ -31,7 +31,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'update_time') ?>
 
-    <?php // echo $form->field($model, 'isDelete') ?>
+    <?php // echo $form->field($model, 'is_delete') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('core_cms', 'Search'), ['class' => 'btn btn-primary']) ?>

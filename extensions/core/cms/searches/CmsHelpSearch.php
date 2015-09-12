@@ -18,7 +18,7 @@ class CmsHelpSearch extends CmsHelp
     public function rules()
     {
         return [
-            [['cms_help_id', 'type', 'isDelete'], 'integer'],
+            [['cms_help_id', 'type', 'is_delete'], 'integer'],
             [['title', 'content', 'create_by', 'update_by', 'create_time', 'update_time'], 'safe'],
         ];
     }
@@ -60,7 +60,7 @@ class CmsHelpSearch extends CmsHelp
             'type' => $this->type,
             'create_time' => $this->create_time,
             'update_time' => $this->update_time,
-            'isDelete' => $this->isDelete,
+            'is_delete' => $this->is_delete,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])

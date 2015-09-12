@@ -55,9 +55,9 @@ use yii\helpers\Url;
                    href="<?= Url::to(['/project/project/list']) ?>">投资项目</a>
                 <a class="<?= isset($this->params['list-coupon']) && $this->params['list-coupon'] ? 'active' : '' ?>"
                    href="<?= Url::to(['/activity/activity/list-coupon']) ?>">积分商城</a>
-                <a href="#">安全保障</a>
+                <a href="<?= Url::to(['/cms/cms/law']) ?>">安全保障</a>
                 <a href="#">新手指南</a>
-                <a href="#">关于我们</a>
+                <a href="<?= Url::to(['/cms/cms/about']) ?>">关于我们</a>
             </div>
         </div>
     </div>

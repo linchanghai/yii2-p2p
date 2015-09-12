@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `p2p`.`activity` (
   `update_by` VARCHAR(45) NULL,
   `create_time` INT NOT NULL,
   `update_time` INT NULL,
-  `isDelete` TINYINT(1) NOT NULL DEFAULT 0,
+  `is_delete` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`activity_id`),
   UNIQUE INDEX `activity_id_UNIQUE` (`activity_id` ASC))
 ENGINE = InnoDB;
