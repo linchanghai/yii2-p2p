@@ -92,7 +92,7 @@ if (isset($model->repayment_date) && isset($model->release_date)) {
     $fieldGroups[] = ['label' => Yii::t('p2p_project', 'Project Base Info'), 'content' => implode('', $fields)];
 
     $fields = ['<br />'];
-    $projectDetails = $model->projectDetails ?: \kiwi\Kiwi::getProjectDetails();
+    $projectDetails = $model->projectDetails ?: Kiwi::getProjectDetails();
     $fields[] = $form->field($projectDetails, 'project_introduce')->textarea();
     $fields[] = $form->field($projectDetails, 'loan_person_info')->textarea();
     $fields[] = $form->field($projectDetails, 'repayment_source')->textarea();
@@ -107,7 +107,7 @@ if (isset($model->repayment_date) && isset($model->release_date)) {
     $fieldGroups[] = ['label' => Yii::t('p2p_project', 'Project Details'), 'content' => implode('', $fields)];
 
     $fields = ['<br />'];
-    $projectLegalOpinion = $model->projectLegalOpinion ?: \kiwi\Kiwi::getProjectLegalOpinion();
+    $projectLegalOpinion = $model->projectLegalOpinion ?: Kiwi::getProjectLegalOpinion();
     $fields[] = $form->field($projectLegalOpinion, 'legal_info')->widget(CKEditor::className(), [
         'name' => 'legal_info',
         'editorOptions' => [
@@ -128,7 +128,7 @@ if (isset($model->repayment_date) && isset($model->release_date)) {
     $fieldGroups[] = ['label' => Yii::t('p2p_project', 'Project Legal Opinion'), 'content' => implode('', $fields)];
 
     $fields = ['<br />'];
-    $projectMaterial = $model->projectMaterial ?: \kiwi\Kiwi::getProjectMaterial();
+    $projectMaterial = $model->projectMaterial ?: Kiwi::getProjectMaterial();
     $fields[] = $form->field($projectMaterial, 'material')->widget(CKEditor::className(), [
         'name' => 'material',
         'editorOptions' => [

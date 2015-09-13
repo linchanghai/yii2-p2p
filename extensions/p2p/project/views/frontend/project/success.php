@@ -1,7 +1,9 @@
 <?php
-$this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/invest.min.css', ['depends' => [\frontend\assets\AppAsset::className()]]);
+use frontend\assets\AppAsset;
 
-$this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depends' => [\frontend\assets\AppAsset::className()]]);
+$this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/invest.min.css', ['depends' => [AppAsset::className()]]);
+
+$this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depends' => [AppAsset::className()]]);
 
 ?>
 

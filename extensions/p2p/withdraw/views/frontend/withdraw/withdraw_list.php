@@ -7,7 +7,7 @@
  */
 
 use yii\helpers\Url;
-use \yii\widgets\LinkPager;
+use yii\widgets\LinkPager;
 
 ?>
 <div class="containerMain">

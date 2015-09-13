@@ -8,7 +8,6 @@
 
 namespace p2p\project\controllers\frontend;
 
-
 use kiwi\Kiwi;
 use kiwi\web\Controller;
 use Yii;
@@ -24,7 +23,7 @@ class ProjectController extends Controller
         $dataProvider->prepare(true);
 
         return $this->render('list', [
-            'projects' => $dataProvider->models,
+            'models' => $dataProvider->models,
             'pages' =>$dataProvider->pagination,
         ]);
     }

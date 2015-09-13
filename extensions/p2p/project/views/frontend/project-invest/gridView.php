@@ -1,6 +1,7 @@
 <?php
 use kartik\helpers\Html;
 use yii\widgets\LinkPager;
+use yii\helpers\Url;
 
 $js = <<<JS
 $('.fundsRecords').on('click', '.get-repayment', function() {
@@ -71,7 +72,7 @@ $this->registerJs($js);
                         <td><?= date('Y-m-d H:i:s', $model->project->repayment_date) ?></td>
                         <td><?= $model->interest_money ?></td>
                         <td><?= $status[$model->status] ?></td>
-                        <td><?= \yii\helpers\Html::button('查看还款记录', ['class' => 'get-repayment', 'data-url' => \yii\helpers\Url::to(['project-invest/repayment-list', 'invest_id' => $model->project_invest_id])]) ?></td>
+                        <td><?= Html::button('查看还款记录', ['class' => 'get-repayment', 'data-url' => Url::to(['project-invest/repayment-list', 'invest_id' => $model->project_invest_id])]) ?></td>
                     </tr>
                 <?php
                 }

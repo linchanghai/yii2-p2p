@@ -13,6 +13,9 @@ use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use frontend\assets\AppAsset;
+use yii\widgets\Pjax;
+use yii\helpers\Json;
 
 /* @var $this \yii\web\View */
 /** @var \p2p\project\models\Project $project */
@@ -20,9 +23,9 @@ use yii\helpers\ArrayHelper;
 
 $this->params['project-list'] = true;
 
-$this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/invest.min.css', ['depends' => [\frontend\assets\AppAsset::className()]]);
+$this->registerCssFile(Yii::$app->urlManager->baseUrl . '/css/invest.min.css', ['depends' => [AppAsset::className()]]);
 
-$this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depends' => [\frontend\assets\AppAsset::className()]]);
+$this->registerJsFile(Yii::$app->urlManager->baseUrl . '/js/invest.js', ['depends' => [AppAsset::className()]]);
 
 $investedRatio = ($project->invested_money / $project->invest_total_money) * 100;
 
@@ -163,55 +166,60 @@ $member = Yii::$app->user->identity;
                 <h4 class="modal-title" id="myModalLabel">填写投资金额</h4>
             </div>
             <div class="modal-body">
-                <?php \yii\widgets\Pjax::begin() ?>
+                <?php Pjax::begin() ?>
                 <?php $form = ActiveForm::begin([
                     'options' => ['class' => 'clearFix prepInvest', 'data-pjax' => true]
                 ]) ?>
-                    <div class="fl investModalArea">
-                        <div class="clearFix">
-                            <label class="fl">投资金额:</label>
+                <div class="fl investModalArea">
+                    <div class="clearFix">
+                        <label class="fl">投资金额:</label>
 
-                            <div class="fl ml10 moneyArea">
-                                <span class="fl operate minus">-</span>
-                                <?= Html::activeTextInput($investForm, 'investMoney', ['class' => 'fl investMoney']); ?>
-                                <span class="fl operate plus">+</span>
-                            </div>
+                        <div class="fl ml10 moneyArea">
+                            <span class="fl operate minus">-</span>
+                            <?= Html::activeTextInput($investForm, 'investMoney', ['class' => 'fl investMoney']); ?>
+                            <span class="fl operate plus">+</span>
                         </div>
-                        <p class="mt20"><?php echo \yii\helpers\Json::encode($investForm->getErrors()) ?></p>
-                        <p class="mt20"><?php echo $investForm->getFirstError('investMoney') ?></p>
-                        <p class="mt20">账户余额: <span id="myMoney"><?= $member->memberStatistic->account_money ?></span>元 </p>
-                        <p class="mt20">
-                            <?php
-                            echo '红包：';
-                            echo Html::activeTextInput($investForm, 'bonusMoney');
-                            echo $investForm->getFirstError('bonusMoney');
-                            echo '可用红包：', ($member->memberStatistic->bonus - $member->memberStatistic->used_bonus), '元';
-                            ?>
-                        </p>
-                        <p class="mt20">
-                            <?php if ($member->memberCashCoupons) {
-                                echo '现金劵：';
-                                $cashCoupons = ArrayHelper::map($member->memberCashCoupons, 'member_coupon_id', 'name');
-                                $cashCoupons = ArrayHelper::merge(['' => '不使用现金劵'], $cashCoupons);
-                                echo Html::activeDropDownList($investForm, 'cash_id', $cashCoupons);
-                                echo $investForm->getFirstError('cash_id');
-                            } ?>
-                        </p>
-                        <p class="mt20">
-                            <?php if ($member->memberAnnualCoupons) {
-                                echo '年化劵：';
-                                $annualCoupons = ArrayHelper::map($member->memberAnnualCoupons, 'member_coupon_id', 'name');
-                                $annualCoupons = ArrayHelper::merge(['' => '不使用年化劵'], $annualCoupons);
-                                echo Html::activeDropDownList($investForm, 'annual_id', $annualCoupons, ['class' => 'annualCoupon']);
-                                echo $investForm->getFirstError('annual_id');
-                            } ?>
-                        </p>
                     </div>
-                    <div class="fr">
-                        <button class="btn largeBtn secondBtn investNow" type="submit">确认投资</button>
-                    </div>
+                    <p class="mt20"><?php echo Json::encode($investForm->getErrors()) ?></p>
+
+                    <p class="mt20"><?php echo $investForm->getFirstError('investMoney') ?></p>
+
+                    <p class="mt20">账户余额: <span id="myMoney"><?= $member->memberStatistic->account_money ?></span>元 </p>
+
+                    <p class="mt20">
+                        <?php
+                        echo '红包：';
+                        echo Html::activeTextInput($investForm, 'bonusMoney');
+                        echo $investForm->getFirstError('bonusMoney');
+                        echo '可用红包：', ($member->memberStatistic->bonus - $member->memberStatistic->used_bonus), '元';
+                        ?>
+                    </p>
+
+                    <p class="mt20">
+                        <?php if ($member->memberCashCoupons) {
+                            echo '现金劵：';
+                            $cashCoupons = ArrayHelper::map($member->memberCashCoupons, 'member_coupon_id', 'name');
+                            $cashCoupons = ArrayHelper::merge(['' => '不使用现金劵'], $cashCoupons);
+                            echo Html::activeDropDownList($investForm, 'cash_id', $cashCoupons);
+                            echo $investForm->getFirstError('cash_id');
+                        } ?>
+                    </p>
+
+                    <p class="mt20">
+                        <?php if ($member->memberAnnualCoupons) {
+                            echo '年化劵：';
+                            $annualCoupons = ArrayHelper::map($member->memberAnnualCoupons, 'member_coupon_id', 'name');
+                            $annualCoupons = ArrayHelper::merge(['' => '不使用年化劵'], $annualCoupons);
+                            echo Html::activeDropDownList($investForm, 'annual_id', $annualCoupons, ['class' => 'annualCoupon']);
+                            echo $investForm->getFirstError('annual_id');
+                        } ?>
+                    </p>
+                </div>
+                <div class="fr">
+                    <button class="btn largeBtn secondBtn investNow" type="submit">确认投资</button>
+                </div>
                 <?php $form->end() ?>
-                <?php \yii\widgets\Pjax::end() ?>
+                <?php Pjax::end() ?>
                 <div class="mt20 investSingleMoney">
 
                 </div>

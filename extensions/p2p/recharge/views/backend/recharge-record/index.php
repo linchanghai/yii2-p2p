@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
+use kiwi\Kiwi;
 
 /* @var $this yii\web\View */
 /* @var $searchModel p2p\recharge\models\RechargeRecordSearch */
@@ -25,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'vAlign'=>'middle',
                 'width'=>'180px',
                 'value'=>function ($model, $key, $index, $widget) {
-                    $member = \kiwi\Kiwi::getMember()->findOne($model->member_id);
+                    $member = Kiwi::getMember()->findOne($model->member_id);
                     return $member->username;
                 },
                 'filterType'=>GridView::FILTER_SELECT2,
