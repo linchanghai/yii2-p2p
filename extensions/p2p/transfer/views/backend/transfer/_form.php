@@ -25,7 +25,7 @@ $disabled = $model->status == $transferClass::STATUS_PENDING ? false : 'disabled
         'type' => ActiveForm::TYPE_HORIZONTAL,
         'formConfig' => ['labelSpan' => 2],
         'fullSpan' => 11,
-        'disabled' => $disabled
+        'disabled' => 'disabled'
     ]); ?>
 
     <?= $form->field($project, 'project_name')->textInput() ?>
@@ -38,7 +38,7 @@ $disabled = $model->status == $transferClass::STATUS_PENDING ? false : 'disabled
 
     <?= $form->field($model, 'discount_rate')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->dropDownList(Kiwi::getDataListModel()->transferCheckStatus) ?>
+    <?= $form->field($model, 'status')->dropDownList(Kiwi::getDataListModel()->transferCheckStatus, ['disabled' => $disabled]) ?>
 
     <?= $form->field($model, 'counter_fee')->textInput(['maxlength' => true]) ?>
 

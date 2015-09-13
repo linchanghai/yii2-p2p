@@ -53,7 +53,7 @@ class ProjectInvestTransferApply extends \kiwi\db\ActiveRecord
             [['project_invest_id', 'project_id', 'member_id', 'total_invest_money'], 'required'],
             [['project_invest_id', 'project_id', 'member_id', 'min_money', 'total_invest_money', 'status', 'verify_date', 'create_time', 'update_time', 'is_delete'], 'integer'],
             [['discount_rate', 'counter_fee'], 'number'],
-            [['verify_user'], 'string', 'max' => 80]
+//            [['verify_user'], 'string', 'max' => 80]
         ];
     }
 
