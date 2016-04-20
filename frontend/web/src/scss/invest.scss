@@ -1,0 +1,480 @@
+@import "settings";
+.investTitle{
+  border-width: 1px 0;
+  border-color: $borderColor;
+  border-style: solid;
+  li{
+    float: left;
+    padding: 10px 20px;
+  }
+  .active a{
+    color: $themeColor;
+  }
+}
+.filterLine{
+  label,a{
+    float: left;
+    padding: 5px 15px;
+  }
+  label{
+    margin-right: 30px;
+  }
+  a{
+    border-radius: 3px;
+  }
+  a.active{
+    background: $themeColor;
+    color: #fff;
+  }
+}
+.investList{
+  li{
+    float: left;
+    width: 240px;
+    padding: 15px;
+    margin: 0 30px 20px 0;
+    border: 1px $borderColor solid;
+    background: $backColor;
+    border-radius: 3px;
+  }
+}
+.investListBrief{
+  height: 72px;
+  overflow: hidden;
+  text-indent: 2em;
+}
+.investListDetail{
+  float: left;
+  width: 50%;
+  border-right: 1px $borderColor solid;
+}
+.investListDetail.fr{
+  border-right: none;
+}
+.checkItem{
+  display: block;
+  width: 80%;
+  height: 45px;
+  line-height: 45px;
+  margin: 20px auto 0 auto;
+  background: $themeColor;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 16px;
+  &:hover{
+    opacity: .8;
+    color: #fff;
+  }
+}
+.indexNotice{
+  li{
+    height: 48px;
+    line-height: 48px;
+  }
+}
+.investTitleTop{
+  height: 60px;
+  line-height: 60px;
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+}
+.investTitleLeft{
+  width: 200px;
+  background: #363b3f;
+}
+.investTitleRight{
+  width: 880px;
+  height: 60px;
+  background: $secondColor;
+  a{
+    margin-right: 20px;
+    color: #fff;
+    font-size: 14px;
+    &:hover{
+      opacity: .8;
+    }
+  }
+}
+.investWrap{
+  padding: 20px;
+  background: $backColor;
+}
+.progressWrap{
+  width: 200px;
+  margin-top: 50px;
+}
+.progressWrapDetail{
+  margin-top: 20px;
+  padding: 0 20px 0 60px;
+}
+.progressWrapDetail2{
+  border-left: 1px #ddd solid;
+}
+.investArea{
+  width: 250px;
+  height: 230px;
+  padding: 10px 15px;
+  margin-left: 30px;
+  background: #fff;
+}
+.toInvestArea{
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px #ECECEC solid;
+}
+.toInvest{
+  width: 70%;
+  height: 36px;
+  line-height: 36px;
+  cursor: pointer;
+}
+.toCalc{
+  width: 26%;
+  margin-left: 4%;
+}
+.investRuleTap{
+  padding: 0 20px;
+  border-bottom: $borderColor;
+  li{
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 30px;
+    border-bottom: 3px transparent solid;
+    margin-bottom: -3px;
+    cursor: pointer;
+  }
+  .active{
+    color: $secondColor;
+    border-color: $secondColor;
+  }
+}
+.investRuleDetail{
+  padding: 0 20px;
+  .table .textRight{
+    color: #666;
+  }
+}
+.investSingleRule{
+  padding-top: 20px;
+}
+.investSingleRule1{
+  width: 52%;
+}
+.investModalArea{
+  width: 320px;
+}
+.prepInvest{
+  padding: 20px 40px;
+}
+.minus,.plus{
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  line-height: 23px;
+  background: $secondColor;
+  cursor: pointer;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+}
+.investMoney{
+  width: 180px;
+  padding-left: 10px;
+  height: 25px;
+  line-height: 24px;
+  border: none;
+  background: $backColor;
+  color: $secondColor;
+  text-align: center;
+}
+.investNow{
+  width: 100px;
+}
+.investSingleMoney{
+  padding-top: 20px;
+  border-top: 1px #e5e5e5 solid;
+}
+//积分
+.showIntegralLeft{
+  width: 240px;
+  padding: 15px;
+  border: 1px $borderColor solid;
+}
+.signArea{
+  margin-top: 5px;
+  padding-bottom: 10px;
+  border-bottom: 1px $borderColor solid;
+  a{
+    float: left;
+    width: 50%;
+    margin-top: 5px;
+  }
+}
+.integralLine{
+  overflow: hidden;
+  dt,dd{
+    float: left;
+  }
+  dt{
+    width: 260px;
+    padding: 30px;
+    text-align: center;
+    background: #fff;
+    font-size: 16px;
+  }
+  dd{
+    width: 820px;
+    background: $backColor;
+  }
+  .integralItem{
+    float: left;
+    padding: 30px 15px;
+    text-align: center;
+  }
+}
+.integralToday{
+  height: 160px;
+  .integralItem{
+    width: 33.3%;
+  }
+}
+.integralNormal{
+  height: 200px;
+  dd{
+    height: 200px;
+  }
+  .integralItem{
+    width: 25%;
+  }
+}
+.integralItemDetail{
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+  background: $themeColor;
+  font-size: 36px;
+  color: #fff;
+  border-radius: 3px;
+}
+.integralItemBottom{
+  .left{
+    margin-top: 5px;
+  }
+  .btn{
+    padding: 5px 10px;
+  }
+}
+.integralYear{
+  .integralItem{
+    width: 50%;
+  }
+  .integralItemDetail,.btn{
+    background: $secondColor;
+  }
+}
+.showExample{
+  width: 300px;
+  height: 325px;
+  padding: 50px 20px;
+  border: 1px $borderColor solid;
+}
+.exchangeArea{
+  width: 740px;
+  height: 325px;
+  padding: 40px;
+  border: 1px $borderColor solid;
+}
+.integralArea{
+  .investMoney{
+    width: 100px;
+    background: #fff;
+    color: $themeColor;
+  }
+  .minus, .plus{
+    background: $themeColor;
+  }
+}
+.myIntegralArea{
+  margin-top: 6px;
+}
+.myIntegralItem{
+  .regularBtn{
+    width: 130px;
+  }
+}
+.integralTopRight{
+  background: $themeColor;
+}
+.afterInvestArea{
+  width: 360px;
+  margin: 40px auto 0 auto;
+}
+.memberRights{
+  padding-bottom: 10px;
+  border-bottom: 1px $borderColor solid;
+}
+.toBe{
+  margin-top: 10px;
+}
+.integralTopArea{
+  height: 342px;
+  overflow: hidden;
+}
+.middleIntegral{
+  margin-left: 10px;
+  width: 630px;
+  border-bottom: 1px $borderColor solid;
+}
+.couponBanner{
+  position: relative;
+  width: 630px;
+  height: 300px;
+  li{
+    width: 630px;
+  }
+  img{
+    width: 630px;
+    height: 300px;
+  }
+}
+.bx-pager{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 99;
+  text-align: center;
+  .bx-pager-item{
+    display: inline-block;
+  }
+  a{
+    background: transparent;
+    text-indent: -9999px;
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border: 1px #fff solid;
+  }
+  a.active{
+    background: #fff;
+    border: 1px #fff solid;
+  }
+}
+.textSliderWrap{
+  height: 42px;
+  line-height: 42px;
+  border-left: 1px $borderColor solid;
+  i{
+    position: relative;
+    top: 4px;
+  }
+  .textSlider{
+    width: 50%;
+    padding-left: 12px;
+    border-right: 1px $borderColor solid;
+  }
+}
+.integralTopHot{
+  width: 188px;
+  padding: 0 10px;
+  margin-left: 10px;
+  border: 1px $borderColor solid;
+  dt{
+    padding-top: 8px;
+    height: 36px;
+  }
+  dd{
+    height: 60px;
+    padding: 10px 0;
+    border-top: 1px $borderColor solid;
+  }
+  .btn{
+    margin-top: 8px;
+    padding: 3px 6px;
+  }
+}
+.memberShow{
+  position: relative;
+  height: 40px;
+  ul{
+    height: 40px;
+    overflow: hidden;
+  }
+  a{
+    float: left;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    text-indent: -1000px;
+    background: url(../images/coupon.png) no-repeat;
+  }
+  .bx-pager{
+    display: none;
+  }
+  .bx-prev,.bx-next{
+    position: absolute;
+    top: 8px;
+    width: 12px;
+    height: 22px;
+    background-position: -222px -1392px;
+  }
+  .bx-prev{
+    left: -18px;
+  }
+  .bx-next{
+    right: -8px;
+    background-position: right -1392px;
+  }
+  .r1{
+    background-position: left -157px;
+  }
+  .r2{
+    background-position: -44px -157px;
+  }
+  .r3{
+    background-position: -86px -157px;
+  }
+  .r4{
+    background-position: -129px -157px;
+  }
+  .r5{
+    background-position: -171px -157px;
+  }
+  .r6{
+    background-position: left -1517px;
+  }
+  .r7{
+    background-position: -42px -1517px;
+  }
+  .r8{
+    background-position: -86px -1517px;
+  }
+}
+//fish
+.fishDetail{
+  padding: 0;
+}
+.fishBanner{
+  img{
+    width: 100%;
+  }
+}
+
+.fishStepLeft{
+  width: 580px;
+  margin-right: 20px;
+  text-align: center;
+}
+.stepDetailSpan{
+  span{
+    margin: 0 35px 0 10px;
+    font-size: 16px;
+  }
+}

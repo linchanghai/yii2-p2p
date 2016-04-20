@@ -1,0 +1,668 @@
+@import "settings";
+a:hover{
+  color: $secondColor;
+}
+.themeColor:hover{
+  color: $themeColor;
+}
+body,.twoContainer{
+  background: $borderColor;
+}
+.backGrey{
+  background: #fff;
+}
+.loginWrap{
+  padding: 50px 30px 40px 100px;
+}
+.formControl,.formC{
+  width: 320px;
+  height: 34px;
+  padding: 6px 12px;
+  background: #fff;
+  border: 1px solid #fff;
+  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  outline: none;
+  background: $backColor;
+  &:focus{
+    border-color: $themeColor;
+  }
+}
+.inputGroupAdd {
+  top: 0;
+  padding: 8px 12px;
+  margin: 0;
+  height: 34px;
+  line-height: 1;
+  font-size: 14px;
+  font-weight: 400;
+  color: #555;
+  text-align: center;
+  background-color: $backColor;
+  border: 1px solid #fff;
+  border-right-color: $borderColor;
+  border-radius: 4px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.loginError{
+  height: 34px;
+  line-height: 34px;
+}
+.findPasswordLink{
+  margin-left: 242px;
+}
+.loginBtn{
+  width: 360px;
+}
+.accountSide{
+  background: $backColor;
+  dt,dd{
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+  }
+  a{
+    color: $accountColor;
+  }
+  i{
+    margin-right: 4px;
+  }
+  dt{
+    border-bottom: 1px #fff solid;
+  }
+  dd{
+    display: none;
+    background: #fff;
+    border-bottom: 1px $borderColor solid;
+  }
+  .current{
+    dd{
+      display: block;
+    }
+    .active{
+      background: $accountColor;
+      a{
+        color: #fff;
+      }
+    }
+  }
+}
+.rechargeTitle{
+  li{
+    float: left;
+  }
+  a{
+    display: block;
+    height: 50px;
+    padding: 0 30px;
+    line-height: 50px;
+    font-size: 16px;
+    text-align: center;
+    color: #333;
+    background: $backColor;
+  }
+  .active{
+    background: #fff;
+    color: $accountColor;
+  }
+}
+.rechargeContainer{
+  padding: 20px 30px;
+  background: $backColor;
+}
+.payWays{
+  dt{
+    margin-top: 6px;
+  }
+}
+.payWayWrap{
+  width: 700px;
+}
+.singleWay{
+  float: left;
+  margin: 0 20px 10px 0;
+  input{
+    margin-top: 10px;
+    margin-right: 16px;
+  }
+  img{
+    border: 1px $borderColor solid;
+  }
+  .active{
+    border: 1px $accountColor solid;
+  }
+}
+#payHide{
+  display: none;
+}
+.toggleItem{
+  position: relative;
+  background: $borderColor;
+  width: 505px;
+  height: 30px;
+  margin: 10px 0 30px 100px;
+  line-height: 30px;
+  text-align: center;
+  cursor: pointer;
+  &:before{
+    content: " ";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    margin-left: -3px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 6px solid $borderColor;
+  }
+}
+.rechargeArea{
+  margin-left: 100px;
+  label{
+    display: inline-block;
+    width: 66px;
+  }
+}
+.rechargeHint{
+  margin-left: 100px;
+}
+.rechargeOptions{
+  dd{
+    margin-top: 6px;
+  }
+}
+.rechargeSucceed{
+  padding: 50px 60px;
+}
+
+.iAccount{
+  height: 160px;
+  padding-top: 28px;
+  overflow: hidden;
+  li{
+    float: left;
+    width: 215px;
+    padding-left: 20px;
+    border-right: 1px $borderColor solid;
+  }
+  .progress{
+    width: 148px;
+  }
+  .regularBtn{
+    margin-top: 36px;
+  }
+}
+.showSecurity{
+  a{
+    margin-right: 15px;
+    padding: 4px;
+    border-radius: 50%;
+    background: $borderColor;
+    &:hover{
+      color: inherit;
+      background: inherit;
+    }
+  }
+  .secondColor{
+    &:hover{
+      color: inherit;
+      background: inherit;
+    }
+  }
+}
+.showTips{
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  background: $borderColor;
+  cursor: pointer;
+}
+.switchWrap{
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  text-align: left;
+  overflow: hidden;
+  line-height: 8px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  width: 100px;
+}
+.switch{
+  display: inline-block;
+  width: 150%;
+  position: relative;
+  top: 0;
+  left: 0;
+  -webkit-transition: left 0.5s;
+  -moz-transition: left 0.5s;
+  -o-transition: left 0.5s;
+  transition: left 0.5s;
+  border: 1px solid #cccccc;
+}
+.switchToggle{
+  left: -50%;
+}
+.switch-item,.switch-middle{
+  float: left;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  height: 100%;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.switch-item{
+  text-align: center;
+  z-index: 1;
+  width: 33%;
+}
+.switch-middle{
+  text-align: center;
+  margin-bottom: -1px;
+  z-index: 100;
+  width: 34%;
+  border-left: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  background: #fff;
+}
+.switch-left{
+  color: #ffffff;
+  background-color: $secondColor;
+}
+.switch-right{
+  background-color: #f0f0f0;
+}
+.accountOverview{
+
+}
+.accountOverviewLeft{
+  width: 25%;
+  height: 240px;
+  border-right: 1px $borderColor solid;
+}
+.accountOverviewRight{
+  width: 73%;
+  margin-left: 2%;
+  li{
+    float: left;
+    width: 33%;
+    height: 100%;
+    padding: 10px 0 10px 20px;
+    border-right: 1px $borderColor solid;
+  }
+}
+.accountOverviewUp{
+  padding-bottom: 10px;
+  border-bottom: 1px $borderColor solid;
+}
+.accountOverviewDown{
+  .fl{
+    padding-left: 30px;
+  }
+
+}
+.accountInvestTitle{
+  height: 48px;
+  line-height: 48px;
+  padding: 0 20px;
+  border-bottom: 1px $borderColor solid;
+}
+.searchTypeWrap{
+  padding: 10px 0;
+}
+.searchType{
+  margin-right: 20px;
+}
+.itemTitle,.itemBottom{
+  height: 48px;
+  line-height: 48px;
+  padding: 0 20px;
+}
+.itemTitle{
+  border-bottom: 1px $borderColor solid;
+}
+.itemBottom{
+  border-top: 1px $borderColor solid;
+}
+.fundsFlow{
+  border: 1px $borderColor solid;
+}
+.fundsFlowContent{
+
+}
+.filterLine{
+  a.active{
+    background: $secondColor;
+    &:hover{
+      color: #fff;
+    }
+  }
+  a:hover{
+    color: $secondColor;
+  }
+  span,input {
+    margin-top: 5px;
+  }
+}
+.datePicker{
+  display: inline-block;
+  width: 120px;
+  height: 26px;
+  line-height: 26px;
+  border: 1px solid #ccc;
+  margin: 0 10px;
+  text-indent: 6px;
+  background: #fcfcfc;
+}
+.walletInfoItem{
+  float: left;
+  width: 22%;
+  height: 100px;
+  padding: 10px  20px;
+  border-right: 1px $borderColor solid;
+}
+.walletInfoRight{
+  float: left;
+  width: 56%;
+  padding: 10px 20px;
+}
+.walletInfoRight1{
+  line-height: 32px;
+}
+.myWalletAreaTap{
+  padding: 0 20px;
+  li{
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 30px;
+    border-bottom: 3px transparent solid;
+    margin-bottom: -3px;
+    cursor: pointer;
+  }
+  .active{
+    color: $secondColor;
+    border-color: $secondColor;
+  }
+}
+.myWalletAreaDetail{
+  padding: 0 20px;
+}
+.myWalletOutLeft{
+  width: 478px;
+  label{
+    display: inline-block;
+    width: 136px;
+  }
+}
+.formControl:focus{
+  border-color: $secondColor;
+}
+.myWalletOutResult{
+  padding: 50px 30px 20px 30px;
+}
+.myWalletOutResultDown{
+  padding-bottom: 30px;
+  border-bottom: 1px $borderColor solid;
+}
+.myWalletIn{
+  li{
+    float: left;
+    padding-left: 20px;
+    width: 33%;
+    border-right: 1px $borderColor solid;
+  }
+}
+.myWalletNow{
+  border-top: 1px $borderColor solid;
+}
+.messagesTable{
+  width: 840px;
+  margin: 0 auto;
+  padding: 0 5px;
+  tr{
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    transition: all 1s ease;
+  }
+  td{
+    padding: 12px 10px!important;
+    cursor: pointer;
+  }
+}
+.messageContent,.removeMsg{
+  display: none;
+}
+.toggleContent{
+  .originDate{
+    display: none;
+  }
+  .messageContent,.removeMsg{
+    display: block;
+  }
+}
+.messageRight{
+  width: 160px;
+  text-align: right;
+}
+.insideDate{
+  color: $defaultColor;
+}
+.myInfo{
+  td{
+    padding: 15px 10px!important;
+  }
+}
+.myMessageBottom{
+  a{
+    margin-left: 10px;
+  }
+}
+.formGroupUnion{
+  .formControl,.itemInput{
+    width: 48%;
+  }
+  .itemInput{
+    height: 34px;
+  }
+}
+.registerForm{
+  .formGroupUnion{
+    width: 360px;
+  }
+}
+.cashArea{
+  margin-left: 0;
+  margin-top: 6px;
+  label{
+    width: 100px;
+  }
+}
+.addBank{
+  float: left;
+  width: 156px;
+  height: 100px;
+  border: 1px solid #f9f9f9;
+  margin: 0 20px 40px;
+  padding-top: 20px;
+  display: inline;
+  text-align: center;
+  background: #dfe5eb;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+  color: $secondColor;
+  i{
+    font-style: normal;
+  }
+  .addText{
+    margin-top: 5px;
+  }
+}
+.modifyPwdForm{
+  padding: 50px 0 30px 80px;
+  .modInput{
+    width: 250px;
+    padding: 7px 9px;
+    line-height: 18px;
+    color: #595959;
+    vertical-align: middle;
+    background: #fcfcfc;
+    outline: none;
+    border: 1px $borderColor solid;
+  }
+  .formGroupUnion{
+    input{
+      width: 120px;
+      margin-right: 10px;
+    }
+    button{
+      width: 120px;
+    }
+  }
+  .modLabel{
+    width: 170px;
+    padding-top: 5px;
+    margin-right: 10px;
+    text-align: right;
+    font-size: 14px;
+  }
+  .modBtn{
+    margin-left: 180px;
+  }
+}
+.withdrawPsw-step {
+  width: 550px;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+.ui-step {
+  padding: 0;
+  font-size: 14px;
+  list-style: none;
+  zoom: 1;
+  position: relative;
+  color: #b7b7b7;
+}
+.ui-step li {
+  float: left;
+  height: 50px;
+  margin: 0;
+  width: 50%;
+  position: relative;
+}
+
+.ui-step-3 li {
+  width: 50%;
+}
+.ui-step .ui-step-active {
+  color: #383838;
+}
+.ui-step .ui-step-line {
+  margin: 0 30px;
+}
+.ui-step li .ui-step-line {
+  height: 2px;
+  background: #e3e7e6;
+  display: block;
+  margin-top: 8px;
+  line-height: 1;
+  overflow: hidden;
+}
+.ui-step li .ui-step-icon {
+  height: 50px;
+  position: absolute;
+  top: 0;
+  width: 150px;
+  text-align: center;
+  left: -25px;
+  font-family: arial,helvetica,sans-serif;
+}
+.ui-step-icon .iconfont {
+  font-size: 30px;
+  margin: 0;
+  color: #b7b7b7;
+  color: rgba(0,0,0,.25);
+  line-height: 30px;
+  padding: 0;
+  position: absolute;
+  top: -11px;
+  left: 3px;
+  text-shadow: 1px 1px 2px #fff,0 0 0 #ccc,1px 1px 2px #fff;
+}
+.ui-step-icon .iconfont {
+  width: 42px;
+  height: 42px;
+  background: url("../images/step-icon-gray.png") no-repeat;
+}
+.ui-step-active .iconfont, .ui-step-done .iconfont {
+  width: 42px;
+  height: 42px;
+  background: url("../images/step-icon-light.png") no-repeat;
+}
+.ui-step-icon .ui-step-number {
+  line-height: 1.5;
+  font-style: normal;
+  position: absolute;
+  top: -6px;
+  left: -1px;
+  padding: 0 18px;
+  font-size: 21px;
+  font-weight: 800;
+  color: #afb4bc;
+}
+.ui-step-active .ui-step-number {
+  color: #fff;
+}
+.ui-step li .ui-step-icon {
+  height: 50px;
+  position: absolute;
+  top: 0;
+  width: 150px;
+  text-align: center;
+  left: -25px;
+  font-family: arial,helvetica,sans-serif;
+}
+.ui-step-icon .ui-step-text {
+  height: 20px;
+  line-height: 20px;
+  position: relative;
+  text-shadow: 0 1px 0 #fff;
+  top: 52px;
+  left: -49px;
+}
+.ui-step-active .ui-step-text {
+  color: #19bd9b;
+}
+.ui-step li.ui-step-end {
+  position: absolute;
+  top: 0;
+  width: 150px;
+  zoom: 1;
+}
+.ui-step li.ui-step-end {
+  right: -145px;
+}
+.ui-step li.ui-step-end .ui-step-line {
+  display: none;
+}
+.ui-step-active .ui-step-line{
+  background: #19bd9b;
+}
+.ui-step-4 li {
+  width: 33%;
+}
+.stepForm{
+  margin-top: 60px;
+}
